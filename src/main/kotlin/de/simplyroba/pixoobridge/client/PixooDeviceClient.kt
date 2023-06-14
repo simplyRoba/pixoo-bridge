@@ -1,6 +1,6 @@
 package de.simplyroba.pixoobridge.client
 
-import de.simplyroba.pixoobridge.client.CommandType.SCREEN_SWITCH
+import de.simplyroba.pixoobridge.client.CommandType.ON_OFF_SCREEN
 import de.simplyroba.pixoobridge.config.PixooConfig
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -16,7 +16,7 @@ class PixooDeviceClient(private val config: PixooConfig) {
     private val webclient = WebClient.create("http://${config.host}")
 
     fun switchDisplay(on: Boolean) {
-        genericPostCommand(SCREEN_SWITCH, Pair("onOff", on.toInt()))
+        genericPostCommand(ON_OFF_SCREEN, Pair("onOff", on.toInt()))
     }
 
     private fun genericPostCommand(
