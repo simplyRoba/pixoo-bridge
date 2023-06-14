@@ -1,8 +1,11 @@
 package de.simplyroba.pixoobridge.client
 
+import de.simplyroba.pixoobridge.client.CommandType.SCREEN_SWITCH
 import de.simplyroba.pixoobridge.config.PixooConfig
 import org.slf4j.LoggerFactory
+import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component
+import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
 
 @Component
@@ -10,8 +13,27 @@ class PixooDeviceClient(private val config: PixooConfig) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    private final val client: WebClient = WebClient.create("http://${config.host}")
+    private val webclient = WebClient.create("http://${config.host}")
 
-    fun screenSwitch()
+    fun switchDisplay(on: Boolean) {
+        genericPostCommand(SCREEN_SWITCH, Pair("onOff", on.toInt()))
+    }
 
+    private fun genericPostCommand(
+        commandType: CommandType,
+        parameters: Pair<String, Int>
+    ): CommandResponse? {
+        logger.info("Sending command $commandType with $parameters")
+
+        return webclient.post().uri("/post")
+            .accept(APPLICATION_JSON)
+            .contentType(APPLICATION_JSON)
+            .body(BodyInserters.fromValue(Command(commandType, parameters)))
+            .retrieve()
+            .toEntity(CommandResponse::class.java)
+            .block()?.body
+    }
+
+    private fun Boolean.toInt() = if (this) 1 else 0
 }
+

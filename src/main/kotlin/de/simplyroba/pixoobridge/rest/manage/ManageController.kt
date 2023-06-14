@@ -14,8 +14,8 @@ class ManageController(private val config: PixooConfig) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    @PostMapping("/display/{mode}")
-    fun manageDisplay(@PathVariable mode: String): ResponseEntity<Unit> {
+    @PostMapping("/display/on/{mode}")
+    fun manageDisplay(@PathVariable mode: Boolean): ResponseEntity<Unit> {
 
         logger.info("Wie geil ist das denn? Sehr geil!")
         logger.info("Host: ${config.host}")
