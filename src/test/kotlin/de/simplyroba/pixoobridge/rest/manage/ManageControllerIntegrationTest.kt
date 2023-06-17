@@ -5,6 +5,7 @@ import de.simplyroba.pixoobridge.AbstractIntegrationTest
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType.APPLICATION_JSON
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.test.web.reactive.server.WebTestClient
 
 class ManageControllerIntegrationTest: AbstractIntegrationTest() {
@@ -30,6 +31,7 @@ class ManageControllerIntegrationTest: AbstractIntegrationTest() {
             .is2xxSuccessful()
 
         verify(postRequestedFor(urlEqualTo("/post"))
+            .withHeader("Content-Type", equalTo(APPLICATION_JSON_VALUE))
             .withRequestBody(equalToJson("{\"Command\":\"Channel/OnOffScreen\", \"OnOff\": 1}")))
     }
 }

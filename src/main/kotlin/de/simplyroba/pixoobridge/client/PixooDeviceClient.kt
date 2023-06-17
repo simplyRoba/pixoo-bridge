@@ -16,7 +16,7 @@ class PixooDeviceClient(private val config: PixooConfig) {
     private val webclient = WebClient.create("http://${config.host}")
 
     fun switchDisplay(on: Boolean) {
-        genericPostCommand(ON_OFF_SCREEN, Pair("onOff", on.toInt()))
+        genericPostCommand(ON_OFF_SCREEN, Pair("OnOff", on.toInt()))
     }
 
     private fun genericPostCommand(
