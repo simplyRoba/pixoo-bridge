@@ -1,0 +1,25 @@
+# Dependency graph doesn't automatically detect all dependencies for ecosystems like Gradle.
+# GitHub Actions adds your dependencies using the dependency submission API so you can receive Dependabot alerts for known vulnerabilities.
+# https://docs.github.com/code-security/supply-chain-security/understanding-your-software-supply-chain/using-the-dependency-submission-api
+
+name: Submit Gradle dependencies
+
+on:
+  schedule:
+    - cron: '0 5 * * MON' # At 05:00 on Monday.
+
+jobs:
+  submit-dependencies:
+    name: Dependencies
+    runs-on: ubuntu-latest
+    permissions: # The Dependency Submission API requires write permission
+      contents: write
+    steps:
+      - name: dd
+        uses: mikepenz/gradle-dependency-submission@{latest}
+        with:
+          use-gradlew: false
+          gradle-build-module: |-
+            :
+          gradle-build-configuration: |-
+            compileClasspath
