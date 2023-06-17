@@ -48,8 +48,13 @@ abstract class AbstractRestIntegrationTest {
         .expectStatus()
         .is2xxSuccessful()
 
-    protected fun verifyCommandSent(s: String) = verify(
+    /**
+     * Wiremock uses JsonUnit and therefore placeholders.
+     * See: https://wiremock.org/docs/request-matching/#json-equality
+     * and: https://github.com/lukas-krecan/JsonUnit#typeplc
+     */
+    protected fun verifyCommandSent(commandJson: String) = verify(
         postRequestedFor(urlEqualTo("/post"))
             .withHeader("Content-Type", equalTo(MediaType.APPLICATION_JSON_VALUE))
-            .withRequestBody(equalToJson(s)))
+            .withRequestBody(equalToJson(commandJson)))
 }

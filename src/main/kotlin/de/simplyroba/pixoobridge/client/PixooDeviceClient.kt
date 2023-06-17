@@ -47,10 +47,30 @@ class PixooDeviceClient(private val config: PixooConfig, private val mapper: Obj
     fun readConfiguration(): Map<String, Any> =
         genericPostCommand(GET_CONFIGURATION)?.parameters ?: mapOf()
 
+    /**
+     * Utc, example=1672416000, Unix epoch timestamps in seconds
+     */
+    fun setSystemTimeInUtc(unixTimeInSeconds: Long) =
+        genericPostCommand(SET_SYSTEM_TIME, Pair("Utc", unixTimeInSeconds))
+
+    /**
+     * TimeZoneValue, example=GMT-5, offset in GMT+/- or GMT0 format
+     */
+    fun setSystemTimeOffset(offset: Int) =
+        genericPostCommand(SET_SYSTEM_TIME_ZONE, Pair("TimeZoneValue", "GMT$offset"))
+
+    /**
+     * Returns:
+     * UTCTime, example=1672416000, Unix epoch timestamps in seconds
+     * LocalTime, example=2022-03-14 03:40:28, time in yyyy-MM-dd HH:mm:ss format
+     */
+    fun getSystemTime(): Map<String, Any> =
+        genericPostCommand(GET_SYSTEM_TIME)?.parameters ?: mapOf()
+
 
     private fun genericPostCommand(
         commandType: CommandType,
-        vararg parameters: Pair<String, Int>
+        vararg parameters: Pair<String, Any>
     ): CommandResponse? {
         logger.debug("Sending command {} with {}", commandType, parameters)
 

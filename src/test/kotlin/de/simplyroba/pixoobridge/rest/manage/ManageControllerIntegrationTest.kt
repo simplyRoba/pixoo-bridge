@@ -25,7 +25,7 @@ class ManageControllerIntegrationTest: AbstractRestIntegrationTest() {
     }
 
     @Test
-    fun `should return all settings`() {
+    fun `should return all device settings`() {
         stubFor(
             post(urlEqualTo("/post")).willReturn(
                 aResponse()
@@ -51,7 +51,7 @@ class ManageControllerIntegrationTest: AbstractRestIntegrationTest() {
             )
         )
 
-        doGetCall("manage/settings/all").expectBody().json("""
+        doGetCall("manage/settings").expectBody().json("""
             {
                 "LightSwitch":1,
                 "MirrorFlag":1,
@@ -68,6 +68,43 @@ class ManageControllerIntegrationTest: AbstractRestIntegrationTest() {
                 "Brightness":100
             }
         """.trimIndent())
-        verifyCommandSent("{\"Command\":\"Channel/GetAllConf\"}")
+        verifyCommandSent("""{"Command":"Channel/GetAllConf"}""")
+    }
+
+    @Test
+    fun `should set system time`() {
+        doPostCall("/manage/time")
+        verifyCommandSent("""{"Command":"Device/SetUTC", "Utc": "${"$"}{json-unit.any-number}"}""")
+    }
+
+    @Test
+    fun `should set system time zone`() {
+        doPostCall("/manage/time/offset/-7")
+        verifyCommandSent("""{"Command":"Sys/TimeZone", "TimeZoneValue": "GMT-7"}""")
+    }
+
+    @Test
+    fun `should return device`() {
+        stubFor(
+            post(urlEqualTo("/post")).willReturn(
+                aResponse()
+                    .withHeader("Content-Type", "text/html")
+                    .withBody("""
+                        {
+                            "error_code":0,
+                            "UTCTime":1647200428,
+                            "LocalTime":"2022-03-14 03:40:28"
+                        }
+                    """.trimIndent())
+            )
+        )
+
+        doGetCall("/manage/time").expectBody().json("""
+            {
+                "UTCTime":1647200428,
+                "LocalTime":"2022-03-14 03:40:28"
+            }
+        """.trimIndent())
+        verifyCommandSent("""{"Command":"Device/GetDeviceTime"}""")
     }
 }
