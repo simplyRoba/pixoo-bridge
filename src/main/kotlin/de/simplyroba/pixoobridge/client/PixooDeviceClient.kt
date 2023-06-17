@@ -24,7 +24,7 @@ class PixooDeviceClient(private val config: PixooConfig, private val mapper: Obj
         commandType: CommandType,
         parameters: Pair<String, Int>
     ): CommandResponse? {
-        logger.info("Sending command $commandType with $parameters")
+        logger.debug("Sending command {} with {}", commandType, parameters)
 
         val rawResponse = webclient.post().uri("/post")
             .contentType(APPLICATION_JSON)
@@ -33,7 +33,7 @@ class PixooDeviceClient(private val config: PixooConfig, private val mapper: Obj
             .toEntity(String::class.java)
             .block()?.body
 
-        logger.debug("Receiving $rawResponse")
+        logger.debug("Response for {}: {}", commandType, rawResponse)
 
         // pixoo will always answer with text/html, although it's formatted as json.
         // Hence, we do mapping manually.
