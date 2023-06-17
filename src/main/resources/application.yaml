@@ -1,3 +1,10 @@
 
 pixoo:
   host: 'localhost'
+
+server:
+  shutdown: 'graceful'
+
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 1m
