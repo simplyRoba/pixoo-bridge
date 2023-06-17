@@ -1,3 +1,6 @@
+# IDEA
+.idea
+
 # Compiled class file
 *.class
 
@@ -44,3 +47,6 @@ gradle-app.setting
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# MacOs
+**/.DS_Store

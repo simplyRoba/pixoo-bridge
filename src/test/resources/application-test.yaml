@@ -1,0 +1,8 @@
+
+pixoo:
+  host: 'localhost:${wiremock.server.port}'
+
+logging:
+  level:
+    root: INFO
+    de.simplyroba.pixoobridge: DEBUG
