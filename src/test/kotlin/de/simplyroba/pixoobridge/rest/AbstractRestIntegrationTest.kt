@@ -1,4 +1,4 @@
-package de.simplyroba.pixoobridge
+package de.simplyroba.pixoobridge.rest
 
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import org.junit.jupiter.api.BeforeAll
@@ -12,7 +12,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWireMock(port = 0)
 @ActiveProfiles("test")
-abstract class AbstractIntegrationTest {
+abstract class AbstractRestIntegrationTest {
 
     @Autowired
     lateinit var webTestClient: WebTestClient
@@ -31,21 +31,25 @@ abstract class AbstractIntegrationTest {
         }
     }
 
-    protected fun callBridge(s: String) {
-        webTestClient
-            .post()
-            .uri(s)
-            .contentType(MediaType.APPLICATION_JSON)
-            .exchange()
-            .expectStatus()
-            .is2xxSuccessful()
-    }
+    protected fun doPostCall(path: String) = webTestClient
+        .post()
+        .uri(path)
+        .accept(MediaType.APPLICATION_JSON)
+        .contentType(MediaType.APPLICATION_JSON)
+        .exchange()
+        .expectStatus()
+        .is2xxSuccessful()
 
-    protected fun verifyCommand(s: String) {
-        verify(
-            postRequestedFor(urlEqualTo("/post"))
-                .withHeader("Content-Type", equalTo(MediaType.APPLICATION_JSON_VALUE))
-                .withRequestBody(equalToJson(s))
-        )
-    }
+    protected fun doGetCall(path: String) = webTestClient
+        .get()
+        .uri(path)
+        .accept(MediaType.APPLICATION_JSON)
+        .exchange()
+        .expectStatus()
+        .is2xxSuccessful()
+
+    protected fun verifyCommandSent(s: String) = verify(
+        postRequestedFor(urlEqualTo("/post"))
+            .withHeader("Content-Type", equalTo(MediaType.APPLICATION_JSON_VALUE))
+            .withRequestBody(equalToJson(s)))
 }

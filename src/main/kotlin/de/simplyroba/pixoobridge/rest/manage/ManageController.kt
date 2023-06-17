@@ -3,11 +3,9 @@ package de.simplyroba.pixoobridge.rest.manage
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.LoggerFactory
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/manage")
@@ -25,5 +23,11 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     fun manageBrightness(@PathVariable value: Int): ResponseEntity<Unit> {
         pixooClient.setBrightness(value)
         return ResponseEntity.ok().build()
+    }
+
+    @GetMapping("/settings/all", produces = [APPLICATION_JSON_VALUE])
+    fun readConfiguration(): ResponseEntity<Map<String, Any>> {
+        val config = pixooClient.readConfiguration()
+        return ResponseEntity.ok(config)
     }
 }
