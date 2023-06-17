@@ -78,6 +78,18 @@ class ManageControllerIntegrationTest: AbstractRestIntegrationTest() {
     }
 
     @Test
+    fun `should set 12 hour time mode`() {
+        doPostCall("/manage/time/mode/12h")
+        verifyCommandSent("""{"Command":"Device/SetTime24Flag", "Mode": 0}""")
+    }
+
+    @Test
+    fun `should set 24 hour time mode`() {
+        doPostCall("/manage/time/mode/24h")
+        verifyCommandSent("""{"Command":"Device/SetTime24Flag", "Mode": 1}""")
+    }
+
+    @Test
     fun `should set system time zone`() {
         doPostCall("/manage/time/offset/-7")
         verifyCommandSent("""{"Command":"Sys/TimeZone", "TimeZoneValue": "GMT-7"}""")

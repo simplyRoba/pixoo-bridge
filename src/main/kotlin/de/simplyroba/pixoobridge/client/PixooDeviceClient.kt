@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
 
 @Component
-class PixooDeviceClient(private val config: PixooConfig, private val mapper: ObjectMapper) {
+class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -35,8 +35,8 @@ class PixooDeviceClient(private val config: PixooConfig, private val mapper: Obj
      * ClockTime, ??, the time of displaying faces (will be active with RotationFlag = 1)
      * GalleryTime, ??, the time of displaying gifs (will be active with RotationFlag = 1)
      * SingleGalleyTime, ??, the time of displaying each gif
-     * PowerOnChannelId, Channel Id, device will display the channel when it powers on
-     * CurClockId, Face Id, the running’s face id
+     * PowerOnChannelId, Channel id, device will display the channel when it powers on
+     * CurClockId, Face id, the running’s face id
      * GalleryShowTimeFlag, 0|1, 1=it will display time at right-top
      * Time24Flag, 0|1, 1=24 hour mode; 0=12 hour mode
      * TemperatureMode, 0|1, 0=Celsius; 1=Fahrenheit
@@ -52,6 +52,12 @@ class PixooDeviceClient(private val config: PixooConfig, private val mapper: Obj
      */
     fun setSystemTimeInUtc(unixTimeInSeconds: Long) =
         genericPostCommand(SET_SYSTEM_TIME, Pair("Utc", unixTimeInSeconds))
+
+    /**
+     * Mode, 0|1, 1=24 hour mode; 0=12 hour mode
+     */
+    fun setSystemTimeMode(twentyFourModeEnabled: Boolean) =
+        genericPostCommand(SET_SYSTEM_TIME_MODE, Pair("Mode", twentyFourModeEnabled.toInt()))
 
     /**
      * TimeZoneValue, example=GMT-5, offset in GMT+/- or GMT0 format

@@ -7,6 +7,7 @@ enum class CommandType(@get:JsonValue val value: String) {
     SET_BRIGHTNESS("Channel/SetBrightness"),
     GET_CONFIGURATION("Channel/GetAllConf"),
     SET_SYSTEM_TIME("Device/SetUTC"),
+    SET_SYSTEM_TIME_MODE("Device/SetTime24Flag"),
     SET_SYSTEM_TIME_ZONE("Sys/TimeZone"),
     GET_SYSTEM_TIME("Device/GetDeviceTime");
 
