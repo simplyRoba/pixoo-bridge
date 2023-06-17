@@ -16,7 +16,7 @@ jobs:
       contents: write
     steps:
       - name: dd
-        uses: mikepenz/gradle-dependency-submission@{latest}
+        uses: mikepenz/gradle-dependency-submission@v1
         with:
           use-gradlew: false
           gradle-build-module: |-
