@@ -3,25 +3,29 @@ package de.simplyroba.pixoobridge.rest.manage
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import de.simplyroba.pixoobridge.rest.AbstractRestIntegrationTest
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
-class ManageControllerIntegrationTest: AbstractRestIntegrationTest() {
+class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
 
-    @Test
-    fun `should turn display on`() {
-        doPostCall("/manage/display/on")
-        verifyCommandSent("""{"Command":"Channel/OnOffScreen", "OnOff": 1}""")
-    }
-
-    @Test
-    fun `should turn display off`() {
-        doPostCall("/manage/display/off")
-        verifyCommandSent("""{"Command":"Channel/OnOffScreen", "OnOff": 0}""")
+    @ParameterizedTest
+    @CsvSource(value = ["on:1", "off:0"], delimiter = ':')
+    fun `should manage display`(input: String, expected: String) {
+        doPostCall("/manage/display/$input")
+        verifyCommandSent("""{"Command":"Channel/OnOffScreen", "OnOff": $expected}""")
     }
 
     @Test
     fun `should set brightness`() {
         doPostCall("/manage/display/brightness/65")
         verifyCommandSent("""{"Command":"Channel/SetBrightness", "Brightness": 65}""")
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["0:0", "90:1", "180:2", "270:3"], delimiter = ':')
+    fun `should rotate display `(input: String, expected: String) {
+        doPostCall("/manage/display/rotate/$input")
+        verifyCommandSent("""{"Command":"Device/SetScreenRotationAngle", "Mode": $expected}""")
     }
 
     @Test
@@ -77,16 +81,11 @@ class ManageControllerIntegrationTest: AbstractRestIntegrationTest() {
         verifyCommandSent("""{"Command":"Device/SetUTC", "Utc": "${"$"}{json-unit.any-number}"}""")
     }
 
-    @Test
-    fun `should set 12 hour time mode`() {
-        doPostCall("/manage/time/mode/12h")
-        verifyCommandSent("""{"Command":"Device/SetTime24Flag", "Mode": 0}""")
-    }
-
-    @Test
-    fun `should set 24 hour time mode`() {
-        doPostCall("/manage/time/mode/24h")
-        verifyCommandSent("""{"Command":"Device/SetTime24Flag", "Mode": 1}""")
+    @ParameterizedTest
+    @CsvSource(value = ["12h:0", "24h:1"], delimiter = ':')
+    fun `should set time mode`(input: String, expected: String) {
+        doPostCall("/manage/time/mode/$input")
+        verifyCommandSent("""{"Command":"Device/SetTime24Flag", "Mode": $expected}""")
     }
 
     @Test
@@ -96,7 +95,7 @@ class ManageControllerIntegrationTest: AbstractRestIntegrationTest() {
     }
 
     @Test
-    fun `should return device`() {
+    fun `should return device time`() {
         stubFor(
             post(urlEqualTo("/post")).willReturn(
                 aResponse()

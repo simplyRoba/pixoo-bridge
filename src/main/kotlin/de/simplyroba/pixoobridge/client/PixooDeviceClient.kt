@@ -19,14 +19,21 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
     /**
      * OnOff, 0|1, 1=on; 0=off
      */
-    fun switchDisplay(on: Boolean) =
-        genericPostCommand(ON_OFF_SCREEN, Pair("OnOff", on.toInt()))
+    fun switchDisplay(onOffFlag: Int) =
+        genericPostCommand(SET_DISPLAY_ON_OFF, Pair("OnOff", onOffFlag))
 
     /**
      * Brightness, 0-100, percentage of brightness.
      */
-    fun setBrightness(percentageValue: Int) =
-        genericPostCommand(SET_BRIGHTNESS, Pair("Brightness", percentageValue))
+    fun setDisplayBrightness(percentageValue: Int) =
+        genericPostCommand(SET_DISPLAY_BRIGHTNESS, Pair("Brightness", percentageValue))
+
+    /**
+     * Mode, 0-3, the rotation angle 0=normal; 1=90; 2=180; 3=270
+     */
+    fun setDisplayRotation(rotationFlag: Int) =
+        genericPostCommand(SET_DISPLAY_ROTATION, Pair("Mode", rotationFlag))
+
 
     /**
      * Returns:
@@ -56,14 +63,14 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
     /**
      * Mode, 0|1, 1=24 hour mode; 0=12 hour mode
      */
-    fun setSystemTimeMode(twentyFourModeEnabled: Boolean) =
-        genericPostCommand(SET_SYSTEM_TIME_MODE, Pair("Mode", twentyFourModeEnabled.toInt()))
+    fun setSystemTimeMode(twentyFourModeFlag: Int) =
+        genericPostCommand(SET_SYSTEM_TIME_MODE, Pair("Mode", twentyFourModeFlag))
 
     /**
      * TimeZoneValue, example=GMT-5, offset in GMT+/- or GMT0 format
      */
-    fun setSystemTimeOffset(offset: Int) =
-        genericPostCommand(SET_SYSTEM_TIME_ZONE, Pair("TimeZoneValue", "GMT$offset"))
+    fun setSystemTimeOffset(timeZone: String) =
+        genericPostCommand(SET_SYSTEM_TIME_ZONE, Pair("TimeZoneValue", timeZone))
 
     /**
      * Returns:
@@ -93,7 +100,5 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
         // Hence, we do mapping manually.
         return mapper.readValue(rawResponse, CommandResponse::class.java)
     }
-
-    private fun Boolean.toInt() = if (this) 1 else 0
 }
 
