@@ -18,7 +18,7 @@ class ManageControllerIntegrationTest: AbstractIntegrationTest() {
 
         stubFor(post(urlEqualTo("/post"))
             .willReturn(aResponse()
-                .withHeader("Content-Type", "application/json")
+                .withHeader("Content-Type", "text/html")
                 .withBody("{\"error_code\":0}")))
 
         webTestClient
