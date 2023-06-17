@@ -2,12 +2,14 @@ package de.simplyroba.pixoobridge.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import de.simplyroba.pixoobridge.client.CommandType.ON_OFF_SCREEN
+import de.simplyroba.pixoobridge.client.CommandType.SET_BRIGHTNESS
 import de.simplyroba.pixoobridge.config.PixooConfig
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
+import kotlin.reflect.KClass
 
 @Component
 class PixooDeviceClient(private val config: PixooConfig, private val mapper: ObjectMapper) {
@@ -20,10 +22,22 @@ class PixooDeviceClient(private val config: PixooConfig, private val mapper: Obj
         genericPostCommand(ON_OFF_SCREEN, Pair("OnOff", on.toInt()))
     }
 
+    fun setBrightness(percentageValue: Int) {
+        genericPostCommand(SET_BRIGHTNESS, Pair("Brightness", percentageValue))
+    }
+
     private fun genericPostCommand(
         commandType: CommandType,
         parameters: Pair<String, Int>
     ): CommandResponse? {
+        return genericPostCommand(commandType, parameters, CommandResponse::class)
+    }
+
+    private fun <T : Any> genericPostCommand(
+        commandType: CommandType,
+        parameters: Pair<String, Int>,
+        clazz: KClass<T>
+    ): T? {
         logger.debug("Sending command {} with {}", commandType, parameters)
 
         val rawResponse = webclient.post().uri("/post")
@@ -37,7 +51,7 @@ class PixooDeviceClient(private val config: PixooConfig, private val mapper: Obj
 
         // pixoo will always answer with text/html, although it's formatted as json.
         // Hence, we do mapping manually.
-        return mapper.readValue(rawResponse, CommandResponse::class.java)
+        return mapper.readValue(rawResponse, clazz.java)
     }
 
     private fun Boolean.toInt() = if (this) 1 else 0

@@ -1,6 +1,7 @@
 package de.simplyroba.pixoobridge.rest.manage
 
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
@@ -14,9 +15,15 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 
-    @PostMapping("/display/on/{bool}")
-    fun manageDisplay(@PathVariable("bool") on: Boolean): ResponseEntity<Unit> {
-        pixooClient.switchDisplay(on)
+    @PostMapping(path = ["/display/on", "display/off"])
+    fun manageDisplay(request: HttpServletRequest): ResponseEntity<Unit> {
+        pixooClient.switchDisplay(request.servletPath.contains("/on"))
+        return ResponseEntity.ok().build()
+    }
+
+    @PostMapping("/display/brightness/{value}")
+    fun manageBrightness(@PathVariable value: Int): ResponseEntity<Unit> {
+        pixooClient.setBrightness(value)
         return ResponseEntity.ok().build()
     }
 }
