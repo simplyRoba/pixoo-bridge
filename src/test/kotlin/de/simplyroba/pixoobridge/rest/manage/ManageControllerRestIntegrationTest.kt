@@ -130,6 +130,13 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
         """.trimIndent())
     }
 
+    @ParameterizedTest
+    @CsvSource(value = ["fahrenheit:1", "celsius:0"], delimiter = ':')
+    fun `should set temperature unit`(input: String, expected: String) {
+        doPostCall("/manage/weather/temperature-unit/$input")
+        verifyCommandSent("""{"Command":"Device/SetDisTempMode", "Mode": $expected}""")
+    }
+
     @Test
     fun `should return all device settings`() {
         stubFor(

@@ -97,6 +97,13 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
         return ok().build()
     }
 
+    @PostMapping(path = ["/weather/temperature-unit/celsius", "/weather/temperature-unit/fahrenheit"])
+    fun manageTemperatureUnit(request: HttpServletRequest): ResponseEntity<Unit> {
+        val temperatureUnitBit = request.servletPath.contains("/fahrenheit")
+        pixooClient.setWeatherTemperatureUnit(temperatureUnitBit)
+        return ok().build()
+    }
+
     @GetMapping("/settings", produces = [APPLICATION_JSON_VALUE])
     fun readDeviceConfiguration(): ResponseEntity<Map<String, Any>> {
         val config = pixooClient.readConfiguration()

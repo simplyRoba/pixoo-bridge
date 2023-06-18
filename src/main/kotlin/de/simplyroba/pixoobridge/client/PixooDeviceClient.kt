@@ -84,11 +84,17 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
         genericPostCommand(GET_SYSTEM_TIME)?.parameters ?: mapOf()
 
     /**
-     * Longitude, example="30.29", as String
-     * Latitude, example="20.58", as String
+     * Longitude, -180-180, as String
+     * Latitude, -90-90, as String
      */
     fun setWeatherLocation(longitude: String, latitude: String) =
         genericPostCommand(SET_WEATHER_LOCATION, Pair("Longitude", longitude), Pair("Latitude", latitude))
+
+    /**
+     * Mode, 0|1, 0=Celsius; 1=Fahrenheit (it won’t be saved and reset when the device power off)
+     */
+    fun setWeatherTemperatureUnit(temperatureUnitBit: Boolean) =
+        genericPostCommand(SET_WEATHER_TEMP_UNIT, Pair("Mode", temperatureUnitBit.toBitNumber()))
 
     /**
      * Returns:
