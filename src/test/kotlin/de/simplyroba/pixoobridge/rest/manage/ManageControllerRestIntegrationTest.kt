@@ -24,7 +24,7 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
     @ParameterizedTest
     @CsvSource(value = ["0:0", "90:1", "180:2", "270:3"], delimiter = ':')
     fun `should rotate display `(input: String, expected: String) {
-        doPostCall("/manage/display/rotate/$input")
+        doPostCall("/manage/display/rotation/$input")
         verifyCommandSent("""{"Command":"Device/SetScreenRotationAngle", "Mode": $expected}""")
     }
 

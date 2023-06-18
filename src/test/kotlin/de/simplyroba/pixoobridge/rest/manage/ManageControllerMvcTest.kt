@@ -18,4 +18,22 @@ class ManageControllerMvcTest: AbstractMvcTest() {
         mockMvc.perform(post("/manage/display/brightness/-1"))
             .andExpect(status().isBadRequest)
     }
+
+    @Test
+    fun `should return bad request on false rotation degree`() {
+        mockMvc.perform(post("/manage/display/rotation/91"))
+            .andExpect(status().isBadRequest)
+    }
+
+    @Test
+    fun `should return bad request on to low time offset`() {
+        mockMvc.perform(post("/manage/time/offset/-13"))
+            .andExpect(status().isBadRequest)
+    }
+
+    @Test
+    fun `should return bad request on to high time offset`() {
+        mockMvc.perform(post("/manage/time/offset/15"))
+            .andExpect(status().isBadRequest)
+    }
 }

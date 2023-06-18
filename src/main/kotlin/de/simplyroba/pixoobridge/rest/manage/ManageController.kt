@@ -29,7 +29,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
         return ok().build()
     }
 
-    @PostMapping("/display/rotate/{degree}")
+    @PostMapping("/display/rotation/{degree}")
     fun manageDisplayRotation(@PathVariable degree: Int):ResponseEntity<Unit> {
         when (degree) {
             0 -> pixooClient.setDisplayRotation(0)
@@ -60,7 +60,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
 
     @PostMapping("/time/offset/{offset}")
     fun setSystemTimeOffset(@PathVariable offset: Int): ResponseEntity<Unit> {
-        if (offset > 18 || offset < -18)
+        if (offset >= 14 || offset <= -12)
             return badRequest().build()
         pixooClient.setSystemTimeOffset("GMT$offset")
         return ok().build()
