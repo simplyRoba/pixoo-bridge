@@ -10,6 +10,7 @@ For further reference, please consider the following sections:
 * [Contract Stub Runner](https://cloud.spring.io/spring-cloud-contract/reference/htmlsingle/#features-stub-runner)
 * [Spring Web](https://docs.spring.io/spring-boot/docs/3.1.0/reference/htmlsingle/#web)
 * [Spring Reactive Web](https://docs.spring.io/spring-boot/docs/3.1.0/reference/htmlsingle/#web.reactive)
+* [Dockerfile](https://spring.io/guides/topicals/spring-boot-docker/)
 
 ### Guides
 The following guides illustrate how to use some features concretely:
@@ -19,8 +20,4 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 * [Building a Reactive RESTful Web Service](https://spring.io/guides/gs/reactive-rest-service/)
 
-### Additional Links
-These additional references should also help you:
-
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 
