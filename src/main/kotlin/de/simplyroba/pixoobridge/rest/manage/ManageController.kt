@@ -89,6 +89,14 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
         return ok(time)
     }
 
+    @PostMapping("/weather/location", consumes = [APPLICATION_JSON_VALUE])
+    fun manageWeatherLocation(@RequestBody body: WeatherLocationRequestBody): ResponseEntity<Unit> {
+        if (body.longitude.toFloat() !in -180f..180f || body.latitude.toFloat() !in -90f..90f)
+            return badRequest().build()
+        pixooClient.setWeatherLocation(body.longitude, body.latitude)
+        return ok().build()
+    }
+
     @GetMapping("/settings", produces = [APPLICATION_JSON_VALUE])
     fun readDeviceConfiguration(): ResponseEntity<Map<String, Any>> {
         val config = pixooClient.readConfiguration()

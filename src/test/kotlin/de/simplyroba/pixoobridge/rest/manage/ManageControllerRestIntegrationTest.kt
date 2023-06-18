@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
+// Test happy cases as complete e2e integration tests
 class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
 
     @ParameterizedTest
@@ -66,6 +67,70 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
     }
 
     @Test
+    fun `should set system time`() {
+        doPostCall("/manage/time")
+        verifyCommandSent("""{"Command":"Device/SetUTC", "Utc": "${"$"}{json-unit.any-number}"}""")
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["12h:0", "24h:1"], delimiter = ':')
+    fun `should set time mode`(input: String, expected: String) {
+        doPostCall("/manage/time/mode/$input")
+        verifyCommandSent("""{"Command":"Device/SetTime24Flag", "Mode": $expected}""")
+    }
+
+    @Test
+    fun `should set system time zone`() {
+        val offsetValue = -1
+        doPostCall("/manage/time/offset/$offsetValue")
+        verifyCommandSent("""{"Command":"Sys/TimeZone", "TimeZoneValue": "GMT$offsetValue"}""")
+    }
+
+    @Test
+    fun `should return device time`() {
+        stubFor(
+            post(urlEqualTo("/post")).willReturn(
+                aResponse()
+                    .withHeader("Content-Type", "text/html")
+                    .withBody("""
+                        {
+                            "error_code":0,
+                            "UTCTime":1647200428,
+                            "LocalTime":"2022-03-14 03:40:28"
+                        }
+                    """.trimIndent())
+            )
+        )
+
+        doGetCall("/manage/time").expectBody().json("""
+            {
+                "UTCTime":1647200428,
+                "LocalTime":"2022-03-14 03:40:28"
+            }
+        """.trimIndent())
+        verifyCommandSent("""{"Command":"Device/GetDeviceTime"}""")
+    }
+
+    @Test
+    fun `should set weather location`() {
+        val longitude = "-56.34"
+        val latitude = "23.89"
+        doPostCallWithBody("/manage/weather/location", """
+            {
+                "longitude": "$longitude",
+                "latitude": "$latitude"
+            }
+        """.trimIndent())
+        verifyCommandSent("""
+            {
+                "Command":"Sys/LogAndLat", 
+                "Longitude": "$longitude",
+                "Latitude": "$latitude"
+            }
+        """.trimIndent())
+    }
+
+    @Test
     fun `should return all device settings`() {
         stubFor(
             post(urlEqualTo("/post")).willReturn(
@@ -110,50 +175,5 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
             }
         """.trimIndent())
         verifyCommandSent("""{"Command":"Channel/GetAllConf"}""")
-    }
-
-    @Test
-    fun `should set system time`() {
-        doPostCall("/manage/time")
-        verifyCommandSent("""{"Command":"Device/SetUTC", "Utc": "${"$"}{json-unit.any-number}"}""")
-    }
-
-    @ParameterizedTest
-    @CsvSource(value = ["12h:0", "24h:1"], delimiter = ':')
-    fun `should set time mode`(input: String, expected: String) {
-        doPostCall("/manage/time/mode/$input")
-        verifyCommandSent("""{"Command":"Device/SetTime24Flag", "Mode": $expected}""")
-    }
-
-    @Test
-    fun `should set system time zone`() {
-        val offsetValue = -1
-        doPostCall("/manage/time/offset/$offsetValue")
-        verifyCommandSent("""{"Command":"Sys/TimeZone", "TimeZoneValue": "GMT$offsetValue"}""")
-    }
-
-    @Test
-    fun `should return device time`() {
-        stubFor(
-            post(urlEqualTo("/post")).willReturn(
-                aResponse()
-                    .withHeader("Content-Type", "text/html")
-                    .withBody("""
-                        {
-                            "error_code":0,
-                            "UTCTime":1647200428,
-                            "LocalTime":"2022-03-14 03:40:28"
-                        }
-                    """.trimIndent())
-            )
-        )
-
-        doGetCall("/manage/time").expectBody().json("""
-            {
-                "UTCTime":1647200428,
-                "LocalTime":"2022-03-14 03:40:28"
-            }
-        """.trimIndent())
-        verifyCommandSent("""{"Command":"Device/GetDeviceTime"}""")
     }
 }

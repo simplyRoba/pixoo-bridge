@@ -9,6 +9,7 @@ import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
+// Test error and validation cases as mock mvc tests for performance
 class ManageControllerMvcTest: AbstractMvcTest() {
 
     @ParameterizedTest
@@ -48,6 +49,20 @@ class ManageControllerMvcTest: AbstractMvcTest() {
     @Test
     fun `should return bad request on to high time offset`() {
         mockMvc.perform(post("/manage/time/offset/15"))
+            .andExpect(status().isBadRequest)
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["-181:0", "181:0", "0:-91", "0:91"], delimiter = ':')
+    fun `should return bad request on weather location out of bound`(longitude: String, latitude: String) {
+        mockMvc.perform(post("/manage/weather/location")
+            .contentType(APPLICATION_JSON)
+            .content("""
+                {
+                    "longitude": "$longitude",
+                    "latitude": "$latitude"
+                }
+            """.trimIndent()))
             .andExpect(status().isBadRequest)
     }
 }

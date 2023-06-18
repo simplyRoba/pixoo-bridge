@@ -84,6 +84,13 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
         genericPostCommand(GET_SYSTEM_TIME)?.parameters ?: mapOf()
 
     /**
+     * Longitude, example="30.29", as String
+     * Latitude, example="20.58", as String
+     */
+    fun setWeatherLocation(longitude: String, latitude: String) =
+        genericPostCommand(SET_WEATHER_LOCATION, Pair("Longitude", longitude), Pair("Latitude", latitude))
+
+    /**
      * Returns:
      * Brightness, 0-100, the system brightness
      * RotationFlag, 0|1, 1=it will switch to display faces and gifs
