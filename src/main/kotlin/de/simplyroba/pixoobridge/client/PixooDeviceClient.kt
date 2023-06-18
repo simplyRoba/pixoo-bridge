@@ -47,6 +47,17 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
         genericPostCommand(SET_DISPLAY_MIRRORED, Pair("Mode", mirrorEnabledBit.toBitNumber()))
 
     /**
+     * RValue, 0-100, red (it won’t be saved and reset when the device power off)
+     * GValue, 0-100, green (it won’t be saved and reset when the device power off)
+     * BValue, 0-100, blue (it won’t be saved and reset when the device power off)
+     */
+    fun setDisplayWhiteBalance(redPercentage: Int, greenPercentage: Int, bluePercentage: Int) =
+        genericPostCommand(SET_DISPLAY_WHITE_BALANCE,
+            Pair("RValue", redPercentage),
+            Pair("GValue", greenPercentage),
+            Pair("BValue", bluePercentage))
+
+    /**
      * Utc, example=1672416000, Unix epoch timestamps in seconds
      */
     fun setSystemTimeInUtc(unixTimeInSeconds: Long) =
@@ -61,8 +72,8 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
     /**
      * TimeZoneValue, example=GMT-5, offset in GMT+/- or GMT0 format
      */
-    fun setSystemTimeOffset(timeZone: String) =
-        genericPostCommand(SET_SYSTEM_TIME_ZONE, Pair("TimeZoneValue", timeZone))
+    fun setSystemTimeOffset(offset: Int) =
+        genericPostCommand(SET_SYSTEM_TIME_ZONE, Pair("TimeZoneValue", "GMT$offset"))
 
     /**
      * Returns:

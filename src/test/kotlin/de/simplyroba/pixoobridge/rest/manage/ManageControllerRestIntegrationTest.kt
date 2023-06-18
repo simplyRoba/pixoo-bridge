@@ -17,8 +17,9 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
 
     @Test
     fun `should set brightness`() {
-        doPostCall("/manage/display/brightness/65")
-        verifyCommandSent("""{"Command":"Channel/SetBrightness", "Brightness": 65}""")
+        val brightnessValue = 65
+        doPostCall("/manage/display/brightness/$brightnessValue")
+        verifyCommandSent("""{"Command":"Channel/SetBrightness", "Brightness": $brightnessValue}""")
     }
 
     @ParameterizedTest
@@ -40,6 +41,28 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
     fun `should mirror display `(input: String, expected: String) {
         doPostCall("/manage/display/mirror/$input")
         verifyCommandSent("""{"Command":"Device/SetMirrorMode", "Mode": $expected}""")
+    }
+
+    @Test
+    fun `should set display white balance`() {
+        val redValue = 75
+        val greenValue = 3
+        val blueValue = 53
+        doPostCallWithBody("/manage/display/white-balance", """
+            {
+                "red": $redValue,
+                "green": $greenValue,
+                "blue": $blueValue
+            }
+        """.trimIndent())
+        verifyCommandSent("""
+            {
+                "Command":"Device/SetWhiteBalance", 
+                "RValue": $redValue,
+                "GValue": $greenValue,
+                "BValue": $blueValue
+            }
+        """.trimIndent())
     }
 
     @Test
@@ -104,8 +127,9 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
 
     @Test
     fun `should set system time zone`() {
-        doPostCall("/manage/time/offset/-7")
-        verifyCommandSent("""{"Command":"Sys/TimeZone", "TimeZoneValue": "GMT-7"}""")
+        val offsetValue = -1
+        doPostCall("/manage/time/offset/$offsetValue")
+        verifyCommandSent("""{"Command":"Sys/TimeZone", "TimeZoneValue": "GMT$offsetValue"}""")
     }
 
     @Test

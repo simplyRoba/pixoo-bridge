@@ -54,6 +54,14 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
         return ok().build()
     }
 
+    @PostMapping("/display/white-balance", consumes = [APPLICATION_JSON_VALUE])
+    fun manageDisplayWhiteBalance(@RequestBody body: WhiteBalanceRequestBody): ResponseEntity<Unit> {
+        if (body.red !in 0..100 || body.green !in 0..100 || body.blue !in 0..100)
+            return badRequest().build()
+        pixooClient.setDisplayWhiteBalance(body.red, body.green, body.blue)
+        return ok().build()
+    }
+
     @PostMapping("/time")
     fun refreshSystemTime(): ResponseEntity<Unit> {
         pixooClient.setSystemTimeInUtc(OffsetDateTime.now(UTC).toEpochSecond())
@@ -71,11 +79,11 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     fun setSystemTimeOffset(@PathVariable offset: Int): ResponseEntity<Unit> {
         if (offset >= 14 || offset <= -12)
             return badRequest().build()
-        pixooClient.setSystemTimeOffset("GMT$offset")
+        pixooClient.setSystemTimeOffset(offset)
         return ok().build()
     }
 
-    @GetMapping("/time")
+    @GetMapping("/time", produces = [APPLICATION_JSON_VALUE])
     fun readDeviceTime(): ResponseEntity<Map<String, Any>> {
         val time = pixooClient.getSystemTime()
         return ok(time)
