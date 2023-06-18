@@ -138,6 +138,43 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
     }
 
     @Test
+    fun `should return weather information`() {
+        stubFor(
+            post(urlEqualTo("/post")).willReturn(
+                aResponse()
+                    .withHeader("Content-Type", "text/html")
+                    .withBody("""
+                        {
+                            "error_code":0,
+                            "Weather": "Cloudy",
+                            "CurTemp": 33.68,
+                            "MinTemp": 31.85,
+                            "MaxTemp": 33.68,
+                            "Pressure": 1006,
+                            "Humidity": 50,
+                            "Visibility": 10000,
+                            "WindSpeed": 2.54
+                        }
+                    """.trimIndent())
+            )
+        )
+
+        doGetCall("manage/weather").expectBody().json("""
+            {
+                "Weather": "Cloudy",
+                "CurTemp": 33.68,
+                "MinTemp": 31.85,
+                "MaxTemp": 33.68,
+                "Pressure": 1006,
+                "Humidity": 50,
+                "Visibility": 10000,
+                "WindSpeed": 2.54
+            }
+        """.trimIndent())
+        verifyCommandSent("""{"Command":"Device/GetWeatherInfo"}""")
+    }
+
+    @Test
     fun `should return all device settings`() {
         stubFor(
             post(urlEqualTo("/post")).willReturn(

@@ -104,6 +104,12 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
         return ok().build()
     }
 
+    @GetMapping("/weather", produces = [APPLICATION_JSON_VALUE])
+    fun readWeatherInformation(): ResponseEntity<Map<String, Any>> {
+        val weather = pixooClient.readWeatherInformation()
+        return ok(weather)
+    }
+
     @GetMapping("/settings", produces = [APPLICATION_JSON_VALUE])
     fun readDeviceConfiguration(): ResponseEntity<Map<String, Any>> {
         val config = pixooClient.readConfiguration()

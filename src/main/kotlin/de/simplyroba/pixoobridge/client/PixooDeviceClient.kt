@@ -98,6 +98,20 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
     /**
      * Returns:
+     * Weather, “Sunny”|”Cloudy”|”Rainy”|”Rainy”|”Frog”, as String
+     * CurTemp, example=33.680000, the current temperature as number
+     * MinTemp, example=31.580000, the minimum temperature as number
+     * MaxTemp, example=34.670000, the maximum temperature as number
+     * Pressure,  example=1006, current pressure as number
+     * Humidity,  example=50, current humidity as number
+     * Visibility,  example=10000, current visibility as number
+     * WindSpeed,  example=2.54, current wind speed as number in m/s
+     */
+    fun readWeatherInformation(): Map<String, Any> =
+        genericPostCommand(GET_WEATHER_INFO)?.parameters ?: mapOf()
+
+    /**
+     * Returns:
      * Brightness, 0-100, the system brightness
      * RotationFlag, 0|1, 1=it will switch to display faces and gifs
      * ClockTime, ??, the time of displaying faces (will be active with RotationFlag = 1)
