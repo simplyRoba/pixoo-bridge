@@ -18,7 +18,8 @@ jobs:
       matrix:
         platform:
           - linux/amd64
-          - linux/arm64
+          - linux/arm64v8
+          - linux/arm32v7
 
     steps:
       - name: Checkout
@@ -36,7 +37,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Run Tests
+      - name: Build jar
         run: ./gradlew bootJar
 
       - name: Set up QEMU
