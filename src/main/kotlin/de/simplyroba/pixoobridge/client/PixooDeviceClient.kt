@@ -19,8 +19,8 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
     /**
      * OnOff, 0|1, 1=on; 0=off
      */
-    fun switchDisplay(onOffFlag: Int) =
-        genericPostCommand(SET_DISPLAY_ON_OFF, Pair("OnOff", onOffFlag))
+    fun switchDisplay(onOffBit: Boolean) =
+        genericPostCommand(SET_DISPLAY_ON_OFF, Pair("OnOff", onOffBit.toBitNumber()))
 
     /**
      * Brightness, 0-100, percentage of brightness.
@@ -29,11 +29,48 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
         genericPostCommand(SET_DISPLAY_BRIGHTNESS, Pair("Brightness", percentageValue))
 
     /**
+     * Mode, 0|1, 1=brightness overclock (it won’t be saved and reset when the device power off)
+     */
+    fun setDisplayBrightnessOverclock(brightnessOverclockEnabledBit: Boolean) =
+        genericPostCommand(SET_DISPLAY_BRIGHTNESS_OVERCLOCK, Pair("Mode", brightnessOverclockEnabledBit.toBitNumber()))
+
+    /**
      * Mode, 0-3, the rotation angle 0=normal; 1=90; 2=180; 3=270
      */
     fun setDisplayRotation(rotationFlag: Int) =
         genericPostCommand(SET_DISPLAY_ROTATION, Pair("Mode", rotationFlag))
 
+    /**
+     * Mode, 0|1, 1=screen is mirrored (it won’t be saved and reset when the device power off)
+     */
+    fun setDisplayMirrored(mirrorEnabledBit: Boolean) =
+        genericPostCommand(SET_DISPLAY_MIRRORED, Pair("Mode", mirrorEnabledBit.toBitNumber()))
+
+    /**
+     * Utc, example=1672416000, Unix epoch timestamps in seconds
+     */
+    fun setSystemTimeInUtc(unixTimeInSeconds: Long) =
+        genericPostCommand(SET_SYSTEM_TIME, Pair("Utc", unixTimeInSeconds))
+
+    /**
+     * Mode, 0|1, 1=24 hour mode; 0=12 hour mode
+     */
+    fun setSystemTimeMode(twentyFourModeEnabledBit: Boolean) =
+        genericPostCommand(SET_SYSTEM_TIME_MODE, Pair("Mode", twentyFourModeEnabledBit.toBitNumber()))
+
+    /**
+     * TimeZoneValue, example=GMT-5, offset in GMT+/- or GMT0 format
+     */
+    fun setSystemTimeOffset(timeZone: String) =
+        genericPostCommand(SET_SYSTEM_TIME_ZONE, Pair("TimeZoneValue", timeZone))
+
+    /**
+     * Returns:
+     * UTCTime, example=1672416000, Unix epoch timestamps in seconds
+     * LocalTime, example=2022-03-14 03:40:28, time in yyyy-MM-dd HH:mm:ss format
+     */
+    fun getSystemTime(): Map<String, Any> =
+        genericPostCommand(GET_SYSTEM_TIME)?.parameters ?: mapOf()
 
     /**
      * Returns:
@@ -54,33 +91,6 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
     fun readConfiguration(): Map<String, Any> =
         genericPostCommand(GET_CONFIGURATION)?.parameters ?: mapOf()
 
-    /**
-     * Utc, example=1672416000, Unix epoch timestamps in seconds
-     */
-    fun setSystemTimeInUtc(unixTimeInSeconds: Long) =
-        genericPostCommand(SET_SYSTEM_TIME, Pair("Utc", unixTimeInSeconds))
-
-    /**
-     * Mode, 0|1, 1=24 hour mode; 0=12 hour mode
-     */
-    fun setSystemTimeMode(twentyFourModeFlag: Int) =
-        genericPostCommand(SET_SYSTEM_TIME_MODE, Pair("Mode", twentyFourModeFlag))
-
-    /**
-     * TimeZoneValue, example=GMT-5, offset in GMT+/- or GMT0 format
-     */
-    fun setSystemTimeOffset(timeZone: String) =
-        genericPostCommand(SET_SYSTEM_TIME_ZONE, Pair("TimeZoneValue", timeZone))
-
-    /**
-     * Returns:
-     * UTCTime, example=1672416000, Unix epoch timestamps in seconds
-     * LocalTime, example=2022-03-14 03:40:28, time in yyyy-MM-dd HH:mm:ss format
-     */
-    fun getSystemTime(): Map<String, Any> =
-        genericPostCommand(GET_SYSTEM_TIME)?.parameters ?: mapOf()
-
-
     private fun genericPostCommand(
         commandType: CommandType,
         vararg parameters: Pair<String, Any>
@@ -100,5 +110,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
         // Hence, we do mapping manually.
         return mapper.readValue(rawResponse, CommandResponse::class.java)
     }
+
+    private fun Boolean.toBitNumber() = if (this) 1 else 0
 }
 

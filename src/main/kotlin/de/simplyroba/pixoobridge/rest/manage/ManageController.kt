@@ -16,8 +16,8 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
 
     @PostMapping(path = ["/display/on", "display/off"])
     fun manageDisplay(request: HttpServletRequest): ResponseEntity<Unit> {
-        val onOffFlag = request.servletPath.contains("/on").toInt()
-        pixooClient.switchDisplay(onOffFlag)
+        val onOffBit = request.servletPath.contains("/on")
+        pixooClient.switchDisplay(onOffBit)
         return ok().build()
     }
 
@@ -26,6 +26,14 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
         if (value !in 0..100)
             return badRequest().build()
         pixooClient.setDisplayBrightness(value)
+        return ok().build()
+    }
+
+    @PostMapping(path = ["/display/brightness/overclock/enabled",
+        "/display/brightness/overclock/disabled"])
+    fun manageDisplayBrightnessOverclockMode(request: HttpServletRequest): ResponseEntity<Unit> {
+        val brightnessOverclockEnabledBit = request.servletPath.contains("/enabled")
+        pixooClient.setDisplayBrightnessOverclock(brightnessOverclockEnabledBit)
         return ok().build()
     }
 
@@ -39,10 +47,11 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
         return ok().build()
     }
 
-    @GetMapping("/settings", produces = [APPLICATION_JSON_VALUE])
-    fun readDeviceConfiguration(): ResponseEntity<Map<String, Any>> {
-        val config = pixooClient.readConfiguration()
-        return ok(config)
+    @PostMapping(path = ["/display/mirror/enabled", "/display/mirror/disabled"])
+    fun manageDisplayMirrorMode(request: HttpServletRequest): ResponseEntity<Unit> {
+        val mirrorEnabledBit = request.servletPath.contains("/enabled")
+        pixooClient.setDisplayMirrored(mirrorEnabledBit)
+        return ok().build()
     }
 
     @PostMapping("/time")
@@ -53,8 +62,8 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
 
     @PostMapping(path = ["/time/mode/12h", "/time/mode/24h"])
     fun setSystemTimeMode(request: HttpServletRequest): ResponseEntity<Unit> {
-        val twentyFourModeFlag = request.servletPath.contains("/24h").toInt()
-        pixooClient.setSystemTimeMode(twentyFourModeFlag)
+        val twentyFourModeEnabledBit = request.servletPath.contains("/24h")
+        pixooClient.setSystemTimeMode(twentyFourModeEnabledBit)
         return ok().build()
     }
 
@@ -72,7 +81,9 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
         return ok(time)
     }
 
-
-
-    private fun Boolean.toInt() = if (this) 1 else 0
+    @GetMapping("/settings", produces = [APPLICATION_JSON_VALUE])
+    fun readDeviceConfiguration(): ResponseEntity<Map<String, Any>> {
+        val config = pixooClient.readConfiguration()
+        return ok(config)
+    }
 }

@@ -22,10 +22,24 @@ class ManageControllerRestIntegrationTest: AbstractRestIntegrationTest() {
     }
 
     @ParameterizedTest
+    @CsvSource(value = ["disabled:0", "enabled:1"], delimiter = ':')
+    fun `should overclock display brightness`(input: String, expected: String) {
+        doPostCall("/manage/display/brightness/overclock/$input")
+        verifyCommandSent("""{"Command":"Device/SetHighLightMode", "Mode": $expected}""")
+    }
+
+    @ParameterizedTest
     @CsvSource(value = ["0:0", "90:1", "180:2", "270:3"], delimiter = ':')
     fun `should rotate display `(input: String, expected: String) {
         doPostCall("/manage/display/rotation/$input")
         verifyCommandSent("""{"Command":"Device/SetScreenRotationAngle", "Mode": $expected}""")
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = ["disabled:0", "enabled:1"], delimiter = ':')
+    fun `should mirror display `(input: String, expected: String) {
+        doPostCall("/manage/display/mirror/$input")
+        verifyCommandSent("""{"Command":"Device/SetMirrorMode", "Mode": $expected}""")
     }
 
     @Test
