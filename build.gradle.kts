@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "de.simplyroba"
-version = "0.0.1alpha"
+version = "0.0.2-alpha"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -44,4 +44,7 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	testLogging {
+		showStandardStreams = true
+	}
 }

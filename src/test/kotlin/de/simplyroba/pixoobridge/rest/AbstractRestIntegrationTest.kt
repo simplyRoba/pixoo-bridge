@@ -8,6 +8,7 @@ import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.web.reactive.function.BodyInserters
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWireMock(port = 0)
@@ -40,6 +41,16 @@ abstract class AbstractRestIntegrationTest {
         .expectStatus()
         .is2xxSuccessful()
 
+    protected fun doPostCallWithBody(path: String, body: Any) = webTestClient
+        .post()
+        .uri(path)
+        .accept(MediaType.APPLICATION_JSON)
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(BodyInserters.fromValue(body))
+        .exchange()
+        .expectStatus()
+        .is2xxSuccessful()
+
     protected fun doGetCall(path: String) = webTestClient
         .get()
         .uri(path)
@@ -48,8 +59,13 @@ abstract class AbstractRestIntegrationTest {
         .expectStatus()
         .is2xxSuccessful()
 
-    protected fun verifyCommandSent(s: String) = verify(
+    /**
+     * Wiremock uses JsonUnit and therefore can handle placeholders.
+     * See: https://wiremock.org/docs/request-matching/#json-equality
+     * and: https://github.com/lukas-krecan/JsonUnit#typeplc
+     */
+    protected fun verifyCommandSent(commandJson: String) = verify(
         postRequestedFor(urlEqualTo("/post"))
             .withHeader("Content-Type", equalTo(MediaType.APPLICATION_JSON_VALUE))
-            .withRequestBody(equalToJson(s)))
+            .withRequestBody(equalToJson(commandJson)))
 }
