@@ -5,6 +5,7 @@
 name: Submit Gradle dependencies
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 5 * * MON' # At 05:00 on Monday.
 
@@ -15,7 +16,7 @@ jobs:
     permissions: # The Dependency Submission API requires write permission
       contents: write
     steps:
-      - name: dd
+      - name: Submit Gradle dependencies
         uses: mikepenz/gradle-dependency-submission@v1
         with:
           use-gradlew: false
