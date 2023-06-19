@@ -5,13 +5,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
 abstract class AbstractMvcTest {
 
-    @Autowired
-    lateinit var mockMvc: MockMvc
+  @Autowired lateinit var mockMvc: MockMvc
 
-    //TODO mock client
+  // TODO mock client
 }

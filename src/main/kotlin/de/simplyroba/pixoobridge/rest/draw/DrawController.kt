@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/draw")
 class DrawController {
 
-    @PostMapping("/fill")
-    fun fill() {
-        throw RuntimeException("Not yet implemented!")
-    }
+  @PostMapping("/fill")
+  fun fill() {
+    throw RuntimeException("Not yet implemented!")
+  }
 }

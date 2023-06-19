@@ -10,59 +10,73 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 // Test error and validation cases as mock mvc tests for performance
-class ManageControllerMvcTest: AbstractMvcTest() {
+class ManageControllerMvcTest : AbstractMvcTest() {
 
-    @ParameterizedTest
-    @ValueSource(ints = [101, -1])
-    fun `should return bad request on brightness out of bound`(input: Int) {
-        mockMvc.perform(post("/manage/display/brightness/$input"))
-            .andExpect(status().isBadRequest)
-    }
+  @ParameterizedTest
+  @ValueSource(ints = [101, -1])
+  fun `should return bad request on brightness out of bound`(input: Int) {
+    mockMvc.perform(post("/manage/display/brightness/$input")).andExpect(status().isBadRequest)
+  }
 
-    @Test
-    fun `should return bad request on false rotation degree`() {
-        mockMvc.perform(post("/manage/display/rotation/91"))
-            .andExpect(status().isBadRequest)
-    }
+  @Test
+  fun `should return bad request on false rotation degree`() {
+    mockMvc.perform(post("/manage/display/rotation/91")).andExpect(status().isBadRequest)
+  }
 
-    @ParameterizedTest
-    @CsvSource(value = ["101:50:50", "-1:50:50", "50:101:50", "50:-1:50", "50:50:101", "50:50:-1"], delimiter = ':')
-    fun `should return bad request on white balance out of bound`(red: Int, green: Int, blue: Int) {
-        mockMvc.perform(post("/manage/display/white-balance")
-            .contentType(APPLICATION_JSON)
-            .content("""
+  @ParameterizedTest
+  @CsvSource(
+    value = ["101:50:50", "-1:50:50", "50:101:50", "50:-1:50", "50:50:101", "50:50:-1"],
+    delimiter = ':'
+  )
+  fun `should return bad request on white balance out of bound`(red: Int, green: Int, blue: Int) {
+    mockMvc
+      .perform(
+        post("/manage/display/white-balance")
+          .contentType(APPLICATION_JSON)
+          .content(
+            """
                 {
                     "red": $red,
                     "green": $green,
                     "blue": $blue
                 }
-            """.trimIndent()))
-            .andExpect(status().isBadRequest)
-    }
+            """
+              .trimIndent()
+          )
+      )
+      .andExpect(status().isBadRequest)
+  }
 
-    @Test
-    fun `should return bad request on to low time offset`() {
-        mockMvc.perform(post("/manage/time/offset/-13"))
-            .andExpect(status().isBadRequest)
-    }
+  @Test
+  fun `should return bad request on to low time offset`() {
+    mockMvc.perform(post("/manage/time/offset/-13")).andExpect(status().isBadRequest)
+  }
 
-    @Test
-    fun `should return bad request on to high time offset`() {
-        mockMvc.perform(post("/manage/time/offset/15"))
-            .andExpect(status().isBadRequest)
-    }
+  @Test
+  fun `should return bad request on to high time offset`() {
+    mockMvc.perform(post("/manage/time/offset/15")).andExpect(status().isBadRequest)
+  }
 
-    @ParameterizedTest
-    @CsvSource(value = ["-181:0", "181:0", "0:-91", "0:91"], delimiter = ':')
-    fun `should return bad request on weather location out of bound`(longitude: String, latitude: String) {
-        mockMvc.perform(post("/manage/weather/location")
-            .contentType(APPLICATION_JSON)
-            .content("""
+  @ParameterizedTest
+  @CsvSource(value = ["-181:0", "181:0", "0:-91", "0:91"], delimiter = ':')
+  fun `should return bad request on weather location out of bound`(
+    longitude: String,
+    latitude: String
+  ) {
+    mockMvc
+      .perform(
+        post("/manage/weather/location")
+          .contentType(APPLICATION_JSON)
+          .content(
+            """
                 {
                     "longitude": "$longitude",
                     "latitude": "$latitude"
                 }
-            """.trimIndent()))
-            .andExpect(status().isBadRequest)
-    }
+            """
+              .trimIndent()
+          )
+      )
+      .andExpect(status().isBadRequest)
+  }
 }
