@@ -2,13 +2,13 @@ package de.simplyroba.pixoobridge.rest.manage
 
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import jakarta.servlet.http.HttpServletRequest
+import java.time.OffsetDateTime
+import java.time.ZoneOffset.UTC
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.badRequest
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.*
-import java.time.OffsetDateTime
-import java.time.ZoneOffset.UTC
 
 @RestController
 @RequestMapping("/manage")
