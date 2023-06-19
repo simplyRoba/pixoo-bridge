@@ -4,10 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
 
-@SpringBootApplication
-@ConfigurationPropertiesScan
-class PixooBridgeApplication
+@SpringBootApplication @ConfigurationPropertiesScan class PixooBridgeApplication
 
 fun main(args: Array<String>) {
-	runApplication<PixooBridgeApplication>(*args)
+  runApplication<PixooBridgeApplication>(*args)
 }
