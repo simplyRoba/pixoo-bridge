@@ -18,9 +18,3 @@ jobs:
     steps:
       - name: Submit Gradle dependencies
         uses: mikepenz/gradle-dependency-submission@v1
-        with:
-          use-gradlew: false
-          gradle-build-module: |-
-            :
-          gradle-build-configuration: |-
-            compileClasspath
