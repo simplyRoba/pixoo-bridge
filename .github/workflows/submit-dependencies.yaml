@@ -11,10 +11,10 @@ on:
 
 jobs:
   submit-dependencies:
-    name: Dependencies
+    name: Dependencies-1
     runs-on: ubuntu-latest
     permissions: # The Dependency Submission API requires write permission
       contents: write
     steps:
       - name: Submit Gradle dependencies
-        uses: mikepenz/gradle-dependency-submission@v1
+        uses: mikepenz/gradle-dependency-submission@v0.8.6
