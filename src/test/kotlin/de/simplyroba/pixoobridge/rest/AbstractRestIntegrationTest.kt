@@ -1,7 +1,7 @@
 package de.simplyroba.pixoobridge.rest
 
 import com.github.tomakehurst.wiremock.client.WireMock.*
-import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
@@ -17,17 +17,15 @@ abstract class AbstractRestIntegrationTest {
 
   @Autowired lateinit var webTestClient: WebTestClient
 
-  companion object {
-    @JvmStatic
-    @BeforeAll
-    fun defaultSuccessResponseStub() {
-      stubFor(
-        post(urlEqualTo("/post"))
-          .willReturn(
-            aResponse().withHeader("Content-Type", "text/html").withBody("{\"error_code\":0}")
-          )
-      )
-    }
+  @BeforeEach
+  fun defaultSuccessResponseStub() {
+    reset()
+    stubFor(
+      post(urlEqualTo("/post"))
+        .willReturn(
+          aResponse().withHeader("Content-Type", "text/html").withBody("{\"error_code\":0}")
+        )
+    )
   }
 
   protected fun doPostCall(path: String) =
