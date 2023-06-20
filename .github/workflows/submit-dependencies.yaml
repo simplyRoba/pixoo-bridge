@@ -11,7 +11,7 @@ on:
 
 jobs:
   submit-dependencies:
-    name: Dependencies-4
+    name: Dependencies
     runs-on: ubuntu-latest
     permissions: # The Dependency Submission API requires write permission
       contents: write
