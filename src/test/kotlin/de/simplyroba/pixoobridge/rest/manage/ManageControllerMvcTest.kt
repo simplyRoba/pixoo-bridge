@@ -35,11 +35,11 @@ class ManageControllerMvcTest : AbstractMvcTest() {
           .contentType(APPLICATION_JSON)
           .content(
             """
-                {
-                    "red": $red,
-                    "green": $green,
-                    "blue": $blue
-                }
+              {
+                "red": $red,
+                "green": $green,
+                "blue": $blue
+              }
             """
               .trimIndent()
           )
@@ -69,10 +69,10 @@ class ManageControllerMvcTest : AbstractMvcTest() {
           .contentType(APPLICATION_JSON)
           .content(
             """
-                {
-                    "longitude": "$longitude",
-                    "latitude": "$latitude"
-                }
+              {
+                "longitude": "$longitude",
+                "latitude": "$latitude"
+              }
             """
               .trimIndent()
           )

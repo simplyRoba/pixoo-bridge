@@ -19,7 +19,12 @@ enum class CommandType(@get:JsonValue val value: String) {
   GET_WEATHER_INFO("Device/GetWeatherInfo"),
   GET_CONFIGURATION("Channel/GetAllConf"),
   // Channel
-  SET_CHANNEL_GALLERY_TIME("Channel/SetSubscribeGalleryTime");
+  SET_CHANNEL_GALLERY_TIME("Channel/SetSubscribeGalleryTime"),
+  // Tool
+  TOOL_TIMER("Tools/SetTimer"),
+  TOOL_STOPWATCH("Tools/SetStopWatch"),
+  TOOL_SCOREBOARD("Tools/SetScoreBoard"),
+  TOOL_NOISE("Tools/SetNoiseStatus");
 
   override fun toString(): String {
     return "$name ($value)"
