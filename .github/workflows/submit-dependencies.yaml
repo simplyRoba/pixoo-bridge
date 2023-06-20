@@ -11,12 +11,13 @@ on:
 
 jobs:
   submit-dependencies:
-    name: Dependencies-2
+    name: Dependencies-3
     runs-on: ubuntu-latest
     permissions: # The Dependency Submission API requires write permission
       contents: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Submit Gradle dependencies
         uses: mikepenz/gradle-dependency-submission@v0.8.6
-        with:
-          gradle-project-path: '../pixoo-bridge'
