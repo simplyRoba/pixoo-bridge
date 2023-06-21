@@ -135,8 +135,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
     )
 
   // Status, 0-1, 0=stop; 1=start; 2=reset
-  fun setStopwatch(status: Int) =
-    genericPostCommand(TOOL_STOPWATCH, Pair("Status", status))
+  fun setStopwatch(status: Int) = genericPostCommand(TOOL_STOPWATCH, Pair("Status", status))
 
   private fun genericPostCommand(
     commandType: CommandType,
