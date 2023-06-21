@@ -30,4 +30,22 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     doPostCall("/tool/timer/stop")
     verifyCommandSent("""{"Command":"Tools/SetTimer", "Minute":0, "Second":0, "Status":0 }""")
   }
+
+  @Test
+  fun `should stop stopwatch`() {
+    doPostCall("/tool/stopwatch/stop")
+    verifyCommandSent("""{"Command":"Tools/SetStopWatch", "Status":0 }""")
+  }
+
+  @Test
+  fun `should start stopwatch`() {
+    doPostCall("/tool/stopwatch/start")
+    verifyCommandSent("""{"Command":"Tools/SetStopWatch", "Status":1 }""")
+  }
+
+  @Test
+  fun `should reset stopwatch`() {
+    doPostCall("/tool/stopwatch/reset")
+    verifyCommandSent("""{"Command":"Tools/SetStopWatch", "Status":2 }""")
+  }
 }
