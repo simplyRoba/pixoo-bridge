@@ -1,4 +1,4 @@
-package de.simplyroba.pixoobridge.client
+package de.simplyroba.pixoobridge.client.model
 
 import com.fasterxml.jackson.annotation.JsonAnySetter
 import com.fasterxml.jackson.annotation.JsonProperty

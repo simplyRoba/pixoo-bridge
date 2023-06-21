@@ -2,6 +2,8 @@ package de.simplyroba.pixoobridge.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import de.simplyroba.pixoobridge.client.CommandType.*
+import de.simplyroba.pixoobridge.client.model.Command
+import de.simplyroba.pixoobridge.client.model.CommandResponse
 import de.simplyroba.pixoobridge.config.PixooConfig
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -131,6 +133,10 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
       Pair("Second", seconds),
       Pair("Status", startBit.toBitNumber())
     )
+
+  // Status, 0-1, 0=stop; 1=start; 2=reset
+  fun setStopwatch(status: Int) =
+    genericPostCommand(TOOL_STOPWATCH, Pair("Status", status))
 
   private fun genericPostCommand(
     commandType: CommandType,
