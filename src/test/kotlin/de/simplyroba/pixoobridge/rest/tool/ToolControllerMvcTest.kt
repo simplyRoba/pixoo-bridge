@@ -32,4 +32,27 @@ class ToolControllerMvcTest : AbstractMvcTest() {
       )
       .andExpect(status().isBadRequest)
   }
+
+  @ParameterizedTest
+  @CsvSource(value = ["-1:0", "0:-1", "0:1000", "1000:0"], delimiter = ':')
+  fun `should return bad request when scores out of bound`(
+    redScore: Int,
+    blueScore: Int
+  ) {
+    mockMvc
+      .perform(
+        post("/tool/score")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content(
+            """
+          {
+            "redScore": $redScore,
+            "blueScore": $blueScore
+          }
+            """
+              .trimIndent()
+          )
+      )
+      .andExpect(status().isBadRequest)
+  }
 }

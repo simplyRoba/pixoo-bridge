@@ -48,4 +48,23 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     doPostCall("/tool/stopwatch/reset")
     verifyCommandSent("""{"Command":"Tools/SetStopWatch", "Status":2 }""")
   }
+
+  @Test
+  fun `should set scoreboard to given values`() {
+    val red = 5
+    val blue = 0
+    doPostCallWithBody(
+      "/tool/score",
+      """
+      {
+        "redScore": $red,
+        "blueScore": $blue
+      }
+    """
+        .trimIndent()
+    )
+    verifyCommandSent(
+      """{"Command":"Tools/SetScoreBoard", "BlueScore":$blue, "RedScore":$red }"""
+    )
+  }
 }
