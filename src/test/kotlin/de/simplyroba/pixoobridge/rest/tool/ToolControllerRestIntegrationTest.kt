@@ -63,8 +63,6 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     """
         .trimIndent()
     )
-    verifyCommandSent(
-      """{"Command":"Tools/SetScoreBoard", "BlueScore":$blue, "RedScore":$red }"""
-    )
+    verifyCommandSent("""{"Command":"Tools/SetScoreBoard", "BlueScore":$blue, "RedScore":$red }""")
   }
 }

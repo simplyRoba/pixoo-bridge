@@ -35,10 +35,7 @@ class ToolControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @CsvSource(value = ["-1:0", "0:-1", "0:1000", "1000:0"], delimiter = ':')
-  fun `should return bad request when scores out of bound`(
-    redScore: Int,
-    blueScore: Int
-  ) {
+  fun `should return bad request when scores out of bound`(redScore: Int, blueScore: Int) {
     mockMvc
       .perform(
         post("/tool/score")
