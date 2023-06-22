@@ -137,6 +137,13 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
   // Status, 0-1, 0=stop; 1=start; 2=reset
   fun setStopwatch(status: Int) = genericPostCommand(TOOL_STOPWATCH, Pair("Status", status))
 
+  /*
+   * RedScore, 0-999, as number
+   * BlueScore, 0-999, as number
+   */
+  fun setScoreBoard(redScore: Int, blueScore: Int) =
+    genericPostCommand(TOOL_SCOREBOARD, Pair("RedScore", redScore), Pair("BlueScore", blueScore))
+
   private fun genericPostCommand(
     commandType: CommandType,
     vararg parameters: Pair<String, Any>

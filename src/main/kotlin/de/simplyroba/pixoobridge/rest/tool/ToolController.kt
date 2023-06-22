@@ -1,6 +1,7 @@
 package de.simplyroba.pixoobridge.rest.tool
 
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import de.simplyroba.pixoobridge.rest.tool.model.ScoreboardScores
 import de.simplyroba.pixoobridge.rest.tool.model.TimerSettings
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
@@ -43,6 +44,13 @@ class ToolController(private val pixooClient: PixooDeviceClient) {
   @PostMapping("/stopwatch/reset")
   fun resetStopwatch(): ResponseEntity<Unit> {
     pixooClient.setStopwatch(2)
+    return ok().build()
+  }
+
+  @PostMapping("/score", consumes = [APPLICATION_JSON_VALUE])
+  fun setScoreboard(@RequestBody body: ScoreboardScores): ResponseEntity<Unit> {
+    if (body.redScore !in 0..999 || body.blueScore !in 0..999) return badRequest().build()
+    pixooClient.setScoreBoard(body.redScore, body.blueScore)
     return ok().build()
   }
 }
