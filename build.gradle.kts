@@ -10,7 +10,7 @@ plugins {
 
 group = "de.simplyroba"
 
-version = "0.0.3-alpha"
+version = "0.1.0"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 
