@@ -6,8 +6,8 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      checks: write
+      contents: read # only needed if permissions are specified directly here
+      checks: write # for test report action
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -32,3 +32,4 @@ jobs:
         if: success() || failure() # always run even if the previous step fails
         with:
           report_paths: 'build/test-results/test/TEST-*.xml'
+          include_passed: true
