@@ -24,7 +24,7 @@ enum class CommandType(@get:JsonValue val value: String) {
   TOOL_TIMER("Tools/SetTimer"),
   TOOL_STOPWATCH("Tools/SetStopWatch"),
   TOOL_SCOREBOARD("Tools/SetScoreBoard"),
-  TOOL_NOISE("Tools/SetNoiseStatus");
+  TOOL_SOUND_METER("Tools/SetNoiseStatus");
 
   override fun toString(): String {
     return "$name ($value)"

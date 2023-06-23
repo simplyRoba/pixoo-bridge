@@ -38,7 +38,7 @@ class ToolControllerMvcTest : AbstractMvcTest() {
   fun `should return bad request when scores out of bound`(redScore: Int, blueScore: Int) {
     mockMvc
       .perform(
-        post("/tool/score")
+        post("/tool/scoreboard")
           .contentType(MediaType.APPLICATION_JSON)
           .content(
             """

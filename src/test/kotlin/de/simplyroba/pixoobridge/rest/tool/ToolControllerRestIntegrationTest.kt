@@ -54,7 +54,7 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     val red = 5
     val blue = 0
     doPostCallWithBody(
-      "/tool/score",
+      "/tool/scoreboard",
       """
       {
         "redScore": $red,
@@ -64,5 +64,17 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
         .trimIndent()
     )
     verifyCommandSent("""{"Command":"Tools/SetScoreBoard", "BlueScore":$blue, "RedScore":$red }""")
+  }
+
+  @Test
+  fun `should start sound meter`() {
+    doPostCall("/tool/soundmeter/start")
+    verifyCommandSent("""{"Command":"Tools/SetNoiseStatus", "NoiseStatus":1 }""")
+  }
+
+  @Test
+  fun `should stop sound meter`() {
+    doPostCall("/tool/soundmeter/stop")
+    verifyCommandSent("""{"Command":"Tools/SetNoiseStatus", "NoiseStatus":0 }""")
   }
 }

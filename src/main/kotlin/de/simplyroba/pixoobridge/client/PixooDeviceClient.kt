@@ -144,6 +144,10 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
   fun setScoreBoard(redScore: Int, blueScore: Int) =
     genericPostCommand(TOOL_SCOREBOARD, Pair("RedScore", redScore), Pair("BlueScore", blueScore))
 
+  // NoiseStatus, 0-1, 0=stop; 1=start
+  fun setSoundMeter(onBit: Boolean) =
+    genericPostCommand(TOOL_SOUND_METER, Pair("NoiseStatus", onBit.toBitNumber()))
+
   private fun genericPostCommand(
     commandType: CommandType,
     vararg parameters: Pair<String, Any>

@@ -47,10 +47,22 @@ class ToolController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
-  @PostMapping("/score", consumes = [APPLICATION_JSON_VALUE])
+  @PostMapping("/scoreboard", consumes = [APPLICATION_JSON_VALUE])
   fun setScoreboard(@RequestBody body: ScoreboardScores): ResponseEntity<Unit> {
     if (body.redScore !in 0..999 || body.blueScore !in 0..999) return badRequest().build()
     pixooClient.setScoreBoard(body.redScore, body.blueScore)
+    return ok().build()
+  }
+
+  @PostMapping("/soundmeter/start")
+  fun startSoundMeter(): ResponseEntity<Unit> {
+    pixooClient.setSoundMeter(true)
+    return ok().build()
+  }
+
+  @PostMapping("/soundmeter/stop")
+  fun stopSoundMeter(): ResponseEntity<Unit> {
+    pixooClient.setSoundMeter(false)
     return ok().build()
   }
 }
