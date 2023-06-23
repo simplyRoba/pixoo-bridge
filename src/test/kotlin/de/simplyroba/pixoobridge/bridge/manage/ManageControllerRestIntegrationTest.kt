@@ -1,7 +1,7 @@
-package de.simplyroba.pixoobridge.rest.manage
+package de.simplyroba.pixoobridge.bridge.manage
 
 import com.github.tomakehurst.wiremock.client.WireMock.*
-import de.simplyroba.pixoobridge.rest.AbstractRestIntegrationTest
+import de.simplyroba.pixoobridge.bridge.AbstractRestIntegrationTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource

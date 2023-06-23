@@ -1,6 +1,6 @@
-package de.simplyroba.pixoobridge.rest.manage
+package de.simplyroba.pixoobridge.bridge.manage
 
-import de.simplyroba.pixoobridge.rest.AbstractMvcTest
+import de.simplyroba.pixoobridge.bridge.AbstractMvcTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
