@@ -18,6 +18,10 @@ repositories { mavenCentral() }
 
 extra["springCloudVersion"] = "2022.0.3"
 
+// security version bumps
+extra["snakeyaml.version"] =
+  "2.0" // https://github.com/simplyRoba/pixoo-bridge/security/dependabot/6
+
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-webflux") // only for webclient
@@ -28,6 +32,15 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
+
+  constraints {
+    implementation("org.apache.httpcomponents:httpclient:4.5.13") {
+      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/4")
+    }
+    implementation("com.google.guava:guava:32.0.1-jre") {
+      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/7")
+    }
+  }
 }
 
 dependencyManagement {
