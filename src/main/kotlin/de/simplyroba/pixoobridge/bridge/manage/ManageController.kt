@@ -1,8 +1,8 @@
 package de.simplyroba.pixoobridge.bridge.manage
 
-import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import de.simplyroba.pixoobridge.bridge.manage.model.WeatherLocation
 import de.simplyroba.pixoobridge.bridge.manage.model.WhiteBalance
+import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import jakarta.servlet.http.HttpServletRequest
 import java.time.OffsetDateTime
 import java.time.ZoneOffset.UTC

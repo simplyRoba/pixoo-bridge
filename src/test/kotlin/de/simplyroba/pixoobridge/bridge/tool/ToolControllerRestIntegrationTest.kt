@@ -1,6 +1,6 @@
 package de.simplyroba.pixoobridge.bridge.tool
 
-import de.simplyroba.pixoobridge.bridge.AbstractRestIntegrationTest
+import de.simplyroba.pixoobridge.AbstractRestIntegrationTest
 import org.junit.jupiter.api.Test
 
 // Test happy cases as complete e2e integration tests

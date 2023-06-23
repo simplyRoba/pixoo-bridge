@@ -1,6 +1,6 @@
 package de.simplyroba.pixoobridge.bridge.tool
 
-import de.simplyroba.pixoobridge.bridge.AbstractMvcTest
+import de.simplyroba.pixoobridge.AbstractMvcTest
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.springframework.http.MediaType

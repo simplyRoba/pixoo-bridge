@@ -1,4 +1,4 @@
-package de.simplyroba.pixoobridge.bridge
+package de.simplyroba.pixoobridge
 
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import org.junit.jupiter.api.BeforeEach
