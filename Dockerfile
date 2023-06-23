@@ -10,6 +10,9 @@ ARG UNAME=pixoo
 ARG UID=1000
 ARG GID=1000
 
+# for healthcheck
+RUN apk --no-cache add curl
+
 RUN addgroup -g $GID -S $UNAME
 RUN adduser -u $UID -S $UNAME -G $UNAME
 USER $UNAME
@@ -19,4 +22,8 @@ COPY --from=builder application/dependencies/ ./
 COPY --from=builder application/spring-boot-loader/ ./
 COPY --from=builder application/snapshot-dependencies/ ./
 COPY --from=builder application/application/ ./
+
+HEALTHCHECK --interval=3m --timeout=10s --start-period=15s --retries=3 \
+  CMD curl -f -s http://localhost:8080/health/check || exit 1
+
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]

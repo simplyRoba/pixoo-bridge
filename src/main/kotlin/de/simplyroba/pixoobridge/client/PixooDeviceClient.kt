@@ -10,6 +10,7 @@ import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.reactive.function.client.toEntity
 
 @Component
 class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
@@ -17,6 +18,8 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
   private val logger = LoggerFactory.getLogger(javaClass)
 
   private val webclient = WebClient.create("http://${config.host}")
+
+  fun healthCheck() = webclient.get().uri("/").retrieve().toBodilessEntity().block()
 
   // OnOff, 0|1, 1=on; 0=off
   fun switchDisplay(onBit: Boolean) =
