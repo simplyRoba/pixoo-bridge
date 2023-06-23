@@ -52,22 +52,22 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     doPostCallWithBody(
       "/manage/display/white-balance",
       """
-            {
-                "red": $redValue,
-                "green": $greenValue,
-                "blue": $blueValue
-            }
+        {
+          "red": $redValue,
+          "green": $greenValue,
+          "blue": $blueValue
+        }
         """
         .trimIndent()
     )
     verifyCommandSent(
       """
-            {
-                "Command":"Device/SetWhiteBalance", 
-                "RValue": $redValue,
-                "GValue": $greenValue,
-                "BValue": $blueValue
-            }
+        {
+          "Command":"Device/SetWhiteBalance", 
+          "RValue": $redValue,
+          "GValue": $greenValue,
+          "BValue": $blueValue
+        }
         """
         .trimIndent()
     )
@@ -102,11 +102,11 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
             .withHeader("Content-Type", "text/html")
             .withBody(
               """
-                        {
-                            "error_code":0,
-                            "UTCTime":1647200428,
-                            "LocalTime":"2022-03-14 03:40:28"
-                        }
+                {
+                  "error_code":0,
+                  "UTCTime":1647200428,
+                  "LocalTime":"2022-03-14 03:40:28"
+                }
                     """
                 .trimIndent()
             )
@@ -117,10 +117,10 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .expectBody()
       .json(
         """
-            {
-                "UTCTime":1647200428,
-                "LocalTime":"2022-03-14 03:40:28"
-            }
+          {
+            "UTCTime":1647200428,
+            "LocalTime":"2022-03-14 03:40:28"
+          }
         """
           .trimIndent()
       )
@@ -134,20 +134,20 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     doPostCallWithBody(
       "/manage/weather/location",
       """
-            {
-                "longitude": "$longitude",
-                "latitude": "$latitude"
-            }
+        {
+          "longitude": "$longitude",
+          "latitude": "$latitude"
+        }
         """
         .trimIndent()
     )
     verifyCommandSent(
       """
-            {
-                "Command":"Sys/LogAndLat", 
-                "Longitude": "$longitude",
-                "Latitude": "$latitude"
-            }
+        {
+          "Command":"Sys/LogAndLat", 
+          "Longitude": "$longitude",
+          "Latitude": "$latitude"
+        }
         """
         .trimIndent()
     )
@@ -169,17 +169,17 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
             .withHeader("Content-Type", "text/html")
             .withBody(
               """
-                        {
-                            "error_code":0,
-                            "Weather": "Cloudy",
-                            "CurTemp": 33.68,
-                            "MinTemp": 31.85,
-                            "MaxTemp": 33.68,
-                            "Pressure": 1006,
-                            "Humidity": 50,
-                            "Visibility": 10000,
-                            "WindSpeed": 2.54
-                        }
+                {
+                  "error_code":0,
+                  "Weather": "Cloudy",
+                  "CurTemp": 33.68,
+                  "MinTemp": 31.85,
+                  "MaxTemp": 33.68,
+                  "Pressure": 1006,
+                  "Humidity": 50,
+                  "Visibility": 10000,
+                  "WindSpeed": 2.54
+                }
                     """
                 .trimIndent()
             )
@@ -190,16 +190,16 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .expectBody()
       .json(
         """
-            {
-                "Weather": "Cloudy",
-                "CurTemp": 33.68,
-                "MinTemp": 31.85,
-                "MaxTemp": 33.68,
-                "Pressure": 1006,
-                "Humidity": 50,
-                "Visibility": 10000,
-                "WindSpeed": 2.54
-            }
+          {
+            "Weather": "Cloudy",
+            "CurTemp": 33.68,
+            "MinTemp": 31.85,
+            "MaxTemp": 33.68,
+            "Pressure": 1006,
+            "Humidity": 50,
+            "Visibility": 10000,
+            "WindSpeed": 2.54
+          }
         """
           .trimIndent()
       )
@@ -215,22 +215,22 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
             .withHeader("Content-Type", "text/html")
             .withBody(
               """
-                        {
-                            "error_code":0,
-                            "Brightness":100,
-                            "RotationFlag":1,
-                            "ClockTime":60,
-                            "GalleryTime":60,
-                            "SingleGalleyTime":5,
-                            "PowerOnChannelId":1,
-                            "GalleryShowTimeFlag":1,
-                            "CurClockId":1,
-                            "Time24Flag":1,
-                            "TemperatureMode":1,
-                            "GyrateAngle":1,
-                            "MirrorFlag":1,
-                            "LightSwitch":1
-                        }
+                {
+                  "error_code":0,
+                  "Brightness":100,
+                  "RotationFlag":1,
+                  "ClockTime":60,
+                  "GalleryTime":60,
+                  "SingleGalleyTime":5,
+                  "PowerOnChannelId":1,
+                  "GalleryShowTimeFlag":1,
+                  "CurClockId":1,
+                  "Time24Flag":1,
+                  "TemperatureMode":1,
+                  "GyrateAngle":1,
+                  "MirrorFlag":1,
+                  "LightSwitch":1
+                }
                     """
                 .trimIndent()
             )
@@ -241,21 +241,21 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .expectBody()
       .json(
         """
-            {
-                "LightSwitch":1,
-                "MirrorFlag":1,
-                "GyrateAngle":1,
-                "TemperatureMode":1,
-                "Time24Flag":1,
-                "CurClockId":1,
-                "GalleryShowTimeFlag":1,
-                "PowerOnChannelId":1,
-                "SingleGalleyTime":5,
-                "GalleryTime":60,
-                "ClockTime":60,
-                "RotationFlag":1,
-                "Brightness":100
-            }
+          {
+            "LightSwitch":1,
+            "MirrorFlag":1,
+            "GyrateAngle":1,
+            "TemperatureMode":1,
+            "Time24Flag":1,
+            "CurClockId":1,
+            "GalleryShowTimeFlag":1,
+            "PowerOnChannelId":1,
+            "SingleGalleyTime":5,
+            "GalleryTime":60,
+            "ClockTime":60,
+            "RotationFlag":1,
+            "Brightness":100
+          }
         """
           .trimIndent()
       )

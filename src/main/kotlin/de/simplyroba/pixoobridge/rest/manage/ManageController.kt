@@ -1,6 +1,8 @@
 package de.simplyroba.pixoobridge.rest.manage
 
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import de.simplyroba.pixoobridge.rest.manage.model.WeatherLocation
+import de.simplyroba.pixoobridge.rest.manage.model.WhiteBalance
 import jakarta.servlet.http.HttpServletRequest
 import java.time.OffsetDateTime
 import java.time.ZoneOffset.UTC
@@ -57,7 +59,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   }
 
   @PostMapping("/display/white-balance", consumes = [APPLICATION_JSON_VALUE])
-  fun manageDisplayWhiteBalance(@RequestBody body: WhiteBalanceRequestBody): ResponseEntity<Unit> {
+  fun manageDisplayWhiteBalance(@RequestBody body: WhiteBalance): ResponseEntity<Unit> {
     if (body.red !in 0..100 || body.green !in 0..100 || body.blue !in 0..100)
       return badRequest().build()
     pixooClient.setDisplayWhiteBalance(body.red, body.green, body.blue)
@@ -91,7 +93,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   }
 
   @PostMapping("/weather/location", consumes = [APPLICATION_JSON_VALUE])
-  fun manageWeatherLocation(@RequestBody body: WeatherLocationRequestBody): ResponseEntity<Unit> {
+  fun manageWeatherLocation(@RequestBody body: WeatherLocation): ResponseEntity<Unit> {
     if (body.longitude.toFloat() !in -180f..180f || body.latitude.toFloat() !in -90f..90f)
       return badRequest().build()
     pixooClient.setWeatherLocation(body.longitude, body.latitude)

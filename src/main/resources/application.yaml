@@ -8,3 +8,6 @@ server:
 spring:
   lifecycle:
     timeout-per-shutdown-phase: 1m
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true

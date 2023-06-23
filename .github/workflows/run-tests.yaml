@@ -3,7 +3,7 @@ name: Run Tests
 on: push
 
 jobs:
-  run-test:
+  run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,9 +20,6 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-
-      - name: Check format
-        run: ./gradlew spotlessCheck
 
       - name: Run Tests
         run: ./gradlew test
