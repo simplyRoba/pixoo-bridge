@@ -6,12 +6,8 @@ import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
-import org.springframework.http.ResponseEntity.badRequest
-import org.springframework.http.ResponseEntity.ok
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity.*
+import org.springframework.web.bind.annotation.*
 
 @Tag(name = "Tool")
 @RestController
@@ -31,21 +27,14 @@ class ToolController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
-  @PostMapping("/stopwatch/start")
-  fun startStopwatch(): ResponseEntity<Unit> {
-    pixooClient.setStopwatch(1)
-    return ok().build()
-  }
-
-  @PostMapping("/stopwatch/stop")
-  fun stopStopwatch(): ResponseEntity<Unit> {
-    pixooClient.setStopwatch(0)
-    return ok().build()
-  }
-
-  @PostMapping("/stopwatch/reset")
-  fun resetStopwatch(): ResponseEntity<Unit> {
-    pixooClient.setStopwatch(2)
+  @PostMapping("/stopwatch/{command}")
+  fun controlStopwatch(@PathVariable("command") command: String): ResponseEntity<Unit> {
+    when (command.lowercase()) {
+      "start" -> pixooClient.setStopwatch(1)
+      "stop" -> pixooClient.setStopwatch(0)
+      "reset" -> pixooClient.setStopwatch(2)
+      else -> return notFound().build()
+    }
     return ok().build()
   }
 
@@ -56,15 +45,13 @@ class ToolController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
-  @PostMapping("/soundmeter/start")
-  fun startSoundMeter(): ResponseEntity<Unit> {
-    pixooClient.setSoundMeter(true)
-    return ok().build()
-  }
-
-  @PostMapping("/soundmeter/stop")
-  fun stopSoundMeter(): ResponseEntity<Unit> {
-    pixooClient.setSoundMeter(false)
+  @PostMapping("/soundmeter/{command}")
+  fun controlSoundMeter(@PathVariable("command") command: String): ResponseEntity<Unit> {
+    when (command.lowercase()) {
+      "start" -> pixooClient.setSoundMeter(true)
+      "stop" -> pixooClient.setSoundMeter(false)
+      else -> return notFound().build()
+    }
     return ok().build()
   }
 }

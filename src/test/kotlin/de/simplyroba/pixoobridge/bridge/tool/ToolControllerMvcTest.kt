@@ -3,6 +3,7 @@ package de.simplyroba.pixoobridge.bridge.tool
 import de.simplyroba.pixoobridge.AbstractMvcTest
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.Mockito.verifyNoInteractions
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
@@ -37,6 +38,12 @@ class ToolControllerMvcTest : AbstractMvcTest() {
   }
 
   @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong stopwatch command`(path: String) {
+    mockMvc.perform(post("/tool/stopwatch/$path")).andExpect(status().isNotFound)
+  }
+
+  @ParameterizedTest
   @CsvSource(value = ["-1:0", "0:-1", "0:1000", "1000:0"], delimiter = ':')
   fun `should return bad request when scores out of bound`(redScore: Int, blueScore: Int) {
     mockMvc
@@ -56,5 +63,11 @@ class ToolControllerMvcTest : AbstractMvcTest() {
       .andExpect(status().isBadRequest)
 
     verifyNoInteractions(pixooClient)
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong sound meter command`(path: String) {
+    mockMvc.perform(post("/tool/soundmeter/$path")).andExpect(status().isNotFound)
   }
 }
