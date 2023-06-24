@@ -5,19 +5,20 @@ import de.simplyroba.pixoobridge.client.CommandType.*
 import de.simplyroba.pixoobridge.client.model.Command
 import de.simplyroba.pixoobridge.client.model.CommandResponse
 import de.simplyroba.pixoobridge.config.PixooConfig
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.toJavaDuration
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
-import java.time.Duration
 
 @Component
 class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   companion object {
-    val DEFAULT_TIMEOUT = Duration.ofSeconds(10)
+    val DEFAULT_TIMEOUT = 10.seconds.toJavaDuration()
   }
 
   private val logger = LoggerFactory.getLogger(javaClass)
