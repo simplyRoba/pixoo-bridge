@@ -17,6 +17,9 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 repositories { mavenCentral() }
 
 extra["springCloudVersion"] = "2022.0.3"
+extra["openapiVersion"] = "2.1.0"
+extra["httpClientVersion"] = "4.5.13"
+extra["guavaVersion"] = "32.0.1-jre"
 
 // security version bumps
 // https://github.com/simplyRoba/pixoo-bridge/security/dependabot/6
@@ -29,15 +32,16 @@ dependencies {
   implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("openapiVersion")}")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
 
   constraints {
-    implementation("org.apache.httpcomponents:httpclient:4.5.13") {
+    implementation("org.apache.httpcomponents:httpclient:${property("httpClientVersion")}") {
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/4")
     }
-    implementation("com.google.guava:guava:32.0.1-jre") {
+    implementation("com.google.guava:guava:${property("guavaVersion")}") {
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/7")
     }
   }
