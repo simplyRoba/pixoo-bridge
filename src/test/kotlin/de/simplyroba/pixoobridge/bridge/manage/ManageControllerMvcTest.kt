@@ -14,6 +14,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 class ManageControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong display control command`(path: String) {
+    mockMvc.perform(post("/manage/display/$path")).andExpect(status().isNotFound)
+  }
+
+  @ParameterizedTest
   @ValueSource(ints = [101, -1])
   fun `should return bad request on brightness out of bound`(input: Int) {
     mockMvc.perform(post("/manage/display/brightness/$input")).andExpect(status().isBadRequest)

@@ -9,8 +9,7 @@ import java.time.OffsetDateTime
 import java.time.ZoneOffset.UTC
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
-import org.springframework.http.ResponseEntity.badRequest
-import org.springframework.http.ResponseEntity.ok
+import org.springframework.http.ResponseEntity.*
 import org.springframework.web.bind.annotation.*
 
 @Tag(name = "Manage")
@@ -18,10 +17,13 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/manage")
 class ManageController(private val pixooClient: PixooDeviceClient) {
 
-  @PostMapping(path = ["/display/on", "display/off"])
-  fun manageDisplay(request: HttpServletRequest): ResponseEntity<Unit> {
-    val onOffBit = request.servletPath.contains("/on")
-    pixooClient.switchDisplay(onOffBit)
+  @PostMapping("/display/{command}")
+  fun manageDisplay(@PathVariable("command") command: String): ResponseEntity<Unit> {
+    when (command.lowercase()) {
+      "on" -> pixooClient.switchDisplay(true)
+      "off" -> pixooClient.switchDisplay(false)
+      else -> return notFound().build()
+    }
     return ok().build()
   }
 
