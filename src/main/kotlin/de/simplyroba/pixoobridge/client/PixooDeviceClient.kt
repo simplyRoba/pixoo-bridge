@@ -11,9 +11,14 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
+import java.time.Duration
 
 @Component
 class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
+
+  companion object {
+    val DEFAULT_TIMEOUT = Duration.ofSeconds(10)
+  }
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -21,7 +26,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   fun healthCheck(): ResponseEntity<Void>? {
     logger.debug("Check connectivity")
-    return webclient.get().uri("/get").retrieve().toBodilessEntity().block()
+    return webclient.get().uri("/get").retrieve().toBodilessEntity().block(DEFAULT_TIMEOUT)
   }
 
   // OnOff, 0|1, 1=on; 0=off
@@ -168,7 +173,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
         .body(BodyInserters.fromValue(Command(commandType, *parameters)))
         .retrieve()
         .toEntity(String::class.java)
-        .block()
+        .block(DEFAULT_TIMEOUT)
         ?.body
 
     logger.debug("Response for {}: {}", commandType, rawResponse)
