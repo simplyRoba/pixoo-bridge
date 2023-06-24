@@ -10,7 +10,7 @@ plugins {
 
 group = "de.simplyroba"
 
-version = "0.1.0"
+version = "0.2.0"
 
 java.sourceCompatibility = JavaVersion.VERSION_17
 
@@ -26,11 +26,8 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-webflux") // only for webclient
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-  implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
-  testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
 
   constraints {
