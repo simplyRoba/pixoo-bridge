@@ -27,9 +27,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux") // only for webclient
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("openapiVersion")}")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
-  testImplementation("org.mockito.kotlin:mockito-kotlin:${property("mockitoKotlinVersion")}")
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
 
   constraints {
