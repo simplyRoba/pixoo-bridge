@@ -19,8 +19,8 @@ repositories { mavenCentral() }
 extra["springCloudVersion"] = "2022.0.3"
 
 // security version bumps
-extra["snakeyaml.version"] =
-  "2.0" // https://github.com/simplyRoba/pixoo-bridge/security/dependabot/6
+// https://github.com/simplyRoba/pixoo-bridge/security/dependabot/6
+extra["snakeyaml.version"] = "2.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
