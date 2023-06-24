@@ -1,8 +1,8 @@
-package de.simplyroba.pixoobridge.rest.tool
+package de.simplyroba.pixoobridge.bridge.tool
 
+import de.simplyroba.pixoobridge.bridge.tool.model.ScoreboardScores
+import de.simplyroba.pixoobridge.bridge.tool.model.TimerSettings
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
-import de.simplyroba.pixoobridge.rest.tool.model.ScoreboardScores
-import de.simplyroba.pixoobridge.rest.tool.model.TimerSettings
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.badRequest

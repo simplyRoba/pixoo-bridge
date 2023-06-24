@@ -1,4 +1,4 @@
-package de.simplyroba.pixoobridge.rest.draw
+package de.simplyroba.pixoobridge.bridge.draw
 
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping

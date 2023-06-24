@@ -1,6 +1,7 @@
 
 pixoo:
   host: 'localhost'
+  health-forward: true
 
 server:
   shutdown: 'graceful'

@@ -1,8 +1,9 @@
-package de.simplyroba.pixoobridge.rest.tool
+package de.simplyroba.pixoobridge.bridge.tool
 
-import de.simplyroba.pixoobridge.rest.AbstractMvcTest
+import de.simplyroba.pixoobridge.AbstractMvcTest
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.mockito.Mockito.verifyNoInteractions
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -31,6 +32,8 @@ class ToolControllerMvcTest : AbstractMvcTest() {
           )
       )
       .andExpect(status().isBadRequest)
+
+    verifyNoInteractions(pixooClient)
   }
 
   @ParameterizedTest
@@ -51,5 +54,7 @@ class ToolControllerMvcTest : AbstractMvcTest() {
           )
       )
       .andExpect(status().isBadRequest)
+
+    verifyNoInteractions(pixooClient)
   }
 }
