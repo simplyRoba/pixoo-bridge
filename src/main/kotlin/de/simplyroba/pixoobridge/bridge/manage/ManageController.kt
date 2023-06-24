@@ -3,6 +3,7 @@ package de.simplyroba.pixoobridge.bridge.manage
 import de.simplyroba.pixoobridge.bridge.manage.model.WeatherLocation
 import de.simplyroba.pixoobridge.bridge.manage.model.WhiteBalance
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
 import java.time.OffsetDateTime
 import java.time.ZoneOffset.UTC
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity.badRequest
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.*
 
+@Tag(name = "Manage")
 @RestController
 @RequestMapping("/manage")
 class ManageController(private val pixooClient: PixooDeviceClient) {

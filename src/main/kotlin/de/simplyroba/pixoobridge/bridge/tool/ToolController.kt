@@ -3,6 +3,7 @@ package de.simplyroba.pixoobridge.bridge.tool
 import de.simplyroba.pixoobridge.bridge.tool.model.ScoreboardScores
 import de.simplyroba.pixoobridge.bridge.tool.model.TimerSettings
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.badRequest
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
+@Tag(name = "Tool")
 @RestController
 @RequestMapping("/tool")
 class ToolController(private val pixooClient: PixooDeviceClient) {
