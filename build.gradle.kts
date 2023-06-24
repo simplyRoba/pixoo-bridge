@@ -17,9 +17,14 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 repositories { mavenCentral() }
 
 extra["springCloudVersion"] = "2022.0.3"
+
 extra["openapiVersion"] = "2.1.0"
+
 extra["httpClientVersion"] = "4.5.13"
+
 extra["guavaVersion"] = "32.0.1-jre"
+
+extra["mockitoKotlinVersion"] = "5.0.0"
 
 // security version bumps
 // https://github.com/simplyRoba/pixoo-bridge/security/dependabot/6
@@ -34,6 +39,7 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("openapiVersion")}")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
+  testImplementation("org.mockito.kotlin:mockito-kotlin:${property("mockitoKotlinVersion")}")
   testImplementation("io.projectreactor:reactor-test")
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
 

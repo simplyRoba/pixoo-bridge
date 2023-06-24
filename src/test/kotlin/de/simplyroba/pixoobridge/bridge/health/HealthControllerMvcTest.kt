@@ -6,7 +6,7 @@ import org.mockito.Mockito.verifyNoInteractions
 import org.springframework.test.context.TestPropertySource
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 
-@TestPropertySource(properties = ["pixoo.health-forward=false"])
+@TestPropertySource(properties = ["pixoo.health.forward=false"])
 class HealthControllerMvcTest : AbstractMvcTest() {
 
   @Test
