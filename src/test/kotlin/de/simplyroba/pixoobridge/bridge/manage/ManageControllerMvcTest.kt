@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
+import org.mockito.Mockito.verifyNoInteractions
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -16,11 +17,13 @@ class ManageControllerMvcTest : AbstractMvcTest() {
   @ValueSource(ints = [101, -1])
   fun `should return bad request on brightness out of bound`(input: Int) {
     mockMvc.perform(post("/manage/display/brightness/$input")).andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 
   @Test
   fun `should return bad request on false rotation degree`() {
     mockMvc.perform(post("/manage/display/rotation/91")).andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 
   @ParameterizedTest
@@ -45,16 +48,20 @@ class ManageControllerMvcTest : AbstractMvcTest() {
           )
       )
       .andExpect(status().isBadRequest)
+
+    verifyNoInteractions(pixooClient)
   }
 
   @Test
   fun `should return bad request on to low time offset`() {
     mockMvc.perform(post("/manage/time/offset/-13")).andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 
   @Test
   fun `should return bad request on to high time offset`() {
     mockMvc.perform(post("/manage/time/offset/15")).andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 
   @ParameterizedTest
@@ -78,5 +85,7 @@ class ManageControllerMvcTest : AbstractMvcTest() {
           )
       )
       .andExpect(status().isBadRequest)
+
+    verifyNoInteractions(pixooClient)
   }
 }

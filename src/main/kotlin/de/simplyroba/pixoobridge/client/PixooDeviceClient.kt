@@ -7,10 +7,10 @@ import de.simplyroba.pixoobridge.client.model.CommandResponse
 import de.simplyroba.pixoobridge.config.PixooConfig
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType.APPLICATION_JSON
+import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.reactive.function.client.toEntity
 
 @Component
 class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
@@ -19,7 +19,10 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   private val webclient = WebClient.create("http://${config.host}")
 
-  fun healthCheck() = webclient.get().uri("/").retrieve().toBodilessEntity().block()
+  fun healthCheck(): ResponseEntity<Void>? {
+    logger.debug("Check connectivity")
+    return webclient.get().uri("/get").retrieve().toBodilessEntity().block()
+  }
 
   // OnOff, 0|1, 1=on; 0=off
   fun switchDisplay(onBit: Boolean) =

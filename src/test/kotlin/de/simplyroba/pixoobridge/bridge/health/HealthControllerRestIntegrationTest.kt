@@ -1,13 +1,15 @@
 package de.simplyroba.pixoobridge.bridge.health
 
+import com.github.tomakehurst.wiremock.client.WireMock.*
 import de.simplyroba.pixoobridge.AbstractRestIntegrationTest
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class HealthControllerRestIntegrationTest: AbstractRestIntegrationTest() {
+class HealthControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
   @Test
   fun `should include pixoo in health check`() {
-    TODO("not yet implemented")
+    stubFor(get(urlEqualTo("/get")).willReturn(aResponse()))
+    doGetCall("/health/check")
+    verify(getRequestedFor(urlEqualTo("/get")))
   }
 }
