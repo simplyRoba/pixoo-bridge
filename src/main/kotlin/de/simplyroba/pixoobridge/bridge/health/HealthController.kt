@@ -14,7 +14,7 @@ class HealthController(val pixooClient: PixooDeviceClient, val config: PixooConf
 
   @GetMapping("/check")
   fun healthCheck(): ResponseEntity<Unit> {
-    if (config.healthForward) pixooClient.healthCheck()
+    if (config.health.forward) pixooClient.healthCheck()
     return ok().build()
   }
 }

@@ -1,7 +1,10 @@
 
 pixoo:
   host: 'localhost'
-  health-forward: true
+  health:
+    forward: true
+  docs:
+    enabled: true
 
 server:
   shutdown: 'graceful'
@@ -12,3 +15,9 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+
+springdoc:
+  api-docs:
+    enabled: ${pixoo.docs.enabled}
+  swagger-ui:
+    enabled: ${pixoo.docs.enabled}
