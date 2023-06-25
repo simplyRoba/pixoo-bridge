@@ -1,3 +1,8 @@
 package de.simplyroba.pixoobridge.bridge.tool.model
 
-data class TimerSettings(val minutes: Int, val seconds: Int)
+import io.swagger.v3.oas.annotations.media.Schema
+
+data class TimerSettings(
+  @Schema(minimum = "0", maximum = "99", defaultValue = "1") val minutes: Int,
+  @Schema(minimum = "0", maximum = "59", defaultValue = "0") val seconds: Int
+)
