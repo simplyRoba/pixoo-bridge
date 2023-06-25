@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*
 class ManageController(private val pixooClient: PixooDeviceClient) {
 
   @PostMapping("/display/{command}")
-  fun manageDisplay(@PathVariable("command") command: String): ResponseEntity<Unit> {
+  fun manageDisplay(@PathVariable("command") command: String): ResponseEntity<Void> {
     when (command.lowercase()) {
       "on" -> pixooClient.switchDisplay(true)
       "off" -> pixooClient.switchDisplay(false)
@@ -28,7 +28,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   }
 
   @PostMapping("/display/brightness/{value}")
-  fun manageDisplayBrightness(@PathVariable value: Int): ResponseEntity<Unit> {
+  fun manageDisplayBrightness(@PathVariable value: Int): ResponseEntity<Void> {
     if (value !in 0..100) return badRequest().build()
     pixooClient.setDisplayBrightness(value)
     return ok().build()
@@ -37,14 +37,14 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   @PostMapping(
     path = ["/display/brightness/overclock/enabled", "/display/brightness/overclock/disabled"]
   )
-  fun manageDisplayBrightnessOverclockMode(request: HttpServletRequest): ResponseEntity<Unit> {
+  fun manageDisplayBrightnessOverclockMode(request: HttpServletRequest): ResponseEntity<Void> {
     val brightnessOverclockEnabledBit = request.servletPath.contains("/enabled")
     pixooClient.setDisplayBrightnessOverclock(brightnessOverclockEnabledBit)
     return ok().build()
   }
 
   @PostMapping("/display/rotation/{degree}")
-  fun manageDisplayRotation(@PathVariable degree: Int): ResponseEntity<Unit> {
+  fun manageDisplayRotation(@PathVariable degree: Int): ResponseEntity<Void> {
     when (degree) {
       0 -> pixooClient.setDisplayRotation(0)
       90,
@@ -56,14 +56,14 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   }
 
   @PostMapping(path = ["/display/mirror/enabled", "/display/mirror/disabled"])
-  fun manageDisplayMirrorMode(request: HttpServletRequest): ResponseEntity<Unit> {
+  fun manageDisplayMirrorMode(request: HttpServletRequest): ResponseEntity<Void> {
     val mirrorEnabledBit = request.servletPath.contains("/enabled")
     pixooClient.setDisplayMirrored(mirrorEnabledBit)
     return ok().build()
   }
 
   @PostMapping("/display/white-balance", consumes = [APPLICATION_JSON_VALUE])
-  fun manageDisplayWhiteBalance(@RequestBody body: WhiteBalance): ResponseEntity<Unit> {
+  fun manageDisplayWhiteBalance(@RequestBody body: WhiteBalance): ResponseEntity<Void> {
     if (body.red !in 0..100 || body.green !in 0..100 || body.blue !in 0..100)
       return badRequest().build()
     pixooClient.setDisplayWhiteBalance(body.red, body.green, body.blue)
@@ -71,20 +71,20 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   }
 
   @PostMapping("/time")
-  fun refreshSystemTime(): ResponseEntity<Unit> {
+  fun refreshSystemTime(): ResponseEntity<Void> {
     pixooClient.setSystemTimeInUtc(OffsetDateTime.now(UTC).toEpochSecond())
     return ok().build()
   }
 
   @PostMapping(path = ["/time/mode/12h", "/time/mode/24h"])
-  fun setSystemTimeMode(request: HttpServletRequest): ResponseEntity<Unit> {
+  fun setSystemTimeMode(request: HttpServletRequest): ResponseEntity<Void> {
     val twentyFourModeEnabledBit = request.servletPath.contains("/24h")
     pixooClient.setSystemTimeMode(twentyFourModeEnabledBit)
     return ok().build()
   }
 
   @PostMapping("/time/offset/{offset}")
-  fun setSystemTimeOffset(@PathVariable offset: Int): ResponseEntity<Unit> {
+  fun setSystemTimeOffset(@PathVariable offset: Int): ResponseEntity<Void> {
     if (offset >= 14 || offset <= -12) return badRequest().build()
     pixooClient.setSystemTimeOffset(offset)
     return ok().build()
@@ -97,7 +97,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   }
 
   @PostMapping("/weather/location", consumes = [APPLICATION_JSON_VALUE])
-  fun manageWeatherLocation(@RequestBody body: WeatherLocation): ResponseEntity<Unit> {
+  fun manageWeatherLocation(@RequestBody body: WeatherLocation): ResponseEntity<Void> {
     if (body.longitude.toFloat() !in -180f..180f || body.latitude.toFloat() !in -90f..90f)
       return badRequest().build()
     pixooClient.setWeatherLocation(body.longitude, body.latitude)
@@ -105,7 +105,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   }
 
   @PostMapping(path = ["/weather/temperature-unit/celsius", "/weather/temperature-unit/fahrenheit"])
-  fun manageTemperatureUnit(request: HttpServletRequest): ResponseEntity<Unit> {
+  fun manageTemperatureUnit(request: HttpServletRequest): ResponseEntity<Void> {
     val temperatureUnitBit = request.servletPath.contains("/fahrenheit")
     pixooClient.setWeatherTemperatureUnit(temperatureUnitBit)
     return ok().build()

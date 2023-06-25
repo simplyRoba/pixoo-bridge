@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 class HealthController(val pixooClient: PixooDeviceClient, val config: PixooConfig) {
 
   @GetMapping("/check")
-  fun healthCheck(): ResponseEntity<Unit> {
+  fun healthCheck(): ResponseEntity<Void> {
     if (config.health.forward) pixooClient.healthCheck()
     return ok().build()
   }
