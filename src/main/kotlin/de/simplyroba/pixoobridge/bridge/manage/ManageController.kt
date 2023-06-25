@@ -3,6 +3,10 @@ package de.simplyroba.pixoobridge.bridge.manage
 import de.simplyroba.pixoobridge.bridge.manage.model.WeatherLocation
 import de.simplyroba.pixoobridge.bridge.manage.model.WhiteBalance
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.enums.ParameterIn
+import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.servlet.http.HttpServletRequest
 import java.time.OffsetDateTime
@@ -17,9 +21,16 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/manage")
 class ManageController(private val pixooClient: PixooDeviceClient) {
 
-  @PostMapping("/display/{command}")
-  fun manageDisplay(@PathVariable("command") command: String): ResponseEntity<Void> {
-    when (command.lowercase()) {
+  @Operation(description = "Turn display on or off.")
+  @Parameter(
+          name = "action",
+          `in` = ParameterIn.PATH,
+          description = "Action to execute.",
+          schema = Schema(allowableValues = ["on", "off"])
+  )
+  @PostMapping("/display/{action}")
+  fun manageDisplay(@PathVariable("action") action: String): ResponseEntity<Void> {
+    when (action) {
       "on" -> pixooClient.switchDisplay(true)
       "off" -> pixooClient.switchDisplay(false)
       else -> return notFound().build()
@@ -27,6 +38,13 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
+  @Operation(description = "Control display brightness.")
+  @Parameter(
+          name = "value",
+          `in` = ParameterIn.PATH,
+          description = "Brightness value in percentage from 0-100.",
+          schema = Schema(type = "integer", minimum = "0", maximum = "100", defaultValue = "50")
+  )
   @PostMapping("/display/brightness/{value}")
   fun manageDisplayBrightness(@PathVariable value: Int): ResponseEntity<Void> {
     if (value !in 0..100) return badRequest().build()
@@ -34,6 +52,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
+  //TODO hier weiter!!
   @PostMapping(
     path = ["/display/brightness/overclock/enabled", "/display/brightness/overclock/disabled"]
   )
