@@ -12,7 +12,7 @@ Pass key as environment variable the docker container.
 
 # Run the image
 ```shell
-docker run -p 8080:8080 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
+docker run -p 4000:4000 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
 ```
 
 # Further resources
