@@ -24,7 +24,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   }
 
   @ParameterizedTest
-  @CsvSource(value = ["disabled:0", "enabled:1"], delimiter = ':')
+  @CsvSource(value = ["on:1", "off:0"], delimiter = ':')
   fun `should overclock display brightness`(input: String, expected: String) {
     doPostCall("/manage/display/brightness/overclock/$input")
     verifyCommandSent("""{"Command":"Device/SetHighLightMode", "Mode": $expected}""")

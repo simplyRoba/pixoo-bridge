@@ -52,16 +52,24 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
-  //TODO hier weiter!!
-  @PostMapping(
-    path = ["/display/brightness/overclock/enabled", "/display/brightness/overclock/disabled"]
+  @Operation(description = "Turn brightness overclock on or off.")
+  @Parameter(
+          name = "action",
+          `in` = ParameterIn.PATH,
+          description = "Action to execute.",
+          schema = Schema(allowableValues = ["on", "off"])
   )
-  fun manageDisplayBrightnessOverclockMode(request: HttpServletRequest): ResponseEntity<Void> {
-    val brightnessOverclockEnabledBit = request.servletPath.contains("/enabled")
-    pixooClient.setDisplayBrightnessOverclock(brightnessOverclockEnabledBit)
+  @PostMapping("/display/brightness/overclock/{action}")
+  fun manageDisplayBrightnessOverclockMode(@PathVariable action: String): ResponseEntity<Void> {
+    when (action) {
+      "on" -> pixooClient.setDisplayBrightnessOverclock(true)
+      "off" -> pixooClient.setDisplayBrightnessOverclock(false)
+      else -> return notFound().build()
+    }
     return ok().build()
   }
 
+  //TODO hier weiter!!
   @PostMapping("/display/rotation/{degree}")
   fun manageDisplayRotation(@PathVariable degree: Int): ResponseEntity<Void> {
     when (degree) {

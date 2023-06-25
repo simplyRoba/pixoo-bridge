@@ -15,7 +15,7 @@ class ManageControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
-  fun `should return not found on wrong display control command`(path: String) {
+  fun `should return not found on wrong display control action`(path: String) {
     mockMvc.perform(post("/manage/display/$path")).andExpect(status().isNotFound)
   }
 
@@ -24,6 +24,12 @@ class ManageControllerMvcTest : AbstractMvcTest() {
   fun `should return bad request on brightness out of bound`(input: Int) {
     mockMvc.perform(post("/manage/display/brightness/$input")).andExpect(status().isBadRequest)
     verifyNoInteractions(pixooClient)
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong brightness overclock action`(path: String) {
+    mockMvc.perform(post("/manage/brightness/overclock/$path")).andExpect(status().isNotFound)
   }
 
   @Test

@@ -39,7 +39,7 @@ class ToolControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
-  fun `should return not found on wrong stopwatch command`(path: String) {
+  fun `should return not found on wrong stopwatch action`(path: String) {
     mockMvc.perform(post("/tool/stopwatch/$path")).andExpect(status().isNotFound)
   }
 
@@ -67,7 +67,7 @@ class ToolControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
-  fun `should return not found on wrong sound meter command`(path: String) {
+  fun `should return not found on wrong sound meter action`(path: String) {
     mockMvc.perform(post("/tool/soundmeter/$path")).andExpect(status().isNotFound)
   }
 }
