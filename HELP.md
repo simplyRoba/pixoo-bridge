@@ -24,3 +24,4 @@ The following guides illustrate how to use some features concretely:
 ### Dependencies
 
 * [Managed dependencies](https://docs.spring.io/spring-boot/docs/current/reference/html/dependency-versions.html)
+* [Dependency Matrix for machines](https://start.spring.io/actuator/info)
