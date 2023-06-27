@@ -2,6 +2,7 @@ package de.simplyroba.pixoobridge.bridge.health
 
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import de.simplyroba.pixoobridge.config.PixooConfig
+import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.ok
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/health")
 class HealthController(val pixooClient: PixooDeviceClient, val config: PixooConfig) {
 
+  @Operation(description = "Check health of the service")
   @GetMapping("/check")
   fun healthCheck(): ResponseEntity<Void> {
     if (config.health.forward) pixooClient.healthCheck()
