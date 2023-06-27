@@ -16,19 +16,17 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories { mavenCentral() }
 
-extra["springCloudVersion"] = "2022.0.3"
+val springCloudVersion = "2022.0.3"
+val openapiVersion = "2.1.0"
+val mockitoKotlinVersion = "5.0.0"
 
-val openapiVersion = "2.1.0" //try this
-
-extra["httpClientVersion"] = "4.5.13"
-
-extra["guavaVersion"] = "32.0.1-jre"
-
-extra["mockitoKotlinVersion"] = "5.0.0"
-
-// security version bumps
+// security version bumps through spring dependency management
+// will not be updated through dependabot
 // https://github.com/simplyRoba/pixoo-bridge/security/dependabot/6
 extra["snakeyaml.version"] = "2.0"
+// direkt security version bumps
+val httpClientVersion = "4.5.13"
+val guavaVersion = "32.0.1-jre"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
@@ -37,14 +35,14 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$openapiVersion")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
-  testImplementation("org.mockito.kotlin:mockito-kotlin:${property("mockitoKotlinVersion")}")
+  testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
 
   constraints {
-    implementation("org.apache.httpcomponents:httpclient:${property("httpClientVersion")}") {
+    implementation("org.apache.httpcomponents:httpclient:$httpClientVersion") {
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/4")
     }
-    implementation("com.google.guava:guava:${property("guavaVersion")}") {
+    implementation("com.google.guava:guava:$guavaVersion") {
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/7")
     }
   }
@@ -53,7 +51,7 @@ dependencies {
 dependencyManagement {
   imports {
     mavenBom(
-      "org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}"
+      "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
     )
   }
 }
