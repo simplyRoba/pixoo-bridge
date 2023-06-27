@@ -38,7 +38,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   }
 
   @ParameterizedTest
-  @CsvSource(value = ["disabled:0", "enabled:1"], delimiter = ':')
+  @CsvSource(value = ["off:0", "on:1"], delimiter = ':')
   fun `should mirror display `(input: String, expected: String) {
     doPostCall("/manage/display/mirror/$input")
     verifyCommandSent("""{"Command":"Device/SetMirrorMode", "Mode": $expected}""")

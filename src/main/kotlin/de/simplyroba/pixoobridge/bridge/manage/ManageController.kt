@@ -69,7 +69,13 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
-  //TODO hier weiter!!
+  @Operation(description = "Control the display rotation")
+  @Parameter(
+          name = "degree",
+          `in` = ParameterIn.PATH,
+          description = "Rotation degree.",
+          schema = Schema(allowableValues = ["0", "90", "180", "270"])
+  )
   @PostMapping("/display/rotation/{degree}")
   fun manageDisplayRotation(@PathVariable degree: Int): ResponseEntity<Void> {
     when (degree) {
@@ -82,10 +88,20 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
-  @PostMapping(path = ["/display/mirror/enabled", "/display/mirror/disabled"])
-  fun manageDisplayMirrorMode(request: HttpServletRequest): ResponseEntity<Void> {
-    val mirrorEnabledBit = request.servletPath.contains("/enabled")
-    pixooClient.setDisplayMirrored(mirrorEnabledBit)
+  @Operation(description = "Control if the display is mirrored")
+  @Parameter(
+          name = "action",
+          `in` = ParameterIn.PATH,
+          description = "Action to execute",
+          schema = Schema(allowableValues = ["on", "off"])
+  )
+  @PostMapping("/display/mirror/{action}")
+  fun manageDisplayMirrorMode(@PathVariable action: String): ResponseEntity<Void> {
+    when (action) {
+      "on" -> pixooClient.setDisplayMirrored(true)
+      "off" -> pixooClient.setDisplayMirrored(false)
+      else -> return notFound().build()
+    }
     return ok().build()
   }
 

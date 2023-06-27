@@ -39,6 +39,12 @@ class ManageControllerMvcTest : AbstractMvcTest() {
   }
 
   @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong display mirror action`(path: String) {
+    mockMvc.perform(post("/manage/display/mirror/$path")).andExpect(status().isNotFound)
+  }
+
+  @ParameterizedTest
   @CsvSource(
     value = ["101:50:50", "-1:50:50", "50:101:50", "50:-1:50", "50:50:101", "50:50:-1"],
     delimiter = ':'
