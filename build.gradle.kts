@@ -18,7 +18,7 @@ repositories { mavenCentral() }
 
 extra["springCloudVersion"] = "2022.0.3"
 
-extra["openapiVersion"] = "2.1.0"
+val openapiVersion = "2.1.0" //try this
 
 extra["httpClientVersion"] = "4.5.13"
 
@@ -35,7 +35,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-webflux") // only for webclient
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${property("openapiVersion")}")
+  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$openapiVersion")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.mockito.kotlin:mockito-kotlin:${property("mockitoKotlinVersion")}")
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
