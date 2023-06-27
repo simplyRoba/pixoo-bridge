@@ -87,7 +87,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   }
 
   @Test
-  fun `should set system time zone`() {
+  fun `should set system time offset`() {
     val offsetValue = -1
     doPostCall("/manage/time/offset/$offsetValue")
     verifyCommandSent("""{"Command":"Sys/TimeZone", "TimeZoneValue": "GMT$offsetValue"}""")

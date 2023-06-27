@@ -125,7 +125,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   @Parameter(
           name = "mode",
           `in` = ParameterIn.PATH,
-          description = "Time display mode",
+          description = "Time display mode.",
           schema = Schema(allowableValues = ["12h", "24h"])
   )
   @PostMapping("/time/mode/{mode}")
@@ -138,12 +138,20 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
+  @Operation(description = "Configure if the time offset of the current time zone")
+  @Parameter(
+          name = "offset",
+          `in` = ParameterIn.PATH,
+          description = "The time offset of the timezone. Between -12 and 14.",
+          schema = Schema(type = "integer", minimum = "-12", maximum = "14")
+  )
   @PostMapping("/time/offset/{offset}")
   fun setSystemTimeOffset(@PathVariable offset: Int): ResponseEntity<Void> {
     if (offset >= 14 || offset <= -12) return badRequest().build()
     pixooClient.setSystemTimeOffset(offset)
     return ok().build()
   }
+
 
   @GetMapping("/time", produces = [APPLICATION_JSON_VALUE])
   fun readDeviceTime(): ResponseEntity<Map<String, Any>> {
