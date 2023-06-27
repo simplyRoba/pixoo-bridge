@@ -92,7 +92,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   @Parameter(
           name = "action",
           `in` = ParameterIn.PATH,
-          description = "Action to execute",
+          description = "Action to execute.",
           schema = Schema(allowableValues = ["on", "off"])
   )
   @PostMapping("/display/mirror/{action}")
@@ -105,6 +105,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
+  @Operation(description = "Control the white balance")
   @PostMapping("/display/white-balance", consumes = [APPLICATION_JSON_VALUE])
   fun manageDisplayWhiteBalance(@RequestBody body: WhiteBalance): ResponseEntity<Void> {
     if (body.red !in 0..100 || body.green !in 0..100 || body.blue !in 0..100)
@@ -113,16 +114,27 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
+  @Operation(description = "Set the time of the pixoo to the correct time of the bridge")
   @PostMapping("/time")
   fun refreshSystemTime(): ResponseEntity<Void> {
     pixooClient.setSystemTimeInUtc(OffsetDateTime.now(UTC).toEpochSecond())
     return ok().build()
   }
 
-  @PostMapping(path = ["/time/mode/12h", "/time/mode/24h"])
-  fun setSystemTimeMode(request: HttpServletRequest): ResponseEntity<Void> {
-    val twentyFourModeEnabledBit = request.servletPath.contains("/24h")
-    pixooClient.setSystemTimeMode(twentyFourModeEnabledBit)
+  @Operation(description = "Configure if the mode time is display")
+  @Parameter(
+          name = "mode",
+          `in` = ParameterIn.PATH,
+          description = "Time display mode",
+          schema = Schema(allowableValues = ["12h", "24h"])
+  )
+  @PostMapping("/time/mode/{mode}")
+  fun setSystemTimeMode(@PathVariable mode: String): ResponseEntity<Void> {
+    when (mode) {
+      "24h" -> pixooClient.setTwentyFourHourTimeMode(true)
+      "12h" -> pixooClient.setTwentyFourHourTimeMode(false)
+      else -> return notFound().build()
+    }
     return ok().build()
   }
 

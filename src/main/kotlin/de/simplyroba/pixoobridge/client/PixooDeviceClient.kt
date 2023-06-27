@@ -71,7 +71,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
     genericPostCommand(SET_SYSTEM_TIME, Pair("Utc", unixTimeInSeconds))
 
   // Mode, 0|1, 1=24 hour mode; 0=12 hour mode
-  fun setSystemTimeMode(twentyFourModeEnabledBit: Boolean) =
+  fun setTwentyFourHourTimeMode(twentyFourModeEnabledBit: Boolean) =
     genericPostCommand(SET_SYSTEM_TIME_MODE, Pair("Mode", twentyFourModeEnabledBit.toBitNumber()))
 
   // TimeZoneValue, example=GMT-5, offset in GMT+/- or GMT0 format

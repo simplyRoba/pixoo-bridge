@@ -70,6 +70,12 @@ class ManageControllerMvcTest : AbstractMvcTest() {
     verifyNoInteractions(pixooClient)
   }
 
+  @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong time mode`(path: String) {
+    mockMvc.perform(post("/manage/time/mode/$path")).andExpect(status().isNotFound)
+  }
+
   @Test
   fun `should return bad request on to low time offset`() {
     mockMvc.perform(post("/manage/time/offset/-13")).andExpect(status().isBadRequest)
