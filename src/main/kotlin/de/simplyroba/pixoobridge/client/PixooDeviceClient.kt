@@ -9,7 +9,6 @@ import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toJavaDuration
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType.APPLICATION_JSON
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
@@ -25,9 +24,17 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   private val webclient = WebClient.create("http://${config.host}")
 
-  fun healthCheck(): ResponseEntity<Void>? {
+  fun healthCheck() {
     logger.debug("Check connectivity")
-    return webclient.get().uri("/get").retrieve().toBodilessEntity().block(DEFAULT_TIMEOUT)
+    webclient
+      .get()
+      .uri("/get")
+      .retrieve()
+      .toBodilessEntity()
+      .block(DEFAULT_TIMEOUT)
+      ?.statusCode
+      ?.takeIf { it.is2xxSuccessful }
+      ?: throw IllegalStateException("Health check at pixoo failed")
   }
 
   // OnOff, 0|1, 1=on; 0=off
@@ -83,7 +90,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
    * UTCTime, example=1672416000, Unix epoch timestamps in seconds
    * LocalTime, example=2022-03-14 03:40:28, time in yyyy-MM-dd HH:mm:ss format
    */
-  fun getSystemTime(): Map<String, Any> = genericPostCommand(GET_SYSTEM_TIME)?.parameters ?: mapOf()
+  fun getSystemTime() = genericPostCommand(GET_SYSTEM_TIME)
 
   /*
    * Longitude, -180-180, as String
@@ -111,8 +118,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
    * Visibility, example=10000, current visibility as number
    * WindSpeed, example=2.54, current wind speed as number in m/s
    */
-  fun readWeatherInformation(): Map<String, Any> =
-    genericPostCommand(GET_WEATHER_INFO)?.parameters ?: mapOf()
+  fun readWeatherInformation() = genericPostCommand(GET_WEATHER_INFO)
 
   /*
    * Returns:
@@ -130,8 +136,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
    * MirrorFlag, 0|1, 1=screen is mirrored
    * LightSwitch, 0|1, 1=screen on: 0=screen off
    */
-  fun readConfiguration(): Map<String, Any> =
-    genericPostCommand(GET_CONFIGURATION)?.parameters ?: mapOf()
+  fun readConfiguration() = genericPostCommand(GET_CONFIGURATION)
 
   /*
    * Minute: 0-99, as number
@@ -163,7 +168,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
   private fun genericPostCommand(
     commandType: CommandType,
     vararg parameters: Pair<String, Any>
-  ): CommandResponse? {
+  ): CommandResponse {
     logger.debug("Sending command {} with {}", commandType, parameters)
 
     val rawResponse =

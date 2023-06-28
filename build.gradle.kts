@@ -49,11 +49,7 @@ dependencies {
 }
 
 dependencyManagement {
-  imports {
-    mavenBom(
-      "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
-    )
-  }
+  imports { mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion") }
 }
 
 tasks.withType<KotlinCompile> {

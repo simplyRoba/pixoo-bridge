@@ -1,7 +1,7 @@
 package de.simplyroba.pixoobridge.bridge.tool
 
-import de.simplyroba.pixoobridge.bridge.tool.model.ScoreboardScores
-import de.simplyroba.pixoobridge.bridge.tool.model.TimerSettings
+import de.simplyroba.pixoobridge.bridge.tool.model.ScoreboardScoresRequest
+import de.simplyroba.pixoobridge.bridge.tool.model.TimerSettingsRequest
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
@@ -20,7 +20,7 @@ class ToolController(private val pixooClient: PixooDeviceClient) {
 
   @Operation(description = "Start the timer tool.")
   @PostMapping("/timer/start", consumes = [APPLICATION_JSON_VALUE])
-  fun startTimer(@RequestBody body: TimerSettings): ResponseEntity<Void> {
+  fun startTimer(@RequestBody body: TimerSettingsRequest): ResponseEntity<Void> {
     if (body.minutes !in 0..99 || body.seconds !in 0..59) return badRequest().build()
     pixooClient.setTimer(body.minutes, body.seconds, true)
     return ok().build()
@@ -53,7 +53,7 @@ class ToolController(private val pixooClient: PixooDeviceClient) {
 
   @Operation(description = "Control scoreboard tool.")
   @PostMapping("/scoreboard", consumes = [APPLICATION_JSON_VALUE])
-  fun setScoreboard(@RequestBody body: ScoreboardScores): ResponseEntity<Void> {
+  fun setScoreboard(@RequestBody body: ScoreboardScoresRequest): ResponseEntity<Void> {
     if (body.redScore !in 0..999 || body.blueScore !in 0..999) return badRequest().build()
     pixooClient.setScoreBoard(body.redScore, body.blueScore)
     return ok().build()

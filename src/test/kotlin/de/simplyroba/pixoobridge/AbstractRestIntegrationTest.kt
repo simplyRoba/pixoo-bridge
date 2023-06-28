@@ -28,7 +28,7 @@ abstract class AbstractRestIntegrationTest {
     )
   }
 
-  protected fun doPostCall(path: String) =
+  protected fun doPostCallExpectSuccess(path: String) =
     webTestClient
       .post()
       .uri(path)
@@ -38,7 +38,7 @@ abstract class AbstractRestIntegrationTest {
       .expectStatus()
       .is2xxSuccessful()
 
-  protected fun doPostCallWithBody(path: String, body: Any) =
+  protected fun doPostCallWithBodyExpectSuccess(path: String, body: Any) =
     webTestClient
       .post()
       .uri(path)
@@ -49,14 +49,11 @@ abstract class AbstractRestIntegrationTest {
       .expectStatus()
       .is2xxSuccessful()
 
+  protected fun doGetCallExpectSuccess(path: String) =
+    doGetCall(path).expectStatus().is2xxSuccessful()
+
   protected fun doGetCall(path: String) =
-    webTestClient
-      .get()
-      .uri(path)
-      .accept(MediaType.APPLICATION_JSON)
-      .exchange()
-      .expectStatus()
-      .is2xxSuccessful()
+    webTestClient.get().uri(path).accept(MediaType.APPLICATION_JSON).exchange()
 
   /**
    * Wiremock uses JsonUnit and therefore can handle placeholders. See:
