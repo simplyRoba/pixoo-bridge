@@ -160,16 +160,19 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   @GetMapping("/time", produces = [APPLICATION_JSON_VALUE])
   fun readDeviceTime(): ResponseEntity<TimeResponse> {
     val clientResponse = pixooClient.getSystemTime().parameters
-    val utcTime = LocalDateTime.ofEpochSecond(toLong(clientResponse["UTCTime"].toString()), 0, UTC)
-    val localTime =
-      LocalDateTime.parse(
-        clientResponse["LocalTime"].toString(),
-        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    val response =
+      TimeResponse(
+        utcTime = LocalDateTime.ofEpochSecond(toLong(clientResponse["UTCTime"].toString()), 0, UTC),
+        localTime =
+          LocalDateTime.parse(
+            clientResponse["LocalTime"].toString(),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+          )
       )
-    val response = TimeResponse(localTime, utcTime)
     return ok(response)
   }
 
+  @Operation(description = "Set the location for the weather forecast")
   @PostMapping("/weather/location", consumes = [APPLICATION_JSON_VALUE])
   fun manageWeatherLocation(@RequestBody body: WeatherLocationRequest): ResponseEntity<Void> {
     if (body.longitude.toFloat() !in -180f..180f || body.latitude.toFloat() !in -90f..90f)
