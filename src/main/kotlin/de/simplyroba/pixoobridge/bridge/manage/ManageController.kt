@@ -2,6 +2,7 @@ package de.simplyroba.pixoobridge.bridge.manage
 
 import de.simplyroba.pixoobridge.bridge.manage.model.TimeResponse
 import de.simplyroba.pixoobridge.bridge.manage.model.WeatherLocationRequest
+import de.simplyroba.pixoobridge.bridge.manage.model.WeatherResponse
 import de.simplyroba.pixoobridge.bridge.manage.model.WhiteBalanceRequest
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import io.swagger.v3.oas.annotations.Operation
@@ -198,9 +199,18 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
   }
 
   @GetMapping("/weather", produces = [APPLICATION_JSON_VALUE])
-  fun readWeatherInformation(): ResponseEntity<Map<String, Any>> {
-    val weather = pixooClient.readWeatherInformation().parameters
-    return ok(weather)
+  fun readWeatherInformation(): ResponseEntity<WeatherResponse> {
+    val clientResponse = pixooClient.readWeatherInformation().parameters
+    val response = WeatherResponse(
+            currentTemperature = clientResponse["CurTemp"].toString().toFloat(),
+            minimalTemperature = clientResponse["MinTemp"].toString().toFloat(),
+            maximalTemperature = clientResponse["MaxTemp"].toString().toFloat(),
+            weatherString = clientResponse["Weather"].toString(),
+            pressure = clientResponse["Pressure"].toString().toInt(),
+            humidity = clientResponse["Humidity"].toString().toInt(),
+            windSpeed = clientResponse["WindSpeed"].toString().toFloat()
+    )
+    return ok(response)
   }
 
   @GetMapping("/settings", produces = [APPLICATION_JSON_VALUE])

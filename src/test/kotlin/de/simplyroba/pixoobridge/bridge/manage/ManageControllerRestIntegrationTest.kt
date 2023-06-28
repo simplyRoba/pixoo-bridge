@@ -191,14 +191,13 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .json(
         """
           {
-            "Weather": "Cloudy",
-            "CurTemp": 33.68,
-            "MinTemp": 31.85,
-            "MaxTemp": 33.68,
-            "Pressure": 1006,
-            "Humidity": 50,
-            "Visibility": 10000,
-            "WindSpeed": 2.54
+            "weatherString": "Cloudy",
+            "currentTemperature": 33.68,
+            "minimalTemperature": 31.85,
+            "maximalTemperature": 33.68,
+            "pressure": 1006,
+            "humidity": 50,
+            "windSpeed": 2.54
           }
         """
           .trimIndent()
