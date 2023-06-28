@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.tags.Tag
-import jakarta.servlet.http.HttpServletRequest
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.ZoneOffset.UTC
@@ -172,7 +171,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok(response)
   }
 
-  @Operation(description = "Set the location for the weather forecast")
+  @Operation(description = "Configure the location for the weather forecast")
   @PostMapping("/weather/location", consumes = [APPLICATION_JSON_VALUE])
   fun manageWeatherLocation(@RequestBody body: WeatherLocationRequest): ResponseEntity<Void> {
     if (body.longitude.toFloat() !in -180f..180f || body.latitude.toFloat() !in -90f..90f)
@@ -181,10 +180,20 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok().build()
   }
 
-  @PostMapping(path = ["/weather/temperature-unit/celsius", "/weather/temperature-unit/fahrenheit"])
-  fun manageTemperatureUnit(request: HttpServletRequest): ResponseEntity<Void> {
-    val temperatureUnitBit = request.servletPath.contains("/fahrenheit")
-    pixooClient.setWeatherTemperatureUnit(temperatureUnitBit)
+  @Operation(description = "Configure if the weather temperature unit")
+  @Parameter(
+          name = "unit",
+          `in` = ParameterIn.PATH,
+          description = "Temperature unit.",
+          schema = Schema(allowableValues = ["celsius", "fahrenheit"])
+  )
+  @PostMapping("/weather/temperature-unit/{unit}")
+  fun manageTemperatureUnit(@PathVariable unit: String): ResponseEntity<Void> {
+    when (unit) {
+      "celsius" -> pixooClient.setWeatherTemperatureUnitFahrenheit(false)
+      "fahrenheit" -> pixooClient.setWeatherTemperatureUnitFahrenheit(true)
+      else -> return notFound().build()
+    }
     return ok().build()
   }
 

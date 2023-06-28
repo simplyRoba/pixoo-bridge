@@ -104,7 +104,7 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
     )
 
   // Mode, 0|1, 0=Celsius; 1=Fahrenheit (it won’t be saved and reset when the device power off)
-  fun setWeatherTemperatureUnit(temperatureUnitBit: Boolean) =
+  fun setWeatherTemperatureUnitFahrenheit(temperatureUnitBit: Boolean) =
     genericPostCommand(SET_WEATHER_TEMP_UNIT, Pair("Mode", temperatureUnitBit.toBitNumber()))
 
   /*

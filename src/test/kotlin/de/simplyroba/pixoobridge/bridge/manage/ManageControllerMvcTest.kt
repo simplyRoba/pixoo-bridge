@@ -76,15 +76,10 @@ class ManageControllerMvcTest : AbstractMvcTest() {
     mockMvc.perform(post("/manage/time/mode/$path")).andExpect(status().isNotFound)
   }
 
-  @Test
-  fun `should return bad request on to low time offset`() {
-    mockMvc.perform(post("/manage/time/offset/-13")).andExpect(status().isBadRequest)
-    verifyNoInteractions(pixooClient)
-  }
-
-  @Test
-  fun `should return bad request on to high time offset`() {
-    mockMvc.perform(post("/manage/time/offset/15")).andExpect(status().isBadRequest)
+  @ParameterizedTest
+  @ValueSource(strings = ["-13", "15"])
+  fun `should return bad request on time offset out of bound`(path: String) {
+    mockMvc.perform(post("/manage/time/offset/$path")).andExpect(status().isBadRequest)
     verifyNoInteractions(pixooClient)
   }
 
@@ -111,5 +106,11 @@ class ManageControllerMvcTest : AbstractMvcTest() {
       .andExpect(status().isBadRequest)
 
     verifyNoInteractions(pixooClient)
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong temperature unit`(path: String) {
+    mockMvc.perform(post("/manage/weather/temperature-unit/$path")).andExpect(status().isNotFound)
   }
 }
