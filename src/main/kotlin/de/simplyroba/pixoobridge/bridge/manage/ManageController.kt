@@ -1,9 +1,10 @@
 package de.simplyroba.pixoobridge.bridge.manage
 
-import de.simplyroba.pixoobridge.bridge.manage.model.TimeResponse
-import de.simplyroba.pixoobridge.bridge.manage.model.WeatherLocationRequest
-import de.simplyroba.pixoobridge.bridge.manage.model.WeatherResponse
-import de.simplyroba.pixoobridge.bridge.manage.model.WhiteBalanceRequest
+import de.simplyroba.pixoobridge.bridge.manage.model.*
+import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TemperatureUnit.CELSIUS
+import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TemperatureUnit.FAHRENHEIT
+import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TimeMode.TWELVE
+import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TimeMode.TWENTYFOUR
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
@@ -75,18 +76,18 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
 
   @Operation(description = "Control the display rotation")
   @Parameter(
-    name = "degree",
+    name = "angle",
     `in` = ParameterIn.PATH,
-    description = "Rotation degree.",
+    description = "Rotation angle.",
     schema = Schema(allowableValues = ["0", "90", "180", "270"])
   )
-  @PostMapping("/display/rotation/{degree}")
-  fun manageDisplayRotation(@PathVariable degree: Int): ResponseEntity<Void> {
-    when (degree) {
+  @PostMapping("/display/rotation/{angle}")
+  fun manageDisplayRotation(@PathVariable angle: Int): ResponseEntity<Void> {
+    when (angle) {
       0 -> pixooClient.setDisplayRotation(0)
       90,
       180,
-      270 -> pixooClient.setDisplayRotation(degree / 90)
+      270 -> pixooClient.setDisplayRotation(angle / 90)
       else -> return badRequest().build()
     }
     return ok().build()
@@ -215,9 +216,25 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
     return ok(response)
   }
 
+  @Operation(description = "Get all settings")
   @GetMapping("/settings", produces = [APPLICATION_JSON_VALUE])
-  fun readDeviceConfiguration(): ResponseEntity<Map<String, Any>> {
-    val config = pixooClient.readConfiguration().parameters
-    return ok(config)
+  fun readDeviceConfiguration(): ResponseEntity<SettingsResponse> {
+    val clientResponse = pixooClient.readConfiguration().parameters
+    val response =
+      SettingsResponse(
+        displayOn = "1".equals(clientResponse["LightSwitch"].toString()),
+        brightness = clientResponse["Brightness"].toString().toInt(),
+        timeMode = if ("1".equals(clientResponse["Time24Flag"].toString())) TWENTYFOUR else TWELVE,
+        rotationAngle =
+          when (val it = clientResponse["RotationFlag"].toString()) {
+            "0" -> 0
+            else -> it.toInt() * 90
+          },
+        mirrored = "1".equals(clientResponse["MirrorFlag"].toString()),
+        temperatureUnit =
+          if ("1".equals(clientResponse["TemperatureMode"].toString())) FAHRENHEIT else CELSIUS,
+        currentClockId = clientResponse["CurClockId"].toString().toInt()
+      )
+    return ok(response)
   }
 }

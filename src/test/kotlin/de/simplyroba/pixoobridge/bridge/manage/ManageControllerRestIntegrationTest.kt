@@ -241,19 +241,13 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .json(
         """
           {
-            "LightSwitch":1,
-            "MirrorFlag":1,
-            "GyrateAngle":1,
-            "TemperatureMode":1,
-            "Time24Flag":1,
-            "CurClockId":1,
-            "GalleryShowTimeFlag":1,
-            "PowerOnChannelId":1,
-            "SingleGalleyTime":5,
-            "GalleryTime":60,
-            "ClockTime":60,
-            "RotationFlag":1,
-            "Brightness":100
+            "displayOn":true,
+            "brightness":100,
+            "timeMode":"TWENTYFOUR",
+            "rotationAngle":90,
+            "mirrored":true,
+            "temperatureUnit":"FAHRENHEIT",
+            "currentClockId":1
           }
         """
           .trimIndent()
