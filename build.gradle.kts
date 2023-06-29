@@ -25,7 +25,7 @@ val mockitoKotlinVersion = "5.0.0"
 // https://github.com/simplyRoba/pixoo-bridge/security/dependabot/6
 extra["snakeyaml.version"] = "2.0"
 // direkt security version bumps
-val httpClientVersion = "4.5.13"
+val httpClientVersion = "4.5.14"
 val guavaVersion = "32.0.1-jre"
 
 dependencies {
