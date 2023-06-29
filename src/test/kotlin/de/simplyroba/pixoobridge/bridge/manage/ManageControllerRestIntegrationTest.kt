@@ -243,7 +243,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           {
             "displayOn":true,
             "brightness":100,
-            "timeMode":"TWENTYFOUR",
+            "timeMode":"TWENTY_FOUR",
             "rotationAngle":90,
             "mirrored":true,
             "temperatureUnit":"FAHRENHEIT",
