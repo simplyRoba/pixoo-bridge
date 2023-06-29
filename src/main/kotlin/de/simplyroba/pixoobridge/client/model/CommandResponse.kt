@@ -5,5 +5,5 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class CommandResponse(
   @JsonProperty("error_code") val errorCode: Int,
-  @JsonAnySetter val parameters: Map<String, Any>?
+  @JsonAnySetter val parameters: Map<String, Any> = mutableMapOf()
 )

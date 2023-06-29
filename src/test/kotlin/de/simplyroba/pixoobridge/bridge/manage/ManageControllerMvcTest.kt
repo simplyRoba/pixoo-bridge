@@ -14,16 +14,34 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 class ManageControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong display control action`(path: String) {
+    mockMvc.perform(post("/manage/display/$path")).andExpect(status().isNotFound)
+  }
+
+  @ParameterizedTest
   @ValueSource(ints = [101, -1])
   fun `should return bad request on brightness out of bound`(input: Int) {
     mockMvc.perform(post("/manage/display/brightness/$input")).andExpect(status().isBadRequest)
     verifyNoInteractions(pixooClient)
   }
 
+  @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong brightness overclock action`(path: String) {
+    mockMvc.perform(post("/manage/brightness/overclock/$path")).andExpect(status().isNotFound)
+  }
+
   @Test
   fun `should return bad request on false rotation degree`() {
     mockMvc.perform(post("/manage/display/rotation/91")).andExpect(status().isBadRequest)
     verifyNoInteractions(pixooClient)
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong display mirror action`(path: String) {
+    mockMvc.perform(post("/manage/display/mirror/$path")).andExpect(status().isNotFound)
   }
 
   @ParameterizedTest
@@ -52,15 +70,16 @@ class ManageControllerMvcTest : AbstractMvcTest() {
     verifyNoInteractions(pixooClient)
   }
 
-  @Test
-  fun `should return bad request on to low time offset`() {
-    mockMvc.perform(post("/manage/time/offset/-13")).andExpect(status().isBadRequest)
-    verifyNoInteractions(pixooClient)
+  @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong time mode`(path: String) {
+    mockMvc.perform(post("/manage/time/mode/$path")).andExpect(status().isNotFound)
   }
 
-  @Test
-  fun `should return bad request on to high time offset`() {
-    mockMvc.perform(post("/manage/time/offset/15")).andExpect(status().isBadRequest)
+  @ParameterizedTest
+  @ValueSource(strings = ["-13", "15"])
+  fun `should return bad request on time offset out of bound`(path: String) {
+    mockMvc.perform(post("/manage/time/offset/$path")).andExpect(status().isBadRequest)
     verifyNoInteractions(pixooClient)
   }
 
@@ -87,5 +106,11 @@ class ManageControllerMvcTest : AbstractMvcTest() {
       .andExpect(status().isBadRequest)
 
     verifyNoInteractions(pixooClient)
+  }
+
+  @ParameterizedTest
+  @ValueSource(strings = ["wrong", "path", "variable", "99"])
+  fun `should return not found on wrong temperature unit`(path: String) {
+    mockMvc.perform(post("/manage/weather/temperature-unit/$path")).andExpect(status().isNotFound)
   }
 }

@@ -11,6 +11,7 @@ For further reference, please consider the following sections:
 * [Spring Web](https://docs.spring.io/spring-boot/docs/3.1.0/reference/htmlsingle/#web)
 * [Spring Reactive Web](https://docs.spring.io/spring-boot/docs/3.1.0/reference/htmlsingle/#web.reactive)
 * [Dockerfile](https://spring.io/guides/topicals/spring-boot-docker/)
+* [Springdoc openapi](https://springdoc.org/v2/)
 
 ### Guides
 The following guides illustrate how to use some features concretely:

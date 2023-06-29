@@ -1,9 +1,13 @@
 
 pixoo:
   host: 'localhost'
-  health-forward: true
+  health:
+    forward: true
+  docs:
+    enabled: true
 
 server:
+  port: 4000
   shutdown: 'graceful'
 
 spring:
@@ -12,3 +16,9 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+
+springdoc:
+  api-docs:
+    enabled: ${pixoo.docs.enabled}
+  swagger-ui:
+    enabled: ${pixoo.docs.enabled}

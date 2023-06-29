@@ -24,6 +24,6 @@ COPY --from=builder application/snapshot-dependencies/ ./
 COPY --from=builder application/application/ ./
 
 HEALTHCHECK --interval=3m --timeout=10s --retries=3 \
-  CMD curl -f -s http://localhost:8080/health/check || exit 1
+  CMD curl -f -s http://localhost:4000/health/check || exit 1
 
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]

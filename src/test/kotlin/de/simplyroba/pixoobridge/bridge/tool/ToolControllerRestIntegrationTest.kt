@@ -10,7 +10,7 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   fun `should start timer with given time`() {
     val minutes = 5
     val seconds = 0
-    doPostCallWithBody(
+    doPostCallWithBodyExpectSuccess(
       "/tool/timer/start",
       """
       {
@@ -27,25 +27,25 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
   @Test
   fun `should stop timer`() {
-    doPostCall("/tool/timer/stop")
+    doPostCallExpectSuccess("/tool/timer/stop")
     verifyCommandSent("""{"Command":"Tools/SetTimer", "Minute":0, "Second":0, "Status":0 }""")
   }
 
   @Test
   fun `should stop stopwatch`() {
-    doPostCall("/tool/stopwatch/stop")
+    doPostCallExpectSuccess("/tool/stopwatch/stop")
     verifyCommandSent("""{"Command":"Tools/SetStopWatch", "Status":0 }""")
   }
 
   @Test
   fun `should start stopwatch`() {
-    doPostCall("/tool/stopwatch/start")
+    doPostCallExpectSuccess("/tool/stopwatch/start")
     verifyCommandSent("""{"Command":"Tools/SetStopWatch", "Status":1 }""")
   }
 
   @Test
   fun `should reset stopwatch`() {
-    doPostCall("/tool/stopwatch/reset")
+    doPostCallExpectSuccess("/tool/stopwatch/reset")
     verifyCommandSent("""{"Command":"Tools/SetStopWatch", "Status":2 }""")
   }
 
@@ -53,7 +53,7 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   fun `should set scoreboard to given values`() {
     val red = 5
     val blue = 0
-    doPostCallWithBody(
+    doPostCallWithBodyExpectSuccess(
       "/tool/scoreboard",
       """
       {
@@ -68,13 +68,13 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
   @Test
   fun `should start sound meter`() {
-    doPostCall("/tool/soundmeter/start")
+    doPostCallExpectSuccess("/tool/soundmeter/start")
     verifyCommandSent("""{"Command":"Tools/SetNoiseStatus", "NoiseStatus":1 }""")
   }
 
   @Test
   fun `should stop sound meter`() {
-    doPostCall("/tool/soundmeter/stop")
+    doPostCallExpectSuccess("/tool/soundmeter/stop")
     verifyCommandSent("""{"Command":"Tools/SetNoiseStatus", "NoiseStatus":0 }""")
   }
 }
