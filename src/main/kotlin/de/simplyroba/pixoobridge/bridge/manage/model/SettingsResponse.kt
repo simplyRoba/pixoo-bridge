@@ -13,7 +13,7 @@ data class SettingsResponse(
 ) {
   enum class TimeMode() {
     TWELVE,
-    TWENTYFOUR
+    TWENTY_FOUR
   }
 
   enum class TemperatureUnit() {

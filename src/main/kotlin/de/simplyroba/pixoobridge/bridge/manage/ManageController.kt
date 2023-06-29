@@ -4,7 +4,7 @@ import de.simplyroba.pixoobridge.bridge.manage.model.*
 import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TemperatureUnit.CELSIUS
 import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TemperatureUnit.FAHRENHEIT
 import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TimeMode.TWELVE
-import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TimeMode.TWENTYFOUR
+import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TimeMode.TWENTY_FOUR
 import de.simplyroba.pixoobridge.client.PixooDeviceClient
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
@@ -224,7 +224,7 @@ class ManageController(private val pixooClient: PixooDeviceClient) {
       SettingsResponse(
         displayOn = "1".equals(clientResponse["LightSwitch"].toString()),
         brightness = clientResponse["Brightness"].toString().toInt(),
-        timeMode = if ("1".equals(clientResponse["Time24Flag"].toString())) TWENTYFOUR else TWELVE,
+        timeMode = if ("1".equals(clientResponse["Time24Flag"].toString())) TWENTY_FOUR else TWELVE,
         rotationAngle =
           when (val it = clientResponse["RotationFlag"].toString()) {
             "0" -> 0
