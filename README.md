@@ -18,7 +18,7 @@ docker run -p 4000:4000 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo
 # Open api documentation
 open following url in a browser
 ```
-http://localhost:4000/swagger-ui/index.html#/
+http://localhost:4000/swagger-ui/index.html
 ```
 
 # Further resources
