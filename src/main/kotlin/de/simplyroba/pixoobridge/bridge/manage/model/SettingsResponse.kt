@@ -2,6 +2,7 @@ package de.simplyroba.pixoobridge.bridge.manage.model
 
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(name = "Settings")
 data class SettingsResponse(
   val displayOn: Boolean,
   @Schema(minimum = "0", maximum = "100", defaultValue = "50") val brightness: Int,
