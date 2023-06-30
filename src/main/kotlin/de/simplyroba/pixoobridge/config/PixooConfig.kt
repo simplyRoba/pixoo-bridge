@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties("pixoo")
-data class PixooConfig(val host: String, val health: PixooHealthConfig) {
+data class PixooConfig(val host: String, val size: Int, val health: PixooHealthConfig) {
 
   private val logger = LoggerFactory.getLogger(javaClass)
 

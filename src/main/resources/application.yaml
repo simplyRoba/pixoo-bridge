@@ -1,6 +1,7 @@
 
 pixoo:
   host: 'localhost'
+  size: 64
   health:
     forward: true
   docs:
