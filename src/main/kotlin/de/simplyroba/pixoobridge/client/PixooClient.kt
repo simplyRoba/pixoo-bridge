@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
 
 @Component
-class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
+class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   companion object {
     val DEFAULT_TIMEOUT = 10.seconds.toJavaDuration()
@@ -164,6 +164,8 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
   // NoiseStatus, 0-1, 0=stop; 1=start
   fun setSoundMeter(onBit: Boolean) =
     genericPostCommand(TOOL_SOUND_METER, Pair("NoiseStatus", onBit.toBitNumber()))
+
+  fun sendAnimation() = genericPostCommand(DRAW_ANIMATION)
 
   private fun genericPostCommand(
     commandType: CommandType,

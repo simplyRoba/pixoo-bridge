@@ -3,6 +3,16 @@ package de.simplyroba.pixoobridge.client
 import com.fasterxml.jackson.annotation.JsonValue
 
 enum class CommandType(@get:JsonValue val value: String) {
+  // Play
+  PLAY_ANIMATION("Device/PlayTFGif"),
+  PLAY_SOUND("Device/PlayBuzzer"),
+  // Draw
+  DRAW_ANIMATION("Draw/SendHttpGif"),
+  GET_NEXT_PICTURE_ID("Draw/GetHttpGifId"),
+  RESET_PICTURE_ID("Draw/ResetHttpGifId"),
+  DRAW_TEXT("Draw/SendHttpText"),
+  CLEAR_TEXT("Draw/ClearHttpText"),
+  DRAW_COMMAND_LIST("Draw/SendHttpItemList"),
   // Manage
   SET_DISPLAY_ON_OFF("Channel/OnOffScreen"),
   SET_DISPLAY_BRIGHTNESS("Channel/SetBrightness"),
