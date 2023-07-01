@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController
 @Tag(name = "Draw")
 @RestController
 @RequestMapping("/draw")
-class DrawController {
+class DrawController(private val drawService: DrawService) {
 
   @Operation(description = "Fill complete screen with rgb color")
   @PostMapping("/fill")
   fun fill(@RequestBody rgb: RGB) {
-    throw RuntimeException("Not yet implemented!")
+    drawService.fill(rgb)
   }
 }

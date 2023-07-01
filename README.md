@@ -16,12 +16,16 @@ Pass key as environment variable the docker container.
 docker run -p 4000:4000 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
 ```
 
-# Open api documentation
+# API
+## Documentation
 open following url in a browser
 ```
 http://localhost:4000/swagger-ui/index.html
 ```
 
+## Limitations
+The `Channel control API` of the Pixoo will not be implemented. Use the App for these functionality.
+
 # Further resources
-## API
+## Pixoo API
 [Official Divoom API documentation](http://doc.divoom-gz.com/web/#/12?page_id=191)

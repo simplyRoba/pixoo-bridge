@@ -3,16 +3,21 @@ package de.simplyroba.pixoobridge.client
 import com.fasterxml.jackson.annotation.JsonValue
 
 enum class CommandType(@get:JsonValue val value: String) {
+  // System
+  REBOOT("Device/SysReboot"),
   // Play
   PLAY_ANIMATION("Device/PlayTFGif"),
   PLAY_SOUND("Device/PlayBuzzer"),
   // Draw
-  DRAW_ANIMATION("Draw/SendHttpGif"),
   GET_NEXT_PICTURE_ID("Draw/GetHttpGifId"),
   RESET_PICTURE_ID("Draw/ResetHttpGifId"),
+  DRAW_ANIMATION("Draw/SendHttpGif"),
   DRAW_TEXT("Draw/SendHttpText"),
   CLEAR_TEXT("Draw/ClearHttpText"),
   DRAW_COMMAND_LIST("Draw/SendHttpItemList"),
+  // Clocks
+  SET_CLOCK("Channel/SetClockSelectId"),
+  GET_CLOCK("Channel/GetClockInfo"),
   // Manage
   SET_DISPLAY_ON_OFF("Channel/OnOffScreen"),
   SET_DISPLAY_BRIGHTNESS("Channel/SetBrightness"),
@@ -28,13 +33,13 @@ enum class CommandType(@get:JsonValue val value: String) {
   SET_WEATHER_TEMP_UNIT("Device/SetDisTempMode"),
   GET_WEATHER_INFO("Device/GetWeatherInfo"),
   GET_CONFIGURATION("Channel/GetAllConf"),
-  // Channel
-  SET_CHANNEL_GALLERY_TIME("Channel/SetSubscribeGalleryTime"),
   // Tool
   TOOL_TIMER("Tools/SetTimer"),
   TOOL_STOPWATCH("Tools/SetStopWatch"),
   TOOL_SCOREBOARD("Tools/SetScoreBoard"),
-  TOOL_SOUND_METER("Tools/SetNoiseStatus");
+  TOOL_SOUND_METER("Tools/SetNoiseStatus"),
+  // Batch commands
+  COMMAND_BATCH("Draw/CommandList");
 
   override fun toString(): String {
     return "$name ($value)"
