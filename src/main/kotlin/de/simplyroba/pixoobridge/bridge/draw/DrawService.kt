@@ -60,11 +60,14 @@ class DrawService(private val pixooConfig: PixooConfig, private val pixooClient:
     val size = pixooConfig.size
     val gif = AnimatedGifReader.read(imageSource)
     val id = getNextId()
-    // TODO cut after 59 frames as documentation says needs to be smaller than 60
     // TODO read animation speed from metadata?
     gif.frames.forEachIndexed { index, frame ->
       val resizedFrame = frame.cover(size, size)
       pixooClient.sendAnimation(gif.frameCount, size, index, id, 100, resizedFrame.toBase64())
+      if (index == 59) { // TODO test this
+        logger.warn("Stop on 59th frame of {} frames.", gif.frameCount)
+        return
+      }
     }
   }
 
