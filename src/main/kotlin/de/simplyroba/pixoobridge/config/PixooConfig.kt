@@ -16,7 +16,7 @@ data class PixooConfig(val host: String, val size: Int, val health: PixooHealthC
     logger.info("Configuration: $this")
     if (ACCEPTABLE_SIZES.contains(size).not())
       throw UnsupportedConfigurationException(
-        "Size: $size is not supported. Possible values: ${ACCEPTABLE_SIZES.contentToString()}"
+        "Size: $size is not supported. Possible values: ${ACCEPTABLE_SIZES.contentToString()}."
       )
   }
 }

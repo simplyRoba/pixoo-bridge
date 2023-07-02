@@ -21,6 +21,7 @@ class DrawController(private val drawService: DrawService) {
     return ok().build()
   }
 
+  // TODO define supported file extensions (jpeg, jpg, png, gif)
   @Operation(description = "Upload an image")
   @PostMapping("/upload", consumes = [MULTIPART_FORM_DATA_VALUE])
   fun uploadImage(

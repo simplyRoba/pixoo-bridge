@@ -1,7 +1,11 @@
 package de.simplyroba.pixoobridge.bridge.draw
 
 import com.sksamuel.scrimage.ImmutableImage
+import com.sksamuel.scrimage.format.Format
+import com.sksamuel.scrimage.format.Format.*
 import com.sksamuel.scrimage.format.FormatDetector
+import com.sksamuel.scrimage.nio.AnimatedGifReader
+import com.sksamuel.scrimage.nio.ImageSource
 import de.simplyroba.pixoobridge.bridge.draw.model.RGB
 import de.simplyroba.pixoobridge.client.PixooClient
 import de.simplyroba.pixoobridge.config.PixooConfig
@@ -19,28 +23,57 @@ class DrawService(private val pixooConfig: PixooConfig, private val pixooClient:
   fun drawColor(rgb: RGB) {
     val size = pixooConfig.size
     val image = ImmutableImage.filled(size, size, Color(rgb.red, rgb.green, rgb.blue))
-    sendImage(image)
+    val id = getNextId()
+    pixooClient.sendAnimation(1, pixooConfig.size, 0, id, 1000, image.toBase64())
   }
 
   fun drawImage(resource: Resource) {
-    val size = pixooConfig.size
     val format = detectFormat(resource)
+
+    resource.inputStream.use { inputStream ->
+        val imageSource = ImageSource.of(inputStream)
+
+        when (format) {
+          JPEG,
+          PNG -> sendSingleImage(imageSource)
+          // of course its possible that a gif contains only one frame this will result in the same
+          // command to the pixoo as in sendSingleImage()
+          GIF -> sendAnimation(imageSource)
+          WEBP -> throw FormatException("Unsupported format webp detected.")
+        }
+      }
+  }
+
+  private fun sendSingleImage(imageSource: ImageSource) {
+    val size = pixooConfig.size
     val resizedImage =
-      resource.inputStream
-        .use { inputStream -> ImmutableImage.loader().fromStream(inputStream) }
+      ImmutableImage.loader()
+        .detectMetadata(false)
+        .detectOrientation(false)
+        .load(imageSource)
         .cover(size, size)
-    sendImage(resizedImage)
+    // we send an animation with 1 frame
+    pixooClient.sendAnimation(1, size, 0, getNextId(), 1000, resizedImage.toBase64())
   }
 
-  private fun detectFormat(resource: Resource) {
-    // its important to get a fresh unused input stream here and also not to reuse the input
-    // stream from here, as the FormatDetector does not reset the stream before or after usage.
-    resource.inputStream.use { inputStream -> FormatDetector.detect(inputStream) }
-  }
-
-  private fun sendImage(image: ImmutableImage) {
+  private fun sendAnimation(imageSource: ImageSource) {
+    val size = pixooConfig.size
+    val gif = AnimatedGifReader.read(imageSource)
     val id = getNextId()
-    pixooClient.sendAnimation(1, pixooConfig.size, 0, id, 1000, image.toBase64())
+    // TODO cut after 59 frames as documentation says needs to be smaller than 60
+    // TODO read animation speed from metadata?
+    gif.frames.forEachIndexed { index, frame ->
+      val resizedFrame = frame.cover(size, size)
+      pixooClient.sendAnimation(gif.frameCount, size, index, id, 100, resizedFrame.toBase64())
+    }
+  }
+
+  private fun detectFormat(resource: Resource): Format {
+    // it's important to get a fresh unused input stream here and also not to reuse the input
+    // stream from here, as the FormatDetector does not reset the stream before or after usage.
+    return resource.inputStream
+      .use { inputStream -> FormatDetector.detect(inputStream) }
+      .orElseThrow { FormatException("Unknown image format for ${resource.filename}") }
   }
 
   private fun getNextId() =
