@@ -214,7 +214,11 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
     // pixoo will always answer with text/html, although it's formatted like json.
     // Hence, we do mapping manually.
-    return mapper.readValue(rawResponse, CommandResponse::class.java)
+    val response = mapper.readValue(rawResponse, CommandResponse::class.java)
+
+    if (response.errorCode != 0) throw PixooException("Error with code ${response.errorCode}")
+
+    return response
   }
 
   private fun Boolean.toBitNumber() = if (this) 1 else 0

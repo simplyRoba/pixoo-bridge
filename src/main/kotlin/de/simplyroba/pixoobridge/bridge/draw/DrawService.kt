@@ -1,12 +1,14 @@
 package de.simplyroba.pixoobridge.bridge.draw
 
 import com.sksamuel.scrimage.ImmutableImage
+import com.sksamuel.scrimage.format.FormatDetector
 import de.simplyroba.pixoobridge.bridge.draw.model.RGB
 import de.simplyroba.pixoobridge.client.PixooClient
 import de.simplyroba.pixoobridge.config.PixooConfig
 import java.awt.Color
 import java.util.*
 import org.slf4j.LoggerFactory
+import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,14 +16,26 @@ class DrawService(private val pixooConfig: PixooConfig, private val pixooClient:
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
-  fun fill(rgb: RGB) {
-    val image = createImage().fill(Color(rgb.red, rgb.green, rgb.blue))
+  fun drawColor(rgb: RGB) {
+    val size = pixooConfig.size
+    val image = ImmutableImage.filled(size, size, Color(rgb.red, rgb.green, rgb.blue))
     sendImage(image)
   }
 
-  private fun createImage(): ImmutableImage {
+  fun drawImage(resource: Resource) {
     val size = pixooConfig.size
-    return ImmutableImage.create(size, size)
+    val format = detectFormat(resource)
+    val resizedImage =
+      resource.inputStream
+        .use { inputStream -> ImmutableImage.loader().fromStream(inputStream) }
+        .cover(size, size)
+    sendImage(resizedImage)
+  }
+
+  private fun detectFormat(resource: Resource) {
+    // its important to get a fresh unused input stream here and also not to reuse the input
+    // stream from here, as the FormatDetector does not reset the stream before or after usage.
+    resource.inputStream.use { inputStream -> FormatDetector.detect(inputStream) }
   }
 
   private fun sendImage(image: ImmutableImage) {

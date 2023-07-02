@@ -23,3 +23,4 @@ springdoc:
     enabled: ${pixoo.docs.enabled}
   swagger-ui:
     enabled: ${pixoo.docs.enabled}
+    tryItOutEnabled: true
