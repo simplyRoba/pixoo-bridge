@@ -26,7 +26,7 @@ val mockitoKotlinVersion = "5.0.0"
 extra["snakeyaml.version"] = "2.0"
 // direkt security version bumps
 val httpClientVersion = "4.5.14"
-val guavaVersion = "32.0.1-jre"
+val guavaVersion = "32.1.1-jre"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
