@@ -25,5 +25,10 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Submit Gradle dependencies
-        uses: mikepenz/gradle-dependency-submission@v0.9.0
+      - name: Setup Gradle to generate and submit dependency graphs
+        uses: gradle/gradle-build-action@dependency-graph
+        with:
+          dependency-graph: generate-and-submit
+
+      - name: Run a build, generating the dependency graph snapshot which will be submitted
+        run: ./gradlew build
