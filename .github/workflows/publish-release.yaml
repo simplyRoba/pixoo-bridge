@@ -29,7 +29,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.4.2 #https://github.com/simplyRoba/pixoo-bridge/security/dependabot/9
+        uses: gradle/gradle-build-action@v2.6.0
 
       - name: Build jar
         run: ./gradlew bootJar
