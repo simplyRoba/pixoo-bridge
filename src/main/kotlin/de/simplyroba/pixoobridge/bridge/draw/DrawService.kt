@@ -31,17 +31,17 @@ class DrawService(private val pixooConfig: PixooConfig, private val pixooClient:
     val format = detectFormat(resource)
 
     resource.inputStream.use { inputStream ->
-        val imageSource = ImageSource.of(inputStream)
+      val imageSource = ImageSource.of(inputStream)
 
-        when (format) {
-          JPEG,
-          PNG -> sendSingleImage(imageSource)
-          // of course its possible that a gif contains only one frame this will result in the same
-          // command to the pixoo as in sendSingleImage()
-          GIF -> sendAnimation(imageSource)
-          WEBP -> throw FormatException("Unsupported format webp detected.")
-        }
+      when (format) {
+        JPEG,
+        PNG -> sendSingleImage(imageSource)
+        // of course its possible that a gif contains only one frame this will result in the same
+        // command to the pixoo as in sendSingleImage()
+        GIF -> sendAnimation(imageSource)
+        WEBP -> throw FormatException("Unsupported format webp detected.")
       }
+    }
   }
 
   private fun sendSingleImage(imageSource: ImageSource) {
