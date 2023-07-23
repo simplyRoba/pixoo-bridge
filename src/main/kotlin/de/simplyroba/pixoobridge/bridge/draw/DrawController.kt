@@ -23,8 +23,8 @@ class DrawController(private val drawService: DrawService) {
     return ok().build()
   }
 
-  // TODO define supported file extensions (jpeg, jpg, png, gif)
-  @Operation(description = "Upload an image")
+  @Operation(description = "Upload an image and show it")
+  @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Image to upload. Supported formats: jpg, jpeg, png, gif")
   @PostMapping("/upload", consumes = [MULTIPART_FORM_DATA_VALUE])
   fun uploadImage(
     @RequestPart("image", required = true) image: MultipartFile

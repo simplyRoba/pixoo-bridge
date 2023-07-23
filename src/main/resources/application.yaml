@@ -10,6 +10,8 @@ pixoo:
 server:
   port: 4000
   shutdown: 'graceful'
+  error:
+    include-message: always
 
 spring:
   lifecycle:
