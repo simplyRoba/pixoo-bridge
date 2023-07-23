@@ -23,6 +23,10 @@ data class PixooConfig(
       throw UnsupportedConfigurationException(
         "Size: $size is not supported. Possible values: ${ACCEPTABLE_SIZES.contentToString()}."
       )
+    if (animationSpeedFactor < 0)
+      throw UnsupportedConfigurationException(
+        "Animation speed factor needs to be positive. Current value $animationSpeedFactor"
+      )
   }
 }
 
