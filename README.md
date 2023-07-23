@@ -16,7 +16,7 @@ Pass key as environment variable the docker container.
 | PIXOO_HOST                   | localhost     | IP of the pixoo in the network                    |
 | PIXOO_SIZE                   | 64            | screen size of the pixoo                          |
 | PIXOO_HEALTH_FORWARD         | true          | Ping pixoo during image health check              |
-| PIXOO_DOCS_ENABLED           | true          | Enable Swagger                                    |
+| PIXOO_DOCS_ENABLED           | true          | Enable API documentation                          |
 | PIXOO_ANIMATION_SPEED_FACTOR | 1.4           | Factor to adjust animation speed of uploaded gifs |
 
 # Run the image
