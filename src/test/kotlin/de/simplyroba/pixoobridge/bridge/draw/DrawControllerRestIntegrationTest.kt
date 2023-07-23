@@ -4,6 +4,10 @@ import com.github.tomakehurst.wiremock.client.WireMock.*
 import de.simplyroba.pixoobridge.AbstractRestIntegrationTest
 import de.simplyroba.test.JsonUnitRegexBuilder.Companion.regex
 import org.junit.jupiter.api.Test
+import org.springframework.core.io.ClassPathResource
+import org.springframework.http.MediaType
+import org.springframework.http.client.MultipartBodyBuilder
+import org.springframework.web.reactive.function.BodyInserters
 
 class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
@@ -35,6 +39,89 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
         }
         """
         .trimIndent()
+    )
+  }
+
+  @Test
+  fun `should send single image`() {
+    val picId = 12
+    stubNextPictureIdCall(picId)
+
+    val multipartBodyBuilder = MultipartBodyBuilder()
+    multipartBodyBuilder.part("image", ClassPathResource("images/black_100x100.jpg"))
+            .contentType(MediaType.MULTIPART_FORM_DATA)
+
+    webTestClient
+            .post()
+            .uri("/draw/upload")
+            .contentType(MediaType.MULTIPART_FORM_DATA)
+            .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful()
+
+    verifyCommandSent(
+            """
+        {
+          "Command": "Draw/SendHttpGif",
+          "PicNum": 1,
+          "PicWidth": 64,
+          "PicOffset": 0,
+          "PicID": $picId,
+          "PicSpeed": 1000,
+          "PicData": ${regex().exp("A{16384}")} 
+        }
+        """
+                    .trimIndent()
+    )
+  }
+
+  @Test
+  fun `should send each frame of animated gif`() {
+    val picId = 32
+    stubNextPictureIdCall(picId)
+
+    val multipartBodyBuilder = MultipartBodyBuilder()
+    multipartBodyBuilder.part("image", ClassPathResource("images/black_white_animated_100x100.gif"))
+            .contentType(MediaType.MULTIPART_FORM_DATA)
+
+    webTestClient
+            .post()
+            .uri("/draw/upload")
+            .contentType(MediaType.MULTIPART_FORM_DATA)
+            .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful()
+
+    verifyCommandSent(
+            """
+        {
+          "Command": "Draw/SendHttpGif",
+          "PicNum": 2,
+          "PicWidth": 64,
+          "PicOffset": 0,
+          "PicID": $picId,
+          "PicSpeed": 100,
+          "PicData": ${regex().exp("A{16384}")} 
+        }
+        """
+                    .trimIndent()
+    )
+
+    verifyCommandSent(
+            """
+        {
+          "Command": "Draw/SendHttpGif",
+          "PicNum": 2,
+          "PicWidth": 64,
+          "PicOffset": 1,
+          "PicID": $picId,
+          "PicSpeed": 100,
+          "PicData": ${regex().exp("\\/{16384}")} 
+        }
+        """
+                    .trimIndent()
     )
   }
 
