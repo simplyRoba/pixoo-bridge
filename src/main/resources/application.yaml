@@ -1,6 +1,7 @@
 
 pixoo:
   host: 'localhost'
+  size: 64
   health:
     forward: true
   docs:
@@ -9,6 +10,8 @@ pixoo:
 server:
   port: 4000
   shutdown: 'graceful'
+  error:
+    include-message: always
 
 spring:
   lifecycle:
@@ -22,3 +25,4 @@ springdoc:
     enabled: ${pixoo.docs.enabled}
   swagger-ui:
     enabled: ${pixoo.docs.enabled}
+    tryItOutEnabled: true

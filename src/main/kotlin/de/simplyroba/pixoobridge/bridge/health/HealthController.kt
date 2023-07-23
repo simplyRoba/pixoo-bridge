@@ -1,6 +1,6 @@
 package de.simplyroba.pixoobridge.bridge.health
 
-import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import de.simplyroba.pixoobridge.client.PixooClient
 import de.simplyroba.pixoobridge.config.PixooConfig
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @Tag(name = "Health")
 @RestController
 @RequestMapping("/health")
-class HealthController(val pixooClient: PixooDeviceClient, val config: PixooConfig) {
+class HealthController(val pixooClient: PixooClient, val config: PixooConfig) {
 
   @Operation(description = "Check health of the service")
   @GetMapping("/check")

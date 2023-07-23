@@ -9,7 +9,7 @@ class HealthControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   @Test
   fun `should include pixoo in health check`() {
     stubFor(get(urlEqualTo("/get")).willReturn(aResponse()))
-    doGetCallExpectSuccess("/health/check")
+    doGetCallExpectingSuccess("/health/check")
     verify(getRequestedFor(urlEqualTo("/get")))
   }
 

@@ -5,7 +5,7 @@ import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.Temperatur
 import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TemperatureUnit.FAHRENHEIT
 import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TimeMode.TWELVE
 import de.simplyroba.pixoobridge.bridge.manage.model.SettingsResponse.TimeMode.TWENTY_FOUR
-import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import de.simplyroba.pixoobridge.client.PixooClient
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*
 @Tag(name = "Manage")
 @RestController
 @RequestMapping("/manage")
-class ManageController(private val pixooClient: PixooDeviceClient) {
+class ManageController(private val pixooClient: PixooClient) {
 
   @Operation(description = "Turn display on or off.")
   @Parameter(

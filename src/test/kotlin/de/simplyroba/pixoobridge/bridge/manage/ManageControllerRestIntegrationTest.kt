@@ -12,35 +12,35 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   @ParameterizedTest
   @CsvSource(value = ["on:1", "off:0"], delimiter = ':')
   fun `should manage display`(input: String, expected: String) {
-    doPostCallExpectSuccess("/manage/display/$input")
+    doPostCallExpectingSuccess("/manage/display/$input")
     verifyCommandSent("""{"Command":"Channel/OnOffScreen", "OnOff": $expected}""")
   }
 
   @Test
   fun `should set brightness`() {
     val brightnessValue = 65
-    doPostCallExpectSuccess("/manage/display/brightness/$brightnessValue")
+    doPostCallExpectingSuccess("/manage/display/brightness/$brightnessValue")
     verifyCommandSent("""{"Command":"Channel/SetBrightness", "Brightness": $brightnessValue}""")
   }
 
   @ParameterizedTest
   @CsvSource(value = ["on:1", "off:0"], delimiter = ':')
   fun `should overclock display brightness`(input: String, expected: String) {
-    doPostCallExpectSuccess("/manage/display/brightness/overclock/$input")
+    doPostCallExpectingSuccess("/manage/display/brightness/overclock/$input")
     verifyCommandSent("""{"Command":"Device/SetHighLightMode", "Mode": $expected}""")
   }
 
   @ParameterizedTest
   @CsvSource(value = ["0:0", "90:1", "180:2", "270:3"], delimiter = ':')
   fun `should rotate display `(input: String, expected: String) {
-    doPostCallExpectSuccess("/manage/display/rotation/$input")
+    doPostCallExpectingSuccess("/manage/display/rotation/$input")
     verifyCommandSent("""{"Command":"Device/SetScreenRotationAngle", "Mode": $expected}""")
   }
 
   @ParameterizedTest
   @CsvSource(value = ["off:0", "on:1"], delimiter = ':')
   fun `should mirror display `(input: String, expected: String) {
-    doPostCallExpectSuccess("/manage/display/mirror/$input")
+    doPostCallExpectingSuccess("/manage/display/mirror/$input")
     verifyCommandSent("""{"Command":"Device/SetMirrorMode", "Mode": $expected}""")
   }
 
@@ -49,7 +49,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     val redValue = 75
     val greenValue = 3
     val blueValue = 53
-    doPostCallWithBodyExpectSuccess(
+    doPostCallWithBodyExpectingSuccess(
       "/manage/display/white-balance",
       """
         {
@@ -75,21 +75,21 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
   @Test
   fun `should set system time`() {
-    doPostCallExpectSuccess("/manage/time")
-    verifyCommandSent("""{"Command":"Device/SetUTC", "Utc": "${"$"}{json-unit.any-number}"}""")
+    doPostCallExpectingSuccess("/manage/time")
+    verifyCommandSent("""{"Command":"Device/SetUTC", "Utc": "#{json-unit.any-number}"}""")
   }
 
   @ParameterizedTest
   @CsvSource(value = ["12h:0", "24h:1"], delimiter = ':')
   fun `should set time mode`(input: String, expected: String) {
-    doPostCallExpectSuccess("/manage/time/mode/$input")
+    doPostCallExpectingSuccess("/manage/time/mode/$input")
     verifyCommandSent("""{"Command":"Device/SetTime24Flag", "Mode": $expected}""")
   }
 
   @Test
   fun `should set system time offset`() {
     val offsetValue = -1
-    doPostCallExpectSuccess("/manage/time/offset/$offsetValue")
+    doPostCallExpectingSuccess("/manage/time/offset/$offsetValue")
     verifyCommandSent("""{"Command":"Sys/TimeZone", "TimeZoneValue": "GMT$offsetValue"}""")
   }
 
@@ -113,7 +113,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
         )
     )
 
-    doGetCallExpectSuccess("/manage/time")
+    doGetCallExpectingSuccess("/manage/time")
       .expectBody()
       .json(
         """
@@ -131,7 +131,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   fun `should set weather location`() {
     val longitude = "-56.34"
     val latitude = "23.89"
-    doPostCallWithBodyExpectSuccess(
+    doPostCallWithBodyExpectingSuccess(
       "/manage/weather/location",
       """
         {
@@ -156,7 +156,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   @ParameterizedTest
   @CsvSource(value = ["fahrenheit:1", "celsius:0"], delimiter = ':')
   fun `should set temperature unit`(input: String, expected: String) {
-    doPostCallExpectSuccess("/manage/weather/temperature-unit/$input")
+    doPostCallExpectingSuccess("/manage/weather/temperature-unit/$input")
     verifyCommandSent("""{"Command":"Device/SetDisTempMode", "Mode": $expected}""")
   }
 
@@ -186,7 +186,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
         )
     )
 
-    doGetCallExpectSuccess("manage/weather")
+    doGetCallExpectingSuccess("manage/weather")
       .expectBody()
       .json(
         """
@@ -236,7 +236,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
         )
     )
 
-    doGetCallExpectSuccess("manage/settings")
+    doGetCallExpectingSuccess("manage/settings")
       .expectBody()
       .json(
         """

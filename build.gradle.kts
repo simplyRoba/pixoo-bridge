@@ -19,6 +19,7 @@ repositories { mavenCentral() }
 val springCloudVersion = "2022.0.3"
 val openapiVersion = "2.1.0"
 val mockitoKotlinVersion = "5.0.0"
+val scrimageVersion = "4.0.37"
 
 // security version bumps through spring dependency management
 // will not be updated through dependabot
@@ -34,6 +35,7 @@ dependencies {
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$openapiVersion")
+  implementation("com.sksamuel.scrimage:scrimage-core:$scrimageVersion")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")

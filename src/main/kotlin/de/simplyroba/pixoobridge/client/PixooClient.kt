@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
 
 @Component
-class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
+class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   companion object {
     val DEFAULT_TIMEOUT = 10.seconds.toJavaDuration()
@@ -165,6 +165,34 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
   fun setSoundMeter(onBit: Boolean) =
     genericPostCommand(TOOL_SOUND_METER, Pair("NoiseStatus", onBit.toBitNumber()))
 
+  fun getNextPictureId() = genericPostCommand(GET_NEXT_PICTURE_ID)
+
+  /*
+   * PicNum, 1-59, number of frames (smaller than 60) in animation
+   * PicWidth, 16|32|64, pixel per side
+   * PicOffset, 0 - PicNum-1, index of the frame in the animation starting with 0
+   * PicID, number, incrementing unique id for the animation starting with 1
+   * PicSpeed, number, time each frame is shown in ms
+   * PicData, base64 encoded, the picture Base64 encoded RGB data, The RGB data is left to right and up to down
+   */
+  fun sendAnimation(
+    frameCount: Int,
+    pixelPerSide: Int,
+    frameIndex: Int,
+    id: Int,
+    animationSpeed: Int,
+    data: String
+  ) =
+    genericPostCommand(
+      DRAW_ANIMATION,
+      Pair("PicNum", frameCount),
+      Pair("PicWidth", pixelPerSide),
+      Pair("PicOffset", frameIndex),
+      Pair("PicID", id),
+      Pair("PicSpeed", animationSpeed),
+      Pair("PicData", data)
+    )
+
   private fun genericPostCommand(
     commandType: CommandType,
     vararg parameters: Pair<String, Any>
@@ -186,7 +214,11 @@ class PixooDeviceClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
     // pixoo will always answer with text/html, although it's formatted like json.
     // Hence, we do mapping manually.
-    return mapper.readValue(rawResponse, CommandResponse::class.java)
+    val response = mapper.readValue(rawResponse, CommandResponse::class.java)
+
+    if (response.errorCode != 0) throw PixooException("Error with code ${response.errorCode}")
+
+    return response
   }
 
   private fun Boolean.toBitNumber() = if (this) 1 else 0

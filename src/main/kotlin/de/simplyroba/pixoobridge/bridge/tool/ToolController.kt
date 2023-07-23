@@ -2,7 +2,7 @@ package de.simplyroba.pixoobridge.bridge.tool
 
 import de.simplyroba.pixoobridge.bridge.tool.model.ScoreboardScoresRequest
 import de.simplyroba.pixoobridge.bridge.tool.model.TimerSettingsRequest
-import de.simplyroba.pixoobridge.client.PixooDeviceClient
+import de.simplyroba.pixoobridge.client.PixooClient
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn.PATH
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*
 @Tag(name = "Tool")
 @RestController
 @RequestMapping("/tool")
-class ToolController(private val pixooClient: PixooDeviceClient) {
+class ToolController(private val pixooClient: PixooClient) {
 
   @Operation(description = "Start the timer tool.")
   @PostMapping("/timer/start", consumes = [APPLICATION_JSON_VALUE])
