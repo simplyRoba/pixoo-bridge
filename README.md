@@ -24,7 +24,6 @@ Pass key as environment variable the docker container.
 docker run -p 4000:4000 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
 ```
 
-
 # API
 ## Documentation
 open following url in a browser
