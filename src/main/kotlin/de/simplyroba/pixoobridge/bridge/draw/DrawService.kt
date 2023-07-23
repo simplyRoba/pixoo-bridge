@@ -24,7 +24,7 @@ class DrawService(private val pixooConfig: PixooConfig, private val pixooClient:
     val size = pixooConfig.size
     val image = ImmutableImage.filled(size, size, Color(rgb.red, rgb.green, rgb.blue))
     val id = getNextId()
-    pixooClient.sendAnimation(1, pixooConfig.size, 0, id, 1000, image.toBase64())
+    pixooClient.sendAnimation(1, pixooConfig.size, 0, id, 9999, image.toBase64())
   }
 
   fun drawImage(resource: Resource) {
@@ -53,18 +53,18 @@ class DrawService(private val pixooConfig: PixooConfig, private val pixooClient:
         .load(imageSource)
         .cover(size, size)
     // we send an animation with 1 frame
-    pixooClient.sendAnimation(1, size, 0, getNextId(), 1000, resizedImage.toBase64())
+    pixooClient.sendAnimation(1, size, 0, getNextId(), 9999, resizedImage.toBase64())
   }
 
   private fun sendAnimation(imageSource: ImageSource) {
     val size = pixooConfig.size
     val gif = AnimatedGifReader.read(imageSource)
     val id = getNextId()
-    // TODO read animation speed from metadata?
     gif.frames.forEachIndexed { index, frame ->
       val resizedFrame = frame.cover(size, size)
-      pixooClient.sendAnimation(gif.frameCount, size, index, id, 100, resizedFrame.toBase64())
-      if (index == 59) { // TODO test this
+      val animationSpeed = gif.getDelay(index).toMillis().toInt()
+      pixooClient.sendAnimation(gif.frameCount, size, index, id, animationSpeed, resizedFrame.toBase64())
+      if (index == 59) {
         logger.warn("Stop on 59th frame of {} frames.", gif.frameCount)
         return
       }

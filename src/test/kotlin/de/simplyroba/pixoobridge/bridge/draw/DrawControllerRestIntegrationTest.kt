@@ -34,7 +34,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "PicWidth": 64,
           "PicOffset": 0,
           "PicID": $picId,
-          "PicSpeed": 1000,
+          "PicSpeed": 9999,
           "PicData": ${regex().exp("A{16384}")} 
         }
         """
@@ -69,7 +69,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "PicWidth": 64,
           "PicOffset": 0,
           "PicID": $picId,
-          "PicSpeed": 1000,
+          "PicSpeed": 9999,
           "PicData": ${regex().exp("A{16384}")} 
         }
         """
@@ -84,7 +84,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
     val multipartBodyBuilder = MultipartBodyBuilder()
     multipartBodyBuilder
-      .part("image", ClassPathResource("images/black_white_animated_100x100.gif"))
+      .part("image", ClassPathResource("images/black_white_animated_100x100_200ms.gif"))
       .contentType(MediaType.MULTIPART_FORM_DATA)
 
     webTestClient
@@ -104,7 +104,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "PicWidth": 64,
           "PicOffset": 0,
           "PicID": $picId,
-          "PicSpeed": 100,
+          "PicSpeed": 200,
           "PicData": ${regex().exp("A{16384}")} 
         }
         """
@@ -119,11 +119,59 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "PicWidth": 64,
           "PicOffset": 1,
           "PicID": $picId,
-          "PicSpeed": 100,
+          "PicSpeed": 200,
           "PicData": ${regex().exp("\\/{16384}")} 
         }
         """
         .trimIndent()
+    )
+  }
+
+  @Test
+  fun `should send correct delay for each frame of animated gif`() {
+    val picId = 67
+    stubNextPictureIdCall(picId)
+
+    val multipartBodyBuilder = MultipartBodyBuilder()
+    multipartBodyBuilder
+            .part("image", ClassPathResource("images/black_white_animated_100x100_1000ms.gif"))
+            .contentType(MediaType.MULTIPART_FORM_DATA)
+
+    webTestClient
+            .post()
+            .uri("/draw/upload")
+            .contentType(MediaType.MULTIPART_FORM_DATA)
+            .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful()
+
+    verifyCommandSent(
+            """
+        {
+          "Command": "Draw/SendHttpGif",
+          "PicNum": 2,
+          "PicWidth": 64,
+          "PicOffset": 0,
+          "PicID": $picId,
+          "PicSpeed": 1000,
+          "PicData": ${regex().exp("A{16384}")} 
+        }
+        """.trimIndent()
+    )
+
+    verifyCommandSent(
+            """
+        {
+          "Command": "Draw/SendHttpGif",
+          "PicNum": 2,
+          "PicWidth": 64,
+          "PicOffset": 1,
+          "PicID": $picId,
+          "PicSpeed": 1000,
+          "PicData": ${regex().exp("\\/{16384}")} 
+        }
+        """.trimIndent()
     )
   }
 
