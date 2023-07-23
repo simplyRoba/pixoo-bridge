@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties("pixoo")
-data class PixooConfig(val host: String, val size: Int, val health: PixooHealthConfig) {
+data class PixooConfig(val host: String, val size: Int, val animationSpeedFactor: Float, val health: PixooHealthConfig) {
 
   companion object {
     val ACCEPTABLE_SIZES = intArrayOf(16, 32, 64)
