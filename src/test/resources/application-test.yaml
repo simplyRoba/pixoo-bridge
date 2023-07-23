@@ -1,6 +1,7 @@
 
 pixoo:
   host: 'localhost:${wiremock.server.port}'
+  animation-speed-factor: 1
 
 logging:
   level:

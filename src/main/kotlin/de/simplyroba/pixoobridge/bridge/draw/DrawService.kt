@@ -62,7 +62,8 @@ class DrawService(private val pixooConfig: PixooConfig, private val pixooClient:
     val id = getNextId()
     gif.frames.forEachIndexed { index, frame ->
       val resizedFrame = frame.cover(size, size)
-      val animationSpeed = (gif.getDelay(index).toMillis() * pixooConfig.animationSpeedFactor).toInt()
+      val animationSpeed =
+        (gif.getDelay(index).toMillis() * pixooConfig.animationSpeedFactor).toInt()
       pixooClient.sendAnimation(
         gif.frameCount,
         size,
