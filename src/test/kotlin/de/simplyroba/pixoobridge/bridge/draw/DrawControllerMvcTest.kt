@@ -41,20 +41,24 @@ class DrawControllerMvcTest : AbstractMvcTest() {
   @Test
   fun `should return bad request on wrong file extension`() {
     mockMvc
-            .perform(multipart("/draw/upload")
-                    .file("image", ClassPathResource("images/text.txt").contentAsByteArray)
-                    .contentType(MediaType.MULTIPART_FORM_DATA))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+      .perform(
+        multipart("/draw/upload")
+          .file("image", ClassPathResource("images/text.txt").contentAsByteArray)
+          .contentType(MediaType.MULTIPART_FORM_DATA)
+      )
+      .andExpect(MockMvcResultMatchers.status().isBadRequest)
     Mockito.verifyNoInteractions(pixooClient)
   }
 
   @Test
   fun `should return bad request on wrong file format but with supported extension`() {
     mockMvc
-            .perform(multipart("/draw/upload")
-                    .file("image", ClassPathResource("images/text.png").contentAsByteArray)
-                    .contentType(MediaType.MULTIPART_FORM_DATA))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+      .perform(
+        multipart("/draw/upload")
+          .file("image", ClassPathResource("images/text.png").contentAsByteArray)
+          .contentType(MediaType.MULTIPART_FORM_DATA)
+      )
+      .andExpect(MockMvcResultMatchers.status().isBadRequest)
     Mockito.verifyNoInteractions(pixooClient)
   }
 }
