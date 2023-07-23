@@ -28,7 +28,7 @@ abstract class AbstractRestIntegrationTest {
     )
   }
 
-  protected fun doPostCallExpectSuccess(path: String) =
+  protected fun doPostCallExpectingSuccess(path: String) =
     webTestClient
       .post()
       .uri(path)
@@ -38,7 +38,7 @@ abstract class AbstractRestIntegrationTest {
       .expectStatus()
       .is2xxSuccessful()
 
-  protected fun doPostCallWithBodyExpectSuccess(path: String, body: Any) =
+  protected fun doPostCallWithBodyExpectingSuccess(path: String, body: Any) =
     webTestClient
       .post()
       .uri(path)
@@ -49,7 +49,7 @@ abstract class AbstractRestIntegrationTest {
       .expectStatus()
       .is2xxSuccessful()
 
-  protected fun doGetCallExpectSuccess(path: String) =
+  protected fun doGetCallExpectingSuccess(path: String) =
     doGetCall(path).expectStatus().is2xxSuccessful()
 
   protected fun doGetCall(path: String) =
