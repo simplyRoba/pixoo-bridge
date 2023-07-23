@@ -31,7 +31,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "PicOffset": 0,
           "PicID": $picId,
           "PicSpeed": 1000,
-          "PicData": ${regex().exp("A.*")}
+          "PicData": ${regex().exp("A{16384}")} 
         }
         """
         .trimIndent()
