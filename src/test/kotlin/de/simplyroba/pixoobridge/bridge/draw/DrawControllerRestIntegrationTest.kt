@@ -134,20 +134,20 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
     val multipartBodyBuilder = MultipartBodyBuilder()
     multipartBodyBuilder
-            .part("image", ClassPathResource("images/black_white_animated_100x100_1000ms.gif"))
-            .contentType(MediaType.MULTIPART_FORM_DATA)
+      .part("image", ClassPathResource("images/black_white_animated_100x100_1000ms.gif"))
+      .contentType(MediaType.MULTIPART_FORM_DATA)
 
     webTestClient
-            .post()
-            .uri("/draw/upload")
-            .contentType(MediaType.MULTIPART_FORM_DATA)
-            .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
-            .exchange()
-            .expectStatus()
-            .is2xxSuccessful()
+      .post()
+      .uri("/draw/upload")
+      .contentType(MediaType.MULTIPART_FORM_DATA)
+      .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
+      .exchange()
+      .expectStatus()
+      .is2xxSuccessful()
 
     verifyCommandSent(
-            """
+      """
         {
           "Command": "Draw/SendHttpGif",
           "PicNum": 2,
@@ -157,11 +157,12 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "PicSpeed": 1000,
           "PicData": ${regex().exp("A{16384}")} 
         }
-        """.trimIndent()
+        """
+        .trimIndent()
     )
 
     verifyCommandSent(
-            """
+      """
         {
           "Command": "Draw/SendHttpGif",
           "PicNum": 2,
@@ -171,7 +172,8 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "PicSpeed": 1000,
           "PicData": ${regex().exp("\\/{16384}")} 
         }
-        """.trimIndent()
+        """
+        .trimIndent()
     )
   }
 

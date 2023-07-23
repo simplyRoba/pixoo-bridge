@@ -63,7 +63,14 @@ class DrawService(private val pixooConfig: PixooConfig, private val pixooClient:
     gif.frames.forEachIndexed { index, frame ->
       val resizedFrame = frame.cover(size, size)
       val animationSpeed = gif.getDelay(index).toMillis().toInt()
-      pixooClient.sendAnimation(gif.frameCount, size, index, id, animationSpeed, resizedFrame.toBase64())
+      pixooClient.sendAnimation(
+        gif.frameCount,
+        size,
+        index,
+        id,
+        animationSpeed,
+        resizedFrame.toBase64()
+      )
       if (index == 59) {
         logger.warn("Stop on 59th frame of {} frames.", gif.frameCount)
         return
