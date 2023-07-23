@@ -76,7 +76,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   @Test
   fun `should set system time`() {
     doPostCallExpectingSuccess("/manage/time")
-    verifyCommandSent("""{"Command":"Device/SetUTC", "Utc": "${"$"}{json-unit.any-number}"}""")
+    verifyCommandSent("""{"Command":"Device/SetUTC", "Utc": "#{json-unit.any-number}"}""")
   }
 
   @ParameterizedTest

@@ -16,8 +16,10 @@ class DrawController(private val drawService: DrawService) {
 
   @Operation(description = "Fill complete screen with rgb color")
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
-  fun fill(@RequestBody rgb: RGB): ResponseEntity<Void> {
-    drawService.drawColor(rgb)
+  fun fill(@RequestBody body: RGB): ResponseEntity<Void> {
+    if (body.red !in 0..255 || body.green !in 0..255 || body.blue !in 0..255)
+      return ResponseEntity.badRequest().build()
+    drawService.drawColor(body)
     return ok().build()
   }
 
