@@ -26,10 +26,12 @@ docker run -p 4000:4000 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo
 
 # API
 ## Documentation
-open following url in a browser
+Generate API documentation can be reached under 
 ```
 http://localhost:4000/swagger-ui/index.html
 ```
+![Swagger Screenshot](/docs/swagger-screenshot.png)
+
 
 ## Limitations
 The `Channel control API` of the Pixoo will not be implemented. Use the App for these functionality.
