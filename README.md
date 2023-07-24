@@ -30,7 +30,7 @@ Generate API documentation can be reached under
 ```
 http://localhost:4000/swagger-ui/index.html
 ```
-![Swagger Screenshot](/docs/swagger-screenshot.png | width=100)
+![Swagger Screenshot](/docs/swagger-screenshot.png)
 
 
 ## Limitations
