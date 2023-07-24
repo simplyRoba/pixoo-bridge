@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile
 @Tag(name = "Draw")
 @RestController
 @RequestMapping("/draw")
-class DrawController(private val imageService: ImageService) {
+class DrawController(private val imageService: ImageService, private val textService: TextService) {
 
   @Operation(description = "Fill complete screen with rgb color")
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
@@ -36,9 +36,16 @@ class DrawController(private val imageService: ImageService) {
   }
 
   @Operation(description = "")
-  @PostMapping()
+  @PostMapping("/text")
   fun drawText(): ResponseEntity<Void> {
 
+    return ok().build()
+  }
+
+  @Operation(description = "Clear all text")
+  @PostMapping("/text/clear")
+  fun clearText(): ResponseEntity<Void> {
+    textService.clear()
     return ok().build()
   }
 }

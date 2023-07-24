@@ -177,6 +177,17 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     )
   }
 
+  @Test
+  fun `should show text`() {
+
+  }
+
+  @Test
+  fun `should clear text`() {
+    doPostCallExpectingSuccess("/draw/text/clear")
+    verifyCommandSent("""{"Command":"Draw/ClearHttpText"}""")
+  }
+
   private fun stubNextPictureIdCall(picId: Int) {
     stubFor(
       post(urlEqualTo("/post"))
