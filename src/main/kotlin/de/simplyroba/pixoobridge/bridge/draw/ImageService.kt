@@ -16,7 +16,7 @@ import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 
 @Service
-class DrawService(private val pixooConfig: PixooConfig, private val pixooClient: PixooClient) {
+class ImageService(private val pixooConfig: PixooConfig, private val pixooClient: PixooClient) {
 
   private val logger = LoggerFactory.getLogger(javaClass)
 

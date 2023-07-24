@@ -12,14 +12,14 @@ import org.springframework.web.multipart.MultipartFile
 @Tag(name = "Draw")
 @RestController
 @RequestMapping("/draw")
-class DrawController(private val drawService: DrawService) {
+class DrawController(private val imageService: ImageService) {
 
   @Operation(description = "Fill complete screen with rgb color")
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
   fun fill(@RequestBody body: RGB): ResponseEntity<Void> {
     if (body.red !in 0..255 || body.green !in 0..255 || body.blue !in 0..255)
       return ResponseEntity.badRequest().build()
-    drawService.drawColor(body)
+    imageService.drawColor(body)
     return ok().build()
   }
 
@@ -31,7 +31,14 @@ class DrawController(private val drawService: DrawService) {
   fun uploadImage(
     @RequestPart("image", required = true) image: MultipartFile
   ): ResponseEntity<Void> {
-    drawService.drawImage(image.resource)
+    imageService.drawImage(image.resource)
+    return ok().build()
+  }
+
+  @Operation(description = "")
+  @PostMapping()
+  fun drawText(): ResponseEntity<Void> {
+
     return ok().build()
   }
 }
