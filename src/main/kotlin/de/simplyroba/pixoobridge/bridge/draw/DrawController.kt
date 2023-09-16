@@ -16,7 +16,7 @@ class DrawController(private val imageService: ImageService, private val textSer
 
   @Operation(description = "Fill complete screen with rgb color")
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
-  fun fill(@RequestBody body: RGB): ResponseEntity<Void> {
+  fun fill(@RequestBody body: RGB): ResponseEntity<Unit> {
     if (body.red !in 0..255 || body.green !in 0..255 || body.blue !in 0..255)
       return ResponseEntity.badRequest().build()
     imageService.drawColor(body)
@@ -30,21 +30,21 @@ class DrawController(private val imageService: ImageService, private val textSer
   @PostMapping("/upload", consumes = [MULTIPART_FORM_DATA_VALUE])
   fun uploadImage(
     @RequestPart("image", required = true) image: MultipartFile
-  ): ResponseEntity<Void> {
+  ): ResponseEntity<Unit> {
     imageService.drawImage(image.resource)
     return ok().build()
   }
 
   @Operation(description = "")
   @PostMapping("/text")
-  fun drawText(): ResponseEntity<Void> {
+  fun drawText(): ResponseEntity<Unit> {
 
     return ok().build()
   }
 
   @Operation(description = "Clear all text")
   @PostMapping("/text/clear")
-  fun clearText(): ResponseEntity<Void> {
+  fun clearText(): ResponseEntity<Unit> {
     textService.clear()
     return ok().build()
   }

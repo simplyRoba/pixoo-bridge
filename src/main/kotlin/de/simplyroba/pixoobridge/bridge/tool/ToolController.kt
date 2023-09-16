@@ -20,7 +20,7 @@ class ToolController(private val pixooClient: PixooClient) {
 
   @Operation(description = "Start the timer tool.")
   @PostMapping("/timer/start", consumes = [APPLICATION_JSON_VALUE])
-  fun startTimer(@RequestBody body: TimerSettingsRequest): ResponseEntity<Void> {
+  fun startTimer(@RequestBody body: TimerSettingsRequest): ResponseEntity<Unit> {
     if (body.minutes !in 0..99 || body.seconds !in 0..59) return badRequest().build()
     pixooClient.setTimer(body.minutes, body.seconds, true)
     return ok().build()
@@ -28,7 +28,7 @@ class ToolController(private val pixooClient: PixooClient) {
 
   @Operation(description = "Stop the timer tool.")
   @PostMapping("/timer/stop")
-  fun stopTimer(): ResponseEntity<Void> {
+  fun stopTimer(): ResponseEntity<Unit> {
     pixooClient.setTimer(0, 0, false)
     return ok().build()
   }
@@ -41,7 +41,7 @@ class ToolController(private val pixooClient: PixooClient) {
     schema = Schema(allowableValues = ["start", "stop", "reset"])
   )
   @PostMapping("/stopwatch/{action}")
-  fun controlStopwatch(@PathVariable("action") action: String): ResponseEntity<Void> {
+  fun controlStopwatch(@PathVariable("action") action: String): ResponseEntity<Unit> {
     when (action) {
       "start" -> pixooClient.setStopwatch(1)
       "stop" -> pixooClient.setStopwatch(0)
@@ -53,7 +53,7 @@ class ToolController(private val pixooClient: PixooClient) {
 
   @Operation(description = "Control scoreboard tool.")
   @PostMapping("/scoreboard", consumes = [APPLICATION_JSON_VALUE])
-  fun setScoreboard(@RequestBody body: ScoreboardScoresRequest): ResponseEntity<Void> {
+  fun setScoreboard(@RequestBody body: ScoreboardScoresRequest): ResponseEntity<Unit> {
     if (body.redScore !in 0..999 || body.blueScore !in 0..999) return badRequest().build()
     pixooClient.setScoreBoard(body.redScore, body.blueScore)
     return ok().build()
@@ -67,7 +67,7 @@ class ToolController(private val pixooClient: PixooClient) {
     schema = Schema(allowableValues = ["start", "stop"])
   )
   @PostMapping("/soundmeter/{action}")
-  fun controlSoundMeter(@PathVariable("action") action: String): ResponseEntity<Void> {
+  fun controlSoundMeter(@PathVariable("action") action: String): ResponseEntity<Unit> {
     when (action) {
       "start" -> pixooClient.setSoundMeter(true)
       "stop" -> pixooClient.setSoundMeter(false)

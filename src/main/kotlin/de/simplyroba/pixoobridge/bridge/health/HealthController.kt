@@ -17,7 +17,7 @@ class HealthController(val pixooClient: PixooClient, val config: PixooConfig) {
 
   @Operation(description = "Check health of the service")
   @GetMapping("/check")
-  fun healthCheck(): ResponseEntity<Void> {
+  fun healthCheck(): ResponseEntity<Unit> {
     if (config.health.forward) pixooClient.healthCheck()
     return ok().build()
   }
