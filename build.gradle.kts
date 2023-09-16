@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("org.springframework.boot") version "3.1.2"
-  id("io.spring.dependency-management") version "1.1.2"
-  kotlin("jvm") version "1.9.0"
-  kotlin("plugin.spring") version "1.9.0"
-  id("com.diffplug.spotless") version "6.20.0"
+  id("org.springframework.boot") version "3.1.3"
+  id("io.spring.dependency-management") version "1.1.3"
+  kotlin("jvm") version "1.9.10"
+  kotlin("plugin.spring") version "1.9.10"
+  id("com.diffplug.spotless") version "6.21.0"
 }
 
 group = "de.simplyroba"
@@ -16,10 +16,10 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories { mavenCentral() }
 
-val springCloudVersion = "2022.0.3"
-val openapiVersion = "2.1.0"
-val mockitoKotlinVersion = "5.0.0"
-val scrimageVersion = "4.0.38"
+val springCloudVersion = "2022.0.4"
+val openapiVersion = "2.2.0"
+val mockitoKotlinVersion = "5.1.0"
+val scrimageVersion = "4.0.39"
 
 // security version bumps through spring dependency management
 // will not be updated through dependabot
@@ -27,7 +27,7 @@ val scrimageVersion = "4.0.38"
 extra["snakeyaml.version"] = "2.0"
 // direkt security version bumps
 val httpClientVersion = "4.5.14"
-val guavaVersion = "32.1.1-jre"
+val guavaVersion = "32.1.2-jre"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
