@@ -12,12 +12,12 @@ data class SettingsResponse(
   val temperatureUnit: TemperatureUnit,
   @Schema(defaultValue = "182") val currentClockId: Int
 ) {
-  enum class TimeMode() {
+  enum class TimeMode {
     TWELVE,
     TWENTY_FOUR
   }
 
-  enum class TemperatureUnit() {
+  enum class TemperatureUnit {
     CELSIUS,
     FAHRENHEIT
   }
