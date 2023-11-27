@@ -26,7 +26,7 @@ jobs:
           java-version: 17
 
       - name: Setup Gradle to generate and submit dependency graphs
-        uses: gradle/gradle-build-action@v2.9.0
+        uses: gradle/gradle-build-action@v2.10.0
         with:
           dependency-graph: generate-and-submit
 
