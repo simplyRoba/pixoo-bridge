@@ -26,7 +26,7 @@ docker run -p 4000:4000 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo
 
 # API
 ## Documentation
-Generate API documentation can be reached under 
+Generated API documentation can be reached under 
 ```
 http://localhost:4000/swagger-ui/index.html
 ```

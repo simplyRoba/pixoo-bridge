@@ -33,8 +33,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       .toBodilessEntity()
       .block(DEFAULT_TIMEOUT)
       ?.statusCode
-      ?.takeIf { it.is2xxSuccessful }
-      ?: throw IllegalStateException("Health check at pixoo failed")
+      ?.takeIf { it.is2xxSuccessful } ?: throw IllegalStateException("Health check at pixoo failed")
   }
 
   // OnOff, 0|1, 1=on; 0=off
