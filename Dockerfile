@@ -26,4 +26,4 @@ COPY --from=builder application/application/ ./
 HEALTHCHECK --interval=3m --timeout=10s --retries=3 \
   CMD curl -f -s http://localhost:4000/health/check || exit 1
 
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
