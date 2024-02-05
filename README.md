@@ -2,11 +2,11 @@
 Small docker image to communicate with a network enabled pixoo LED dot matrix.
 
 <!-- TODO Downloads from ghcr.io -->
-![GitHub release (with filter)](https://img.shields.io/github/v/release/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Freleases)
+![GitHub License](https://img.shields.io/github/license/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Fblob%2Fmain%2FLICENSE)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/simplyRoba/pixoo-bridge/run-tests.yaml?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Factions%2Fworkflows%2Frun-tests.yaml%3Fquery%3Dbranch%253Amain)
-![GitHub Repo stars](https://img.shields.io/github/stars/simplyRoba/pixoo-bridge)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Freleases)
 ![GitHub issues](https://img.shields.io/github/issues/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Fissues)
-![GitHub](https://img.shields.io/github/license/simplyRoba/pixoo-bridge)
+![GitHub Repo stars](https://img.shields.io/github/stars/simplyRoba/pixoo-bridge)
 
 # Configuration
 Pass key as environment variable the docker container.

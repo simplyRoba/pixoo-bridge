@@ -23,10 +23,10 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 21
 
       - name: Setup Gradle to generate and submit dependency graphs
-        uses: gradle/gradle-build-action@v2.11.1
+        uses: gradle/actions/setup-gradle@v3
         with:
           dependency-graph: generate-and-submit
 
