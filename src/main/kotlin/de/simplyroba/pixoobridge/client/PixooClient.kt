@@ -192,9 +192,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       Pair("PicData", data)
     )
 
-  fun writeText() {
-
-  }
+  fun writeText() {}
 
   fun clearText() {
     genericPostCommand(CLEAR_TEXT)

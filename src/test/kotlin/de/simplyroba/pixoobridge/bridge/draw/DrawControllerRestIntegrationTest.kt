@@ -177,10 +177,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     )
   }
 
-  @Test
-  fun `should show text`() {
-
-  }
+  @Test fun `should show text`() {}
 
   @Test
   fun `should clear text`() {
