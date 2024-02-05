@@ -13,8 +13,8 @@ ARG GID=1000
 # for healthcheck
 RUN apk --no-cache add curl
 
-RUN addgroup -g "$GID" -S "$UNAME"
-RUN adduser -u "$UID"-S "$UNAME" -G "$UNAME"
+RUN addgroup -g $GID -S $UNAME
+RUN adduser -u $UID -S $UNAME -G $UNAME
 USER $UNAME
 
 WORKDIR application
