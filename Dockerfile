@@ -1,11 +1,11 @@
 # Liberica is recomended by Spring
-FROM bellsoft/liberica-openjre-alpine-musl:17 as builder
+FROM bellsoft/liberica-openjre-alpine-musl:21 AS builder
 WORKDIR application
 COPY build/libs/*.jar app.jar
 RUN java -Djarmode=layertools -jar app.jar extract
 
 
-FROM bellsoft/liberica-openjre-alpine-musl:17
+FROM bellsoft/liberica-openjre-alpine-musl:21
 ARG UNAME=pixoo
 ARG UID=1000
 ARG GID=1000
