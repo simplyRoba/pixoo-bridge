@@ -1,10 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("org.springframework.boot") version "3.2.2"
-  id("io.spring.dependency-management") version "1.1.4"
   kotlin("jvm") version "1.9.22"
   kotlin("plugin.spring") version "1.9.22"
+  id("org.springframework.boot") version "3.2.2"
+  id("io.spring.dependency-management") version "1.1.4"
   id("com.diffplug.spotless") version "6.25.0"
 }
 
@@ -12,7 +12,7 @@ group = "de.simplyroba"
 
 version = "0.3.9"
 
-java.sourceCompatibility = JavaVersion.VERSION_21
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories { mavenCentral() }
 
@@ -53,7 +53,7 @@ dependencyManagement {
 tasks.withType<KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "21"
+    jvmTarget = "17"
   }
 }
 
