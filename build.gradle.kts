@@ -23,11 +23,11 @@ val scrimageVersion = "4.1.1"
 
 // security version bumps through spring dependency management
 // will not be updated through dependabot
-// https://github.com/simplyRoba/pixoo-bridge/security/dependabot/6
-extra["snakeyaml.version"] = "2.0"
+// like extra["libXX.version"] = "XXX"
+
 // direkt security version bumps
-val httpClientVersion = "4.5.14"
 val guavaVersion = "33.0.0-jre"
+val jsonPathVersion = "2.9.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
@@ -41,11 +41,11 @@ dependencies {
   testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
 
   constraints {
-    implementation("org.apache.httpcomponents:httpclient:$httpClientVersion") {
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/4")
-    }
     implementation("com.google.guava:guava:$guavaVersion") {
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/7")
+    }
+    implementation("com.jayway.jsonpath:json-path:$jsonPathVersion") {
+      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/30")
     }
   }
 }
