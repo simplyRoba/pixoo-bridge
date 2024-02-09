@@ -9,18 +9,21 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 5 * * MON' # At 05:00 on Monday.
-  push:
+  push: # will only trigger if both conditions are satisfied
+    branches:
+      - 'main'
     paths:
       - 'build.gradle.kts'
+
+permissions:
+  contents: write # The Dependency Submission API requires write permission
 
 jobs:
   submit-dependencies:
     name: Dependencies
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # The Dependency Submission API requires write permission
     steps:
-      - name: Checkout sources
+      - name: Checkout
         uses: actions/checkout@v4
       - name: Generate and submit dependency graph
         uses: gradle/actions/dependency-submission@v3
