@@ -1,6 +1,7 @@
 # Dependency graph doesn't automatically detect all dependencies for ecosystems like Gradle.
 # GitHub Actions adds your dependencies using the dependency submission API so you can receive Dependabot alerts for known vulnerabilities.
 # https://docs.github.com/code-security/supply-chain-security/understanding-your-software-supply-chain/using-the-dependency-submission-api
+# https://github.com/gradle/actions/blob/main/dependency-submission/README.md
 
 name: Submit Gradle dependencies
 
@@ -8,16 +9,19 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 5 * * MON' # At 05:00 on Monday.
-  push:
+  push: # will only trigger if both conditions are satisfied
+    branches:
+      - 'main'
     paths:
       - 'build.gradle.kts'
+
+permissions:
+  contents: write # The Dependency Submission API requires write permission
 
 jobs:
   submit-dependencies:
     name: Dependencies
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # The Dependency Submission API requires write permission
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,10 +32,8 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Setup Gradle to generate and submit dependency graphs
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          dependency-graph: generate-and-submit
-
-      - name: Run a build, generating the dependency graph snapshot which will be submitted
-        run: ./gradlew build
+      - name: Generate and submit dependency graph
+        uses: gradle/actions/dependency-submission@v3
+        env:
+          # Exclude dependencies that are only resolved in test classpaths
+          DEPENDENCY_GRAPH_EXCLUDE_CONFIGURATIONS: '.*[Tt]est(Compile|Runtime)Classpath'
