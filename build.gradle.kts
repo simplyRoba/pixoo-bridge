@@ -12,7 +12,7 @@ group = "de.simplyroba"
 
 version = "0.3.9"
 
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories { mavenCentral() }
 
@@ -53,7 +53,7 @@ dependencyManagement {
 tasks.withType<KotlinCompile> {
   kotlinOptions {
     freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "11"
+    jvmTarget = "21"
   }
 }
 
