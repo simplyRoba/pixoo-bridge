@@ -20,8 +20,13 @@ Pass key as environment variable the docker container.
 | PIXOO_ANIMATION_SPEED_FACTOR | 1.4           | Factor to adjust animation speed of uploaded gifs |
 
 # Run the image
+replace the ip of your pixoo and run
 ```shell
 docker run -p 4000:4000 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
+```
+or use the [docker-compose.yaml](/docker-compose.yaml)
+```shell
+docker compose up -d
 ```
 
 # API
