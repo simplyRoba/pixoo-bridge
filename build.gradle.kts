@@ -27,7 +27,6 @@ val scrimageVersion = "4.1.1"
 
 // direkt security version bumps
 val guavaVersion = "33.0.0-jre"
-val jsonPathVersion = "2.9.0"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
@@ -43,9 +42,6 @@ dependencies {
   constraints {
     implementation("com.google.guava:guava:$guavaVersion") {
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/7")
-    }
-    implementation("com.jayway.jsonpath:json-path:$jsonPathVersion") {
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/30")
     }
   }
 }
