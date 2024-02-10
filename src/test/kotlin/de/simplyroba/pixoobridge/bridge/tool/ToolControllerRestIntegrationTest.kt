@@ -13,11 +13,11 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     doPostCallWithBodyExpectingSuccess(
       "/tool/timer/start",
       """
-      {
-        "minutes": $minutes,
-        "seconds": $seconds
-      }
-    """
+        {
+          "minutes": $minutes,
+          "seconds": $seconds
+        }
+        """
         .trimIndent()
     )
     verifyCommandSent(
@@ -56,11 +56,11 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     doPostCallWithBodyExpectingSuccess(
       "/tool/scoreboard",
       """
-      {
-        "redScore": $red,
-        "blueScore": $blue
-      }
-    """
+        {
+          "redScore": $red,
+          "blueScore": $blue
+        }
+        """
         .trimIndent()
     )
     verifyCommandSent("""{"Command":"Tools/SetScoreBoard", "BlueScore":$blue, "RedScore":$red }""")

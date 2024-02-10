@@ -24,10 +24,10 @@ class ToolControllerMvcTest : AbstractMvcTest() {
           .contentType(MediaType.APPLICATION_JSON)
           .content(
             """
-          {
-            "minutes": $minutes,
-            "seconds": $seconds
-          }
+              {
+                "minutes": $minutes,
+                "seconds": $seconds
+              }
             """
               .trimIndent()
           )
@@ -52,10 +52,10 @@ class ToolControllerMvcTest : AbstractMvcTest() {
           .contentType(MediaType.APPLICATION_JSON)
           .content(
             """
-          {
-            "redScore": $redScore,
-            "blueScore": $blueScore
-          }
+              {
+                "redScore": $redScore,
+                "blueScore": $blueScore
+              }
             """
               .trimIndent()
           )

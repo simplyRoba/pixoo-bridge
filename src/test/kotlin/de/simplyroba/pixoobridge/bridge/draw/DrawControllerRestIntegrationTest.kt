@@ -178,7 +178,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   }
 
   @Test
-  fun `should show text`() {
+  fun `should send text command`() {
     doPostCallWithBodyExpectingSuccess(
       "/draw/text",
       """
@@ -224,7 +224,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   }
 
   @Test
-  fun `should clear text`() {
+  fun `should send clear text command`() {
     doPostCallExpectingSuccess("/draw/text/clear")
     verifyCommandSent("""{"Command":"Draw/ClearHttpText"}""")
   }
