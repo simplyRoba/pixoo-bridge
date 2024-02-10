@@ -8,6 +8,6 @@ data class RgbColor(
   @Schema(minimum = "0", maximum = "255") val blue: Int
 )
 
-fun RgbColor.validate(): Boolean = red in 0..255 && green in 0..255 && blue in 0..255
+fun RgbColor.valid(): Boolean = red in 0..255 && green in 0..255 && blue in 0..255
 
 fun RgbColor.toHexString() = String.format("#%02X%02X%02X", red, green, blue)

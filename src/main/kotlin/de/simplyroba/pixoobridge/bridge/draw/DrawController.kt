@@ -18,7 +18,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
   @Operation(description = "Fill complete screen with rgb color")
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
   fun fill(@RequestBody body: FillRequest): ResponseEntity<Unit> {
-    if (!body.validate()) return ResponseEntity.badRequest().build()
+    if (!body.valid()) return ResponseEntity.badRequest().build()
 
     imageService.drawColor(body)
     return ok().build()
@@ -39,7 +39,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
   @Operation(description = "")
   @PostMapping("/text")
   fun drawText(@RequestBody body: TextRequest): ResponseEntity<Unit> {
-    if (!body.validate()) return ResponseEntity.badRequest().build()
+    if (!body.valid()) return ResponseEntity.badRequest().build()
 
     pixooClient.writeText(
       id = body.id,

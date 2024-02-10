@@ -14,11 +14,11 @@ data class TextRequest(
   val textAlignment: TextAlignment
 )
 
-fun TextRequest.validate() =
+fun TextRequest.valid() =
   id in 0..20 &&
-    position.validate() &&
+    position.valid() &&
     font in 0..7 &&
     textWidth in 16..64 &&
     text.length <= 512 &&
     scrollSpeed in 0..100 &&
-    color.validate()
+    color.valid()
