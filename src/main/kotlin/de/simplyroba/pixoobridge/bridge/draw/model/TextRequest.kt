@@ -15,10 +15,10 @@ data class TextRequest(
 )
 
 fun TextRequest.validate() =
-  id in 0..255 &&
+  id in 0..20 &&
     position.validate() &&
     font in 0..7 &&
     textWidth in 16..64 &&
-    text.length >= 512 &&
+    text.length <= 512 &&
     scrollSpeed in 0..100 &&
     color.validate()

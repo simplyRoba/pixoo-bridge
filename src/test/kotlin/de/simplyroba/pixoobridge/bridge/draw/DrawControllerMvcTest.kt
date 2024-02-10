@@ -209,6 +209,7 @@ class DrawControllerMvcTest : AbstractMvcTest() {
 
   @Test
   fun `should return bad request on to long text`() {
+    val longText = "X".repeat(513)
     mockMvc
       .perform(
         post("/draw/text")
@@ -224,7 +225,7 @@ class DrawControllerMvcTest : AbstractMvcTest() {
                 "scrollDirection":"LEFT",
                 "font": 4,
                 "textWidth":56,
-                "text":"hello, world",
+                "text": "$longText",
                 "scrollSpeed": 10,
                 "color": {
                   "red": 255,
