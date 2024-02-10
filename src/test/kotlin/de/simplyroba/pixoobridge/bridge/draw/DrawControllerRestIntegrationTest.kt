@@ -177,7 +177,49 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     )
   }
 
-  @Test fun `should show text`() {}
+  @Test fun `should show text`() {
+    doPostCallWithBodyExpectingSuccess(
+      "/draw/text",
+      """
+        {
+          "id":4,
+          "position": {
+            "x":0,
+            "y":40
+          },
+          "scrollDirection":"LEFT",
+          "font":4,
+          "textWidth":56,
+          "text":"hello, world",
+          "color": {
+            "red":255,
+            "green":255,
+            "blue":0
+          },
+          "textAlignment":"LEFT"
+        }
+        """
+        .trimIndent()
+    )
+    verifyCommandSent(
+      """
+        {
+          "Command":"Draw/SendHttpText",
+          "TextId":4,
+          "x":0,
+          "y":40,
+          "dir":0,
+          "font":4,
+          "TextWidth":56,
+          "speed":10,
+          "TextString":"hello, world",
+          "color":"#FFFF00",
+          "align":1
+        }
+        """
+        .trimIndent()
+    )
+  }
 
   @Test
   fun `should clear text`() {
