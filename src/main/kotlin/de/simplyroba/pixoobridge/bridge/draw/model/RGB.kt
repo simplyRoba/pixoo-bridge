@@ -7,3 +7,5 @@ data class RGB(
   @Schema(minimum = "0", maximum = "255") val green: Int,
   @Schema(minimum = "0", maximum = "255") val blue: Int
 )
+
+fun RGB.toHexString() = String.format("#%02X%02X%02X", red, green, blue)

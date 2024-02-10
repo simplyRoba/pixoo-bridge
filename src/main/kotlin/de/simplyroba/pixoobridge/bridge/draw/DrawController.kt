@@ -1,6 +1,9 @@
 package de.simplyroba.pixoobridge.bridge.draw
 
 import de.simplyroba.pixoobridge.bridge.draw.model.RGB
+import de.simplyroba.pixoobridge.bridge.draw.model.TextRequest
+import de.simplyroba.pixoobridge.bridge.draw.model.toHexString
+import de.simplyroba.pixoobridge.client.PixooClient
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.MediaType.*
@@ -12,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile
 @Tag(name = "Draw")
 @RestController
 @RequestMapping("/draw")
-class DrawController(private val imageService: ImageService, private val textService: TextService) {
+class DrawController(private val imageService: ImageService, private val pixooClient: PixooClient) {
 
   @Operation(description = "Fill complete screen with rgb color")
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
@@ -37,15 +40,27 @@ class DrawController(private val imageService: ImageService, private val textSer
 
   @Operation(description = "")
   @PostMapping("/text")
-  fun drawText(): ResponseEntity<Unit> {
-
+  fun drawText(@RequestBody body: TextRequest): ResponseEntity<Unit> {
+    // TODO do checks and mvc test
+    pixooClient.writeText(
+      id = body.id,
+      x = body.position.x,
+      y = body.position.y,
+      direction = body.scrollDirection.key,
+      font = body.font,
+      textWidth = body.textWidth,
+      text = body.text,
+      speed = body.scrollSpeed,
+      color = body.color.toHexString(),
+      align = body.textAlignment.key
+    )
     return ok().build()
   }
 
   @Operation(description = "Clear all text")
   @PostMapping("/text/clear")
   fun clearText(): ResponseEntity<Unit> {
-    textService.clear()
+    pixooClient.clearText()
     return ok().build()
   }
 }

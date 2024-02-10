@@ -177,7 +177,8 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     )
   }
 
-  @Test fun `should show text`() {
+  @Test
+  fun `should show text`() {
     doPostCallWithBodyExpectingSuccess(
       "/draw/text",
       """
@@ -191,6 +192,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "font":4,
           "textWidth":56,
           "text":"hello, world",
+          "scrollSpeed": 10,
           "color": {
             "red":255,
             "green":255,
