@@ -10,6 +10,15 @@ data class TextRequest(
   @Schema(minimum = "16", maximum = "64") val textWidth: Int,
   @Schema(maxLength = 512) val text: String,
   @Schema(minimum = "0", maximum = "100") val scrollSpeed: Int,
-  val color: RGB,
+  val color: RgbColor,
   val textAlignment: TextAlignment
 )
+
+fun TextRequest.validate() =
+  id in 0..255 &&
+    position.validate() &&
+    font in 0..7 &&
+    textWidth in 16..64 &&
+    text.length >= 512 &&
+    scrollSpeed in 0..100 &&
+    color.validate()

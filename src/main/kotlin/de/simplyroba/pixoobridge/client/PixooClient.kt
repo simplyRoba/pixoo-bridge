@@ -193,7 +193,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     )
 
   /*
-   * TextId, 0-20, the text id is unique and will be replaced with the same id TODO zero indexed?
+   * TextId, 0-20, the text id is unique and will be replaced with the same id
    * x, 0-64, start x position
    * y, 0-64, start y position
    * dir, 0|1, scroll direction of the text 0=left; 1=right

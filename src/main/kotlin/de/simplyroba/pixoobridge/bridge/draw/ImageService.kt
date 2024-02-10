@@ -6,7 +6,7 @@ import com.sksamuel.scrimage.format.Format.*
 import com.sksamuel.scrimage.format.FormatDetector
 import com.sksamuel.scrimage.nio.AnimatedGifReader
 import com.sksamuel.scrimage.nio.ImageSource
-import de.simplyroba.pixoobridge.bridge.draw.model.RGB
+import de.simplyroba.pixoobridge.bridge.draw.model.RgbColor
 import de.simplyroba.pixoobridge.client.PixooClient
 import de.simplyroba.pixoobridge.config.PixooConfig
 import java.awt.Color
@@ -20,9 +20,10 @@ class ImageService(private val pixooConfig: PixooConfig, private val pixooClient
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
-  fun drawColor(rgb: RGB) {
+  fun drawColor(rgbColor: RgbColor) {
     val size = pixooConfig.size
-    val image = ImmutableImage.filled(size, size, Color(rgb.red, rgb.green, rgb.blue))
+    val image =
+      ImmutableImage.filled(size, size, Color(rgbColor.red, rgbColor.green, rgbColor.blue))
     val id = getNextId()
     pixooClient.sendAnimation(1, pixooConfig.size, 0, id, 9999, image.toBase64())
   }

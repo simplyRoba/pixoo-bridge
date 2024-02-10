@@ -1,8 +1,6 @@
 package de.simplyroba.pixoobridge.bridge.draw
 
-import de.simplyroba.pixoobridge.bridge.draw.model.RGB
-import de.simplyroba.pixoobridge.bridge.draw.model.TextRequest
-import de.simplyroba.pixoobridge.bridge.draw.model.toHexString
+import de.simplyroba.pixoobridge.bridge.draw.model.*
 import de.simplyroba.pixoobridge.client.PixooClient
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -19,9 +17,9 @@ class DrawController(private val imageService: ImageService, private val pixooCl
 
   @Operation(description = "Fill complete screen with rgb color")
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
-  fun fill(@RequestBody body: RGB): ResponseEntity<Unit> {
-    if (body.red !in 0..255 || body.green !in 0..255 || body.blue !in 0..255)
-      return ResponseEntity.badRequest().build()
+  fun fill(@RequestBody body: FillRequest): ResponseEntity<Unit> {
+    if (!body.validate()) return ResponseEntity.badRequest().build()
+
     imageService.drawColor(body)
     return ok().build()
   }
@@ -41,7 +39,8 @@ class DrawController(private val imageService: ImageService, private val pixooCl
   @Operation(description = "")
   @PostMapping("/text")
   fun drawText(@RequestBody body: TextRequest): ResponseEntity<Unit> {
-    // TODO do checks and mvc test
+    if (!body.validate()) return ResponseEntity.badRequest().build()
+
     pixooClient.writeText(
       id = body.id,
       x = body.position.x,
