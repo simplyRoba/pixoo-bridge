@@ -27,7 +27,7 @@ class SystemController(val pixooClient: PixooClient, val config: PixooConfig) {
   @Operation(
     summary = "Reboot the pixoo",
     description =
-      "This might response with an 500 after a timeout as it happens that the pixoo reboots before responding."
+      "This might respond with a 500 after a timeout as it might happen that the pixoo reboots before responding."
   )
   @PostMapping("/reboot")
   fun reboot() {
