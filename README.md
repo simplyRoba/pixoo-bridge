@@ -18,6 +18,7 @@ Pass key as environment variable the docker container.
 | PIXOO_HEALTH_FORWARD         | true          | Ping pixoo during image health check              |
 | PIXOO_DOCS_ENABLED           | true          | Enable API documentation                          |
 | PIXOO_ANIMATION_SPEED_FACTOR | 1.4           | Factor to adjust animation speed of uploaded gifs |
+| PIXOO_LOG_LEVEL              | INFO          | Possible values OFF, DEBUG, INFO, WARN, ERROR     |
 
 # Run the image
 replace the ip of your pixoo and run

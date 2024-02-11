@@ -1,3 +1,3 @@
  - try native images with spring
  - evaluate mqtt support
- - create debug log config parameter
+ - 
