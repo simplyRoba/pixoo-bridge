@@ -15,7 +15,10 @@ import org.springframework.web.multipart.MultipartFile
 @RequestMapping("/draw")
 class DrawController(private val imageService: ImageService, private val pixooClient: PixooClient) {
 
-  @Operation(description = "Fill complete screen with rgb color")
+  @Operation(
+    summary = "Fill complete screen with rgb color",
+    description = "Can be used together with the text endpoint. This will work as background."
+  )
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
   fun fill(@RequestBody body: FillRequest): ResponseEntity<Unit> {
     if (!body.valid()) return ResponseEntity.badRequest().build()
@@ -24,7 +27,10 @@ class DrawController(private val imageService: ImageService, private val pixooCl
     return ok().build()
   }
 
-  @Operation(description = "Upload an image and show it")
+  @Operation(
+    summary = "Upload an image",
+    description = "Can be used together with the text endpoint. This will work as background."
+  )
   @io.swagger.v3.oas.annotations.parameters.RequestBody(
     description = "Image to upload. Supported formats: jpg, jpeg, png, gif"
   )
@@ -36,7 +42,11 @@ class DrawController(private val imageService: ImageService, private val pixooCl
     return ok().build()
   }
 
-  @Operation(description = "")
+  @Operation(
+    summary = "Show text",
+    description =
+      "Can be used together with the upload or fill endpoint. Text will be showed as overlay. Same id will replace the text on the board."
+  )
   @PostMapping("/text")
   fun drawText(@RequestBody body: TextRequest): ResponseEntity<Unit> {
     if (!body.valid()) return ResponseEntity.badRequest().build()
@@ -56,7 +66,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
     return ok().build()
   }
 
-  @Operation(description = "Clear all text")
+  @Operation(summary = "Clear all text")
   @PostMapping("/text/clear")
   fun clearText(): ResponseEntity<Unit> {
     pixooClient.clearText()

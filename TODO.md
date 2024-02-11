@@ -1,2 +1,0 @@
- - swagger description and summary for all
- - enum to INT generic mapping

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/tool")
 class ToolController(private val pixooClient: PixooClient) {
 
-  @Operation(description = "Start the timer tool.")
+  @Operation(summary = "Start the timer tool.")
   @PostMapping("/timer/start", consumes = [APPLICATION_JSON_VALUE])
   fun startTimer(@RequestBody body: TimerSettingsRequest): ResponseEntity<Unit> {
     if (body.minutes !in 0..99 || body.seconds !in 0..59) return badRequest().build()
@@ -26,14 +26,14 @@ class ToolController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Stop the timer tool.")
+  @Operation(summary = "Stop the timer tool.")
   @PostMapping("/timer/stop")
   fun stopTimer(): ResponseEntity<Unit> {
     pixooClient.setTimer(0, 0, false)
     return ok().build()
   }
 
-  @Operation(description = "Control stopwatch tool.")
+  @Operation(summary = "Control stopwatch tool.")
   @Parameter(
     name = "action",
     `in` = PATH,
@@ -51,7 +51,7 @@ class ToolController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Control scoreboard tool.")
+  @Operation(summary = "Control scoreboard tool.")
   @PostMapping("/scoreboard", consumes = [APPLICATION_JSON_VALUE])
   fun setScoreboard(@RequestBody body: ScoreboardScoresRequest): ResponseEntity<Unit> {
     if (body.redScore !in 0..999 || body.blueScore !in 0..999) return badRequest().build()
@@ -59,7 +59,7 @@ class ToolController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Control sound meter tool.")
+  @Operation(summary = "Control sound meter tool.")
   @Parameter(
     name = "action",
     `in` = PATH,

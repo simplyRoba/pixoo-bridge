@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/manage")
 class ManageController(private val pixooClient: PixooClient) {
 
-  @Operation(description = "Turn display on or off.")
+  @Operation(summary = "Turn display on or off.")
   @Parameter(
     name = "action",
     `in` = ParameterIn.PATH,
@@ -43,7 +43,7 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Control display brightness.")
+  @Operation(summary = "Control display brightness.")
   @Parameter(
     name = "value",
     `in` = ParameterIn.PATH,
@@ -57,7 +57,10 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Turn brightness overclock on or off.")
+  @Operation(
+    summary = "Turn brightness overclock on or off.",
+    description = "This won’t be saved on the pixoo and resets when the device powers off."
+  )
   @Parameter(
     name = "action",
     `in` = ParameterIn.PATH,
@@ -74,7 +77,10 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Control the display rotation")
+  @Operation(
+    summary = "Control the display rotation",
+    description = "This won’t be saved on the pixoo and resets when the device powers off."
+  )
   @Parameter(
     name = "angle",
     `in` = ParameterIn.PATH,
@@ -93,7 +99,10 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Control if the display is mirrored")
+  @Operation(
+    summary = "Control if the display is mirrored",
+    description = "This won’t be saved on the pixoo and resets when the device powers off."
+  )
   @Parameter(
     name = "action",
     `in` = ParameterIn.PATH,
@@ -110,7 +119,10 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Control the white balance")
+  @Operation(
+    summary = "Control the white balance",
+    description = "This won’t be saved on the pixoo and resets when the device powers off."
+  )
   @PostMapping("/display/white-balance", consumes = [APPLICATION_JSON_VALUE])
   fun manageDisplayWhiteBalance(@RequestBody body: WhiteBalanceRequest): ResponseEntity<Unit> {
     if (body.red !in 0..100 || body.green !in 0..100 || body.blue !in 0..100)
@@ -119,14 +131,17 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Set the time of the pixoo to the correct time of the bridge")
+  @Operation(summary = "Set the time of the pixoo to the correct time of the bridge")
   @PostMapping("/time")
   fun refreshSystemTime(): ResponseEntity<Unit> {
     pixooClient.setSystemTimeInUtc(OffsetDateTime.now(UTC).toEpochSecond())
     return ok().build()
   }
 
-  @Operation(description = "Configure if the mode time is display")
+  @Operation(
+    summary = "Configure if the mode time is display",
+    description = "This won’t be saved on the pixoo and resets when the device powers off."
+  )
   @Parameter(
     name = "mode",
     `in` = ParameterIn.PATH,
@@ -143,7 +158,7 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Configure if the time offset of the current time zone")
+  @Operation(summary = "Configure if the time offset of the current time zone")
   @Parameter(
     name = "offset",
     `in` = ParameterIn.PATH,
@@ -157,7 +172,7 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Get time on the pixoo")
+  @Operation(summary = "Get time on the pixoo")
   @GetMapping("/time", produces = [APPLICATION_JSON_VALUE])
   fun readDeviceTime(): ResponseEntity<TimeResponse> {
     val clientResponse = pixooClient.getSystemTime().parameters
@@ -173,7 +188,10 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok(response)
   }
 
-  @Operation(description = "Configure the location for the weather forecast")
+  @Operation(
+    summary = "Configure the location for the weather forecast",
+    description = "All data comes from https://openweathermap.org/."
+  )
   @PostMapping("/weather/location", consumes = [APPLICATION_JSON_VALUE])
   fun manageWeatherLocation(@RequestBody body: WeatherLocationRequest): ResponseEntity<Unit> {
     if (body.longitude.toFloat() !in -180f..180f || body.latitude.toFloat() !in -90f..90f)
@@ -182,7 +200,10 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Configure if the weather temperature unit")
+  @Operation(
+    summary = "Configure if the weather temperature unit",
+    description = "This won’t be saved on the pixoo and resets when the device powers off."
+  )
   @Parameter(
     name = "unit",
     `in` = ParameterIn.PATH,
@@ -199,7 +220,7 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok().build()
   }
 
-  @Operation(description = "Get weather information")
+  @Operation(summary = "Get weather information")
   @GetMapping("/weather", produces = [APPLICATION_JSON_VALUE])
   fun readWeatherInformation(): ResponseEntity<WeatherResponse> {
     val clientResponse = pixooClient.readWeatherInformation().parameters
@@ -216,7 +237,7 @@ class ManageController(private val pixooClient: PixooClient) {
     return ok(response)
   }
 
-  @Operation(description = "Get all settings")
+  @Operation(summary = "Get all settings")
   @GetMapping("/settings", produces = [APPLICATION_JSON_VALUE])
   fun readDeviceConfiguration(): ResponseEntity<SettingsResponse> {
     val clientResponse = pixooClient.readConfiguration().parameters
