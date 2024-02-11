@@ -150,7 +150,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       Pair("Status", startBit.toBitNumber())
     )
 
-  // Status, 0-1, 0=stop; 1=start; 2=reset
+  // Status, 0|1|2, 0=stop; 1=start; 2=reset
   fun setStopwatch(status: Int) = genericPostCommand(TOOL_STOPWATCH, Pair("Status", status))
 
   /*
@@ -160,7 +160,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
   fun setScoreBoard(redScore: Int, blueScore: Int) =
     genericPostCommand(TOOL_SCOREBOARD, Pair("RedScore", redScore), Pair("BlueScore", blueScore))
 
-  // NoiseStatus, 0-1, 0=stop; 1=start
+  // NoiseStatus, 0|1, 0=stop; 1=start
   fun setSoundMeter(onBit: Boolean) =
     genericPostCommand(TOOL_SOUND_METER, Pair("NoiseStatus", onBit.toBitNumber()))
 
@@ -191,6 +191,48 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       Pair("PicSpeed", animationSpeed),
       Pair("PicData", data)
     )
+
+  /*
+   * TextId, 0-20, the text id is unique and will be replaced with the same id
+   * x, 0-64, start x position
+   * y, 0-64, start y position
+   * dir, 0|1, scroll direction of the text 0=left; 1=right
+   * font, 0-7, animation font
+   * TextWidth, 16-64, the text width
+   * TextString, 0-512, the text string in utf8
+   * speed, 0,100, the scroll speed if it need scroll, the time (ms) the text move one step
+   * color, example=#FFFF00, font color in hex notation
+   * align, 1|2|3, horizontal text alignmen, 1=left; 2=middle; 3=right
+   */
+  fun writeText(
+    id: Int,
+    x: Int,
+    y: Int,
+    direction: Int,
+    font: Int,
+    textWidth: Int,
+    text: String,
+    speed: Int,
+    color: String,
+    align: Int
+  ) =
+    genericPostCommand(
+      DRAW_TEXT,
+      Pair("TextId", id),
+      Pair("x", x),
+      Pair("y", y),
+      Pair("dir", direction),
+      Pair("font", font),
+      Pair("TextWidth", textWidth),
+      Pair("TextString", text),
+      Pair("speed", speed),
+      Pair("color", color),
+      Pair("align", align)
+    )
+
+  fun clearText() {
+    genericPostCommand(CLEAR_TEXT)
+  }
 
   private fun genericPostCommand(
     commandType: CommandType,

@@ -177,6 +177,58 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     )
   }
 
+  @Test
+  fun `should send text command`() {
+    doPostCallWithBodyExpectingSuccess(
+      "/draw/text",
+      """
+        {
+          "id":4,
+          "position": {
+            "x":0,
+            "y":40
+          },
+          "scrollDirection":"LEFT",
+          "font":4,
+          "textWidth":56,
+          "text":"hello, world",
+          "scrollSpeed": 10,
+          "color": {
+            "red":255,
+            "green":255,
+            "blue":0
+          },
+          "textAlignment":"LEFT"
+        }
+        """
+        .trimIndent()
+    )
+    verifyCommandSent(
+      """
+        {
+          "Command":"Draw/SendHttpText",
+          "TextId":4,
+          "x":0,
+          "y":40,
+          "dir":0,
+          "font":4,
+          "TextWidth":56,
+          "speed":10,
+          "TextString":"hello, world",
+          "color":"#FFFF00",
+          "align":1
+        }
+        """
+        .trimIndent()
+    )
+  }
+
+  @Test
+  fun `should send clear text command`() {
+    doPostCallExpectingSuccess("/draw/text/clear")
+    verifyCommandSent("""{"Command":"Draw/ClearHttpText"}""")
+  }
+
   private fun stubNextPictureIdCall(picId: Int) {
     stubFor(
       post(urlEqualTo("/post"))
