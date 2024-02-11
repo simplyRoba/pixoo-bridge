@@ -7,6 +7,8 @@ pixoo:
     forward: true
   docs:
     enabled: true
+  log:
+    level: INFO
 
 server:
   port: 4000
@@ -27,3 +29,7 @@ springdoc:
   swagger-ui:
     enabled: ${pixoo.docs.enabled}
     tryItOutEnabled: true
+
+logging:
+  level:
+    de.simplyroba.pixoobridge: ${pixoo.log.level}
