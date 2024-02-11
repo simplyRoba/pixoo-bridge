@@ -170,6 +170,8 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   fun getNextPictureId() = genericPostCommand(GET_NEXT_PICTURE_ID)
 
+  fun resetPictureId() = genericPostCommand(RESET_PICTURE_ID)
+
   /*
    * PicNum, 1-59, number of frames (smaller than 60) in animation
    * PicWidth, 16|32|64, pixel per side

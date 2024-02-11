@@ -16,7 +16,11 @@ import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 
 @Service
-class ImageService(private val pixooConfig: PixooConfig, private val pixooClient: PixooClient) {
+class ImageService(
+  private val pixooConfig: PixooConfig,
+  private val pixooClient: PixooClient,
+  private val imageDownloader: ImageDownloader
+) {
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -26,6 +30,10 @@ class ImageService(private val pixooConfig: PixooConfig, private val pixooClient
       ImmutableImage.filled(size, size, Color(rgbColor.red, rgbColor.green, rgbColor.blue))
     val id = getNextId()
     pixooClient.sendAnimation(1, pixooConfig.size, 0, id, 9999, image.toBase64())
+  }
+
+  fun drawRemoteImage(link: String) {
+    drawImage(imageDownloader.download(link))
   }
 
   fun drawImage(resource: Resource) {

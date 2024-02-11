@@ -42,6 +42,14 @@ class DrawController(private val imageService: ImageService, private val pixooCl
     return ok().build()
   }
 
+  @Operation(summary = "Send a link to an image", description = "")
+  @PostMapping("/remote")
+  fun remoteImage(@RequestBody body: RemoteImageRequest): ResponseEntity<Unit> {
+    // TODO validate for correct url
+    imageService.drawRemoteImage(body.link)
+    return ok().build()
+  }
+
   @Operation(
     summary = "Show text",
     description =
