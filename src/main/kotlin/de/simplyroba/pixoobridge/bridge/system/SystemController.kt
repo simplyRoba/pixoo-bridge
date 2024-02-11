@@ -1,4 +1,4 @@
-package de.simplyroba.pixoobridge.bridge.health
+package de.simplyroba.pixoobridge.bridge.system
 
 import de.simplyroba.pixoobridge.client.PixooClient
 import de.simplyroba.pixoobridge.config.PixooConfig
@@ -7,21 +7,26 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
-@Tag(name = "Health")
+@Tag(name = "System")
 @RestController
-@RequestMapping("/health")
-class HealthController(val pixooClient: PixooClient, val config: PixooConfig) {
+class SystemController(val pixooClient: PixooClient, val config: PixooConfig) {
 
   @Operation(
     summary = "Check health of the service",
     description = "If configured this will also ping the pixoo."
   )
-  @GetMapping("/check")
+  @GetMapping("/health/check")
   fun healthCheck(): ResponseEntity<Unit> {
     if (config.health.forward) pixooClient.healthCheck()
     return ok().build()
+  }
+
+  @Operation(summary = "Reboot the pixoo")
+  @PostMapping("/reboot")
+  fun reboot() {
+    pixooClient.reboot()
   }
 }

@@ -36,6 +36,10 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       ?.takeIf { it.is2xxSuccessful } ?: throw IllegalStateException("Health check at pixoo failed")
   }
 
+  fun reboot() {
+    genericPostCommand(REBOOT)
+  }
+
   // OnOff, 0|1, 1=on; 0=off
   fun switchDisplay(onBit: Boolean) =
     genericPostCommand(SET_DISPLAY_ON_OFF, Pair("OnOff", onBit.toBitNumber()))
