@@ -2,6 +2,7 @@ package de.simplyroba.pixoobridge.bridge.draw.model
 
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(name = "Text")
 data class TextRequest(
   @Schema(minimum = "0", maximum = "20") val id: Int,
   val position: Position,

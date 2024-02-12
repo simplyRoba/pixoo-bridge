@@ -1,10 +1,11 @@
 package de.simplyroba.pixoobridge.bridge.draw.model
 
+import io.swagger.v3.oas.annotations.media.Schema
 import java.net.MalformedURLException
 import java.net.URI
 import java.net.URISyntaxException
 
-data class RemoteImageRequest(val link: String)
+@Schema(name = "Remote image") data class RemoteImageRequest(val link: String)
 
 fun RemoteImageRequest.valid(): Boolean {
   try {
