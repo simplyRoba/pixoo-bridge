@@ -10,11 +10,12 @@ import org.springframework.web.reactive.function.client.WebClient
 class FileDownloader(private val pixooConfig: PixooConfig) {
   fun download(link: String): Resource {
 
-    val webClient = WebClient.builder()
-      .codecs { configurer ->
-        configurer.defaultCodecs().maxInMemorySize(pixooConfig.maxImageSize.toBytes().toInt())
-      }
-      .build()
+    val webClient =
+      WebClient.builder()
+        .codecs { configurer ->
+          configurer.defaultCodecs().maxInMemorySize(pixooConfig.maxImageSize.toBytes().toInt())
+        }
+        .build()
 
     val bytes =
       webClient
