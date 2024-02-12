@@ -1,3 +1,4 @@
  - try native images with spring
  - evaluate mqtt support
  - check when to reset picture id
+ - log a message when request is invalid

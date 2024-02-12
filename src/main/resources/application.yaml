@@ -3,13 +3,13 @@ pixoo:
   host: 'localhost'
   size: 64
   animation-speed-factor: 1.4
+  max-image-size: 2MB
   health:
     forward: true
   docs:
     enabled: true
   log:
     level: INFO
-  max-image-size: 2MB
 
 server:
   port: 4000
