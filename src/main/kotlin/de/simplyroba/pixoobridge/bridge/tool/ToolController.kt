@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.*
 class ToolController(private val pixooClient: PixooClient) {
 
   @Operation(summary = "Start the timer tool.")
-  @ApiResponses(
-    value =
-    [ApiResponse(responseCode = "400", description = "Invalid path variable.")]
-  )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/timer/start", consumes = [APPLICATION_JSON_VALUE])
   fun startTimer(@RequestBody body: TimerSettingsRequest): ResponseEntity<Unit> {
     if (body.minutes !in 0..99 || body.seconds !in 0..59) return badRequest().build()
@@ -46,10 +43,7 @@ class ToolController(private val pixooClient: PixooClient) {
     description = "Action to execute.",
     schema = Schema(allowableValues = ["start", "stop", "reset"])
   )
-  @ApiResponses(
-    value =
-    [ApiResponse(responseCode = "400", description = "Invalid path variable.")]
-  )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/stopwatch/{action}")
   fun controlStopwatch(@PathVariable("action") action: String): ResponseEntity<Unit> {
     when (action) {
@@ -62,10 +56,7 @@ class ToolController(private val pixooClient: PixooClient) {
   }
 
   @Operation(summary = "Control scoreboard tool.")
-  @ApiResponses(
-    value =
-    [ApiResponse(responseCode = "400", description = "Invalid request body.")]
-  )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid request body.")])
   @PostMapping("/scoreboard", consumes = [APPLICATION_JSON_VALUE])
   fun setScoreboard(@RequestBody body: ScoreboardScoresRequest): ResponseEntity<Unit> {
     if (body.redScore !in 0..999 || body.blueScore !in 0..999) return badRequest().build()
@@ -80,10 +71,7 @@ class ToolController(private val pixooClient: PixooClient) {
     description = "Action to execute.",
     schema = Schema(allowableValues = ["start", "stop"])
   )
-  @ApiResponses(
-    value =
-    [ApiResponse(responseCode = "400", description = "Invalid path variable.")]
-  )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/soundmeter/{action}")
   fun controlSoundMeter(@PathVariable("action") action: String): ResponseEntity<Unit> {
     when (action) {
