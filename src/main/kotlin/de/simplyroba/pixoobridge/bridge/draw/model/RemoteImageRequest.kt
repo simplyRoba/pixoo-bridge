@@ -5,8 +5,7 @@ import java.net.MalformedURLException
 import java.net.URI
 import java.net.URISyntaxException
 
-@Schema(name = "Remote image")
-data class RemoteImageRequest(val link: String)
+@Schema(name = "Remote image") data class RemoteImageRequest(val link: String)
 
 fun RemoteImageRequest.valid(): Boolean {
   try {
