@@ -9,6 +9,7 @@ import com.sksamuel.scrimage.nio.ImageSource
 import de.simplyroba.pixoobridge.bridge.draw.model.RgbColor
 import de.simplyroba.pixoobridge.client.PixooClient
 import de.simplyroba.pixoobridge.config.PixooConfig
+import de.simplyroba.pixoobridge.util.FileDownloader
 import java.awt.Color
 import java.util.*
 import org.slf4j.LoggerFactory
@@ -16,7 +17,11 @@ import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 
 @Service
-class ImageService(private val pixooConfig: PixooConfig, private val pixooClient: PixooClient) {
+class ImageService(
+  private val pixooConfig: PixooConfig,
+  private val pixooClient: PixooClient,
+  private val imageDownloader: FileDownloader
+) {
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
@@ -28,7 +33,12 @@ class ImageService(private val pixooConfig: PixooConfig, private val pixooClient
     pixooClient.sendAnimation(1, pixooConfig.size, 0, id, 9999, image.toBase64())
   }
 
+  fun drawRemoteImage(link: String) {
+    drawImage(imageDownloader.download(link))
+  }
+
   fun drawImage(resource: Resource) {
+    // also checks if its valid image
     val format = detectFormat(resource)
 
     resource.inputStream.use { inputStream ->

@@ -68,6 +68,17 @@ class DrawControllerMvcTest : AbstractMvcTest() {
   }
 
   @ParameterizedTest
+  @ValueSource(strings = ["https://www.test.de/ bad", "http://test.de/-%%\$^&&"])
+  fun `should return bad request on invalid url`(link: String) {
+    mockMvc
+      .perform(
+        post("/draw/text").contentType(MediaType.APPLICATION_JSON).content("""{"link": $link}""")
+      )
+      .andExpect(MockMvcResultMatchers.status().isBadRequest)
+    Mockito.verifyNoInteractions(pixooClient)
+  }
+
+  @ParameterizedTest
   @ValueSource(ints = [-1, 21])
   fun `should return bad request on text id out of bound`(textId: Int) {
     mockMvc

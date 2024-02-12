@@ -10,6 +10,8 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
@@ -33,12 +35,13 @@ class ManageController(private val pixooClient: PixooClient) {
     description = "Action to execute.",
     schema = Schema(allowableValues = ["on", "off"])
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/{action}")
   fun manageDisplay(@PathVariable("action") action: String): ResponseEntity<Unit> {
     when (action) {
       "on" -> pixooClient.switchDisplay(true)
       "off" -> pixooClient.switchDisplay(false)
-      else -> return notFound().build()
+      else -> return badRequest().build()
     }
     return ok().build()
   }
@@ -50,6 +53,7 @@ class ManageController(private val pixooClient: PixooClient) {
     description = "Brightness value in percentage from 0-100.",
     schema = Schema(type = "integer", minimum = "0", maximum = "100", defaultValue = "50")
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/brightness/{value}")
   fun manageDisplayBrightness(@PathVariable value: Int): ResponseEntity<Unit> {
     if (value !in 0..100) return badRequest().build()
@@ -67,12 +71,13 @@ class ManageController(private val pixooClient: PixooClient) {
     description = "Action to execute.",
     schema = Schema(allowableValues = ["on", "off"])
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/brightness/overclock/{action}")
   fun manageDisplayBrightnessOverclockMode(@PathVariable action: String): ResponseEntity<Unit> {
     when (action) {
       "on" -> pixooClient.setDisplayBrightnessOverclock(true)
       "off" -> pixooClient.setDisplayBrightnessOverclock(false)
-      else -> return notFound().build()
+      else -> return badRequest().build()
     }
     return ok().build()
   }
@@ -87,6 +92,7 @@ class ManageController(private val pixooClient: PixooClient) {
     description = "Rotation angle.",
     schema = Schema(allowableValues = ["0", "90", "180", "270"])
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/rotation/{angle}")
   fun manageDisplayRotation(@PathVariable angle: Int): ResponseEntity<Unit> {
     when (angle) {
@@ -109,12 +115,13 @@ class ManageController(private val pixooClient: PixooClient) {
     description = "Action to execute.",
     schema = Schema(allowableValues = ["on", "off"])
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/mirror/{action}")
   fun manageDisplayMirrorMode(@PathVariable action: String): ResponseEntity<Unit> {
     when (action) {
       "on" -> pixooClient.setDisplayMirrored(true)
       "off" -> pixooClient.setDisplayMirrored(false)
-      else -> return notFound().build()
+      else -> return badRequest().build()
     }
     return ok().build()
   }
@@ -123,6 +130,7 @@ class ManageController(private val pixooClient: PixooClient) {
     summary = "Control the white balance",
     description = "This won’t be saved on the pixoo and resets when the device powers off."
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid request body.")])
   @PostMapping("/display/white-balance", consumes = [APPLICATION_JSON_VALUE])
   fun manageDisplayWhiteBalance(@RequestBody body: WhiteBalanceRequest): ResponseEntity<Unit> {
     if (body.red !in 0..100 || body.green !in 0..100 || body.blue !in 0..100)
@@ -148,12 +156,13 @@ class ManageController(private val pixooClient: PixooClient) {
     description = "Time display mode.",
     schema = Schema(allowableValues = ["12h", "24h"])
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/time/mode/{mode}")
   fun setSystemTimeMode(@PathVariable mode: String): ResponseEntity<Unit> {
     when (mode) {
       "24h" -> pixooClient.setTwentyFourHourTimeMode(true)
       "12h" -> pixooClient.setTwentyFourHourTimeMode(false)
-      else -> return notFound().build()
+      else -> return badRequest().build()
     }
     return ok().build()
   }
@@ -165,6 +174,7 @@ class ManageController(private val pixooClient: PixooClient) {
     description = "The time offset of the timezone. Between -12 and 14.",
     schema = Schema(type = "integer", minimum = "-12", maximum = "14")
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/time/offset/{offset}")
   fun setSystemTimeOffset(@PathVariable offset: Int): ResponseEntity<Unit> {
     if (offset >= 14 || offset <= -12) return badRequest().build()
@@ -192,6 +202,7 @@ class ManageController(private val pixooClient: PixooClient) {
     summary = "Configure the location for the weather forecast",
     description = "All data comes from https://openweathermap.org/."
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid request body.")])
   @PostMapping("/weather/location", consumes = [APPLICATION_JSON_VALUE])
   fun manageWeatherLocation(@RequestBody body: WeatherLocationRequest): ResponseEntity<Unit> {
     if (body.longitude.toFloat() !in -180f..180f || body.latitude.toFloat() !in -90f..90f)
@@ -210,12 +221,13 @@ class ManageController(private val pixooClient: PixooClient) {
     description = "Temperature unit.",
     schema = Schema(allowableValues = ["celsius", "fahrenheit"])
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/weather/temperature-unit/{unit}")
   fun manageTemperatureUnit(@PathVariable unit: String): ResponseEntity<Unit> {
     when (unit) {
       "celsius" -> pixooClient.setWeatherTemperatureUnitFahrenheit(false)
       "fahrenheit" -> pixooClient.setWeatherTemperatureUnitFahrenheit(true)
-      else -> return notFound().build()
+      else -> return badRequest().build()
     }
     return ok().build()
   }

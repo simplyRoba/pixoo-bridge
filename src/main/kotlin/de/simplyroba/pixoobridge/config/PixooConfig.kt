@@ -2,13 +2,17 @@ package de.simplyroba.pixoobridge.config
 
 import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.util.unit.DataSize
 
 @ConfigurationProperties("pixoo")
 data class PixooConfig(
   val host: String,
   val size: Int,
   val animationSpeedFactor: Float,
-  val health: PixooHealthConfig
+  val maxImageSize: DataSize,
+  val health: PixooHealthConfig,
+  val docs: PixooDocumentationConfig,
+  val log: PixooLogLevelConfig,
 ) {
 
   companion object {
@@ -31,3 +35,7 @@ data class PixooConfig(
 }
 
 data class PixooHealthConfig(val forward: Boolean)
+
+data class PixooDocumentationConfig(val enabled: Boolean)
+
+data class PixooLogLevelConfig(val level: String)

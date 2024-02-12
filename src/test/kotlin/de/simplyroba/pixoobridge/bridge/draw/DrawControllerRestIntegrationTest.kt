@@ -178,6 +178,78 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   }
 
   @Test
+  fun `should send remote image`() {
+    val picId = 11
+    val imagePath = "/path-to-image/black"
+    stubNextPictureIdCall(picId)
+
+    // let the remote image be delivered by wiremock
+    stubFor(
+      get(imagePath)
+        .willReturn(
+          aResponse().withBody(ClassPathResource("images/black_100x100.jpg").contentAsByteArray)
+        )
+    )
+
+    doPostCallWithBodyExpectingSuccess(
+      "/draw/remote",
+      """{"link": "${createFullWireMockUrl(imagePath)}"}"""
+    )
+
+    verifyCommandSent(
+      """
+        {
+          "Command": "Draw/SendHttpGif",
+          "PicNum": 1,
+          "PicWidth": 64,
+          "PicOffset": 0,
+          "PicID": $picId,
+          "PicSpeed": 9999,
+          "PicData": ${regex().exp("A{16384}")} 
+        }
+        """
+        .trimIndent()
+    )
+  }
+
+  @Test
+  fun `should return bad request if the url did point to anything but an image`() {
+    val notAnImagePath = "/not-an-image"
+
+    // let the remote file be delivered by wiremock
+    stubFor(
+      get(notAnImagePath)
+        .willReturn(aResponse().withBody(ClassPathResource("images/text.txt").contentAsByteArray))
+    )
+
+    doPostCallWithBody("/draw/remote", """{"link": "${createFullWireMockUrl(notAnImagePath)}"}""")
+      .expectStatus()
+      .isBadRequest
+  }
+
+  @Test
+  fun `should return not found if the url did point to nothing downloadable`() {
+    val nothingPath = "/points-to-nothing"
+
+    stubFor(get(nothingPath).willReturn(aResponse()))
+
+    doPostCallWithBody("/draw/remote", """{"link": "${createFullWireMockUrl(nothingPath)}"}""")
+      .expectStatus()
+      .isNotFound
+  }
+
+  @Test
+  fun `should return not found if the url return anything but a 200`() {
+    val notFoundPath = "/points-to-nothing"
+
+    stubFor(get(notFoundPath).willReturn(aResponse().withBody("Something").withStatus(404)))
+
+    doPostCallWithBody("/draw/remote", """{"link": "${createFullWireMockUrl(notFoundPath)}"}""")
+      .expectStatus()
+      .isNotFound
+  }
+
+  @Test
   fun `should send text command`() {
     doPostCallWithBodyExpectingSuccess(
       "/draw/text",

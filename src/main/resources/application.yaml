@@ -3,6 +3,7 @@ pixoo:
   host: 'localhost'
   size: 64
   animation-speed-factor: 1.4
+  max-image-size: 2MB
   health:
     forward: true
   docs:
@@ -22,6 +23,10 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+  servlet:
+    multipart: # upper limit for uploaded images
+      max-file-size: ${pixoo.max-image-size}
+      max-request-size: ${pixoo.max-image-size}
 
 springdoc:
   api-docs:

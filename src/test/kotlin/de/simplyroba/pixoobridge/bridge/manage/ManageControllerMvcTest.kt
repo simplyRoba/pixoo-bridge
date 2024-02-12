@@ -15,8 +15,9 @@ class ManageControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
-  fun `should return not found on wrong display control action`(path: String) {
-    mockMvc.perform(post("/manage/display/$path")).andExpect(status().isNotFound)
+  fun `should return bad request on wrong display control action`(path: String) {
+    mockMvc.perform(post("/manage/display/$path")).andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 
   @ParameterizedTest
@@ -28,8 +29,11 @@ class ManageControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
-  fun `should return not found on wrong brightness overclock action`(path: String) {
-    mockMvc.perform(post("/manage/brightness/overclock/$path")).andExpect(status().isNotFound)
+  fun `should return bad request on wrong brightness overclock action`(path: String) {
+    mockMvc
+      .perform(post("/manage/display/brightness/overclock/$path"))
+      .andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 
   @Test
@@ -40,8 +44,9 @@ class ManageControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
-  fun `should return not found on wrong display mirror action`(path: String) {
-    mockMvc.perform(post("/manage/display/mirror/$path")).andExpect(status().isNotFound)
+  fun `should return bad request on wrong display mirror action`(path: String) {
+    mockMvc.perform(post("/manage/display/mirror/$path")).andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 
   @ParameterizedTest
@@ -72,8 +77,9 @@ class ManageControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
-  fun `should return not found on wrong time mode`(path: String) {
-    mockMvc.perform(post("/manage/time/mode/$path")).andExpect(status().isNotFound)
+  fun `should return bad request on wrong time mode`(path: String) {
+    mockMvc.perform(post("/manage/time/mode/$path")).andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 
   @ParameterizedTest
@@ -110,7 +116,8 @@ class ManageControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
-  fun `should return not found on wrong temperature unit`(path: String) {
-    mockMvc.perform(post("/manage/weather/temperature-unit/$path")).andExpect(status().isNotFound)
+  fun `should return bad request on wrong temperature unit`(path: String) {
+    mockMvc.perform(post("/manage/weather/temperature-unit/$path")).andExpect(status().isBadRequest)
+    verifyNoInteractions(pixooClient)
   }
 }
