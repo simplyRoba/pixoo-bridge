@@ -35,5 +35,7 @@ data class PixooConfig(
 }
 
 data class PixooHealthConfig(val forward: Boolean)
+
 data class PixooDocumentationConfig(val enabled: Boolean)
+
 data class PixooLogLevelConfig(val level: String)
