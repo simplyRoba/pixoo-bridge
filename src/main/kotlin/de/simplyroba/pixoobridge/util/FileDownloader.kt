@@ -1,13 +1,18 @@
 package de.simplyroba.pixoobridge.util
 
 import de.simplyroba.pixoobridge.config.PixooConfig
+import org.slf4j.LoggerFactory
 import org.springframework.core.io.ByteArrayResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
+import reactor.core.publisher.Mono
 
 @Component
 class FileDownloader(private val pixooConfig: PixooConfig) {
+
+  private val logger = LoggerFactory.getLogger(javaClass)
+
   fun download(link: String): Resource {
 
     val webClient =
@@ -23,7 +28,9 @@ class FileDownloader(private val pixooConfig: PixooConfig) {
         .uri(link)
         .retrieve()
         .bodyToMono(ByteArray::class.java)
-        .onErrorComplete() // will return an empty byte array on http error like 404
+        .doOnError { e -> logger.warn("Error while retrieving file", e) } // log the error
+        // will return an empty byte array on http error like 404
+        .onErrorResume { _ -> Mono.empty() }
         .block()
 
     if (bytes != null && bytes.isNotEmpty()) return ByteArrayResource(bytes)
