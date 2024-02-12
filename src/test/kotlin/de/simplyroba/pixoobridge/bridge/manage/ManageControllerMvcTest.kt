@@ -30,7 +30,9 @@ class ManageControllerMvcTest : AbstractMvcTest() {
   @ParameterizedTest
   @ValueSource(strings = ["wrong", "path", "variable", "99"])
   fun `should return bad request on wrong brightness overclock action`(path: String) {
-    mockMvc.perform(post("/manage/display/brightness/overclock/$path")).andExpect(status().isBadRequest)
+    mockMvc
+      .perform(post("/manage/display/brightness/overclock/$path"))
+      .andExpect(status().isBadRequest)
     verifyNoInteractions(pixooClient)
   }
 
