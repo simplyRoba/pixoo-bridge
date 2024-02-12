@@ -3,8 +3,11 @@ package de.simplyroba.pixoobridge.bridge.draw
 import de.simplyroba.pixoobridge.bridge.draw.model.*
 import de.simplyroba.pixoobridge.client.PixooClient
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
-import org.springframework.http.MediaType.*
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
+import org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.*
@@ -31,6 +34,16 @@ class DrawController(private val imageService: ImageService, private val pixooCl
     summary = "Upload an image",
     description = "Can be used together with the text endpoint. This will work as background."
   )
+  @ApiResponses(
+    value =
+      [
+        ApiResponse(
+          responseCode = "400",
+          description = "File is not an image or has an unsupported format."
+        ),
+        ApiResponse(responseCode = "413", description = "Maximum upload size exceeded.")
+      ]
+  )
   @io.swagger.v3.oas.annotations.parameters.RequestBody(
     description = "Image to upload. Supported formats: jpg, jpeg, png, gif"
   )
@@ -43,9 +56,17 @@ class DrawController(private val imageService: ImageService, private val pixooCl
   }
 
   @Operation(summary = "Send a link to an image", description = "")
+  @ApiResponses(
+    value =
+      [
+        ApiResponse(responseCode = "404", description = "Could not download the remote image."),
+        ApiResponse(responseCode = "400", description = "Invalid request body.")
+      ]
+  )
   @PostMapping("/remote")
   fun remoteImage(@RequestBody body: RemoteImageRequest): ResponseEntity<Unit> {
-    // TODO validate for correct url
+    if (!body.valid()) return ResponseEntity.badRequest().build()
+
     imageService.drawRemoteImage(body.link)
     return ok().build()
   }
@@ -55,6 +76,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
     description =
       "Can be used together with the upload or fill endpoint. Text will be showed as overlay. Same id will replace the text on the board."
   )
+  @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid request body.")])
   @PostMapping("/text")
   fun drawText(@RequestBody body: TextRequest): ResponseEntity<Unit> {
     if (!body.valid()) return ResponseEntity.badRequest().build()
