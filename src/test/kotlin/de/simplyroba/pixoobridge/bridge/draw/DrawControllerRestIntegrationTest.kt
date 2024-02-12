@@ -231,10 +231,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   fun `should return not found if the url did point to nothing downloadable`() {
     val nothingPath = "/points-to-nothing"
 
-    stubFor(
-      get(nothingPath)
-        .willReturn(aResponse())
-    )
+    stubFor(get(nothingPath).willReturn(aResponse()))
 
     doPostCallWithBody("/draw/remote", """{"link": "${createFullWireMockUrl(nothingPath)}"}""")
       .expectStatus()
@@ -243,14 +240,11 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
   @Test
   fun `should return not found if the url return anything but a 200`() {
-    val nothingPath = "/points-to-nothing"
+    val notFoundPath = "/points-to-nothing"
 
-    stubFor(
-      get(nothingPath)
-        .willReturn(aResponse().withBody("Something").withStatus(404))
-    )
+    stubFor(get(notFoundPath).willReturn(aResponse().withBody("Something").withStatus(404)))
 
-    doPostCallWithBody("/draw/remote", """{"link": "${createFullWireMockUrl(nothingPath)}"}""")
+    doPostCallWithBody("/draw/remote", """{"link": "${createFullWireMockUrl(notFoundPath)}"}""")
       .expectStatus()
       .isNotFound
   }
