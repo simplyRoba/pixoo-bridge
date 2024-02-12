@@ -3,6 +3,7 @@ package de.simplyroba.pixoobridge
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.http.MediaType
@@ -16,6 +17,8 @@ import org.springframework.web.reactive.function.BodyInserters
 abstract class AbstractRestIntegrationTest {
 
   @Autowired lateinit var webTestClient: WebTestClient
+
+  @Value("\${wiremock.server.port}") lateinit var wireMockPort: String
 
   @BeforeEach
   fun defaultSuccessResponseStub() {
@@ -39,6 +42,9 @@ abstract class AbstractRestIntegrationTest {
       .is2xxSuccessful()
 
   protected fun doPostCallWithBodyExpectingSuccess(path: String, body: Any) =
+    doPostCallWithBody(path, body).expectStatus().is2xxSuccessful()
+
+  protected fun doPostCallWithBody(path: String, body: Any) =
     webTestClient
       .post()
       .uri(path)
@@ -46,8 +52,6 @@ abstract class AbstractRestIntegrationTest {
       .contentType(MediaType.APPLICATION_JSON)
       .body(BodyInserters.fromValue(body))
       .exchange()
-      .expectStatus()
-      .is2xxSuccessful()
 
   protected fun doGetCallExpectingSuccess(path: String) =
     doGetCall(path).expectStatus().is2xxSuccessful()
@@ -66,4 +70,6 @@ abstract class AbstractRestIntegrationTest {
         .withHeader("Content-Type", equalTo(MediaType.APPLICATION_JSON_VALUE))
         .withRequestBody(equalToJson(commandJson))
     )
+
+  protected fun createFullWireMockUrl(path: String) = "http://localhost:$wireMockPort$path"
 }

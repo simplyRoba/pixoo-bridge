@@ -178,13 +178,53 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   }
 
   @Test
-  fun `should return not found if the url did point to an file that is not an image`() {
-    TODO("NotImplementedError")
+  fun `should send remote image`() {
+    val picId = 11
+    val imagePath = "/path-to-image/black"
+    stubNextPictureIdCall(picId)
+
+    // let the remote image be delivered by wiremock
+    stubFor(
+      get(imagePath)
+        .willReturn(
+          aResponse().withBody(ClassPathResource("images/black_100x100.jpg").contentAsByteArray)
+        )
+    )
+
+    doPostCallWithBodyExpectingSuccess(
+      "/draw/remote",
+      """{"link": "${createFullWireMockUrl(imagePath)}"}"""
+    )
+
+    verifyCommandSent(
+      """
+        {
+          "Command": "Draw/SendHttpGif",
+          "PicNum": 1,
+          "PicWidth": 64,
+          "PicOffset": 0,
+          "PicID": $picId,
+          "PicSpeed": 9999,
+          "PicData": ${regex().exp("A{16384}")} 
+        }
+        """
+        .trimIndent()
+    )
   }
 
   @Test
-  fun `should return not found if the url did point to nothing downloadable`() {
-    TODO("NotImplementedError")
+  fun `should return bad request if the url did point to anything but an image`() {
+    val notAnImagePath = "/not-an-image"
+
+    // let the remote file be delivered by wiremock
+    stubFor(
+      get(notAnImagePath)
+        .willReturn(aResponse().withBody(ClassPathResource("images/text.txt").contentAsByteArray))
+    )
+
+    doPostCallWithBody("/draw/remote", """{"link": "${createFullWireMockUrl(notAnImagePath)}"}""")
+      .expectStatus()
+      .isBadRequest
   }
 
   @Test
