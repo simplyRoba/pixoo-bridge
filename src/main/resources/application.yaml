@@ -23,8 +23,6 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
-  codec:
-    max-in-memory-size: ${pixoo.max-image-size} # upper limit for remote images
   servlet:
     multipart: # upper limit for uploaded images
       max-file-size: ${pixoo.max-image-size}
