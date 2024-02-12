@@ -2,6 +2,7 @@ package de.simplyroba.pixoobridge.bridge.draw.model
 
 import io.swagger.v3.oas.annotations.media.Schema
 
+@Schema(name = "Color")
 data class RgbColor(
   @Schema(minimum = "0", maximum = "255") val red: Int,
   @Schema(minimum = "0", maximum = "255") val green: Int,
