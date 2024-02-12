@@ -178,6 +178,16 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
   }
 
   @Test
+  fun `should return not found if the url did point to an file that is not an image`() {
+    TODO("NotImplementedError")
+  }
+
+  @Test
+  fun `should return not found if the url did point to nothing downloadable`() {
+    TODO("NotImplementedError")
+  }
+
+  @Test
   fun `should send text command`() {
     doPostCallWithBodyExpectingSuccess(
       "/draw/text",
