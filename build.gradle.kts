@@ -27,8 +27,8 @@ val scrimageVersion = "4.1.1"
 
 // direkt security version bumps
 val guavaVersion = "33.1.0-jre"
-val commonsCompressVersion = "1.26.1"
-val nettyCodecVersion = "4.1.108.Final"
+//val commonsCompressVersion = "1.26.1"
+//val nettyCodecVersion = "4.1.108.Final"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
@@ -45,13 +45,13 @@ dependencies {
     implementation("com.google.guava:guava:$guavaVersion") {
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/7")
     }
-    implementation("org.apache.commons:commons-compress:$commonsCompressVersion") {
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/34")
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/33")
-    }
-    implementation("io.netty:netty-codec-http:$nettyCodecVersion") {
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/35")
-    }
+//    implementation("org.apache.commons:commons-compress:$commonsCompressVersion") {
+//      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/34")
+//      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/33")
+//    }
+//    implementation("io.netty:netty-codec-http:$nettyCodecVersion") {
+//      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/35")
+//    }
   }
 }
 
