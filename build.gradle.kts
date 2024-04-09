@@ -27,7 +27,7 @@ val scrimageVersion = "4.1.1"
 
 // direkt security version bumps
 val guavaVersion = "33.1.0-jre"
-val commonsCompressVersion = "1.26.0"
+val commonsCompressVersion = "1.26.1"
 val nettyCodecVersion = "4.1.108.Final"
 
 dependencies {
