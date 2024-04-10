@@ -18,7 +18,7 @@ repositories { mavenCentral() }
 
 val springCloudVersion = "2023.0.1"
 val openapiVersion = "2.5.0"
-val mockitoKotlinVersion = "5.2.1"
+val mockitoKotlinVersion = "5.3.1"
 val scrimageVersion = "4.1.1"
 
 // security version bumps through spring dependency management
