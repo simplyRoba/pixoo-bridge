@@ -31,21 +31,24 @@ or use the [docker-compose.yaml](/docker-compose.yaml)
 docker compose up -d
 ```
 
-# API
-## Documentation
+# Documentation
+## API
 Generated API documentation can be reached under 
 ```
 http://localhost:4000/swagger-ui/index.html
 ```
 ![Swagger Screenshot](/docs/swagger-screenshot.png)
 
+## other docuemntation
+ - [developer docs](/docs/dev-docs.md)
+
 
 ## Limitations
 The `Channel control API` of the Pixoo will not be implemented. Use the App for these functionality.
 
-# Further resources
-## Official product page
+## Further resources
+### Official product page
 [Pixoo64](https://divoom.com/products/pixoo-64)
 
-## Pixoo API
+### Pixoo API
 [Official Divoom API documentation](http://doc.divoom-gz.com/web/#/12?page_id=191)
