@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   kotlin("jvm") version "1.9.23"
   kotlin("plugin.spring") version "1.9.23"
-  id("org.springframework.boot") version "3.2.3"
+  id("org.springframework.boot") version "3.2.4"
   id("io.spring.dependency-management") version "1.1.4"
   id("com.diffplug.spotless") version "6.25.0"
 }
@@ -16,17 +16,20 @@ java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories { mavenCentral() }
 
-val springCloudVersion = "2023.0.0"
-val openapiVersion = "2.3.0"
-val mockitoKotlinVersion = "5.2.1"
+val springCloudVersion = "2023.0.1"
+val openapiVersion = "2.5.0"
+val mockitoKotlinVersion = "5.3.1"
 val scrimageVersion = "4.1.1"
 
 // security version bumps through spring dependency management
 // will not be updated through dependabot
 // like extra["libXX.version"] = "XXX"
 
+// https://github.com/simplyRoba/pixoo-bridge/security/dependabot/35
+extra["netty.version"] = "4.1.108.Final"
+
 // direkt security version bumps
-val guavaVersion = "33.0.0-jre"
+val guavaVersion = "33.1.0-jre"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")

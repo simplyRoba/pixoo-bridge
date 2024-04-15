@@ -5,8 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue
 enum class CommandType(@get:JsonValue val value: String) {
   // System
   REBOOT("Device/SysReboot"),
-  // Play
-  PLAY_ANIMATION("Device/PlayTFGif"),
+  // Sound
   PLAY_SOUND("Device/PlayBuzzer"),
   // Draw
   GET_NEXT_PICTURE_ID("Draw/GetHttpGifId"),
