@@ -25,9 +25,6 @@ val scrimageVersion = "4.1.1"
 // will not be updated through dependabot
 // like extra["libXX.version"] = "XXX"
 
-// https://github.com/simplyRoba/pixoo-bridge/security/dependabot/35
-extra["netty.version"] = "4.1.108.Final"
-
 // direkt security version bumps
 val guavaVersion = "33.1.0-jre"
 
