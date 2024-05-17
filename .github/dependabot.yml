@@ -16,6 +16,8 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "ci(deps): "
     schedule:
       interval: "daily"
       time: "09:00"
