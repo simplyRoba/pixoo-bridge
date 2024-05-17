@@ -6,6 +6,8 @@ updates:
   - package-ecosystem: "gradle"
     directory: "/"
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "fix(deps): "
     schedule:
       interval: "daily"
       time: "09:00"
@@ -14,6 +16,8 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     open-pull-requests-limit: 10
+    commit-message:
+      prefix: "fix(deps): "
     schedule:
       interval: "daily"
       time: "09:00"
