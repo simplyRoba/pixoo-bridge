@@ -10,7 +10,7 @@ plugins {
 
 group = "de.simplyroba"
 
-version = "0.5.4"
+version = file('version.txt').text.trim()
 
 java.sourceCompatibility = JavaVersion.VERSION_21
 
