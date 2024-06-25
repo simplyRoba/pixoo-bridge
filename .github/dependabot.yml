@@ -7,7 +7,7 @@ updates:
     directory: "/"
     open-pull-requests-limit: 10
     commit-message:
-      prefix: "build(deps): "
+      prefix: "fix(deps): "
     schedule:
       interval: "daily"
       time: "09:00"
@@ -17,7 +17,7 @@ updates:
     directory: "/"
     open-pull-requests-limit: 10
     commit-message:
-      prefix: "build(ci): "
+      prefix: "ci(deps): "
     schedule:
       interval: "daily"
       time: "09:00"
