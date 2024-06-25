@@ -2,10 +2,11 @@
 Small docker image to communicate with a network enabled pixoo LED dot matrix.
 
 <!-- TODO Downloads from ghcr.io -->
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 ![GitHub License](https://img.shields.io/github/license/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Fblob%2Fmain%2FLICENSE)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/simplyRoba/pixoo-bridge/run-tests.yaml?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Factions%2Fworkflows%2Frun-tests.yaml%3Fquery%3Dbranch%253Amain)
-![GitHub release (with filter)](https://img.shields.io/github/v/release/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Freleases)
-![GitHub issues](https://img.shields.io/github/issues/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Fissues)
+[![GitHub release (with filter)](https://img.shields.io/github/v/release/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Freleases)](https://github.com/simplyRoba/pixoo-bridge/releases)
+[![GitHub issues](https://img.shields.io/github/issues/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Fissues)](https://github.com/simplyRoba/pixoo-bridge/issues)
 ![GitHub Repo stars](https://img.shields.io/github/stars/simplyRoba/pixoo-bridge)
 
 # Configuration

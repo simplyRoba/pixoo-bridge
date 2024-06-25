@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.9.24"
-  kotlin("plugin.spring") version "1.9.24"
-  id("org.springframework.boot") version "3.2.5"
+  kotlin("jvm") version "2.0.0"
+  kotlin("plugin.spring") version "2.0.0"
+  id("org.springframework.boot") version "3.3.1"
   id("io.spring.dependency-management") version "1.1.5"
   id("com.diffplug.spotless") version "6.25.0"
 }
@@ -16,7 +16,7 @@ java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories { mavenCentral() }
 
-val springCloudVersion = "2023.0.1"
+val springCloudVersion = "2023.0.2"
 val openapiVersion = "2.5.0"
 val mockitoKotlinVersion = "5.3.1"
 val scrimageVersion = "4.1.3"
@@ -26,7 +26,7 @@ val scrimageVersion = "4.1.3"
 // like extra["libXX.version"] = "XXX"
 
 // direkt security version bumps
-val guavaVersion = "33.2.0-jre"
+val guavaVersion = "33.2.1-jre"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
