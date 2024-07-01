@@ -21,12 +21,8 @@ class SwaggerIntegrationTest : AbstractRestIntegrationTest() {
       .isNotEmpty
   }
 
-  @Test fun shouldGenerateSwaggerUi() {
-    webTestClient
-      .get()
-      .uri("swagger-ui/index.html")
-      .exchange()
-      .expectStatus()
-      .is2xxSuccessful
+  @Test
+  fun shouldGenerateSwaggerUi() {
+    webTestClient.get().uri("swagger-ui/index.html").exchange().expectStatus().is2xxSuccessful
   }
 }
