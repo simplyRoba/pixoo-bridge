@@ -17,7 +17,7 @@ java.sourceCompatibility = JavaVersion.VERSION_21
 repositories { mavenCentral() }
 
 val springCloudVersion = "2023.0.2"
-val openapiVersion = "2.5.0"
+val openapiVersion = "2.6.0"
 val mockitoKotlinVersion = "5.3.1"
 val scrimageVersion = "4.1.3"
 
