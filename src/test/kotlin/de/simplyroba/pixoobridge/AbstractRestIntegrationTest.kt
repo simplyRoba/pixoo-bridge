@@ -39,7 +39,7 @@ abstract class AbstractRestIntegrationTest {
       .contentType(MediaType.APPLICATION_JSON)
       .exchange()
       .expectStatus()
-      .is2xxSuccessful()
+      .is2xxSuccessful
 
   protected fun doPostCallWithBodyExpectingSuccess(path: String, body: Any) =
     doPostCallWithBody(path, body).expectStatus().is2xxSuccessful()
@@ -54,7 +54,7 @@ abstract class AbstractRestIntegrationTest {
       .exchange()
 
   protected fun doGetCallExpectingSuccess(path: String) =
-    doGetCall(path).expectStatus().is2xxSuccessful()
+    doGetCall(path).expectStatus().is2xxSuccessful
 
   protected fun doGetCall(path: String) =
     webTestClient.get().uri(path).accept(MediaType.APPLICATION_JSON).exchange()
