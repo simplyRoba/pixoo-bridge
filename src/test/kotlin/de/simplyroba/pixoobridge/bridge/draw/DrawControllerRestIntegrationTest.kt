@@ -59,7 +59,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
       .exchange()
       .expectStatus()
-      .is2xxSuccessful()
+      .is2xxSuccessful
 
     verifyCommandSent(
       """
