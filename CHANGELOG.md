@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.7](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.6...v0.5.7) (2024-08-06)
+
+
+### Bug Fixes
+
+* **deps:** bump jvm from 2.0.0 to 2.0.10 ([#184](https://github.com/simplyRoba/pixoo-bridge/issues/184)) ([f5c06aa](https://github.com/simplyRoba/pixoo-bridge/commit/f5c06aaaca59f4dc2953cdd7fe16c6a848c13b74))
+* **deps:** bump org.springframework.boot from 3.3.1 to 3.3.2 ([#181](https://github.com/simplyRoba/pixoo-bridge/issues/181)) ([5c7dc66](https://github.com/simplyRoba/pixoo-bridge/commit/5c7dc6625fae5b74776351c8c8bd5b3952068123))
+* **deps:** bump org.springframework.cloud:spring-cloud-dependencies from 2023.0.2 to 2023.0.3 ([#179](https://github.com/simplyRoba/pixoo-bridge/issues/179)) ([3c8d164](https://github.com/simplyRoba/pixoo-bridge/commit/3c8d1646c9919ef93ce5a75fcc76ddd2e09dadbd))
+* **deps:** bump plugin.spring from 2.0.0 to 2.0.10 ([#185](https://github.com/simplyRoba/pixoo-bridge/issues/185)) ([c709abc](https://github.com/simplyRoba/pixoo-bridge/commit/c709abc23b37fe0d4265e9f57ba1c75f2273c7f2))
+* migrate deprecated kotlinOptions ([#183](https://github.com/simplyRoba/pixoo-bridge/issues/183)) ([436a9f6](https://github.com/simplyRoba/pixoo-bridge/commit/436a9f64e3df168fee5adea64d509de6628bd911))
+
 ## [0.5.6](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.5...v0.5.6) (2024-07-10)
 
 
