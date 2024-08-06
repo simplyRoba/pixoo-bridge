@@ -12,8 +12,11 @@ group = "de.simplyroba"
 
 version = file("version.txt").readText().trim()
 
-java.sourceCompatibility = JavaVersion.VERSION_21
-
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
 repositories { mavenCentral() }
 
 val springCloudVersion = "2023.0.3"
@@ -50,10 +53,9 @@ dependencyManagement {
   imports { mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion") }
 }
 
-tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "21"
+kotlin {
+  compilerOptions {
+    freeCompilerArgs.addAll("-Xjsr305=strict")
   }
 }
 
