@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
   kotlin("jvm") version "2.0.0"
   kotlin("plugin.spring") version "2.0.0"
@@ -12,11 +10,8 @@ group = "de.simplyroba"
 
 version = file("version.txt").readText().trim()
 
-java {
-  toolchain {
-    languageVersion = JavaLanguageVersion.of(21)
-  }
-}
+java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
+
 repositories { mavenCentral() }
 
 val springCloudVersion = "2023.0.3"
@@ -53,11 +48,7 @@ dependencyManagement {
   imports { mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion") }
 }
 
-kotlin {
-  compilerOptions {
-    freeCompilerArgs.addAll("-Xjsr305=strict")
-  }
-}
+kotlin { compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") } }
 
 tasks.withType<Test> {
   useJUnitPlatform()
