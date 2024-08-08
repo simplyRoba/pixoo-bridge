@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.8](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.7...v0.5.8) (2024-08-08)
+
+
+### Bug Fixes
+
+* wrong link in CONTRIBUTING.md ([#186](https://github.com/simplyRoba/pixoo-bridge/issues/186)) ([6ad4b74](https://github.com/simplyRoba/pixoo-bridge/commit/6ad4b7444ae79cfa3d6f2960e1935bc490c47496))
+
 ## [0.5.7](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.6...v0.5.7) (2024-08-06)
 
 
