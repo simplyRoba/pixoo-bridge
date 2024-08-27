@@ -24,7 +24,7 @@ val scrimageVersion = "4.2.0"
 // like extra["libXX.version"] = "XXX"
 
 // direkt security version bumps
-val guavaVersion = "33.2.1-jre"
+val guavaVersion = "33.3.0-jre"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
@@ -39,7 +39,8 @@ dependencies {
 
   constraints {
     implementation("com.google.guava:guava:$guavaVersion") {
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/7")
+      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/22")
+      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/21")
     }
   }
 }
