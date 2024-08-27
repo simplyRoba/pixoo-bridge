@@ -39,7 +39,8 @@ dependencies {
 
   constraints {
     implementation("com.google.guava:guava:$guavaVersion") {
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/7")
+      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/22")
+      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/21")
     }
   }
 }
