@@ -151,7 +151,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       TOOL_TIMER,
       Pair("Minute", minutes),
       Pair("Second", seconds),
-      Pair("Status", startBit.toBitNumber())
+      Pair("Status", startBit.toBitNumber()),
     )
 
   // Status, 0|1|2, 0=stop; 1=start; 2=reset
@@ -186,7 +186,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     frameIndex: Int,
     id: Int,
     animationSpeed: Int,
-    data: String
+    data: String,
   ) =
     genericPostCommand(
       DRAW_ANIMATION,
@@ -195,7 +195,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       Pair("PicOffset", frameIndex),
       Pair("PicID", id),
       Pair("PicSpeed", animationSpeed),
-      Pair("PicData", data)
+      Pair("PicData", data),
     )
 
   /*
@@ -220,7 +220,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     text: String,
     speed: Int,
     color: String,
-    align: Int
+    align: Int,
   ) =
     genericPostCommand(
       DRAW_TEXT,
@@ -233,16 +233,34 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       Pair("TextString", text),
       Pair("speed", speed),
       Pair("color", color),
-      Pair("align", align)
+      Pair("align", align),
     )
 
   fun clearText() {
     genericPostCommand(CLEAR_TEXT)
   }
 
+  /*
+   * ActiveTimeInCycle,	0-TODO,	Working time of buzzer in one cycle in milliseconds
+   * OffTimeInCycle, 0-TODO, Idle time of buzzer in one cycle in milliseconds
+   * PlayTotalTime, 0-TODO, Working total time of buzzer in milliseconds
+   */
+  fun playSound(
+    activeTimeInCycle: Int,
+    offTimeInCycle: Int,
+    totalPlayTime: Int,
+  ) {
+    genericPostCommand(
+      PLAY_SOUND,
+      Pair("ActiveTimeInCycle", activeTimeInCycle),
+      Pair("OffTimeInCycle", offTimeInCycle),
+      Pair("PlayTotalTime", totalPlayTime),
+    )
+  }
+
   private fun genericPostCommand(
     commandType: CommandType,
-    vararg parameters: Pair<String, Any>
+    vararg parameters: Pair<String, Any>,
   ): CommandResponse {
     logger.debug("Sending command {} with {}", commandType, parameters)
 
