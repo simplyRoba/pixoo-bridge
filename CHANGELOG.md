@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.9](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.8...v0.5.9) (2024-09-24)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.guava:guava from 33.3.0-jre to 33.3.1-jre ([#195](https://github.com/simplyRoba/pixoo-bridge/issues/195)) ([6cd7a23](https://github.com/simplyRoba/pixoo-bridge/commit/6cd7a234bcae8013eb8941f6ac700f201df2a4b4))
+* **deps:** bump org.springframework.boot from 3.3.3 to 3.3.4 ([#193](https://github.com/simplyRoba/pixoo-bridge/issues/193)) ([02516df](https://github.com/simplyRoba/pixoo-bridge/commit/02516df94ceb52ef1079e7ab747cc8e058c3b6c7))
+
 ## [0.5.8](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.7...v0.5.8) (2024-08-27)
 
 
