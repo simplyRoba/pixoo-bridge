@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.10](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.9...v0.5.10) (2024-11-04)
+
+
+### Bug Fixes
+
+* **deps:** bump org.springframework.boot from 3.3.4 to 3.3.5 ([#198](https://github.com/simplyRoba/pixoo-bridge/issues/198)) ([8240f77](https://github.com/simplyRoba/pixoo-bridge/commit/8240f77531f3f467a4e27e6b0915b24f972c5acb))
+
 ## [0.5.9](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.8...v0.5.9) (2024-10-11)
 
 
