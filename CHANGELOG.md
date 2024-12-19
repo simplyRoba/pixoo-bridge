@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.11](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.10...v0.5.11) (2024-12-19)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.guava:guava from 33.3.1-jre to 33.4.0-jre ([#208](https://github.com/simplyRoba/pixoo-bridge/issues/208)) ([22ffd86](https://github.com/simplyRoba/pixoo-bridge/commit/22ffd865011da25068c90376044ff6d14113c2fe))
+* **deps:** bump io.spring.dependency-management from 1.1.6 to 1.1.7 ([#209](https://github.com/simplyRoba/pixoo-bridge/issues/209)) ([d0d3a15](https://github.com/simplyRoba/pixoo-bridge/commit/d0d3a1586c3ba000a6e58d58e7dbefaf558b5e11))
+
 ## [0.5.10](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.9...v0.5.10) (2024-12-04)
 
 
