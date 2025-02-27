@@ -20,7 +20,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
 
   @Operation(
     summary = "Fill complete screen with rgb color",
-    description = "Can be used together with the text endpoint. This will work as background."
+    description = "Can be used together with the text endpoint. This will work as background.",
   )
   @PostMapping("/fill", consumes = [APPLICATION_JSON_VALUE])
   fun fill(@RequestBody body: FillRequest): ResponseEntity<Unit> {
@@ -32,16 +32,16 @@ class DrawController(private val imageService: ImageService, private val pixooCl
 
   @Operation(
     summary = "Upload an image",
-    description = "Can be used together with the text endpoint. This will work as background."
+    description = "Can be used together with the text endpoint. This will work as background.",
   )
   @ApiResponses(
     value =
       [
         ApiResponse(
           responseCode = "400",
-          description = "File is not an image or has an unsupported format."
+          description = "File is not an image or has an unsupported format.",
         ),
-        ApiResponse(responseCode = "413", description = "Maximum upload size exceeded.")
+        ApiResponse(responseCode = "413", description = "Maximum upload size exceeded."),
       ]
   )
   @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -60,7 +60,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
     value =
       [
         ApiResponse(responseCode = "404", description = "Could not download the remote image."),
-        ApiResponse(responseCode = "400", description = "Invalid request body.")
+        ApiResponse(responseCode = "400", description = "Invalid request body."),
       ]
   )
   @PostMapping("/remote")
@@ -74,7 +74,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
   @Operation(
     summary = "Show text",
     description =
-      "Can be used together with the upload or fill endpoint. Text will be showed as overlay. Same id will replace the text on the board."
+      "Can be used together with the upload or fill endpoint. Text will be showed as overlay. Same id will replace the text on the board.",
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid request body.")])
   @PostMapping("/text")
@@ -91,7 +91,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
       text = body.text,
       speed = body.scrollSpeed,
       color = body.color.toHexString(),
-      align = body.textAlignment.key
+      align = body.textAlignment.key,
     )
     return ok().build()
   }

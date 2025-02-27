@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.5.10](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.9...v0.5.10) (2024-12-04)
+
+
+### Bug Fixes
+
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.2.0 to 4.3.0 ([#206](https://github.com/simplyRoba/pixoo-bridge/issues/206)) ([8ebf23d](https://github.com/simplyRoba/pixoo-bridge/commit/8ebf23d160ec6792435d0f32fb4b9e6cd57cbc54))
+* **deps:** bump jvm from 2.0.21 to 2.1.0 ([#205](https://github.com/simplyRoba/pixoo-bridge/issues/205)) ([02f8455](https://github.com/simplyRoba/pixoo-bridge/commit/02f8455631998950b6cd1024a13204a99218e5f5))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.6.0 to 2.7.0 ([#202](https://github.com/simplyRoba/pixoo-bridge/issues/202)) ([3745194](https://github.com/simplyRoba/pixoo-bridge/commit/374519444760cc152cb8cfc56a27da79156893de))
+* **deps:** bump org.springframework.boot from 3.3.4 to 3.3.5 ([#198](https://github.com/simplyRoba/pixoo-bridge/issues/198)) ([8240f77](https://github.com/simplyRoba/pixoo-bridge/commit/8240f77531f3f467a4e27e6b0915b24f972c5acb))
+* **deps:** bump org.springframework.boot from 3.3.5 to 3.4.0 ([#201](https://github.com/simplyRoba/pixoo-bridge/issues/201)) ([9d4d4c5](https://github.com/simplyRoba/pixoo-bridge/commit/9d4d4c5edba053463ebf2bda59dc52410d340a26))
+* **deps:** bump org.springframework.cloud:spring-cloud-dependencies from 2023.0.3 to 2023.0.4 ([#203](https://github.com/simplyRoba/pixoo-bridge/issues/203)) ([cbd3294](https://github.com/simplyRoba/pixoo-bridge/commit/cbd3294235f30651a5b6f8cae3f2625d328f4864))
+* **deps:** bump org.springframework.cloud:spring-cloud-dependencies from 2023.0.4 to 2024.0.0 ([#207](https://github.com/simplyRoba/pixoo-bridge/issues/207)) ([e7c5cb8](https://github.com/simplyRoba/pixoo-bridge/commit/e7c5cb849a14982ec4d5c49a04cc4bc9b2f07658))
+* **deps:** bump plugin.spring from 2.0.21 to 2.1.0 ([#204](https://github.com/simplyRoba/pixoo-bridge/issues/204)) ([617e3c3](https://github.com/simplyRoba/pixoo-bridge/commit/617e3c381608cd48402df4972a2d09a72055dd6e))
+
+## [0.5.9](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.8...v0.5.9) (2024-10-11)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.guava:guava from 33.3.0-jre to 33.3.1-jre ([#195](https://github.com/simplyRoba/pixoo-bridge/issues/195)) ([6cd7a23](https://github.com/simplyRoba/pixoo-bridge/commit/6cd7a234bcae8013eb8941f6ac700f201df2a4b4))
+* **deps:** bump jvm from 2.0.20 to 2.0.21 ([#197](https://github.com/simplyRoba/pixoo-bridge/issues/197)) ([89db90b](https://github.com/simplyRoba/pixoo-bridge/commit/89db90b3a2af8520fb09996ceab8dcc922c8db61))
+* **deps:** bump org.springframework.boot from 3.3.3 to 3.3.4 ([#193](https://github.com/simplyRoba/pixoo-bridge/issues/193)) ([02516df](https://github.com/simplyRoba/pixoo-bridge/commit/02516df94ceb52ef1079e7ab747cc8e058c3b6c7))
+* **deps:** bump plugin.spring from 2.0.20 to 2.0.21 ([#196](https://github.com/simplyRoba/pixoo-bridge/issues/196)) ([fd9bd26](https://github.com/simplyRoba/pixoo-bridge/commit/fd9bd26d3479d610331e09dd6dbfce4599048c76))
+
+## [0.5.8](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.7...v0.5.8) (2024-08-27)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.guava:guava from 33.2.1-jre to 33.3.0-jre ([#189](https://github.com/simplyRoba/pixoo-bridge/issues/189)) ([683dd9c](https://github.com/simplyRoba/pixoo-bridge/commit/683dd9c143a6e2fbefaf56704d2e6b319d200efd))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.1.3 to 4.2.0 ([#188](https://github.com/simplyRoba/pixoo-bridge/issues/188)) ([9ac232a](https://github.com/simplyRoba/pixoo-bridge/commit/9ac232ae0b99f47f6c298cbb30bfc37cc993a333))
+* **deps:** bump jvm from 2.0.10 to 2.0.20 ([#190](https://github.com/simplyRoba/pixoo-bridge/issues/190)) ([3316dfc](https://github.com/simplyRoba/pixoo-bridge/commit/3316dfce6636c9542f22c240ba2b6c4da8e6e5fe))
+* **deps:** bump org.springframework.boot from 3.3.2 to 3.3.3 ([#191](https://github.com/simplyRoba/pixoo-bridge/issues/191)) ([018b3a6](https://github.com/simplyRoba/pixoo-bridge/commit/018b3a6f468d4a6b672c4e0fd04e0b4b18c735b0))
+* **deps:** bump plugin.spring from 2.0.10 to 2.0.20 ([#192](https://github.com/simplyRoba/pixoo-bridge/issues/192)) ([64906e2](https://github.com/simplyRoba/pixoo-bridge/commit/64906e2f361b109a3b0c450025bd6c2ddfe9c013))
+* wrong link in CONTRIBUTING.md ([#186](https://github.com/simplyRoba/pixoo-bridge/issues/186)) ([6ad4b74](https://github.com/simplyRoba/pixoo-bridge/commit/6ad4b7444ae79cfa3d6f2960e1935bc490c47496))
+
 ## [0.5.7](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.6...v0.5.7) (2024-08-06)
 
 

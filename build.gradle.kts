@@ -1,9 +1,9 @@
 plugins {
-  kotlin("jvm") version "2.0.20"
-  kotlin("plugin.spring") version "2.0.20"
-  id("org.springframework.boot") version "3.3.3"
-  id("io.spring.dependency-management") version "1.1.6"
-  id("com.diffplug.spotless") version "6.25.0"
+  kotlin("jvm") version "2.1.10"
+  kotlin("plugin.spring") version "2.1.10"
+  id("org.springframework.boot") version "3.4.3"
+  id("io.spring.dependency-management") version "1.1.7"
+  id("com.diffplug.spotless") version "7.0.2"
 }
 
 group = "de.simplyroba"
@@ -14,17 +14,17 @@ java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
 
 repositories { mavenCentral() }
 
-val springCloudVersion = "2023.0.3"
-val openapiVersion = "2.6.0"
+val springCloudVersion = "2024.0.0"
+val openapiVersion = "2.8.5"
 val mockitoKotlinVersion = "5.4.0"
-val scrimageVersion = "4.2.0"
+val scrimageVersion = "4.3.0"
 
 // security version bumps through spring dependency management
 // will not be updated through dependabot
 // like extra["libXX.version"] = "XXX"
 
 // direkt security version bumps
-val guavaVersion = "33.3.0-jre"
+val guavaVersion = "33.4.0-jre"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")

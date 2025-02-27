@@ -18,7 +18,7 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "seconds": $seconds
         }
         """
-        .trimIndent()
+        .trimIndent(),
     )
     verifyCommandSent(
       """{"Command":"Tools/SetTimer", "Minute":$minutes, "Second":$seconds, "Status":1 }"""
@@ -61,7 +61,7 @@ class ToolControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "blueScore": $blue
         }
         """
-        .trimIndent()
+        .trimIndent(),
     )
     verifyCommandSent("""{"Command":"Tools/SetScoreBoard", "BlueScore":$blue, "RedScore":$red }""")
   }

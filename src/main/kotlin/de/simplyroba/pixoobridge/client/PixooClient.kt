@@ -52,7 +52,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
   fun setDisplayBrightnessOverclock(brightnessOverclockEnabledBit: Boolean) =
     genericPostCommand(
       SET_DISPLAY_BRIGHTNESS_OVERCLOCK,
-      Pair("Mode", brightnessOverclockEnabledBit.toBitNumber())
+      Pair("Mode", brightnessOverclockEnabledBit.toBitNumber()),
     )
 
   // Mode, 0-3, the rotation angle 0=normal; 1=90; 2=180; 3=270
@@ -73,7 +73,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       SET_DISPLAY_WHITE_BALANCE,
       Pair("RValue", redPercentage),
       Pair("GValue", greenPercentage),
-      Pair("BValue", bluePercentage)
+      Pair("BValue", bluePercentage),
     )
 
   // Utc, example=1672416000, Unix epoch timestamps in seconds
@@ -103,7 +103,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     genericPostCommand(
       SET_WEATHER_LOCATION,
       Pair("Longitude", longitude),
-      Pair("Latitude", latitude)
+      Pair("Latitude", latitude),
     )
 
   // Mode, 0|1, 0=Celsius; 1=Fahrenheit (it won’t be saved and reset when the device power off)

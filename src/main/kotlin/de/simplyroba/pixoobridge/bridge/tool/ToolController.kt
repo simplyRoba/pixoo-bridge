@@ -41,7 +41,7 @@ class ToolController(private val pixooClient: PixooClient) {
     name = "action",
     `in` = PATH,
     description = "Action to execute.",
-    schema = Schema(allowableValues = ["start", "stop", "reset"])
+    schema = Schema(allowableValues = ["start", "stop", "reset"]),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/stopwatch/{action}")
@@ -69,7 +69,7 @@ class ToolController(private val pixooClient: PixooClient) {
     name = "action",
     `in` = PATH,
     description = "Action to execute.",
-    schema = Schema(allowableValues = ["start", "stop"])
+    schema = Schema(allowableValues = ["start", "stop"]),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/soundmeter/{action}")

@@ -10,15 +10,15 @@ data class SettingsResponse(
   @Schema(allowableValues = ["0", "90", "180", "270"], defaultValue = "0") val rotationAngle: Int,
   val mirrored: Boolean,
   val temperatureUnit: TemperatureUnit,
-  @Schema(defaultValue = "182") val currentClockId: Int
+  @Schema(defaultValue = "182") val currentClockId: Int,
 ) {
   enum class TimeMode {
     TWELVE,
-    TWENTY_FOUR
+    TWENTY_FOUR,
   }
 
   enum class TemperatureUnit {
     CELSIUS,
-    FAHRENHEIT
+    FAHRENHEIT,
   }
 }
