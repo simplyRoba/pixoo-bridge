@@ -52,7 +52,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
   fun setDisplayBrightnessOverclock(brightnessOverclockEnabledBit: Boolean) =
     genericPostCommand(
       SET_DISPLAY_BRIGHTNESS_OVERCLOCK,
-      Pair("Mode", brightnessOverclockEnabledBit.toBitNumber())
+      Pair("Mode", brightnessOverclockEnabledBit.toBitNumber()),
     )
 
   // Mode, 0-3, the rotation angle 0=normal; 1=90; 2=180; 3=270
@@ -73,7 +73,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       SET_DISPLAY_WHITE_BALANCE,
       Pair("RValue", redPercentage),
       Pair("GValue", greenPercentage),
-      Pair("BValue", bluePercentage)
+      Pair("BValue", bluePercentage),
     )
 
   // Utc, example=1672416000, Unix epoch timestamps in seconds
@@ -103,7 +103,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     genericPostCommand(
       SET_WEATHER_LOCATION,
       Pair("Longitude", longitude),
-      Pair("Latitude", latitude)
+      Pair("Latitude", latitude),
     )
 
   // Mode, 0|1, 0=Celsius; 1=Fahrenheit (it won’t be saved and reset when the device power off)
@@ -151,7 +151,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       TOOL_TIMER,
       Pair("Minute", minutes),
       Pair("Second", seconds),
-      Pair("Status", startBit.toBitNumber())
+      Pair("Status", startBit.toBitNumber()),
     )
 
   // Status, 0|1|2, 0=stop; 1=start; 2=reset
@@ -186,7 +186,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     frameIndex: Int,
     id: Int,
     animationSpeed: Int,
-    data: String
+    data: String,
   ) =
     genericPostCommand(
       DRAW_ANIMATION,
@@ -195,7 +195,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       Pair("PicOffset", frameIndex),
       Pair("PicID", id),
       Pair("PicSpeed", animationSpeed),
-      Pair("PicData", data)
+      Pair("PicData", data),
     )
 
   /*
@@ -220,7 +220,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     text: String,
     speed: Int,
     color: String,
-    align: Int
+    align: Int,
   ) =
     genericPostCommand(
       DRAW_TEXT,
@@ -233,7 +233,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
       Pair("TextString", text),
       Pair("speed", speed),
       Pair("color", color),
-      Pair("align", align)
+      Pair("align", align),
     )
 
   fun clearText() {
@@ -242,7 +242,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   private fun genericPostCommand(
     commandType: CommandType,
-    vararg parameters: Pair<String, Any>
+    vararg parameters: Pair<String, Any>,
   ): CommandResponse {
     logger.debug("Sending command {} with {}", commandType, parameters)
 

@@ -11,5 +11,5 @@ data class WeatherResponse(
   val weatherString: String,
   @Schema(description = "in hPa", defaultValue = "1006") val pressure: Int,
   @Schema(description = "in %", defaultValue = "47") val humidity: Int,
-  @Schema(description = "in m/s", defaultValue = "2.54") val windSpeed: Float
+  @Schema(description = "in m/s", defaultValue = "2.54") val windSpeed: Float,
 )

@@ -12,7 +12,7 @@ data class TextRequest(
   @Schema(maxLength = 512) val text: String,
   @Schema(minimum = "0", maximum = "100") val scrollSpeed: Int,
   val color: RgbColor,
-  val textAlignment: TextAlignment
+  val textAlignment: TextAlignment,
 )
 
 fun TextRequest.valid() =

@@ -52,7 +52,7 @@ class ManageControllerMvcTest : AbstractMvcTest() {
   @ParameterizedTest
   @CsvSource(
     value = ["101:50:50", "-1:50:50", "50:101:50", "50:-1:50", "50:50:101", "50:50:-1"],
-    delimiter = ':'
+    delimiter = ':',
   )
   fun `should return bad request on white balance out of bound`(red: Int, green: Int, blue: Int) {
     mockMvc
@@ -93,7 +93,7 @@ class ManageControllerMvcTest : AbstractMvcTest() {
   @CsvSource(value = ["-181:0", "181:0", "0:-91", "0:91"], delimiter = ':')
   fun `should return bad request on weather location out of bound`(
     longitude: String,
-    latitude: String
+    latitude: String,
   ) {
     mockMvc
       .perform(
