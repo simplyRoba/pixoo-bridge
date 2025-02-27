@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.11](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.10...v0.5.11) (2025-02-27)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 6.25.0 to 7.0.2 ([#217](https://github.com/simplyRoba/pixoo-bridge/issues/217)) ([e3fcc17](https://github.com/simplyRoba/pixoo-bridge/commit/e3fcc17723952f4c9b763a61072f5b242411c3d7))
+* **deps:** bump com.google.guava:guava from 33.3.1-jre to 33.4.0-jre ([#208](https://github.com/simplyRoba/pixoo-bridge/issues/208)) ([22ffd86](https://github.com/simplyRoba/pixoo-bridge/commit/22ffd865011da25068c90376044ff6d14113c2fe))
+* **deps:** bump io.spring.dependency-management from 1.1.6 to 1.1.7 ([#209](https://github.com/simplyRoba/pixoo-bridge/issues/209)) ([d0d3a15](https://github.com/simplyRoba/pixoo-bridge/commit/d0d3a1586c3ba000a6e58d58e7dbefaf558b5e11))
+* **deps:** bump jvm from 2.1.0 to 2.1.10 ([#221](https://github.com/simplyRoba/pixoo-bridge/issues/221)) ([df0ad0c](https://github.com/simplyRoba/pixoo-bridge/commit/df0ad0cb99c69d6b4e54743e6c48266429da10ad))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.7.0 to 2.8.5 ([#222](https://github.com/simplyRoba/pixoo-bridge/issues/222)) ([cddbb0f](https://github.com/simplyRoba/pixoo-bridge/commit/cddbb0fa6e9d8e339493e22c133a48363eae4821))
+* **deps:** bump org.springframework.boot from 3.4.0 to 3.4.3 ([#223](https://github.com/simplyRoba/pixoo-bridge/issues/223)) ([6e4dbd4](https://github.com/simplyRoba/pixoo-bridge/commit/6e4dbd4be5d9136909eaa2b546109ebd888aa6d1))
+* **deps:** bump plugin.spring from 2.1.0 to 2.1.10 ([#219](https://github.com/simplyRoba/pixoo-bridge/issues/219)) ([90458e7](https://github.com/simplyRoba/pixoo-bridge/commit/90458e7a0253596a8d366346685043284e5bee90))
+
 ## [0.5.10](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.9...v0.5.10) (2024-12-04)
 
 
