@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service
 class ImageService(
   private val pixooConfig: PixooConfig,
   private val pixooClient: PixooClient,
-  private val imageDownloader: FileDownloader
+  private val imageDownloader: FileDownloader,
 ) {
 
   private val logger = LoggerFactory.getLogger(javaClass)
@@ -81,7 +81,7 @@ class ImageService(
         index,
         id,
         animationSpeed,
-        resizedFrame.toBase64()
+        resizedFrame.toBase64(),
       )
       if (index == 59) {
         logger.warn("Stop on 59th frame of {} frames.", gif.frameCount)

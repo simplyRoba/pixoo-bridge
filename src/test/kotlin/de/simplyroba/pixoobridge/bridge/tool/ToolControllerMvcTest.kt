@@ -16,7 +16,7 @@ class ToolControllerMvcTest : AbstractMvcTest() {
   @CsvSource(value = ["-1:0", "0:-1", "0:61", "100:0"], delimiter = ':')
   fun `should return bad request timer minutes or seconds out of bound`(
     minutes: Int,
-    seconds: Int
+    seconds: Int,
   ) {
     mockMvc
       .perform(

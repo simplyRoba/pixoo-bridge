@@ -17,12 +17,12 @@ class DrawControllerMvcTest : AbstractMvcTest() {
   @ParameterizedTest
   @CsvSource(
     value = ["-1:0:0", "0:-1:0", "0:0:-1", "256:0:0", "0:256:0", "0:0:256"],
-    delimiter = ':'
+    delimiter = ':',
   )
   fun `should return bad request on rgb value out of bound on fill`(
     red: Int,
     green: Int,
-    blue: Int
+    blue: Int,
   ) {
     mockMvc
       .perform(
@@ -291,12 +291,12 @@ class DrawControllerMvcTest : AbstractMvcTest() {
   @ParameterizedTest
   @CsvSource(
     value = ["-1:0:0", "0:-1:0", "0:0:-1", "256:0:0", "0:256:0", "0:0:256"],
-    delimiter = ':'
+    delimiter = ':',
   )
   fun `should return bad request on rgb value out of bound on text`(
     red: Int,
     green: Int,
-    blue: Int
+    blue: Int,
   ) {
     mockMvc
       .perform(

@@ -24,7 +24,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "blue": 0
         }
         """
-        .trimIndent()
+        .trimIndent(),
     )
     verifyCommandSent(
       """
@@ -193,7 +193,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
     doPostCallWithBodyExpectingSuccess(
       "/draw/remote",
-      """{"link": "${createFullWireMockUrl(imagePath)}"}"""
+      """{"link": "${createFullWireMockUrl(imagePath)}"}""",
     )
 
     verifyCommandSent(
@@ -273,7 +273,7 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "textAlignment":"LEFT"
         }
         """
-        .trimIndent()
+        .trimIndent(),
     )
     verifyCommandSent(
       """

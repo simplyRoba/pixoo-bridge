@@ -58,7 +58,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "blue": $blueValue
         }
         """
-        .trimIndent()
+        .trimIndent(),
     )
     verifyCommandSent(
       """
@@ -139,7 +139,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
           "latitude": "$latitude"
         }
         """
-        .trimIndent()
+        .trimIndent(),
     )
     verifyCommandSent(
       """

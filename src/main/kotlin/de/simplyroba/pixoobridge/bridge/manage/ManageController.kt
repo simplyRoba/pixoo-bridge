@@ -33,7 +33,7 @@ class ManageController(private val pixooClient: PixooClient) {
     name = "action",
     `in` = ParameterIn.PATH,
     description = "Action to execute.",
-    schema = Schema(allowableValues = ["on", "off"])
+    schema = Schema(allowableValues = ["on", "off"]),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/{action}")
@@ -51,7 +51,7 @@ class ManageController(private val pixooClient: PixooClient) {
     name = "value",
     `in` = ParameterIn.PATH,
     description = "Brightness value in percentage from 0-100.",
-    schema = Schema(type = "integer", minimum = "0", maximum = "100", defaultValue = "50")
+    schema = Schema(type = "integer", minimum = "0", maximum = "100", defaultValue = "50"),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/brightness/{value}")
@@ -63,13 +63,13 @@ class ManageController(private val pixooClient: PixooClient) {
 
   @Operation(
     summary = "Turn brightness overclock on or off.",
-    description = "This won’t be saved on the pixoo and resets when the device powers off."
+    description = "This won’t be saved on the pixoo and resets when the device powers off.",
   )
   @Parameter(
     name = "action",
     `in` = ParameterIn.PATH,
     description = "Action to execute.",
-    schema = Schema(allowableValues = ["on", "off"])
+    schema = Schema(allowableValues = ["on", "off"]),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/brightness/overclock/{action}")
@@ -84,13 +84,13 @@ class ManageController(private val pixooClient: PixooClient) {
 
   @Operation(
     summary = "Control the display rotation",
-    description = "This won’t be saved on the pixoo and resets when the device powers off."
+    description = "This won’t be saved on the pixoo and resets when the device powers off.",
   )
   @Parameter(
     name = "angle",
     `in` = ParameterIn.PATH,
     description = "Rotation angle.",
-    schema = Schema(allowableValues = ["0", "90", "180", "270"])
+    schema = Schema(allowableValues = ["0", "90", "180", "270"]),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/rotation/{angle}")
@@ -107,13 +107,13 @@ class ManageController(private val pixooClient: PixooClient) {
 
   @Operation(
     summary = "Control if the display is mirrored",
-    description = "This won’t be saved on the pixoo and resets when the device powers off."
+    description = "This won’t be saved on the pixoo and resets when the device powers off.",
   )
   @Parameter(
     name = "action",
     `in` = ParameterIn.PATH,
     description = "Action to execute.",
-    schema = Schema(allowableValues = ["on", "off"])
+    schema = Schema(allowableValues = ["on", "off"]),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/display/mirror/{action}")
@@ -128,7 +128,7 @@ class ManageController(private val pixooClient: PixooClient) {
 
   @Operation(
     summary = "Control the white balance",
-    description = "This won’t be saved on the pixoo and resets when the device powers off."
+    description = "This won’t be saved on the pixoo and resets when the device powers off.",
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid request body.")])
   @PostMapping("/display/white-balance", consumes = [APPLICATION_JSON_VALUE])
@@ -148,13 +148,13 @@ class ManageController(private val pixooClient: PixooClient) {
 
   @Operation(
     summary = "Configure if the mode time is display",
-    description = "This won’t be saved on the pixoo and resets when the device powers off."
+    description = "This won’t be saved on the pixoo and resets when the device powers off.",
   )
   @Parameter(
     name = "mode",
     `in` = ParameterIn.PATH,
     description = "Time display mode.",
-    schema = Schema(allowableValues = ["12h", "24h"])
+    schema = Schema(allowableValues = ["12h", "24h"]),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/time/mode/{mode}")
@@ -172,7 +172,7 @@ class ManageController(private val pixooClient: PixooClient) {
     name = "offset",
     `in` = ParameterIn.PATH,
     description = "The time offset of the timezone. Between -12 and 14.",
-    schema = Schema(type = "integer", minimum = "-12", maximum = "14")
+    schema = Schema(type = "integer", minimum = "-12", maximum = "14"),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/time/offset/{offset}")
@@ -192,15 +192,15 @@ class ManageController(private val pixooClient: PixooClient) {
         localTime =
           LocalDateTime.parse(
             clientResponse["LocalTime"].toString(),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-          )
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
+          ),
       )
     return ok(response)
   }
 
   @Operation(
     summary = "Configure the location for the weather forecast",
-    description = "All data comes from https://openweathermap.org/."
+    description = "All data comes from https://openweathermap.org/.",
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid request body.")])
   @PostMapping("/weather/location", consumes = [APPLICATION_JSON_VALUE])
@@ -213,13 +213,13 @@ class ManageController(private val pixooClient: PixooClient) {
 
   @Operation(
     summary = "Configure if the weather temperature unit",
-    description = "This won’t be saved on the pixoo and resets when the device powers off."
+    description = "This won’t be saved on the pixoo and resets when the device powers off.",
   )
   @Parameter(
     name = "unit",
     `in` = ParameterIn.PATH,
     description = "Temperature unit.",
-    schema = Schema(allowableValues = ["celsius", "fahrenheit"])
+    schema = Schema(allowableValues = ["celsius", "fahrenheit"]),
   )
   @ApiResponses(value = [ApiResponse(responseCode = "400", description = "Invalid path variable.")])
   @PostMapping("/weather/temperature-unit/{unit}")
@@ -244,7 +244,7 @@ class ManageController(private val pixooClient: PixooClient) {
         weatherString = clientResponse["Weather"].toString(),
         pressure = clientResponse["Pressure"].toString().toInt(),
         humidity = clientResponse["Humidity"].toString().toInt(),
-        windSpeed = clientResponse["WindSpeed"].toString().toFloat()
+        windSpeed = clientResponse["WindSpeed"].toString().toFloat(),
       )
     return ok(response)
   }
@@ -266,7 +266,7 @@ class ManageController(private val pixooClient: PixooClient) {
         mirrored = "1" == clientResponse["MirrorFlag"].toString(),
         temperatureUnit =
           if ("1" == clientResponse["TemperatureMode"].toString()) FAHRENHEIT else CELSIUS,
-        currentClockId = clientResponse["CurClockId"].toString().toInt()
+        currentClockId = clientResponse["CurClockId"].toString().toInt(),
       )
     return ok(response)
   }

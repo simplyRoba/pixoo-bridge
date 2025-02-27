@@ -16,7 +16,7 @@ class SystemController(val pixooClient: PixooClient, val config: PixooConfig) {
 
   @Operation(
     summary = "Check health of the service",
-    description = "If configured this will also ping the pixoo."
+    description = "If configured this will also ping the pixoo.",
   )
   @GetMapping("/health/check")
   fun healthCheck(): ResponseEntity<Unit> {
@@ -27,7 +27,7 @@ class SystemController(val pixooClient: PixooClient, val config: PixooConfig) {
   @Operation(
     summary = "Reboot the pixoo",
     description =
-      "This might respond with a 500 after a timeout as it might happen that the pixoo reboots before responding."
+      "This might respond with a 500 after a timeout as it might happen that the pixoo reboots before responding.",
   )
   @PostMapping("/reboot")
   fun reboot() {
