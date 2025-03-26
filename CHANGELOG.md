@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.12](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.11...v0.5.12) (2025-03-26)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.guava:guava from 33.4.0-jre to 33.4.5-jre ([#227](https://github.com/simplyRoba/pixoo-bridge/issues/227)) ([990addc](https://github.com/simplyRoba/pixoo-bridge/commit/990addc85fccaa814c9e1e94cdeb452f3d03d606))
+* **deps:** bump com.google.guava:guava from 33.4.5-jre to 33.4.6-jre ([#231](https://github.com/simplyRoba/pixoo-bridge/issues/231)) ([44fc8e5](https://github.com/simplyRoba/pixoo-bridge/commit/44fc8e55aa73238a60a3bdf9ee4565df7457b973))
+* **deps:** bump jvm from 2.1.10 to 2.1.20 ([#226](https://github.com/simplyRoba/pixoo-bridge/issues/226)) ([2228810](https://github.com/simplyRoba/pixoo-bridge/commit/22288101a25bc05647d05a2b4584a5dab5fb934b))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.5 to 2.8.6 ([#230](https://github.com/simplyRoba/pixoo-bridge/issues/230)) ([d8121f6](https://github.com/simplyRoba/pixoo-bridge/commit/d8121f6537a3ec256bd6a48fe1031e7f750fbe3e))
+* **deps:** bump org.springframework.boot from 3.4.3 to 3.4.4 ([#229](https://github.com/simplyRoba/pixoo-bridge/issues/229)) ([c2e5d92](https://github.com/simplyRoba/pixoo-bridge/commit/c2e5d92fa99e4c4e8d5b7a4d2b9840f1b1300382))
+* **deps:** bump org.springframework.cloud:spring-cloud-dependencies from 2024.0.0 to 2024.0.1 ([#224](https://github.com/simplyRoba/pixoo-bridge/issues/224)) ([249e5ac](https://github.com/simplyRoba/pixoo-bridge/commit/249e5ac5eb042c84d44260bf7685570da26cc686))
+* **deps:** bump plugin.spring from 2.1.10 to 2.1.20 ([#225](https://github.com/simplyRoba/pixoo-bridge/issues/225)) ([20a9664](https://github.com/simplyRoba/pixoo-bridge/commit/20a96644132c8df7912793dfba9674d20bd1cbc2))
+
 ## [0.5.11](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.10...v0.5.11) (2025-02-27)
 
 
