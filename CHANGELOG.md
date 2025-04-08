@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.13](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.12...v0.5.13) (2025-04-08)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 7.0.2 to 7.0.3 ([#232](https://github.com/simplyRoba/pixoo-bridge/issues/232)) ([5109933](https://github.com/simplyRoba/pixoo-bridge/commit/51099332bbec21568ecf9219de0b7e94bba0d66d))
+
 ## [0.5.12](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.11...v0.5.12) (2025-03-26)
 
 
