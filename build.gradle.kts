@@ -24,7 +24,7 @@ val scrimageVersion = "4.3.0"
 // like extra["libXX.version"] = "XXX"
 
 // direkt security version bumps
-val guavaVersion = "33.4.6-jre"
+val guavaVersion = "33.4.8-jre"
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
