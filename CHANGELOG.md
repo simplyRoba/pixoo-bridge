@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.13](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.12...v0.5.13) (2025-04-25)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 7.0.2 to 7.0.3 ([#232](https://github.com/simplyRoba/pixoo-bridge/issues/232)) ([5109933](https://github.com/simplyRoba/pixoo-bridge/commit/51099332bbec21568ecf9219de0b7e94bba0d66d))
+* **deps:** bump com.google.guava:guava from 33.4.6-jre to 33.4.8-jre ([#235](https://github.com/simplyRoba/pixoo-bridge/issues/235)) ([4f478ed](https://github.com/simplyRoba/pixoo-bridge/commit/4f478ed57e4617992b4766792790c40499d12cd1))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.3.0 to 4.3.1 ([#236](https://github.com/simplyRoba/pixoo-bridge/issues/236)) ([4b4c6f3](https://github.com/simplyRoba/pixoo-bridge/commit/4b4c6f3b5fe643b88398da1de30349289d482a14))
+* **deps:** bump org.springframework.boot from 3.4.4 to 3.4.5 ([#237](https://github.com/simplyRoba/pixoo-bridge/issues/237)) ([8a0aa22](https://github.com/simplyRoba/pixoo-bridge/commit/8a0aa22c6af2bff837a14934d4cd31aa4fa230ce))
+
 ## [0.5.12](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.11...v0.5.12) (2025-03-26)
 
 
