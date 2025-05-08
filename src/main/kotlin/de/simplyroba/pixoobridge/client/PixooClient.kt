@@ -240,6 +240,24 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     genericPostCommand(CLEAR_TEXT)
   }
 
+  /*
+   * ActiveTimeInCycle,	0-TODO,	Working time of buzzer in one cycle in milliseconds
+   * OffTimeInCycle, 0-TODO, Idle time of buzzer in one cycle in milliseconds
+   * PlayTotalTime, 0-TODO, Working total time of buzzer in milliseconds
+   */
+  fun playSound(
+    activeTimeInCycle: Int,
+    offTimeInCycle: Int,
+    totalPlayTime: Int,
+  ) {
+    genericPostCommand(
+      PLAY_SOUND,
+      Pair("ActiveTimeInCycle", activeTimeInCycle),
+      Pair("OffTimeInCycle", offTimeInCycle),
+      Pair("PlayTotalTime", totalPlayTime),
+    )
+  }
+
   private fun genericPostCommand(
     commandType: CommandType,
     vararg parameters: Pair<String, Any>,
