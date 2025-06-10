@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.14](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.13...v0.5.14) (2025-06-10)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 7.0.3 to 7.0.4 ([#242](https://github.com/simplyRoba/pixoo-bridge/issues/242)) ([7d5587a](https://github.com/simplyRoba/pixoo-bridge/commit/7d5587a82356395d14ba726e1b98e754ee0a6c60))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.8 to 2.8.9 ([#245](https://github.com/simplyRoba/pixoo-bridge/issues/245)) ([105ec41](https://github.com/simplyRoba/pixoo-bridge/commit/105ec4189a0081f838473ceb7619c67b763416e2))
+* **deps:** bump org.springframework.boot from 3.4.5 to 3.5.0 ([#241](https://github.com/simplyRoba/pixoo-bridge/issues/241)) ([ccef0e1](https://github.com/simplyRoba/pixoo-bridge/commit/ccef0e16b975ffdd6766ec84076bcbdc200b0324))
+* **deps:** bump org.springframework.cloud:spring-cloud-dependencies from 2024.0.1 to 2025.0.0 ([#244](https://github.com/simplyRoba/pixoo-bridge/issues/244)) ([31a27c2](https://github.com/simplyRoba/pixoo-bridge/commit/31a27c26fc47dac5c43f47cccb6d7bccfe932071))
+
 ## [0.5.13](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.12...v0.5.13) (2025-05-15)
 
 
