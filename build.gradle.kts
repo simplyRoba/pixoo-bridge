@@ -15,7 +15,7 @@ java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
 repositories { mavenCentral() }
 
 val springCloudVersion = "2025.0.0"
-val openapiVersion = "2.8.8"
+val openapiVersion = "2.8.9"
 val mockitoKotlinVersion = "5.4.0"
 val scrimageVersion = "4.3.1"
 
