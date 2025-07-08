@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.15](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.14...v0.5.15) (2025-07-08)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 7.0.4 to 7.1.0 ([#251](https://github.com/simplyRoba/pixoo-bridge/issues/251)) ([173ab99](https://github.com/simplyRoba/pixoo-bridge/commit/173ab9950eb4a2f7850f1fc3a6b15539a3c2000c))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.3.1 to 4.3.2 ([#250](https://github.com/simplyRoba/pixoo-bridge/issues/250)) ([40125e5](https://github.com/simplyRoba/pixoo-bridge/commit/40125e5fcbce7e9a9778bdb6ccb7acd94ca86bd2))
+* **deps:** bump jvm from 2.1.21 to 2.2.0 ([#248](https://github.com/simplyRoba/pixoo-bridge/issues/248)) ([284be34](https://github.com/simplyRoba/pixoo-bridge/commit/284be34baa6c944de9f69a2b1af03f8d35b81c1a))
+* **deps:** bump org.springframework.boot from 3.5.0 to 3.5.3 ([#246](https://github.com/simplyRoba/pixoo-bridge/issues/246)) ([25cbcfc](https://github.com/simplyRoba/pixoo-bridge/commit/25cbcfc0f1a94f7864f6838ab7a15dd0f6ddc704))
+* **deps:** bump plugin.spring from 2.1.21 to 2.2.0 ([#249](https://github.com/simplyRoba/pixoo-bridge/issues/249)) ([83e4c38](https://github.com/simplyRoba/pixoo-bridge/commit/83e4c38eb197b7098aac6b45ec1800d0079be2a0))
+
 ## [0.5.14](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.13...v0.5.14) (2025-06-10)
 
 
