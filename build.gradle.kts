@@ -14,14 +14,9 @@ java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
 
 repositories { mavenCentral() }
 
-val springCloudVersion = "2025.0.0"
-
 // security version bumps through spring dependency management
 // will not be updated through dependabot
 // like extra["libXX.version"] = "XXX"
-
-// direkt security version bumps
-val guavaVersion = "33.4.8-jre"
 
 dependencies {
   implementation(kotlin("reflect"))
@@ -37,7 +32,6 @@ dependencies {
 
   constraints {
     implementation(libs.guava) {
-      version { strictly(guavaVersion) }
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/22")
       because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/21")
     }
