@@ -1,9 +1,9 @@
 plugins {
-  kotlin("jvm") version "2.2.0"
-  kotlin("plugin.spring") version "2.2.0"
-  id("org.springframework.boot") version "3.5.4"
-  id("io.spring.dependency-management") version "1.1.7"
-  id("com.diffplug.spotless") version "7.2.1"
+  kotlin("jvm") version libs.versions.kotlin.core
+  kotlin("plugin.spring") version libs.versions.kotlin.core
+  alias(libs.plugins.spring.dependency.management)
+  alias(libs.plugins.spring.boot) apply false
+  alias(libs.plugins.spottless)
 }
 
 group = "de.simplyroba"
@@ -14,39 +14,25 @@ java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
 
 repositories { mavenCentral() }
 
-val springCloudVersion = "2025.0.0"
-val openapiVersion = "2.8.9"
-val mockitoKotlinVersion = "6.0.0"
-val scrimageVersion = "4.3.3"
-
 // security version bumps through spring dependency management
 // will not be updated through dependabot
 // like extra["libXX.version"] = "XXX"
 
-// direkt security version bumps
-val guavaVersion = "33.4.8-jre"
-
 dependencies {
-  implementation("org.springframework.boot:spring-boot-starter-web")
-  implementation("org.springframework.boot:spring-boot-starter-webflux") // only for webclient
-  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-  implementation("org.jetbrains.kotlin:kotlin-reflect")
-  implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$openapiVersion")
-  implementation("com.sksamuel.scrimage:scrimage-core:$scrimageVersion")
-  testImplementation("org.springframework.boot:spring-boot-starter-test")
-  testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
-  testImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner")
+  implementation(platform(libs.spring.boot.bom))
+  implementation(platform(libs.spring.cloud.bom))
 
-  constraints {
-    implementation("com.google.guava:guava:$guavaVersion") {
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/22")
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/21")
-    }
-  }
-}
+  implementation(kotlin("reflect"))
+  implementation(libs.spring.boot.starter.web)
+  implementation(libs.spring.boot.starter.webflux) // TODO switch to RestClient
+  implementation(libs.jackson.module.kotlin)
+  implementation(libs.springdoc.openapi.webmvc)
+  implementation(libs.scrimage.core)
 
-dependencyManagement {
-  imports { mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion") }
+  testImplementation(libs.spring.boot.starter.test)
+  testImplementation(libs.mockito.kotlin) // TODO use springmockk
+  testImplementation(libs.spring.cloud.stub.runner) // TODO use wiremock spring boot
+  testRuntimeOnly(libs.junit.platform)
 }
 
 kotlin { compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") } }
@@ -62,14 +48,14 @@ spotless {
     targetExclude("build/**", ".idea/**", ".gradle/**")
     trimTrailingWhitespace()
     endWithNewline()
-    indentWithSpaces(2)
+    leadingTabsToSpaces(2)
   }
 
   kotlin {
     target("src/**/*.kt", "src/**/*.kts")
     targetExclude("build/**/*.kts", "build/**/*.kt")
     ktfmt().googleStyle()
-    indentWithSpaces(2)
+    leadingTabsToSpaces(2)
   }
 
   kotlinGradle {
