@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.15...v0.6.0) (2025-08-14)
+
+
+### Features
+
+* **build:** migrate dependencies to version catalog ([#260](https://github.com/simplyRoba/pixoo-bridge/issues/260)) ([370b59e](https://github.com/simplyRoba/pixoo-bridge/commit/370b59e0c49c0b78539ad079a6bfdc508d1ef75b))
+
+
+### Bug Fixes
+
+* **deps:** bump org.springframework.boot from 3.5.3 to 3.5.4 ([#255](https://github.com/simplyRoba/pixoo-bridge/issues/255)) ([adf54fc](https://github.com/simplyRoba/pixoo-bridge/commit/adf54fc1b5639d52bba69074d45d2652509923b9))
+
 ## [0.5.15](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.14...v0.5.15) (2025-07-22)
 
 
