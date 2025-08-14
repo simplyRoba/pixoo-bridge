@@ -62,14 +62,14 @@ spotless {
     targetExclude("build/**", ".idea/**", ".gradle/**")
     trimTrailingWhitespace()
     endWithNewline()
-    indentWithSpaces(2)
+    leadingTabsToSpaces(2)
   }
 
   kotlin {
     target("src/**/*.kt", "src/**/*.kts")
     targetExclude("build/**/*.kts", "build/**/*.kt")
     ktfmt().googleStyle()
-    indentWithSpaces(2)
+    leadingTabsToSpaces(2)
   }
 
   kotlinGradle {
