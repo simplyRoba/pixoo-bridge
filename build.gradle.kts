@@ -45,7 +45,9 @@ dependencies {
 }
 
 dependencyManagement {
-  imports { mavenBom("org.springframework.cloud:spring-cloud-dependencies:${libs.versions.spring.cloud}") }
+  imports {
+    mavenBom("org.springframework.cloud:spring-cloud-dependencies:${libs.versions.spring.cloud}")
+  }
 }
 
 kotlin { compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") } }
