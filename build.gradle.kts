@@ -1,8 +1,8 @@
 plugins {
   kotlin("jvm") version libs.versions.kotlin.core
   kotlin("plugin.spring") version libs.versions.kotlin.core
-  alias(libs.plugins.spring.boot)
   alias(libs.plugins.spring.dependency.management)
+  alias(libs.plugins.spring.boot) apply false
   alias(libs.plugins.spottless)
 }
 
@@ -19,6 +19,9 @@ repositories { mavenCentral() }
 // like extra["libXX.version"] = "XXX"
 
 dependencies {
+  implementation(platform(libs.spring.boot.bom))
+  implementation(platform(libs.spring.cloud.bom))
+
   implementation(kotlin("reflect"))
   implementation(libs.spring.boot.starter.web)
   implementation(libs.spring.boot.starter.webflux) // TODO switch to RestClient
@@ -29,19 +32,7 @@ dependencies {
   testImplementation(libs.spring.boot.starter.test)
   testImplementation(libs.mockito.kotlin) // TODO use springmockk
   testImplementation(libs.spring.cloud.stub.runner) // TODO use wiremock spring boot
-
-  constraints {
-    implementation(libs.guava) {
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/22")
-      because("https://github.com/simplyRoba/pixoo-bridge/security/dependabot/21")
-    }
-  }
-}
-
-dependencyManagement {
-  imports {
-    mavenBom("org.springframework.cloud:spring-cloud-dependencies:${libs.versions.spring.cloud}")
-  }
+  testRuntimeOnly(libs.junit.platform)
 }
 
 kotlin { compilerOptions { freeCompilerArgs.addAll("-Xjsr305=strict") } }

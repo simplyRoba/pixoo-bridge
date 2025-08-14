@@ -8,21 +8,21 @@ springdoc = "2.8.9"
 spotless = "7.2.1"
 mockito-kotlin = "6.0.0"
 scrimage = "4.3.3"
-guava = "33.4.8-jre"
 
 [libraries]
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot"}
+spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
+
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version.ref = "scrimage" }
-springdoc-openapi-webmvc = { module = "org.springdoc:springdoc-openapi-webmvc-ui", version.ref = "springdoc" }
+springdoc-openapi-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
 
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
 spring-cloud-stub-runner = { module = "org.springframework.cloud:spring-cloud-starter-contract-stub-runner" }
-
-# security bumps
-guava = { module = "com.google.guava:guava", version.ref = "guava" }
+junit-platform = { module = "org.junit.platform:junit-platform-launcher" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
