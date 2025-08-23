@@ -24,7 +24,6 @@ dependencies {
 
   implementation(kotlin("reflect"))
   implementation(libs.spring.boot.starter.web)
-  implementation(libs.spring.boot.starter.webflux) // TODO switch to RestClient
   implementation(libs.jackson.module.kotlin)
   implementation(libs.springdoc.openapi.webmvc)
   implementation(libs.scrimage.core)
