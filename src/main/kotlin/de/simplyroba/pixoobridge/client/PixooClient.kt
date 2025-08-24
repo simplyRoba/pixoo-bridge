@@ -259,6 +259,8 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
         .toEntity(String::class.java)
         .body
 
+    // TODO why is the body broken here and why doe the test dont catch this?
+
     logger.debug("Response for {}: {}", commandType, rawResponse)
 
     // pixoo will always answer with text/html, although it's formatted like json.

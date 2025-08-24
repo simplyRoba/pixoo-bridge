@@ -23,7 +23,7 @@ dependencies {
   implementation(libs.spring.boot.starter.web)
   implementation(libs.jackson.module.kotlin)
   implementation(libs.springdoc.openapi.webmvc)
-  implementation(libs.http.client)
+  implementation(libs.http.client) // TODO maybe use jdk http client instead of apache??
   implementation(libs.scrimage.core)
 
   testImplementation(libs.spring.boot.starter.test)
