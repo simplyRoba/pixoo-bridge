@@ -248,11 +248,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
    * OffTimeInCycle, 0-TODO, Idle time of buzzer in one cycle in milliseconds
    * PlayTotalTime, 0-TODO, Working total time of buzzer in milliseconds
    */
-  fun playSound(
-    activeTimeInCycle: Int,
-    offTimeInCycle: Int,
-    totalPlayTime: Int,
-  ) {
+  fun playSound(activeTimeInCycle: Int, offTimeInCycle: Int, totalPlayTime: Int) {
     genericPostCommand(
       PLAY_SOUND,
       Pair("ActiveTimeInCycle", activeTimeInCycle),
