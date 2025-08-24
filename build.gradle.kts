@@ -23,14 +23,12 @@ dependencies {
   implementation(libs.spring.boot.starter.web)
   implementation(libs.jackson.module.kotlin)
   implementation(libs.springdoc.openapi.webmvc)
-  implementation(libs.http.client)
+  implementation(libs.spring.boot.starter.webflux)
   implementation(libs.scrimage.core)
 
   testImplementation(libs.spring.boot.starter.test)
   testImplementation(libs.mockito.kotlin) // TODO use springmockk
   testImplementation(libs.wiremock.spring.boot)
-  // for webtestclient (maybe sometime there will be a RestTestClient for easy migration)
-  testImplementation(libs.spring.boot.starter.webflux)
   testRuntimeOnly(libs.junit.platform)
 }
 
