@@ -2,16 +2,15 @@
 [versions]
 spring-boot = "3.5.5"
 spring-dependency-management = "1.1.7"
-spring-cloud = "2025.0.0"
 kotlin-core = "2.2.0"
 springdoc = "2.8.10"
 spotless = "7.2.1"
 mockito-kotlin = "6.0.0"
+wiremock-spring-boot = "3.10.6"
 scrimage = "4.3.3"
 
 [libraries]
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot"}
-spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
 
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
@@ -21,7 +20,7 @@ springdoc-openapi-webmvc = { module = "org.springdoc:springdoc-openapi-starter-w
 
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
-spring-cloud-stub-runner = { module = "org.springframework.cloud:spring-cloud-starter-contract-stub-runner" }
+wiremock-spring-boot = { module = "org.wiremock.integrations:wiremock-spring-boot", version.ref = "wiremock-spring-boot" }
 junit-platform = { module = "org.junit.platform:junit-platform-launcher" }
 
 [plugins]

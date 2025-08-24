@@ -6,7 +6,7 @@ services:
     ports:
       - 4000:4000
     environment:
-      PIXOO_HOST: xxx.xxx.xxx.xxx
+      PIXOO_BASE_URL: xxx.xxx.xxx.xxx
       #PIXOO_HEALTH_FORWARD: false
       UID: 1000
       GID: 1000

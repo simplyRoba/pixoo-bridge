@@ -6,34 +6,37 @@ import de.simplyroba.pixoobridge.client.model.Command
 import de.simplyroba.pixoobridge.client.model.CommandResponse
 import de.simplyroba.pixoobridge.config.PixooConfig
 import kotlin.time.Duration.Companion.seconds
-import kotlin.time.toJavaDuration
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType.APPLICATION_JSON
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.BodyInserters
-import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.client.RestClient
 
 @Component
 class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   companion object {
-    val DEFAULT_TIMEOUT = 10.seconds.toJavaDuration()
+    val DEFAULT_TIMEOUT = 10.seconds
   }
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
-  private val webclient = WebClient.create("http://${config.host}")
+  private val restClient =
+    RestClient.builder()
+      .baseUrl(config.baseUrl)
+      .requestFactory(
+        HttpComponentsClientHttpRequestFactory().apply {
+          setConnectTimeout(DEFAULT_TIMEOUT.inWholeMilliseconds.toInt())
+          setReadTimeout(DEFAULT_TIMEOUT.inWholeMilliseconds.toInt())
+        }
+      )
+      .build()
 
   fun healthCheck() {
     logger.debug("Check connectivity")
-    webclient
-      .get()
-      .uri("/get")
-      .retrieve()
-      .toBodilessEntity()
-      .block(DEFAULT_TIMEOUT)
-      ?.statusCode
-      ?.takeIf { it.is2xxSuccessful } ?: throw IllegalStateException("Health check at pixoo failed")
+    restClient.get().uri("/get").retrieve().toBodilessEntity().statusCode.takeIf {
+      it.is2xxSuccessful
+    } ?: throw IllegalStateException("Health check at pixoo failed")
   }
 
   fun reboot() {
@@ -112,7 +115,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   /*
    * Returns:
-   * Weather, “Sunny”|”Cloudy”|”Rainy”|”Rainy”|”Frog”, as String
+   * Weather, "Sunny"|"Cloudy"|"Rainy"|"Rainy"|"Frog" , as String
    * CurTemp, example=33.680000, the current temperature as number
    * MinTemp, example=31.580000, the minimum temperature as number
    * MaxTemp, example=34.670000, the maximum temperature as number
@@ -206,9 +209,9 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
    * font, 0-7, animation font
    * TextWidth, 16-64, the text width
    * TextString, 0-512, the text string in utf8
-   * speed, 0,100, the scroll speed if it need scroll, the time (ms) the text move one step
+   * speed, 0,100, the scroll speed if it needs scroll, the time (ms) the text move one step
    * color, example=#FFFF00, font color in hex notation
-   * align, 1|2|3, horizontal text alignmen, 1=left; 2=middle; 3=right
+   * align, 1|2|3, horizontal text alignment, 1=left; 2=middle; 3=right
    */
   fun writeText(
     id: Int,
@@ -247,15 +250,14 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
     logger.debug("Sending command {} with {}", commandType, parameters)
 
     val rawResponse =
-      webclient
+      restClient
         .post()
         .uri("/post")
         .contentType(APPLICATION_JSON)
-        .body(BodyInserters.fromValue(Command(commandType, *parameters)))
+        .body(Command(commandType, *parameters))
         .retrieve()
         .toEntity(String::class.java)
-        .block(DEFAULT_TIMEOUT)
-        ?.body
+        .body
 
     logger.debug("Response for {}: {}", commandType, rawResponse)
 

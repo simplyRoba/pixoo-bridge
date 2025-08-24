@@ -20,18 +20,18 @@ repositories { mavenCentral() }
 
 dependencies {
   implementation(platform(libs.spring.boot.bom))
-  implementation(platform(libs.spring.cloud.bom))
 
   implementation(kotlin("reflect"))
   implementation(libs.spring.boot.starter.web)
-  implementation(libs.spring.boot.starter.webflux) // TODO switch to RestClient
   implementation(libs.jackson.module.kotlin)
   implementation(libs.springdoc.openapi.webmvc)
   implementation(libs.scrimage.core)
 
   testImplementation(libs.spring.boot.starter.test)
   testImplementation(libs.mockito.kotlin) // TODO use springmockk
-  testImplementation(libs.spring.cloud.stub.runner) // TODO use wiremock spring boot
+  testImplementation(libs.wiremock.spring.boot)
+  // for webtestclient (maybe sometime there will be a RestTestClient for easy migration)
+  testImplementation(libs.spring.boot.starter.webflux)
   testRuntimeOnly(libs.junit.platform)
 }
 
