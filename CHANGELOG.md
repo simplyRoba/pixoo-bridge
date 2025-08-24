@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.3...v1.1.0) (2025-08-24)
+
+
+### Features
+
+* enhance health check endpoint to support force flag ([ec43aa2](https://github.com/simplyRoba/pixoo-bridge/commit/ec43aa26036d85724ba7578c892f89fa3f55b84a))
+
 ## [1.0.3](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.2...v1.0.3) (2025-08-24)
 
 
