@@ -1,25 +1,18 @@
 package de.simplyroba.pixoobridge.bridge.draw
 
 import de.simplyroba.pixoobridge.AbstractMvcTest
-import de.simplyroba.pixoobridge.client.PixooClient
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
-import org.mockito.Mock
 import org.mockito.Mockito
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.ClassPathResource
 import org.springframework.http.MediaType
-import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-class DrawControllerMvcTest(
-    @param:Autowired val mockMvc: MockMvc,
-    @param:Mock val pixooClient: PixooClient,
-) : AbstractMvcTest() {
+class DrawControllerMvcTest : AbstractMvcTest() {
 
   @ParameterizedTest
   @CsvSource(
