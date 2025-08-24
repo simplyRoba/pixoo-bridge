@@ -9,7 +9,7 @@ pixoo:
   docs:
     enabled: true
   log:
-    level: DEBUG
+    level: INFO
 
 server:
   port: 4000
