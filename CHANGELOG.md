@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.0.0](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.15...v1.0.0) (2025-08-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* update configuration to use baseUrl instead of host in configuration properties ([#264](https://github.com/simplyRoba/pixoo-bridge/issues/264))
+
+### Features
+
+* **build:** migrate dependencies to version catalog ([#260](https://github.com/simplyRoba/pixoo-bridge/issues/260)) ([370b59e](https://github.com/simplyRoba/pixoo-bridge/commit/370b59e0c49c0b78539ad079a6bfdc508d1ef75b))
+* update configuration to use baseUrl instead of host in configuration properties ([#264](https://github.com/simplyRoba/pixoo-bridge/issues/264)) ([dcb8e2b](https://github.com/simplyRoba/pixoo-bridge/commit/dcb8e2b0cf5cbfd12cbb15076feb5fbd8d372e47))
+
+
+### Bug Fixes
+
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.9 to 2.8.10 ([#261](https://github.com/simplyRoba/pixoo-bridge/issues/261)) ([050d1c4](https://github.com/simplyRoba/pixoo-bridge/commit/050d1c48ecd34fc7d85f4fedc35f6eb6a300df37))
+* **deps:** bump org.springframework.boot from 3.5.3 to 3.5.4 ([#255](https://github.com/simplyRoba/pixoo-bridge/issues/255)) ([adf54fc](https://github.com/simplyRoba/pixoo-bridge/commit/adf54fc1b5639d52bba69074d45d2652509923b9))
+* **deps:** bump spring-boot from 3.5.4 to 3.5.5 ([#263](https://github.com/simplyRoba/pixoo-bridge/issues/263)) ([ab0efb6](https://github.com/simplyRoba/pixoo-bridge/commit/ab0efb6a220bc5a4fd24a083b94c56b328b183d2))
+
 ## [0.5.15](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.14...v0.5.15) (2025-07-22)
 
 
