@@ -7,7 +7,7 @@ import org.springframework.util.unit.DataSize
 // TODO test this config
 @ConfigurationProperties("pixoo")
 data class PixooConfig(
-  val host: String,
+  val baseUrl: String,
   val size: Int,
   val animationSpeedFactor: Float,
   val maxImageSize: DataSize,

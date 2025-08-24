@@ -9,23 +9,24 @@ Small docker image to communicate with a network enabled pixoo LED dot matrix.
 [![GitHub issues](https://img.shields.io/github/issues/simplyRoba/pixoo-bridge?link=https%3A%2F%2Fgithub.com%2FsimplyRoba%2Fpixoo-bridge%2Fissues)](https://github.com/simplyRoba/pixoo-bridge/issues)
 ![GitHub Repo stars](https://img.shields.io/github/stars/simplyRoba/pixoo-bridge)
 
+
 # Configuration
 Pass key as environment variable the docker container.
 
-| Key                          | Default value | Description                                       |
-|------------------------------|---------------|---------------------------------------------------|
-| PIXOO_HOST                   | localhost     | IP of the pixoo in the network                    |
-| PIXOO_SIZE                   | 64            | screen size of the pixoo                          |
-| PIXOO_HEALTH_FORWARD         | true          | Ping pixoo during image health check              |
-| PIXOO_DOCS_ENABLED           | true          | Enable API documentation                          |
-| PIXOO_ANIMATION_SPEED_FACTOR | 1.4           | Factor to adjust animation speed of uploaded gifs |
-| PIXOO_MAX_IMAGE_SIZE         | 2MB           | Image size for uploads. Format like 128KB or 5MB  |
-| PIXOO_LOG_LEVEL              | INFO          | Possible values OFF, DEBUG, INFO, WARN, ERROR     |
+| Key                          | Default value    | Description                                       |
+|------------------------------|------------------|---------------------------------------------------|
+| PIXOO_BASE_URL               | http://localhost | Protocol and IP of the pixoo in the network       |
+| PIXOO_SIZE                   | 64               | screen size of the pixoo                          |
+| PIXOO_HEALTH_FORWARD         | true             | Ping pixoo during image health check              |
+| PIXOO_DOCS_ENABLED           | true             | Enable API documentation                          |
+| PIXOO_ANIMATION_SPEED_FACTOR | 1.4              | Factor to adjust animation speed of uploaded gifs |
+| PIXOO_MAX_IMAGE_SIZE         | 2MB              | Image size for uploads. Format like 128KB or 5MB  |
+| PIXOO_LOG_LEVEL              | INFO             | Possible values OFF, DEBUG, INFO, WARN, ERROR     |
 
 # Run the image
 replace the ip of your pixoo and run
 ```shell
-docker run -p 4000:4000 -e "PIXOO_HOST=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
+docker run -p 4000:4000 -e "PIXOO_BASE_URL=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
 ```
 or use the [docker-compose.yaml](/docker-compose.yaml)
 ```shell

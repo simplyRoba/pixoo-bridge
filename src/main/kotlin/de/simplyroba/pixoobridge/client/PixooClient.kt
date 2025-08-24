@@ -23,7 +23,7 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   private val restClient =
     RestClient.builder()
-      .baseUrl("http://${config.host}")
+      .baseUrl(config.baseUrl)
       .requestFactory(
         HttpComponentsClientHttpRequestFactory().apply {
           setConnectTimeout(DEFAULT_TIMEOUT.inWholeMilliseconds.toInt())

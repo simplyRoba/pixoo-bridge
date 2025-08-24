@@ -33,14 +33,18 @@ class FileDownloader() {
         .onStatus(
           { it.is4xxClientError || it.is5xxServerError },
           { _, response ->
-            logger.warn(
+            logger.error(
               "Error while retrieving file: ${response.statusCode} - ${response.statusText}"
             )
+            throw RemoteFileNotFoundException()
           },
         )
         .body(ByteArray::class.java)
 
     if (bytes != null && bytes.isNotEmpty()) return ByteArrayResource(bytes)
-    else throw RemoteFileNotFoundException()
+    else {
+      logger.error("Downloaded file was empty")
+      throw RemoteFileNotFoundException()
+    }
   }
 }
