@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.1...v1.0.2) (2025-08-24)
+
+
+### Bug Fixes
+
+* add missing Apache HttpClient dependency to build configuration ([27e30bf](https://github.com/simplyRoba/pixoo-bridge/commit/27e30bf4e04faba989d04602f83825f070d2e157))
+
 ## [1.0.1](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.0...v1.0.1) (2025-08-24)
 
 
