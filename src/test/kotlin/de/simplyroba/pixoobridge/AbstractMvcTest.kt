@@ -9,9 +9,4 @@ import org.springframework.test.web.servlet.MockMvc
 
 @SpringBootTest
 @AutoConfigureMockMvc
-abstract class AbstractMvcTest {
-
-  @Autowired lateinit var mockMvc: MockMvc
-
-  @Mock lateinit var pixooClient: PixooClient
-}
+abstract class AbstractMvcTest()
