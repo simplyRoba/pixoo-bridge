@@ -1,6 +1,6 @@
 
 pixoo:
-  baseUrl: 'http://localhost'
+  baseUrl: 'http://192.168.178.40'
   size: 64
   animation-speed-factor: 1.4
   max-image-size: 2MB

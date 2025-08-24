@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.1.0](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.3...v1.1.0) (2025-08-24)
+
+
+### Features
+
+* enhance health check endpoint to support force flag ([ec43aa2](https://github.com/simplyRoba/pixoo-bridge/commit/ec43aa26036d85724ba7578c892f89fa3f55b84a))
+
+## [1.0.3](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.2...v1.0.3) (2025-08-24)
+
+
+### Bug Fixes
+
+* revert migration to rest client as it seems not working correctly ([#268](https://github.com/simplyRoba/pixoo-bridge/issues/268)) ([7fc7228](https://github.com/simplyRoba/pixoo-bridge/commit/7fc722887fa6f5ba9209656bd9915023cb58d14e))
+
+## [1.0.2](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.1...v1.0.2) (2025-08-24)
+
+
+### Bug Fixes
+
+* add missing Apache HttpClient dependency to build configuration ([27e30bf](https://github.com/simplyRoba/pixoo-bridge/commit/27e30bf4e04faba989d04602f83825f070d2e157))
+
 ## [1.0.1](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.0...v1.0.1) (2025-08-24)
 
 
