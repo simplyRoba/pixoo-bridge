@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.0...v1.0.1) (2025-08-24)
+
+
+### Bug Fixes
+
+* **build:** enable spring boot plugin and remove BOM dependency ([#265](https://github.com/simplyRoba/pixoo-bridge/issues/265)) ([5d90a8c](https://github.com/simplyRoba/pixoo-bridge/commit/5d90a8cc9e4991598f7f2e81b7394449781a5ae3))
+
 ## [1.0.0](https://github.com/simplyRoba/pixoo-bridge/compare/v0.5.15...v1.0.0) (2025-08-24)
 
 
