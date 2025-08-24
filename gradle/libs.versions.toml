@@ -14,6 +14,7 @@ spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-start
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version.ref = "scrimage" }
+http-client = { module = "org.apache.httpcomponents.client5:httpclient5" }
 springdoc-openapi-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
 
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
