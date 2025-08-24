@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.2...v1.0.3) (2025-08-24)
+
+
+### Bug Fixes
+
+* revert migration to rest client as it seems not working correctly ([#268](https://github.com/simplyRoba/pixoo-bridge/issues/268)) ([7fc7228](https://github.com/simplyRoba/pixoo-bridge/commit/7fc722887fa6f5ba9209656bd9915023cb58d14e))
+
 ## [1.0.2](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.1...v1.0.2) (2025-08-24)
 
 
