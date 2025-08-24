@@ -4,13 +4,13 @@ import io.swagger.v3.oas.annotations.media.Schema
 
 @Schema(name = "Text")
 data class TextRequest(
-  @Schema(minimum = "0", maximum = "20") val id: Int,
+  @param:Schema(minimum = "0", maximum = "20") val id: Int,
   val position: Position,
   val scrollDirection: ScrollDirection,
-  @Schema(minimum = "0", maximum = "7") val font: Int,
-  @Schema(minimum = "16", maximum = "64") val textWidth: Int,
-  @Schema(maxLength = 512) val text: String,
-  @Schema(minimum = "0", maximum = "100") val scrollSpeed: Int,
+  @param:Schema(minimum = "0", maximum = "7") val font: Int,
+  @param:Schema(minimum = "16", maximum = "64") val textWidth: Int,
+  @param:Schema(maxLength = 512) val text: String,
+  @param:Schema(minimum = "0", maximum = "100") val scrollSpeed: Int,
   val color: RgbColor,
   val textAlignment: TextAlignment,
 )

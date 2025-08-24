@@ -3,6 +3,7 @@ package de.simplyroba.pixoobridge.bridge.draw
 import de.simplyroba.pixoobridge.bridge.draw.model.*
 import de.simplyroba.pixoobridge.client.PixooClient
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.parameters.RequestBody as SwaggerRequestBody
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -44,9 +45,7 @@ class DrawController(private val imageService: ImageService, private val pixooCl
         ApiResponse(responseCode = "413", description = "Maximum upload size exceeded."),
       ]
   )
-  @io.swagger.v3.oas.annotations.parameters.RequestBody(
-    description = "Image to upload. Supported formats: jpg, jpeg, png, gif"
-  )
+  @SwaggerRequestBody(description = "Image to upload. Supported formats: jpg, jpeg, png, gif")
   @PostMapping("/upload", consumes = [MULTIPART_FORM_DATA_VALUE])
   fun uploadImage(
     @RequestPart("image", required = true) image: MultipartFile
