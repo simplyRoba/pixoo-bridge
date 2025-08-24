@@ -2,7 +2,7 @@ plugins {
   kotlin("jvm") version libs.versions.kotlin.core
   kotlin("plugin.spring") version libs.versions.kotlin.core
   alias(libs.plugins.spring.dependency.management)
-  alias(libs.plugins.spring.boot) apply false
+  alias(libs.plugins.spring.boot)
   alias(libs.plugins.spottless)
 }
 
@@ -19,8 +19,6 @@ repositories { mavenCentral() }
 // like extra["libXX.version"] = "XXX"
 
 dependencies {
-  implementation(platform(libs.spring.boot.bom))
-
   implementation(kotlin("reflect"))
   implementation(libs.spring.boot.starter.web)
   implementation(libs.jackson.module.kotlin)
