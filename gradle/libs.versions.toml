@@ -3,7 +3,7 @@
 spring-boot = "3.5.5"
 spring-dependency-management = "1.1.7"
 kotlin-core = "2.2.0"
-springdoc = "2.8.10"
+springdoc = "2.8.11"
 spotless = "7.2.1"
 mockito-kotlin = "6.0.0"
 wiremock-spring-boot = "3.10.6"
