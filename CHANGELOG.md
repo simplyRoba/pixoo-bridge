@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/simplyRoba/pixoo-bridge/compare/v1.1.0...v1.1.1) (2025-09-03)
+
+
+### Bug Fixes
+
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.3.3 to 4.3.4 ([#276](https://github.com/simplyRoba/pixoo-bridge/issues/276)) ([b394513](https://github.com/simplyRoba/pixoo-bridge/commit/b3945135deb23ea962a5885199edfd4394984963))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.10 to 2.8.11 ([#272](https://github.com/simplyRoba/pixoo-bridge/issues/272)) ([17af6b4](https://github.com/simplyRoba/pixoo-bridge/commit/17af6b48101d42a816ff45c18088e7a21796d0cb))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.11 to 2.8.12 ([#277](https://github.com/simplyRoba/pixoo-bridge/issues/277)) ([d916be0](https://github.com/simplyRoba/pixoo-bridge/commit/d916be0406d07003f149c08911071337f194cc22))
+
 ## [1.1.0](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.3...v1.1.0) (2025-08-24)
 
 
