@@ -7,7 +7,7 @@ springdoc = "2.8.11"
 spotless = "7.2.1"
 mockito-kotlin = "6.0.0"
 wiremock-spring-boot = "3.10.6"
-scrimage = "4.3.3"
+scrimage = "4.3.4"
 
 [libraries]
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
