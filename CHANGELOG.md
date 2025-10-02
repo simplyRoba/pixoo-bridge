@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/simplyRoba/pixoo-bridge/compare/v1.1.1...v1.1.2) (2025-10-02)
+
+
+### Bug Fixes
+
+* **deps:** bump org.mockito.kotlin:mockito-kotlin from 6.0.0 to 6.1.0 ([#282](https://github.com/simplyRoba/pixoo-bridge/issues/282)) ([89155b1](https://github.com/simplyRoba/pixoo-bridge/commit/89155b1d080ad336bc2370391183dc3e9d65bc35))
+
 ## [1.1.1](https://github.com/simplyRoba/pixoo-bridge/compare/v1.1.0...v1.1.1) (2025-09-25)
 
 
