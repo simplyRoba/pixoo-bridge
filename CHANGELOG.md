@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.2](https://github.com/simplyRoba/pixoo-bridge/compare/v1.1.1...v1.1.2) (2025-11-12)
+
+
+### Bug Fixes
+
+* **deps:** bump org.mockito.kotlin:mockito-kotlin from 6.0.0 to 6.1.0 ([#282](https://github.com/simplyRoba/pixoo-bridge/issues/282)) ([89155b1](https://github.com/simplyRoba/pixoo-bridge/commit/89155b1d080ad336bc2370391183dc3e9d65bc35))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.13 to 2.8.14 ([#287](https://github.com/simplyRoba/pixoo-bridge/issues/287)) ([e216a07](https://github.com/simplyRoba/pixoo-bridge/commit/e216a071a54c216e9995884b565102748ba34a72))
+* **deps:** bump org.springframework.boot from 3.5.6 to 3.5.7 ([#285](https://github.com/simplyRoba/pixoo-bridge/issues/285)) ([21bca43](https://github.com/simplyRoba/pixoo-bridge/commit/21bca43610c5a683c9e3db55a226f7e8adc39233))
+* **deps:** bump org.wiremock.integrations:wiremock-spring-boot from 3.10.6 to 4.0.6 ([#288](https://github.com/simplyRoba/pixoo-bridge/issues/288)) ([6ea7d11](https://github.com/simplyRoba/pixoo-bridge/commit/6ea7d114e8555161f61bd34a73790b654eddbc60))
+* **deps:** bump org.wiremock.integrations:wiremock-spring-boot from 4.0.6 to 4.0.7 ([#289](https://github.com/simplyRoba/pixoo-bridge/issues/289)) ([386b0f7](https://github.com/simplyRoba/pixoo-bridge/commit/386b0f77538e2d36490e9c84685f3ab0a318a340))
+
 ## [1.1.1](https://github.com/simplyRoba/pixoo-bridge/compare/v1.1.0...v1.1.1) (2025-09-25)
 
 
