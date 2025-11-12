@@ -6,7 +6,7 @@ kotlin-core = "2.2.0"
 springdoc = "2.8.14"
 spotless = "8.0.0"
 mockito-kotlin = "6.1.0"
-wiremock-spring-boot = "4.0.6"
+wiremock-spring-boot = "4.0.7"
 scrimage = "4.3.5"
 
 [libraries]
