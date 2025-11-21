@@ -10,7 +10,7 @@ jobs:
       checks: write # for test report action
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Java
         uses: actions/setup-java@v5
