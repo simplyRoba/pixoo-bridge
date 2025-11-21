@@ -107,7 +107,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
                 "UTCTime":1647200428,
                 "LocalTime":"2022-03-14 03:40:28"
               }
-                  """
+              """
                 .trimIndent()
             )
         )
@@ -117,10 +117,10 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .expectBody()
       .json(
         """
-          {
-            "utcTime":"2022-03-13T19:40:28",
-            "localTime":"2022-03-14T03:40:28"
-          }
+        {
+          "utcTime":"2022-03-13T19:40:28",
+          "localTime":"2022-03-14T03:40:28"
+        }
         """
           .trimIndent()
       )
@@ -180,7 +180,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
                 "Visibility": 10000,
                 "WindSpeed": 2.54
               }
-                  """
+              """
                 .trimIndent()
             )
         )
@@ -190,15 +190,15 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .expectBody()
       .json(
         """
-          {
-            "weatherString": "Cloudy",
-            "currentTemperature": 33.68,
-            "minimalTemperature": 31.85,
-            "maximalTemperature": 33.68,
-            "pressure": 1006,
-            "humidity": 50,
-            "windSpeed": 2.54
-          }
+        {
+          "weatherString": "Cloudy",
+          "currentTemperature": 33.68,
+          "minimalTemperature": 31.85,
+          "maximalTemperature": 33.68,
+          "pressure": 1006,
+          "humidity": 50,
+          "windSpeed": 2.54
+        }
         """
           .trimIndent()
       )
@@ -230,7 +230,7 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
                 "MirrorFlag":1,
                 "LightSwitch":1
               }
-                  """
+              """
                 .trimIndent()
             )
         )
@@ -240,15 +240,15 @@ class ManageControllerRestIntegrationTest : AbstractRestIntegrationTest() {
       .expectBody()
       .json(
         """
-          {
-            "displayOn":true,
-            "brightness":100,
-            "timeMode":"TWENTY_FOUR",
-            "rotationAngle":90,
-            "mirrored":true,
-            "temperatureUnit":"FAHRENHEIT",
-            "currentClockId":1
-          }
+        {
+          "displayOn":true,
+          "brightness":100,
+          "timeMode":"TWENTY_FOUR",
+          "rotationAngle":90,
+          "mirrored":true,
+          "temperatureUnit":"FAHRENHEIT",
+          "currentClockId":1
+        }
         """
           .trimIndent()
       )
