@@ -10,6 +10,14 @@ pixoo:
     enabled: true
   log:
     level: INFO
+  bridge:
+    max-image-size: 2MB
+    health:
+      forward: true
+    docs:
+      enabled: true
+    log:
+      level: INFO
 
 server:
   port: 4000 # TODO add overwrite at some point later
@@ -25,16 +33,16 @@ spring:
       fail-on-unknown-properties: true
   servlet:
     multipart: # upper limit for uploaded images
-      max-file-size: ${pixoo.max-image-size}
-      max-request-size: ${pixoo.max-image-size}
+      max-file-size: ${pixoo.bridge.max-image-size}
+      max-request-size: ${pixoo.bridge.max-image-size}
 
 springdoc:
   api-docs:
-    enabled: ${pixoo.docs.enabled}
+    enabled: ${pixoo.bridge.docs.enabled}
   swagger-ui:
-    enabled: ${pixoo.docs.enabled}
+    enabled: ${pixoo.bridge.docs.enabled}
     tryItOutEnabled: true
 
 logging:
   level:
-    de.simplyroba.pixoobridge: ${pixoo.log.level}
+    de.simplyroba.pixoobridge: ${pixoo.bridge.log.level}

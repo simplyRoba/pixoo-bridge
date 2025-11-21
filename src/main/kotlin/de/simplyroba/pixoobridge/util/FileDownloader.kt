@@ -18,7 +18,9 @@ class FileDownloader(private val pixooConfig: PixooConfig) {
     val webClient =
       WebClient.builder()
         .codecs { configurer ->
-          configurer.defaultCodecs().maxInMemorySize(pixooConfig.maxImageSize.toBytes().toInt())
+          configurer
+            .defaultCodecs()
+            .maxInMemorySize(pixooConfig.bridge.maxImageSize.toBytes().toInt())
         }
         .build()
 

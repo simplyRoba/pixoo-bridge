@@ -7,7 +7,7 @@ import org.mockito.kotlin.verify
 import org.springframework.test.context.TestPropertySource
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 
-@TestPropertySource(properties = ["pixoo.health.forward=false"])
+@TestPropertySource(properties = ["pixoo.bridge.health.forward=false"])
 class SystemControllerMvcTest : AbstractMvcTest() {
 
   @Test
