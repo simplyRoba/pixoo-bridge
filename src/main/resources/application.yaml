@@ -3,14 +3,8 @@ pixoo:
   baseUrl: 'http://localhost'
   size: 64
   animation-speed-factor: 1.4
-  max-image-size: 2MB
-  health:
-    forward: true
-  docs:
-    enabled: true
-  log:
-    level: INFO
   bridge:
+    port: 4000
     max-image-size: 2MB
     health:
       forward: true
@@ -20,7 +14,7 @@ pixoo:
       level: INFO
 
 server:
-  port: 4000 # TODO add overwrite at some point later
+  port: ${pixoo.bridge.port}
   shutdown: 'graceful'
   error:
     include-message: always
