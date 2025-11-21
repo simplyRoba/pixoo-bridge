@@ -43,9 +43,27 @@ http://localhost:4000/swagger-ui/index.html
 ```
 ![Swagger Screenshot](/docs/swagger-screenshot.png)
 
-
 ## Limitations
 The `Channel control API` of the Pixoo will not be implemented. Use the App for these functionality.
+
+# Migration Guides
+## from 0.x to 1.x
+Rename configuration parameter in your `compose.yaml`.
+
+| old name   | new name       |
+|------------|----------------|
+| PIXOO_HOST | PIXOO_BASE_URL | 
+
+## from 1.x to 2.x
+Rename configuration parameter in your `compose.yaml:` 
+
+| old name             | new name                    |
+|----------------------|-----------------------------|
+| PIXOO_HEALTH_FORWARD | PIXOO_BRIDGE_HEALTH_FORWARD |
+| PIXOO_DOCS_ENABLED   | PIXOO_BRIDGE_DOCS_ENABLED   |
+| PIXOO_MAX_IMAGE_SIZE | PIXOO_BRIDGE_MAX_IMAGE_SIZE |
+| PIXOO_LOG_LEVEL      | PIXOO_BRIDGE_LOG_LEVEL      |
+
 
 # Further resources
 ## Official product page
