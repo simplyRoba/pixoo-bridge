@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/simplyRoba/pixoo-bridge/compare/v2.0.0...v2.1.0) (2025-11-28)
+
+
+### Features
+
+* add forward header support to support reverse proxies ([#298](https://github.com/simplyRoba/pixoo-bridge/issues/298)) ([e5bf44f](https://github.com/simplyRoba/pixoo-bridge/commit/e5bf44fbc642f6a9edec80d191e2b32df226b96a))
+* add root redirect to swagger ui ([#300](https://github.com/simplyRoba/pixoo-bridge/issues/300)) ([0c59a42](https://github.com/simplyRoba/pixoo-bridge/commit/0c59a426e73396c51fcf700db58ef86b32b2b26c))
+
 ## [2.0.0](https://github.com/simplyRoba/pixoo-bridge/compare/v1.1.1...v2.0.0) (2025-11-21)
 
 
