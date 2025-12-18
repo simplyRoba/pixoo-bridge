@@ -38,7 +38,7 @@ docker compose up -d
 ## Documentation
 Generated API documentation can be reached under 
 ```
-http://localhost:4000/swagger-ui/index.html
+http://localhost:4000
 ```
 ![Swagger Screenshot](/docs/swagger-screenshot.png)
 
