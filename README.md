@@ -34,26 +34,23 @@ or use the [docker-compose.yaml](/docker-compose.yaml)
 docker compose up -d
 ```
 
-# API
-## Documentation
+# Documentation
+## API
 Generated API documentation can be reached under 
 ```
 http://localhost:4000
 ```
 ![Swagger Screenshot](/docs/swagger-screenshot.png)
 
-## Limitations
-The `Channel control API` of the Pixoo will not be implemented. Use the App for these functionality.
-
-# Migration Guides
-## from 0.x to 1.x
+## Migration Guides
+### from 0.x to 1.x
 Rename configuration parameter in your `compose.yaml`.
 
 | old name   | new name       |
 |------------|----------------|
 | PIXOO_HOST | PIXOO_BASE_URL | 
 
-## from 1.x to 2.x
+### from 1.x to 2.x
 Rename configuration parameter in your `compose.yaml:` 
 
 | old name             | new name                    |
@@ -63,10 +60,12 @@ Rename configuration parameter in your `compose.yaml:`
 | PIXOO_MAX_IMAGE_SIZE | PIXOO_BRIDGE_MAX_IMAGE_SIZE |
 | PIXOO_LOG_LEVEL      | PIXOO_BRIDGE_LOG_LEVEL      |
 
+## Limitations
+The `Channel control API` of the Pixoo will not be implemented. Use the App for these functionality.
 
-# Further resources
-## Official product page
+## Further resources
+### Official product page
 [Pixoo64](https://divoom.com/products/pixoo-64)
 
-## Pixoo API
+### Pixoo API
 [Official Divoom API documentation](http://doc.divoom-gz.com/web/#/12?page_id=191)
