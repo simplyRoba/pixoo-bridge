@@ -4,26 +4,25 @@ import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
-import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient
 import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.web.reactive.server.WebTestClient
-import org.springframework.web.reactive.function.BodyInserters
+import org.springframework.test.web.servlet.client.RestTestClient
 import org.wiremock.spring.ConfigureWireMock
 import org.wiremock.spring.EnableWireMock
 import org.wiremock.spring.InjectWireMock
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-@AutoConfigureWebTestClient
+@AutoConfigureRestTestClient
 @ActiveProfiles("test")
 @EnableWireMock(
   ConfigureWireMock(name = "pixoo-led-matrix", baseUrlProperties = ["pixoo.base-url"])
 )
 abstract class AbstractRestIntegrationTest {
 
-  @Autowired protected lateinit var webTestClient: WebTestClient
+  @Autowired protected lateinit var restTestClient: RestTestClient
 
   @InjectWireMock("pixoo-led-matrix") protected lateinit var pixooLedMatrix: WireMockServer
 
@@ -39,7 +38,7 @@ abstract class AbstractRestIntegrationTest {
   }
 
   protected fun doPostCallExpectingSuccess(path: String) =
-    webTestClient
+    restTestClient
       .post()
       .uri(path)
       .accept(MediaType.APPLICATION_JSON)
@@ -52,19 +51,19 @@ abstract class AbstractRestIntegrationTest {
     doPostCallWithBody(path, body).expectStatus().is2xxSuccessful()
 
   protected fun doPostCallWithBody(path: String, body: Any) =
-    webTestClient
+    restTestClient
       .post()
       .uri(path)
       .accept(MediaType.APPLICATION_JSON)
       .contentType(MediaType.APPLICATION_JSON)
-      .body(BodyInserters.fromValue(body))
+      .body(body)
       .exchange()
 
   protected fun doGetCallExpectingSuccess(path: String) =
     doGetCall(path).expectStatus().is2xxSuccessful
 
   protected fun doGetCall(path: String) =
-    webTestClient.get().uri(path).accept(MediaType.APPLICATION_JSON).exchange()
+    restTestClient.get().uri(path).accept(MediaType.APPLICATION_JSON).exchange()
 
   /**
    * Wiremock uses JsonUnit and therefore can handle placeholders. See:

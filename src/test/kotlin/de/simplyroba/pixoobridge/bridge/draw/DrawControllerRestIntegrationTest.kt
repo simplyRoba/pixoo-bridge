@@ -6,8 +6,8 @@ import de.simplyroba.test.JsonUnitRegexBuilder.Companion.regex
 import org.junit.jupiter.api.Test
 import org.springframework.core.io.ClassPathResource
 import org.springframework.http.MediaType
-import org.springframework.http.client.MultipartBodyBuilder
-import org.springframework.web.reactive.function.BodyInserters
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.util.MultiValueMap
 
 class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
 
@@ -47,16 +47,14 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     val picId = 12
     stubNextPictureIdCall(picId)
 
-    val multipartBodyBuilder = MultipartBodyBuilder()
-    multipartBodyBuilder
-      .part("image", ClassPathResource("images/black_100x100.jpg"))
-      .contentType(MediaType.MULTIPART_FORM_DATA)
+    val multipartData: MultiValueMap<String, Any> = LinkedMultiValueMap()
+    multipartData.add("image", ClassPathResource("images/black_100x100.jpg"))
 
-    webTestClient
+    restTestClient
       .post()
       .uri("/draw/upload")
       .contentType(MediaType.MULTIPART_FORM_DATA)
-      .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
+      .body(multipartData)
       .exchange()
       .expectStatus()
       .is2xxSuccessful
@@ -82,16 +80,14 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     val picId = 32
     stubNextPictureIdCall(picId)
 
-    val multipartBodyBuilder = MultipartBodyBuilder()
-    multipartBodyBuilder
-      .part("image", ClassPathResource("images/black_white_animated_100x100_200ms.gif"))
-      .contentType(MediaType.MULTIPART_FORM_DATA)
+    val multipartData: MultiValueMap<String, Any> = LinkedMultiValueMap()
+    multipartData.add("image", ClassPathResource("images/black_white_animated_100x100_200ms.gif"))
 
-    webTestClient
+    restTestClient
       .post()
       .uri("/draw/upload")
       .contentType(MediaType.MULTIPART_FORM_DATA)
-      .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
+      .body(multipartData)
       .exchange()
       .expectStatus()
       .is2xxSuccessful()
@@ -132,16 +128,14 @@ class DrawControllerRestIntegrationTest : AbstractRestIntegrationTest() {
     val picId = 67
     stubNextPictureIdCall(picId)
 
-    val multipartBodyBuilder = MultipartBodyBuilder()
-    multipartBodyBuilder
-      .part("image", ClassPathResource("images/black_white_animated_100x100_1000ms.gif"))
-      .contentType(MediaType.MULTIPART_FORM_DATA)
+    val multipartData: MultiValueMap<String, Any> = LinkedMultiValueMap()
+    multipartData.add("image", ClassPathResource("images/black_white_animated_100x100_1000ms.gif"))
 
-    webTestClient
+    restTestClient
       .post()
       .uri("/draw/upload")
       .contentType(MediaType.MULTIPART_FORM_DATA)
-      .body(BodyInserters.fromMultipartData(multipartBodyBuilder.build()))
+      .body(multipartData)
       .exchange()
       .expectStatus()
       .is2xxSuccessful()

@@ -28,8 +28,7 @@ dependencies {
   implementation(libs.scrimage.core)
 
   testImplementation(libs.spring.boot.starter.webmvc.test)
-  testImplementation(libs.spring.boot.starter.webflux.test)
-  testImplementation(libs.mockito.kotlin) // TODO use springmockk
+  testImplementation(libs.mockito.kotlin) // TODO checkout springmockk
   testImplementation(libs.wiremock.spring.boot)
   testRuntimeOnly(libs.junit.platform)
 }
