@@ -23,7 +23,7 @@ class SystemController(val pixooClient: PixooClient, val config: PixooConfig) {
   fun healthCheck(
     @RequestParam(required = false, defaultValue = "false") force: Boolean
   ): ResponseEntity<Unit> {
-    if (force || config.health.forward) pixooClient.healthCheck()
+    if (force || config.bridge.health.forward) pixooClient.healthCheck()
     return ok().build()
   }
 

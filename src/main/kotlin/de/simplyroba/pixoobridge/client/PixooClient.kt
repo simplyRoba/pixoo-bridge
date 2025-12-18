@@ -1,6 +1,5 @@
 package de.simplyroba.pixoobridge.client
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import de.simplyroba.pixoobridge.client.CommandType.*
 import de.simplyroba.pixoobridge.client.model.Command
 import de.simplyroba.pixoobridge.client.model.CommandResponse
@@ -12,6 +11,7 @@ import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
+import tools.jackson.databind.ObjectMapper
 
 @Component
 class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {

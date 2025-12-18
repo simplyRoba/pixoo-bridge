@@ -1,18 +1,22 @@
 
 pixoo:
-  baseUrl: 'http://192.168.178.40'
+  baseUrl: 'http://localhost'
   size: 64
   animation-speed-factor: 1.4
-  max-image-size: 2MB
-  health:
-    forward: true
-  docs:
-    enabled: true
-  log:
-    level: INFO
+  bridge:
+    port: 4000
+    max-image-size: 2MB
+    health:
+      forward: true
+    docs:
+      enabled: true
+    log:
+      level: INFO
 
 server:
-  port: 4000
+  port: ${pixoo.bridge.port}
+  forward-headers-strategy: framework
+  use-forward-headers: true
   shutdown: 'graceful'
   error:
     include-message: always
@@ -25,16 +29,16 @@ spring:
       fail-on-unknown-properties: true
   servlet:
     multipart: # upper limit for uploaded images
-      max-file-size: ${pixoo.max-image-size}
-      max-request-size: ${pixoo.max-image-size}
+      max-file-size: ${pixoo.bridge.max-image-size}
+      max-request-size: ${pixoo.bridge.max-image-size}
 
 springdoc:
   api-docs:
-    enabled: ${pixoo.docs.enabled}
+    enabled: ${pixoo.bridge.docs.enabled}
   swagger-ui:
-    enabled: ${pixoo.docs.enabled}
+    enabled: ${pixoo.bridge.docs.enabled}
     tryItOutEnabled: true
 
 logging:
   level:
-    de.simplyroba.pixoobridge: ${pixoo.log.level}
+    de.simplyroba.pixoobridge: ${pixoo.bridge.log.level}

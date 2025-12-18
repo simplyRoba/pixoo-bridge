@@ -4,16 +4,12 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.util.unit.DataSize
 
-// TODO test this config
 @ConfigurationProperties("pixoo")
 data class PixooConfig(
   val baseUrl: String,
   val size: Int,
   val animationSpeedFactor: Float,
-  val maxImageSize: DataSize,
-  val health: PixooHealthConfig,
-  val docs: PixooDocumentationConfig,
-  val log: PixooLogLevelConfig,
+  val bridge: PixooBridgeConfig,
 ) {
 
   companion object {
@@ -23,7 +19,7 @@ data class PixooConfig(
   private val logger = LoggerFactory.getLogger(javaClass)
 
   init {
-    logger.info("Configuration: $this")
+    logger.info("Configuration loaded: $this")
     if (ACCEPTABLE_SIZES.contains(size).not())
       throw UnsupportedConfigurationException(
         "Size: $size is not supported. Possible values: ${ACCEPTABLE_SIZES.contentToString()}."
@@ -34,6 +30,13 @@ data class PixooConfig(
       )
   }
 }
+
+data class PixooBridgeConfig(
+  val maxImageSize: DataSize,
+  val health: PixooHealthConfig,
+  val docs: PixooDocumentationConfig,
+  val log: PixooLogLevelConfig,
+)
 
 data class PixooHealthConfig(val forward: Boolean)
 

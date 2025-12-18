@@ -1,22 +1,23 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 [versions]
-spring-boot = "3.5.6"
+spring-boot = "4.0.0"
 spring-dependency-management = "1.1.7"
 kotlin-core = "2.2.0"
-springdoc = "2.8.13"
-spotless = "8.0.0"
-mockito-kotlin = "6.0.0"
-wiremock-spring-boot = "3.10.6"
+springdoc = "3.0.0"
+spotless = "8.1.0"
+mockito-kotlin = "6.1.0"
+wiremock-spring-boot = "4.0.8"
 scrimage = "4.3.5"
 
 [libraries]
-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-webmvc = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version.ref = "scrimage" }
 springdoc-openapi-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
 
-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-starter-webmvc-test = { module = "org.springframework.boot:spring-boot-starter-webmvc-test" }
+spring-boot-starter-webflux-test = { module = "org.springframework.boot:spring-boot-starter-webflux-test" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
 wiremock-spring-boot = { module = "org.wiremock.integrations:wiremock-spring-boot", version.ref = "wiremock-spring-boot" }
 junit-platform = { module = "org.junit.platform:junit-platform-launcher" }
