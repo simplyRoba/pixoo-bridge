@@ -17,11 +17,12 @@ Pass key as environment variable the docker container.
 |------------------------------|------------------|---------------------------------------------------|
 | PIXOO_BASE_URL               | http://localhost | Protocol and IP of the pixoo in the network       |
 | PIXOO_SIZE                   | 64               | screen size of the pixoo                          |
-| PIXOO_HEALTH_FORWARD         | true             | Ping pixoo during image health check              |
-| PIXOO_DOCS_ENABLED           | true             | Enable API documentation                          |
 | PIXOO_ANIMATION_SPEED_FACTOR | 1.4              | Factor to adjust animation speed of uploaded gifs |
-| PIXOO_MAX_IMAGE_SIZE         | 2MB              | Image size for uploads. Format like 128KB or 5MB  |
-| PIXOO_LOG_LEVEL              | INFO             | Possible values OFF, DEBUG, INFO, WARN, ERROR     |
+| PIXOO_BRIDGE_PORT            | 4000             | Port of the pixxo bridge in the container         |
+| PIXOO_BRIDGE_HEALTH_FORWARD  | true             | Ping pixoo during image health check              |
+| PIXOO_BRIDGE_DOCS_ENABLED    | true             | Enable API documentation (Swagger UI)             |
+| PIXOO_BRIDGE_MAX_IMAGE_SIZE  | 2MB              | Image size for uploads. Format like 128KB or 5MB  |
+| PIXOO_BRIDGE_LOG_LEVEL       | INFO             | Possible values OFF, DEBUG, INFO, WARN, ERROR     |
 
 # Run the image
 replace the ip of your pixoo and run
@@ -33,21 +34,38 @@ or use the [docker-compose.yaml](/docker-compose.yaml)
 docker compose up -d
 ```
 
-# API
-## Documentation
+# Documentation
+## API
 Generated API documentation can be reached under 
 ```
-http://localhost:4000/swagger-ui/index.html
+http://localhost:4000
 ```
 ![Swagger Screenshot](/docs/swagger-screenshot.png)
 
+## Migration Guides
+### from 0.x to 1.x
+Rename configuration parameter in your `compose.yaml`.
+
+| old name   | new name       |
+|------------|----------------|
+| PIXOO_HOST | PIXOO_BASE_URL | 
+
+### from 1.x to 2.x
+Rename configuration parameter in your `compose.yaml:` 
+
+| old name             | new name                    |
+|----------------------|-----------------------------|
+| PIXOO_HEALTH_FORWARD | PIXOO_BRIDGE_HEALTH_FORWARD |
+| PIXOO_DOCS_ENABLED   | PIXOO_BRIDGE_DOCS_ENABLED   |
+| PIXOO_MAX_IMAGE_SIZE | PIXOO_BRIDGE_MAX_IMAGE_SIZE |
+| PIXOO_LOG_LEVEL      | PIXOO_BRIDGE_LOG_LEVEL      |
 
 ## Limitations
 The `Channel control API` of the Pixoo will not be implemented. Use the App for these functionality.
 
-# Further resources
-## Official product page
+## Further resources
+### Official product page
 [Pixoo64](https://divoom.com/products/pixoo-64)
 
-## Pixoo API
+### Pixoo API
 [Official Divoom API documentation](http://doc.divoom-gz.com/web/#/12?page_id=191)

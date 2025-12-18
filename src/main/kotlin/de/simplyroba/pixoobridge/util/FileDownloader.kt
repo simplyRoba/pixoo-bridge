@@ -1,49 +1,46 @@
 package de.simplyroba.pixoobridge.util
 
-import de.simplyroba.pixoobridge.client.PixooClient.Companion.DEFAULT_TIMEOUT
+import de.simplyroba.pixoobridge.config.PixooConfig
 import org.slf4j.LoggerFactory
 import org.springframework.core.io.ByteArrayResource
 import org.springframework.core.io.Resource
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory
 import org.springframework.stereotype.Component
-import org.springframework.web.client.RestClient
+import org.springframework.web.reactive.function.client.WebClient
+import reactor.core.publisher.Mono
 
 @Component
-class FileDownloader() {
+class FileDownloader(private val pixooConfig: PixooConfig) {
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
   fun download(link: String): Resource {
 
-    val restClient =
-      RestClient.builder()
-        .requestFactory(
-          HttpComponentsClientHttpRequestFactory().apply {
-            setConnectTimeout(DEFAULT_TIMEOUT.inWholeMilliseconds.toInt())
-            setReadTimeout(DEFAULT_TIMEOUT.inWholeMilliseconds.toInt())
-          }
-        )
+    logger.debug("Starting download from link: {}", link)
+    val webClient =
+      WebClient.builder()
+        .codecs { configurer ->
+          configurer
+            .defaultCodecs()
+            .maxInMemorySize(pixooConfig.bridge.maxImageSize.toBytes().toInt())
+        }
         .build()
 
     val bytes =
-      restClient
+      webClient
         .get()
         .uri(link)
         .retrieve()
-        .onStatus(
-          { it.is4xxClientError || it.is5xxServerError },
-          { _, response ->
-            logger.error(
-              "Error while retrieving file: ${response.statusCode} - ${response.statusText}"
-            )
-            throw RemoteFileNotFoundException()
-          },
-        )
-        .body(ByteArray::class.java)
+        .bodyToMono(ByteArray::class.java)
+        .doOnError { e -> logger.error("Error while retrieving file: {}", e.message) }
+        // will return an empty byte array on http error like 404
+        .onErrorResume { _ -> Mono.empty() }
+        .block()
 
-    if (bytes != null && bytes.isNotEmpty()) return ByteArrayResource(bytes)
-    else {
-      logger.error("Downloaded file was empty")
+    if (bytes != null && bytes.isNotEmpty()) {
+      logger.debug("Download successful, received {} bytes", bytes.size)
+      return ByteArrayResource(bytes)
+    } else {
+      logger.warn("No data received or file not found.")
       throw RemoteFileNotFoundException()
     }
   }

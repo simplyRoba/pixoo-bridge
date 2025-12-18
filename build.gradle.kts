@@ -20,17 +20,17 @@ repositories { mavenCentral() }
 
 dependencies {
   implementation(kotlin("reflect"))
-  implementation(libs.spring.boot.starter.web)
+  implementation(libs.spring.boot.starter.webmvc)
   implementation(libs.jackson.module.kotlin)
   implementation(libs.springdoc.openapi.webmvc)
-  implementation(libs.http.client) // TODO maybe use jdk http client instead of apache??
+  // TODO only for webclient and web test client replace with rest client see #270
+  implementation(libs.spring.boot.starter.webflux)
   implementation(libs.scrimage.core)
 
-  testImplementation(libs.spring.boot.starter.test)
+  testImplementation(libs.spring.boot.starter.webmvc.test)
+  testImplementation(libs.spring.boot.starter.webflux.test)
   testImplementation(libs.mockito.kotlin) // TODO use springmockk
   testImplementation(libs.wiremock.spring.boot)
-  // for webtestclient (maybe sometime there will be a RestTestClient for easy migration)
-  testImplementation(libs.spring.boot.starter.webflux)
   testRuntimeOnly(libs.junit.platform)
 }
 

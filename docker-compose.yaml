@@ -7,7 +7,7 @@ services:
       - 4000:4000
     environment:
       PIXOO_BASE_URL: xxx.xxx.xxx.xxx
-      #PIXOO_HEALTH_FORWARD: false
+      #PIXOO_BRIDGE_HEALTH_FORWARD: false
       UID: 1000
       GID: 1000
     restart: unless-stopped

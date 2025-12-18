@@ -1,5 +1,51 @@
 # Changelog
 
+## [2.1.0](https://github.com/simplyRoba/pixoo-bridge/compare/v2.0.0...v2.1.0) (2025-11-28)
+
+
+### Features
+
+* add forward header support to support reverse proxies ([#298](https://github.com/simplyRoba/pixoo-bridge/issues/298)) ([e5bf44f](https://github.com/simplyRoba/pixoo-bridge/commit/e5bf44fbc642f6a9edec80d191e2b32df226b96a))
+* add root redirect to swagger ui ([#300](https://github.com/simplyRoba/pixoo-bridge/issues/300)) ([0c59a42](https://github.com/simplyRoba/pixoo-bridge/commit/0c59a426e73396c51fcf700db58ef86b32b2b26c))
+
+## [2.0.0](https://github.com/simplyRoba/pixoo-bridge/compare/v1.1.1...v2.0.0) (2025-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* introduce bridge config and move config parameter names that belong to the bridge and not the pixoo ([#295](https://github.com/simplyRoba/pixoo-bridge/issues/295))
+
+### Features
+
+* add migration guide section to readme ([#296](https://github.com/simplyRoba/pixoo-bridge/issues/296)) ([c0d743c](https://github.com/simplyRoba/pixoo-bridge/commit/c0d743ccc1e3f80c58d98b283d65fbcab3d8bc24))
+* add port override parameter for bridge ([#297](https://github.com/simplyRoba/pixoo-bridge/issues/297)) ([24c38e7](https://github.com/simplyRoba/pixoo-bridge/commit/24c38e76e38258107d7bf6eaae842fcbb5525634))
+* introduce bridge config and move config parameter names that belong to the bridge and not the pixoo ([#295](https://github.com/simplyRoba/pixoo-bridge/issues/295)) ([1e7ac98](https://github.com/simplyRoba/pixoo-bridge/commit/1e7ac985fd02bf1ed5d63faaec9787bf8d9cb3f1))
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 8.0.0 to 8.1.0 ([#291](https://github.com/simplyRoba/pixoo-bridge/issues/291)) ([7fd07b1](https://github.com/simplyRoba/pixoo-bridge/commit/7fd07b163887103f759004bb07deba58f7e341ea))
+* **deps:** bump org.mockito.kotlin:mockito-kotlin from 6.0.0 to 6.1.0 ([#282](https://github.com/simplyRoba/pixoo-bridge/issues/282)) ([89155b1](https://github.com/simplyRoba/pixoo-bridge/commit/89155b1d080ad336bc2370391183dc3e9d65bc35))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.13 to 2.8.14 ([#287](https://github.com/simplyRoba/pixoo-bridge/issues/287)) ([e216a07](https://github.com/simplyRoba/pixoo-bridge/commit/e216a071a54c216e9995884b565102748ba34a72))
+* **deps:** bump org.springframework.boot from 3.5.6 to 3.5.7 ([#285](https://github.com/simplyRoba/pixoo-bridge/issues/285)) ([21bca43](https://github.com/simplyRoba/pixoo-bridge/commit/21bca43610c5a683c9e3db55a226f7e8adc39233))
+* **deps:** bump org.springframework.boot from 3.5.7 to 4.0.0 ([#293](https://github.com/simplyRoba/pixoo-bridge/issues/293)) ([e0dbbc5](https://github.com/simplyRoba/pixoo-bridge/commit/e0dbbc5f810ccb7fc9c910ad12fc37b97e5f3b1a))
+* **deps:** bump org.wiremock.integrations:wiremock-spring-boot from 3.10.6 to 4.0.6 ([#288](https://github.com/simplyRoba/pixoo-bridge/issues/288)) ([6ea7d11](https://github.com/simplyRoba/pixoo-bridge/commit/6ea7d114e8555161f61bd34a73790b654eddbc60))
+* **deps:** bump org.wiremock.integrations:wiremock-spring-boot from 4.0.6 to 4.0.7 ([#289](https://github.com/simplyRoba/pixoo-bridge/issues/289)) ([386b0f7](https://github.com/simplyRoba/pixoo-bridge/commit/386b0f77538e2d36490e9c84685f3ab0a318a340))
+* **deps:** bump org.wiremock.integrations:wiremock-spring-boot from 4.0.7 to 4.0.8 ([#290](https://github.com/simplyRoba/pixoo-bridge/issues/290)) ([0c0c2f1](https://github.com/simplyRoba/pixoo-bridge/commit/0c0c2f1f88b681f0a2f9a6807c81d95dad1b7aaa))
+
+## [1.1.1](https://github.com/simplyRoba/pixoo-bridge/compare/v1.1.0...v1.1.1) (2025-09-25)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 7.2.1 to 8.0.0 ([#281](https://github.com/simplyRoba/pixoo-bridge/issues/281)) ([5ce9dad](https://github.com/simplyRoba/pixoo-bridge/commit/5ce9dad70b470cee25a2cf838071ff8cd7f46735))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.3.3 to 4.3.4 ([#276](https://github.com/simplyRoba/pixoo-bridge/issues/276)) ([b394513](https://github.com/simplyRoba/pixoo-bridge/commit/b3945135deb23ea962a5885199edfd4394984963))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.3.4 to 4.3.5 ([#280](https://github.com/simplyRoba/pixoo-bridge/issues/280)) ([dc6ffc0](https://github.com/simplyRoba/pixoo-bridge/commit/dc6ffc016a1834a5b8afcfd9b3df67129cc11b61))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.10 to 2.8.11 ([#272](https://github.com/simplyRoba/pixoo-bridge/issues/272)) ([17af6b4](https://github.com/simplyRoba/pixoo-bridge/commit/17af6b48101d42a816ff45c18088e7a21796d0cb))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.11 to 2.8.12 ([#277](https://github.com/simplyRoba/pixoo-bridge/issues/277)) ([d916be0](https://github.com/simplyRoba/pixoo-bridge/commit/d916be0406d07003f149c08911071337f194cc22))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 2.8.12 to 2.8.13 ([#278](https://github.com/simplyRoba/pixoo-bridge/issues/278)) ([1dd02f4](https://github.com/simplyRoba/pixoo-bridge/commit/1dd02f434288c1677ced89b1980f6111be8e0253))
+* **deps:** bump org.springframework.boot from 3.5.5 to 3.5.6 ([#279](https://github.com/simplyRoba/pixoo-bridge/issues/279)) ([fdc6368](https://github.com/simplyRoba/pixoo-bridge/commit/fdc63681b41caafff3085f8bed2e62a2701f2462))
+
 ## [1.1.0](https://github.com/simplyRoba/pixoo-bridge/compare/v1.0.3...v1.1.0) (2025-08-24)
 
 
