@@ -82,7 +82,9 @@ class ImageService(
     val size = pixooConfig.size
     val gif = AnimatedGifReader.read(imageSource)
     val id = getNextId()
-    logger.debug("Sending GIF animation with ${gif.frameCount} frames, PicId $id, target size $size x $size")
+    logger.debug(
+      "Sending GIF animation with ${gif.frameCount} frames, PicId $id, target size $size x $size"
+    )
     gif.frames.forEachIndexed { index, frame ->
       val resizedFrame = frame.cover(size, size)
       val animationSpeed =
@@ -106,9 +108,10 @@ class ImageService(
   private fun detectFormat(resource: Resource): Format {
     // it's important to get a fresh unused input stream here and also not to reuse the input
     // stream from here, as the FormatDetector does not reset the stream before or after usage.
-    val format = resource.inputStream
-      .use { inputStream -> FormatDetector.detect(inputStream) }
-      .orElseThrow { FormatException("Unknown image format for ${resource.filename}") }
+    val format =
+      resource.inputStream
+        .use { inputStream -> FormatDetector.detect(inputStream) }
+        .orElseThrow { FormatException("Unknown image format for ${resource.filename}") }
     logger.debug("Format detection: file {} is {}", resource.filename, format)
     return format
   }
