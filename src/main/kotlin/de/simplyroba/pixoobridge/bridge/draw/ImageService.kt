@@ -66,7 +66,7 @@ class ImageService(
 
   private fun sendSingleImage(imageSource: ImageSource) {
     val size = pixooConfig.size
-    logger.debug("Resizing and sending single image with target size $size x $size")
+    logger.debug("Resizing and sending single image with target size {} x {}", size, size)
     val resizedImage =
       ImmutableImage.loader()
         .detectMetadata(false)
@@ -83,13 +83,22 @@ class ImageService(
     val gif = AnimatedGifReader.read(imageSource)
     val id = getNextId()
     logger.debug(
-      "Sending GIF animation with ${gif.frameCount} frames, PicId $id, target size $size x $size"
+      "Sending GIF animation with {} frames, PicId {}, target size ",
+      gif.frameCount,
+      id,
+      size,
+      size,
     )
     gif.frames.forEachIndexed { index, frame ->
       val resizedFrame = frame.cover(size, size)
       val animationSpeed =
         (gif.getDelay(index).toMillis() * pixooConfig.animationSpeedFactor).toInt()
-      logger.debug("Sending frame ${index + 1}/${gif.frameCount} with delay $animationSpeed ms")
+      logger.debug(
+        "Sending frame {}/{} with delay {} ms",
+        index + 1,
+        gif.frameCount,
+        animationSpeed,
+      )
       pixooClient.sendAnimation(
         gif.frameCount,
         size,
@@ -99,7 +108,7 @@ class ImageService(
         resizedFrame.toBase64(),
       )
       if (index == 59) {
-        logger.warn("Stop on 59th frame of ${gif.frameCount} frames.")
+        logger.warn("Stop on 59th frame of {} frames.", gif.frameCount)
         return
       }
     }
@@ -118,7 +127,7 @@ class ImageService(
 
   private fun getNextId() =
     pixooClient.getNextPictureId().parameters["PicId"].toString().toIntOrNull()?.also {
-      logger.debug("Fetched next PicId: $it")
+      logger.debug("Fetched next PicId: {}", it)
     } ?: 1
 
   private fun ImmutableImage.toBase64(): String {
