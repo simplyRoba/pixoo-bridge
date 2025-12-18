@@ -83,7 +83,7 @@ class ImageService(
     val gif = AnimatedGifReader.read(imageSource)
     val id = getNextId()
     logger.debug(
-      "Sending GIF animation with {} frames, PicId {}, target size ",
+      "Sending GIF animation with {} frames, PicId {}, target size {} x {}",
       gif.frameCount,
       id,
       size,
