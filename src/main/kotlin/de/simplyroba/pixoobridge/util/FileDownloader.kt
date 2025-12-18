@@ -15,6 +15,7 @@ class FileDownloader(private val pixooConfig: PixooConfig) {
 
   fun download(link: String): Resource {
 
+    logger.debug("Starting download from link: {}", link)
     val webClient =
       WebClient.builder()
         .codecs { configurer ->
@@ -30,12 +31,17 @@ class FileDownloader(private val pixooConfig: PixooConfig) {
         .uri(link)
         .retrieve()
         .bodyToMono(ByteArray::class.java)
-        .doOnError { e -> logger.warn("Error while retrieving file", e) } // log the error
+        .doOnError { e -> logger.error("Error while retrieving file: {}", e.message) }
         // will return an empty byte array on http error like 404
         .onErrorResume { _ -> Mono.empty() }
         .block()
 
-    if (bytes != null && bytes.isNotEmpty()) return ByteArrayResource(bytes)
-    else throw RemoteFileNotFoundException()
+    if (bytes != null && bytes.isNotEmpty()) {
+      logger.debug("Download successful, received {} bytes", bytes.size)
+      return ByteArrayResource(bytes)
+    } else {
+      logger.warn("No data received or file not found.")
+      throw RemoteFileNotFoundException()
+    }
   }
 }
