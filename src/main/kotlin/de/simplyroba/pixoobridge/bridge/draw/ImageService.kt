@@ -34,7 +34,6 @@ class ImageService(
   }
 
   fun drawRemoteImage(link: String) {
-    logger.debug("Downloading and drawing remote image from link: {}", link)
     drawImage(imageDownloader.download(link))
   }
 
