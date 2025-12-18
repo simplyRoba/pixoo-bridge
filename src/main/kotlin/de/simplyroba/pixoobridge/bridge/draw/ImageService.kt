@@ -34,12 +34,12 @@ class ImageService(
   }
 
   fun drawRemoteImage(link: String) {
-    logger.debug("Downloading and drawing remote image from link: $link")
+    logger.debug("Downloading and drawing remote image from link: {}", link)
     drawImage(imageDownloader.download(link))
   }
 
   fun drawImage(resource: Resource) {
-    logger.debug("Preparing to draw image from resource: ${resource.filename}")
+    logger.debug("Preparing to draw image from resource: {}", resource.filename)
     // also checks if its valid image
     val format = detectFormat(resource)
     logger.debug("Detected image format: {} for file: {}", format, resource.filename)
@@ -50,13 +50,13 @@ class ImageService(
       when (format) {
         JPEG,
         PNG -> {
-          logger.debug("Sending single image for file: ${resource.filename}")
+          logger.debug("Sending single image for file: {}", resource.filename)
           sendSingleImage(imageSource)
         }
         // of course its possible that a gif contains only one frame this will result in the same
         // command to the pixoo as in sendSingleImage()
         GIF -> {
-          logger.debug("Sending animation for GIF file: ${resource.filename}")
+          logger.debug("Sending animation for GIF file: {}", resource.filename)
           sendAnimation(imageSource)
         }
         WEBP -> throw FormatException("Unsupported format webp detected.")
