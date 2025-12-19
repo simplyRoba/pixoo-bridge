@@ -10,6 +10,12 @@ import org.springframework.web.client.RestClient
 @Component
 class FileDownloader(private val pixooConfig: PixooConfig) {
 
+  companion object {
+    // Maximum image size allowed to download (25 MB)
+    // This is a lot considering Pixoo devices have limited pixels,
+    const val MAX_IMAGE_SIZE_BYTES = 25 * 1024 * 1024
+  }
+
   private val logger = LoggerFactory.getLogger(javaClass)
   private val restClient = RestClient.builder().build()
 
@@ -26,10 +32,9 @@ class FileDownloader(private val pixooConfig: PixooConfig) {
 
         // 2. Check the Content-Length header BEFORE consuming the body
         val contentLength = response.headers.contentLength
-        val maxSize = pixooConfig.bridge.maxImageSize.toBytes()
 
-        if (contentLength > maxSize) {
-          logger.error("File is too large: {} bytes (max: {})", contentLength, maxSize)
+        if (contentLength > MAX_IMAGE_SIZE_BYTES) {
+          logger.error("File is too large: {} bytes (max: {})", contentLength, MAX_IMAGE_SIZE_BYTES)
           throw IllegalArgumentException("File exceeds maximum allowed size")
         }
 
