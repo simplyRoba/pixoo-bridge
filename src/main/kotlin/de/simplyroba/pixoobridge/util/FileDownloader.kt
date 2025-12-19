@@ -58,7 +58,7 @@ class FileDownloader(private val pixooConfig: PixooConfig) {
         }
 
         logger.debug("Download successful, received {} bytes", bytes.size)
-        ByteArrayResource(bytes)
+        ByteArrayResource(bytes, link.substringAfterLast("/", "downloaded_file"))
       }
     } catch (ex: Exception) {
       // Wrap all exceptions into RemoteFileNotFoundException.
