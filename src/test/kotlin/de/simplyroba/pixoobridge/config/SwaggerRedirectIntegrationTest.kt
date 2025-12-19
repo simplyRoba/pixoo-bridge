@@ -1,8 +1,9 @@
-package de.simplyroba.pixoobridge
+package de.simplyroba.pixoobridge.config
 
+import de.simplyroba.pixoobridge.AbstractRestIntegrationTest
 import org.junit.jupiter.api.Test
 
-class SwaggerIntegrationTest : AbstractRestIntegrationTest() {
+class SwaggerRedirectIntegrationTest : AbstractRestIntegrationTest() {
 
   @Test
   fun shouldReturnApiDocsContainingMinimalConfig() {
