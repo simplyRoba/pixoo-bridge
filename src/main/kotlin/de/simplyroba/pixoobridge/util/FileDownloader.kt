@@ -5,43 +5,56 @@ import org.slf4j.LoggerFactory
 import org.springframework.core.io.ByteArrayResource
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.client.WebClient
-import reactor.core.publisher.Mono
+import org.springframework.web.client.RestClient
 
 @Component
 class FileDownloader(private val pixooConfig: PixooConfig) {
 
+  companion object {
+    // Maximum image size allowed to download (25 MB)
+    // This is a lot considering Pixoo devices have limited pixels,
+    const val MAX_IMAGE_SIZE_BYTES = 25 * 1024 * 1024
+  }
+
   private val logger = LoggerFactory.getLogger(javaClass)
+  private val restClient = RestClient.builder().build()
 
   fun download(link: String): Resource {
-
     logger.debug("Starting download from link: {}", link)
-    val webClient =
-      WebClient.builder()
-        .codecs { configurer ->
-          configurer
-            .defaultCodecs()
-            .maxInMemorySize(pixooConfig.bridge.maxImageSize.toBytes().toInt())
+
+    return try {
+      restClient.get().uri(link).exchange { _, response ->
+        // 1. Check if the request was successful
+        if (!response.statusCode.is2xxSuccessful) {
+          logger.warn("File not found or server error: {}", response.statusCode)
+          throw RemoteFileNotFoundException("Server returned ${response.statusCode}")
         }
-        .build()
 
-    val bytes =
-      webClient
-        .get()
-        .uri(link)
-        .retrieve()
-        .bodyToMono(ByteArray::class.java)
-        .doOnError { e -> logger.error("Error while retrieving file: {}", e.message) }
-        // will return an empty byte array on http error like 404
-        .onErrorResume { _ -> Mono.empty() }
-        .block()
+        // 2. Check the Content-Length header BEFORE consuming the body
+        val contentLength = response.headers.contentLength
 
-    if (bytes != null && bytes.isNotEmpty()) {
-      logger.debug("Download successful, received {} bytes", bytes.size)
-      return ByteArrayResource(bytes)
-    } else {
-      logger.warn("No data received or file not found.")
-      throw RemoteFileNotFoundException()
+        if (contentLength > MAX_IMAGE_SIZE_BYTES) {
+          logger.error("File is too large: {} bytes (max: {})", contentLength, MAX_IMAGE_SIZE_BYTES)
+          throw IllegalArgumentException("File exceeds maximum allowed size")
+        }
+
+        // 3. If size is okay, read the body
+        val bytes = response.body.readAllBytes()
+        if (bytes.isEmpty()) {
+          logger.warn("Downloaded file is empty from link: {}", link)
+          throw RemoteFileNotFoundException("Received empty body from $link")
+        }
+
+        logger.debug("Download successful, received {} bytes", bytes.size)
+        ByteArrayResource(bytes)
+      }
+    } catch (ex: Exception) {
+      // Wrap all exceptions into RemoteFileNotFoundException.
+      // As the caller only wants an Image. If it fails, there is no image.
+      throw when (ex) {
+        is RemoteFileNotFoundException -> ex
+        else -> RemoteFileNotFoundException("Download failed for $link", ex)
+      }
     }
   }
 }

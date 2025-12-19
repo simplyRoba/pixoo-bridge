@@ -6,7 +6,7 @@ class SwaggerIntegrationTest : AbstractRestIntegrationTest() {
 
   @Test
   fun shouldReturnApiDocsContainingMinimalConfig() {
-    webTestClient
+    restTestClient
       .get()
       .uri("/v3/api-docs")
       .exchange()
@@ -23,6 +23,6 @@ class SwaggerIntegrationTest : AbstractRestIntegrationTest() {
 
   @Test
   fun shouldGenerateSwaggerUi() {
-    webTestClient.get().uri("swagger-ui/index.html").exchange().expectStatus().is2xxSuccessful
+    restTestClient.get().uri("swagger-ui/index.html").exchange().expectStatus().is2xxSuccessful
   }
 }
