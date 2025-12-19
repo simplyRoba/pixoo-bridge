@@ -10,7 +10,7 @@ group = "de.simplyroba"
 
 version = file("version.txt").readText().trim()
 
-java { toolchain { languageVersion = JavaLanguageVersion.of(21) } }
+java { toolchain { languageVersion = JavaLanguageVersion.of(25) } }
 
 repositories { mavenCentral() }
 
