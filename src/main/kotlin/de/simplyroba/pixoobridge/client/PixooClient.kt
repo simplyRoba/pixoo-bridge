@@ -276,14 +276,14 @@ class PixooClient(config: PixooConfig, private val mapper: JsonMapper) {
           .post()
           .uri("/post")
           .contentType(APPLICATION_JSON)
-          .body(Command(commandType, *parameters))
+          .body(mapper.writeValueAsString(Command(commandType, *parameters)))
           .retrieve()
           .body(String::class.java) ?: throw PixooException("Received empty body for $commandType")
 
       // Manually map the string using the injected mapper
       val response = mapper.readValue(rawResponse, CommandResponse::class.java)
 
-      if (response.errorCode != 0) {
+      if (response.errorCode != "0") {
         throw PixooException("Error with code ${response.errorCode}")
       }
 

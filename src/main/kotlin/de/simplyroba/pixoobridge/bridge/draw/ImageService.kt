@@ -41,7 +41,6 @@ class ImageService(
     logger.debug("Preparing to draw image from resource: {}", resource.filename)
     // also checks if its valid image
     val format = detectFormat(resource)
-    logger.debug("Detected image format: {} for file: {}", format, resource.filename)
 
     resource.inputStream.use { inputStream ->
       val imageSource = ImageSource.of(inputStream)
@@ -73,7 +72,6 @@ class ImageService(
         .load(imageSource)
         .cover(size, size)
     // we send an animation with 1 frame
-    logger.debug("Sending as animation with 1 frame")
     pixooClient.sendAnimation(1, size, 0, getNextId(), 9999, resizedImage.toBase64())
   }
 
@@ -82,7 +80,7 @@ class ImageService(
     val gif = AnimatedGifReader.read(imageSource)
     val id = getNextId()
     logger.debug(
-      "Sending GIF animation with {} frames, PicId {}, target size {} x {}",
+      "Resizing and sending GIF animation with {} frames, PicId {}, target size {} x {}",
       gif.frameCount,
       id,
       size,
