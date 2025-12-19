@@ -1,5 +1,6 @@
 # IDEA
 .idea
+.kotlin
 
 # Compiled class file
 *.class
