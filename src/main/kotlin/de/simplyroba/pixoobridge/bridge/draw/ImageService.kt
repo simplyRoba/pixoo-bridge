@@ -38,10 +38,9 @@ class ImageService(
   }
 
   fun drawImage(resource: Resource) {
-    logger.debug("Preparing to draw image from resource: {}", resource.filename)
+    logger.debug("Preparing to draw image from resource: {}", resource.readableName())
     // also checks if its valid image
     val format = detectFormat(resource)
-    logger.debug("Detected image format: {} for file: {}", format, resource.filename)
 
     resource.inputStream.use { inputStream ->
       val imageSource = ImageSource.of(inputStream)
@@ -49,13 +48,13 @@ class ImageService(
       when (format) {
         JPEG,
         PNG -> {
-          logger.debug("Sending single image for file: {}", resource.filename)
+          logger.debug("Sending single image for file: {}", resource.readableName())
           sendSingleImage(imageSource)
         }
         // of course its possible that a gif contains only one frame this will result in the same
         // command to the pixoo as in sendSingleImage()
         GIF -> {
-          logger.debug("Sending animation for GIF file: {}", resource.filename)
+          logger.debug("Sending animation for GIF file: {}", resource.readableName())
           sendAnimation(imageSource)
         }
         WEBP -> throw FormatException("Unsupported format webp detected.")
@@ -73,7 +72,6 @@ class ImageService(
         .load(imageSource)
         .cover(size, size)
     // we send an animation with 1 frame
-    logger.debug("Sending as animation with 1 frame")
     pixooClient.sendAnimation(1, size, 0, getNextId(), 9999, resizedImage.toBase64())
   }
 
@@ -82,7 +80,7 @@ class ImageService(
     val gif = AnimatedGifReader.read(imageSource)
     val id = getNextId()
     logger.debug(
-      "Sending GIF animation with {} frames, PicId {}, target size {} x {}",
+      "Resizing and sending GIF animation with {} frames, PicId {}, target size {} x {}",
       gif.frameCount,
       id,
       size,
@@ -119,8 +117,8 @@ class ImageService(
     val format =
       resource.inputStream
         .use { inputStream -> FormatDetector.detect(inputStream) }
-        .orElseThrow { FormatException("Unknown image format for ${resource.filename}") }
-    logger.debug("Format detection: file {} is {}", resource.filename, format)
+        .orElseThrow { FormatException("Unknown image format for ${resource.readableName()}") }
+    logger.debug("Format detection: file {} is {}", resource.readableName(), format)
     return format
   }
 
@@ -139,4 +137,12 @@ class ImageService(
 
     return Base64.getEncoder().withoutPadding().encodeToString(pixelByteArray)
   }
+}
+
+/**
+ * Returns a human-readable identifier for this [Resource], preferring the file name when available
+ * and falling back to the resource description otherwise.
+ */
+fun Resource.readableName(): String {
+  return this.filename ?: this.description
 }

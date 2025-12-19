@@ -11,7 +11,7 @@ scrimage = "4.3.5"
 
 [libraries]
 spring-boot-starter-webmvc = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
-spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
+apache-httpclient = { module = "org.apache.httpcomponents.client5:httpclient5" }
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 scrimage-core = { module = "com.sksamuel.scrimage:scrimage-core", version.ref = "scrimage" }
 springdoc-openapi-webmvc = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
