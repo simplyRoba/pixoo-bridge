@@ -27,7 +27,7 @@ Pass key as environment variable the docker container.
 # Run the image
 replace the ip of your pixoo and run
 ```shell
-docker run -p 4000:4000 -e "PIXOO_BASE_URL=xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
+docker run -p 4000:4000 -e "PIXOO_BASE_URL=http://xxx.xxx.xxx.xxx" ghcr.io/simplyroba/pixoo-bridge:latest
 ```
 or use the [docker-compose.yaml](/docker-compose.yaml)
 ```shell

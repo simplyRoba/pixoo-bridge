@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   pixoo-brdige:
     container_name: pixoo-bridge
@@ -6,7 +5,7 @@ services:
     ports:
       - 4000:4000
     environment:
-      PIXOO_BASE_URL: xxx.xxx.xxx.xxx
+      PIXOO_BASE_URL: http://xxx.xxx.xxx.xxx
       #PIXOO_BRIDGE_HEALTH_FORWARD: false
       UID: 1000
       GID: 1000
