@@ -37,7 +37,7 @@ abstract class AbstractRestIntegrationTest {
     )
   }
 
-  protected fun doPostCallExpectingSuccess(path: String) =
+  protected fun doPostCallExpectingSuccess(path: String): RestTestClient.ResponseSpec =
     restTestClient
       .post()
       .uri(path)
@@ -47,10 +47,12 @@ abstract class AbstractRestIntegrationTest {
       .expectStatus()
       .is2xxSuccessful
 
-  protected fun doPostCallWithBodyExpectingSuccess(path: String, body: Any) =
-    doPostCallWithBody(path, body).expectStatus().is2xxSuccessful()
+  protected fun doPostCallWithBodyExpectingSuccess(
+    path: String,
+    body: Any,
+  ): RestTestClient.ResponseSpec = doPostCallWithBody(path, body).expectStatus().is2xxSuccessful()
 
-  protected fun doPostCallWithBody(path: String, body: Any) =
+  protected fun doPostCallWithBody(path: String, body: Any): RestTestClient.ResponseSpec =
     restTestClient
       .post()
       .uri(path)
@@ -59,10 +61,10 @@ abstract class AbstractRestIntegrationTest {
       .body(body)
       .exchange()
 
-  protected fun doGetCallExpectingSuccess(path: String) =
+  protected fun doGetCallExpectingSuccess(path: String): RestTestClient.ResponseSpec =
     doGetCall(path).expectStatus().is2xxSuccessful
 
-  protected fun doGetCall(path: String) =
+  protected fun doGetCall(path: String): RestTestClient.ResponseSpec =
     restTestClient.get().uri(path).accept(MediaType.APPLICATION_JSON).exchange()
 
   /**
