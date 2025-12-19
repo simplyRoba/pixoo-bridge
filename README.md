@@ -21,7 +21,7 @@ Pass key as environment variable the docker container.
 | PIXOO_BRIDGE_PORT            | 4000             | Port of the pixxo bridge in the container         |
 | PIXOO_BRIDGE_HEALTH_FORWARD  | true             | Ping pixoo during image health check              |
 | PIXOO_BRIDGE_DOCS_ENABLED    | true             | Enable API documentation (Swagger UI)             |
-| PIXOO_BRIDGE_MAX_IMAGE_SIZE  | 2MB              | Image size for uploads. Format like 128KB or 5MB  |
+| PIXOO_BRIDGE_MAX_IMAGE_SIZE  | 5MB              | Image size for uploads. Format like 128KB or 5MB  |
 | PIXOO_BRIDGE_LOG_LEVEL       | INFO             | Possible values OFF, DEBUG, INFO, WARN, ERROR     |
 
 # Run the image

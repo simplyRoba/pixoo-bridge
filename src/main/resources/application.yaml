@@ -5,7 +5,7 @@ pixoo:
   animation-speed-factor: 1.4
   bridge:
     port: 4000
-    max-image-size: 2MB
+    max-image-size: 5MB
     health:
       forward: true
     docs:
