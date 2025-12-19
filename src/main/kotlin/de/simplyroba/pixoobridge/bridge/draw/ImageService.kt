@@ -140,8 +140,8 @@ class ImageService(
 }
 
 /**
- * Returns a human-readable identifier for this [Resource], preferring the file name when
- * available and falling back to the resource description otherwise.
+ * Returns a human-readable identifier for this [Resource], preferring the file name when available
+ * and falling back to the resource description otherwise.
  */
 fun Resource.readableName(): String {
   return this.filename ?: this.description
