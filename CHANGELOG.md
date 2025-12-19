@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.2.0](https://github.com/simplyRoba/pixoo-bridge/compare/v2.1.0...v2.2.0) (2025-12-19)
+
+
+### Features
+
+* add debug logging to FileDownloader and ImageService ([#304](https://github.com/simplyRoba/pixoo-bridge/issues/304)) ([2fe4415](https://github.com/simplyRoba/pixoo-bridge/commit/2fe44157abbc3122594c7597af4d2952e14d0f2c))
+* add sound capabilities ([#147](https://github.com/simplyRoba/pixoo-bridge/issues/147)) ([f29f261](https://github.com/simplyRoba/pixoo-bridge/commit/f29f2614f8c9f1f82c896e84210feb1e16ce35c5))
+* improve Docker healthcheck configuration ([#302](https://github.com/simplyRoba/pixoo-bridge/issues/302)) ([0949b8b](https://github.com/simplyRoba/pixoo-bridge/commit/0949b8b40b11f95667eb554e3d8363f8fa8416c4))
+
+
+### Bug Fixes
+
+* **deps:** bump kotlin-core version to 2.2.21 ([#308](https://github.com/simplyRoba/pixoo-bridge/issues/308)) ([c933e63](https://github.com/simplyRoba/pixoo-bridge/commit/c933e63f1a4bd0dfdd133003c8f3abe3929e7c4f))
+* **deps:** bump org.springframework.boot from 4.0.0 to 4.0.1 ([#306](https://github.com/simplyRoba/pixoo-bridge/issues/306)) ([97d1a5c](https://github.com/simplyRoba/pixoo-bridge/commit/97d1a5c5278761cda99abc22b980fabaf5582128))
+* **deps:** update Java version to 25 liberica ([#309](https://github.com/simplyRoba/pixoo-bridge/issues/309)) ([231d963](https://github.com/simplyRoba/pixoo-bridge/commit/231d9637990ec46647bea17f603e726d83e19d21))
+* update PIXOO_BASE_URL to include http in docker-compose and README ([#310](https://github.com/simplyRoba/pixoo-bridge/issues/310)) ([b8da99a](https://github.com/simplyRoba/pixoo-bridge/commit/b8da99a246748daa20e1eb0558ac1b7601f1f07f))
+* use HttpComponentsClientHttpRequestFactory globally for improved timeout handling ([#307](https://github.com/simplyRoba/pixoo-bridge/issues/307)) ([0801e31](https://github.com/simplyRoba/pixoo-bridge/commit/0801e314f64103ffe0cea78416635f349e60ed53))
+
 ## [2.1.0](https://github.com/simplyRoba/pixoo-bridge/compare/v2.0.0...v2.1.0) (2025-11-28)
 
 
