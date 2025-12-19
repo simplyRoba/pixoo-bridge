@@ -21,10 +21,9 @@ repositories { mavenCentral() }
 dependencies {
   implementation(kotlin("reflect"))
   implementation(libs.spring.boot.starter.webmvc)
+  implementation(libs.apache.httpclient)
   implementation(libs.jackson.module.kotlin)
   implementation(libs.springdoc.openapi.webmvc)
-  // TODO only for webclient and web test client replace with rest client see #270
-  implementation(libs.spring.boot.starter.webflux)
   implementation(libs.scrimage.core)
 
   testImplementation(libs.spring.boot.starter.webmvc.test)

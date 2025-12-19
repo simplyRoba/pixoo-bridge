@@ -17,12 +17,12 @@ import tools.jackson.databind.json.JsonMapper
 class PixooClient(config: PixooConfig, private val mapper: JsonMapper) {
 
   companion object {
-    val DEFAULT_TIMEOUT = 10.seconds.toJavaDuration()
+    private val DEFAULT_TIMEOUT = 10.seconds.toJavaDuration()
   }
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
-  private val restClient =
+  private val pixooRestClient =
     RestClient.builder()
       .baseUrl(config.baseUrl)
       .requestFactory(
@@ -36,7 +36,7 @@ class PixooClient(config: PixooConfig, private val mapper: JsonMapper) {
   fun healthCheck() {
     logger.debug("Check connectivity")
     try {
-      val status = restClient.get().uri("/get").retrieve().toBodilessEntity().statusCode
+      val status = pixooRestClient.get().uri("/get").retrieve().toBodilessEntity().statusCode
       if (!status.is2xxSuccessful) {
         throw IllegalStateException("Health check at pixoo failed with status $status")
       }
@@ -272,7 +272,7 @@ class PixooClient(config: PixooConfig, private val mapper: JsonMapper) {
     return try {
       // We retrieve as String to bypass the 'text/html' vs 'application/json' conflict
       val rawResponse =
-        restClient
+        pixooRestClient
           .post()
           .uri("/post")
           .contentType(APPLICATION_JSON)
