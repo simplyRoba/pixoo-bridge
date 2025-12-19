@@ -8,13 +8,13 @@ import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toJavaDuration
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType.APPLICATION_JSON
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.BodyInserters
-import org.springframework.web.reactive.function.client.WebClient
-import tools.jackson.databind.ObjectMapper
+import org.springframework.web.client.RestClient
+import tools.jackson.databind.json.JsonMapper
 
 @Component
-class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
+class PixooClient(config: PixooConfig, private val mapper: JsonMapper) {
 
   companion object {
     val DEFAULT_TIMEOUT = 10.seconds.toJavaDuration()
@@ -22,18 +22,27 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
 
   private val logger = LoggerFactory.getLogger(javaClass)
 
-  private val webclient = WebClient.create(config.baseUrl)
+  private val restClient =
+    RestClient.builder()
+      .baseUrl(config.baseUrl)
+      .requestFactory(
+        HttpComponentsClientHttpRequestFactory().apply {
+          setConnectionRequestTimeout(DEFAULT_TIMEOUT)
+          setReadTimeout(DEFAULT_TIMEOUT)
+        }
+      )
+      .build()
 
   fun healthCheck() {
     logger.debug("Check connectivity")
-    webclient
-      .get()
-      .uri("/get")
-      .retrieve()
-      .toBodilessEntity()
-      .block(DEFAULT_TIMEOUT)
-      ?.statusCode
-      ?.takeIf { it.is2xxSuccessful } ?: throw IllegalStateException("Health check at pixoo failed")
+    try {
+      val status = restClient.get().uri("/get").retrieve().toBodilessEntity().statusCode
+      if (!status.is2xxSuccessful) {
+        throw IllegalStateException("Health check at pixoo failed with status $status")
+      }
+    } catch (ex: Exception) {
+      throw IllegalStateException("Health check at pixoo failed", ex)
+    }
   }
 
   fun reboot() {
@@ -260,26 +269,32 @@ class PixooClient(config: PixooConfig, private val mapper: ObjectMapper) {
   ): CommandResponse {
     logger.debug("Sending command {} with {}", commandType, parameters)
 
-    val rawResponse =
-      webclient
-        .post()
-        .uri("/post")
-        .contentType(APPLICATION_JSON)
-        .body(BodyInserters.fromValue(Command(commandType, *parameters)))
-        .retrieve()
-        .toEntity(String::class.java)
-        .block(DEFAULT_TIMEOUT)
-        ?.body
+    return try {
+      // We retrieve as String to bypass the 'text/html' vs 'application/json' conflict
+      val rawResponse =
+        restClient
+          .post()
+          .uri("/post")
+          .contentType(APPLICATION_JSON)
+          .body(Command(commandType, *parameters))
+          .retrieve()
+          .body(String::class.java) ?: throw PixooException("Received empty body for $commandType")
 
-    logger.debug("Response for {}: {}", commandType, rawResponse)
+      // Manually map the string using the injected mapper
+      val response = mapper.readValue(rawResponse, CommandResponse::class.java)
 
-    // pixoo will always answer with text/html, although it's formatted like json.
-    // Hence, we do mapping manually.
-    val response = mapper.readValue(rawResponse, CommandResponse::class.java)
+      if (response.errorCode != 0) {
+        throw PixooException("Error with code ${response.errorCode}")
+      }
 
-    if (response.errorCode != 0) throw PixooException("Error with code ${response.errorCode}")
-
-    return response
+      logger.debug("Response for {}: {}", commandType, response)
+      response
+    } catch (ex: Exception) {
+      throw when (ex) {
+        is PixooException -> ex
+        else -> PixooException("Communication failure for command $commandType", ex)
+      }
+    }
   }
 
   private fun Boolean.toBitNumber() = if (this) 1 else 0

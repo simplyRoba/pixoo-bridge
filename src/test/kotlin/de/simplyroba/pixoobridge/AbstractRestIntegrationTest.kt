@@ -32,7 +32,10 @@ abstract class AbstractRestIntegrationTest {
     pixooLedMatrix.stubFor(
       post(urlEqualTo("/post"))
         .willReturn(
-          aResponse().withHeader("Content-Type", "text/html").withBody("{\"error_code\":0}")
+          aResponse()
+            .withStatus(200)
+            .withHeader("Content-Type", "text/html") // Matches our converter fix
+            .withBody("""{"error_code": 0}""")
         )
     )
   }
