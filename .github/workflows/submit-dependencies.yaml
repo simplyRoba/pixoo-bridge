@@ -14,6 +14,7 @@ on:
       - 'main'
     paths:
       - 'build.gradle.kts'
+      - 'gradle/libs.versions.toml'
 
 permissions:
   contents: write # The Dependency Submission API requires write permission
@@ -29,8 +30,9 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          distribution: temurin
-          java-version: 21
+          distribution: liberica
+          java-version: 25
+          cache: 'gradle'
 
       - name: Generate and submit dependency graph
         uses: gradle/actions/dependency-submission@v5
