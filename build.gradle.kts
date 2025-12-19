@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.spring.dependency.management)
   alias(libs.plugins.spring.boot)
   alias(libs.plugins.spottless)
+  alias(libs.plugins.graalvm.buildtools.native)
 }
 
 group = "de.simplyroba"
