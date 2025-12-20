@@ -4,7 +4,7 @@ import de.simplyroba.pixoobridge.AbstractMvcTest
 import org.junit.jupiter.api.Test
 import org.springframework.test.web.servlet.get
 
-class SwaggerRedirectConfigTest : AbstractMvcTest() {
+class SwaggerRedirectMvcTest : AbstractMvcTest() {
 
   @Test
   fun `root path should permanently redirect to swagger-ui`() {
