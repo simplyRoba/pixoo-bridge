@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.0...v2.2.1) (2026-01-02)
+
+
+### Bug Fixes
+
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 3.0.0 to 3.0.1 ([#312](https://github.com/simplyRoba/pixoo-bridge/issues/312)) ([e49ef66](https://github.com/simplyRoba/pixoo-bridge/commit/e49ef6674bcaf71c471523e1ade82d044873653a))
+
 ## [2.2.0](https://github.com/simplyRoba/pixoo-bridge/compare/v2.1.0...v2.2.0) (2025-12-19)
 
 
