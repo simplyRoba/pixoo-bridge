@@ -1,3 +1,5 @@
+> **pixoo-bridge has been superseded by [pixoo-bridge.rs](https://github.com/simplyRoba/pixoo-bridge.rs)** — a drop-in replacement written in Rust. Same HTTP API, ~2 MB RAM instead of ~200 MB. See the [migration guide](https://github.com/simplyRoba/pixoo-bridge.rs#migration) for details.   
+
 # Pixoo Bridge
 Small docker image to communicate with a network enabled pixoo LED dot matrix.
 
