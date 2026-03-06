@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.2](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.1...v2.2.2) (2026-03-06)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 8.2.1 to 8.3.0 ([#332](https://github.com/simplyRoba/pixoo-bridge/issues/332)) ([b50d3cf](https://github.com/simplyRoba/pixoo-bridge/commit/b50d3cfdc3736fae91e6758e583a64527c6eb645))
+* **deps:** bump gradle-wrapper from 9.3.1 to 9.4.0 ([#336](https://github.com/simplyRoba/pixoo-bridge/issues/336)) ([82a6626](https://github.com/simplyRoba/pixoo-bridge/commit/82a66269304abc8aae50d6fc79d7553248e79ffc))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 3.0.1 to 3.0.2 ([#329](https://github.com/simplyRoba/pixoo-bridge/issues/329)) ([ea4b2b8](https://github.com/simplyRoba/pixoo-bridge/commit/ea4b2b8836d41f7322e58573061ca699d4dff966))
+* **deps:** bump org.wiremock.integrations:wiremock-spring-boot from 4.1.0 to 4.2.0 ([#328](https://github.com/simplyRoba/pixoo-bridge/issues/328)) ([385b53b](https://github.com/simplyRoba/pixoo-bridge/commit/385b53bace1efdeb6e58e74f4113e459621d89e3))
+
 ## [2.2.1](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.0...v2.2.1) (2026-02-20)
 
 
