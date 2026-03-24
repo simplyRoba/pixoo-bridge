@@ -35,7 +35,7 @@ jobs:
           cache: 'gradle'
 
       - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v5
+        uses: gradle/actions/dependency-submission@v6
         env:
           # Exclude dependencies that are only resolved in test classpaths
           DEPENDENCY_GRAPH_EXCLUDE_CONFIGURATIONS: '.*[Tt]est(Compile|Runtime)Classpath'
