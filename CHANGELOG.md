@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.2.3](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.2...v2.2.3) (2026-04-17)
+
+
+### Bug Fixes
+
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.3.10 to 4.4.1 ([#349](https://github.com/simplyRoba/pixoo-bridge/issues/349)) ([e43ea16](https://github.com/simplyRoba/pixoo-bridge/commit/e43ea16b26b823108dcaa8df870b0042f70de7a3))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.3.8 to 4.3.10 ([#342](https://github.com/simplyRoba/pixoo-bridge/issues/342)) ([45d36a6](https://github.com/simplyRoba/pixoo-bridge/commit/45d36a648f60ba1010b052a47e925c12d828793d))
+* **deps:** bump gradle-wrapper from 9.4.0 to 9.4.1 ([#343](https://github.com/simplyRoba/pixoo-bridge/issues/343)) ([ecd160e](https://github.com/simplyRoba/pixoo-bridge/commit/ecd160e8883d36f4c9cc2d8040265523d3eff400))
+* **deps:** bump org.mockito.kotlin:mockito-kotlin from 6.2.3 to 6.3.0 ([#344](https://github.com/simplyRoba/pixoo-bridge/issues/344)) ([e904c8e](https://github.com/simplyRoba/pixoo-bridge/commit/e904c8ef2c12d7249f3d7dd279475e63da9c5d67))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 3.0.2 to 3.0.3 ([#348](https://github.com/simplyRoba/pixoo-bridge/issues/348)) ([40c0d5f](https://github.com/simplyRoba/pixoo-bridge/commit/40c0d5fd12d4ab24241702639b2f2c9d466949e6))
+* **deps:** bump org.springframework.boot from 4.0.3 to 4.0.4 ([#341](https://github.com/simplyRoba/pixoo-bridge/issues/341)) ([34e9b04](https://github.com/simplyRoba/pixoo-bridge/commit/34e9b040bef25cb224f45dfdd3c6d0704e4d348c))
+* **deps:** bump org.springframework.boot from 4.0.4 to 4.0.5 ([#347](https://github.com/simplyRoba/pixoo-bridge/issues/347)) ([d93a5c8](https://github.com/simplyRoba/pixoo-bridge/commit/d93a5c8425bb1d9ca4e14af86643bd030deac314))
+
 ## [2.2.2](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.1...v2.2.2) (2026-03-19)
 
 
