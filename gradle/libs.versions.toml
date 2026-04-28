@@ -7,7 +7,7 @@ springdoc = "3.0.3"
 spotless = "8.4.0"
 mockito-kotlin = "6.3.0"
 wiremock-spring-boot = "4.2.1"
-scrimage = "4.4.2"
+scrimage = "4.4.3"
 
 [libraries]
 spring-boot-starter-webmvc = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
