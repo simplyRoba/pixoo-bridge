@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.2.4](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.3...v2.2.4) (2026-05-19)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 8.4.0 to 8.5.1 ([#362](https://github.com/simplyRoba/pixoo-bridge/issues/362)) ([5b0cf28](https://github.com/simplyRoba/pixoo-bridge/commit/5b0cf288865670be3d5a8b07ff11bbb9fe524be7))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.4.1 to 4.4.2 ([#350](https://github.com/simplyRoba/pixoo-bridge/issues/350)) ([c1323b1](https://github.com/simplyRoba/pixoo-bridge/commit/c1323b1603dac83c5f39331542809e2d53b8b35d))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.4.2 to 4.4.3 ([#354](https://github.com/simplyRoba/pixoo-bridge/issues/354)) ([70c4828](https://github.com/simplyRoba/pixoo-bridge/commit/70c48283761509e761097542c2d266a11e3ab91c))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.4.3 to 4.4.4 ([#356](https://github.com/simplyRoba/pixoo-bridge/issues/356)) ([b6342c5](https://github.com/simplyRoba/pixoo-bridge/commit/b6342c53b9b0051d6dd851c8fc3ed876a6598c44))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.4.4 to 4.5.1 ([#357](https://github.com/simplyRoba/pixoo-bridge/issues/357)) ([f59a679](https://github.com/simplyRoba/pixoo-bridge/commit/f59a679f57bea85e9c4979ba2acd52a829c1443c))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.5.1 to 4.5.4 ([#360](https://github.com/simplyRoba/pixoo-bridge/issues/360)) ([7835db3](https://github.com/simplyRoba/pixoo-bridge/commit/7835db392ccfd9fb49c51e5c85e48f951fbbc757))
+* **deps:** bump gradle-wrapper from 9.4.1 to 9.5.0 ([#355](https://github.com/simplyRoba/pixoo-bridge/issues/355)) ([26341f8](https://github.com/simplyRoba/pixoo-bridge/commit/26341f846e5276567c45bd438f4205438884effe))
+* **deps:** bump gradle-wrapper from 9.5.0 to 9.5.1 ([#359](https://github.com/simplyRoba/pixoo-bridge/issues/359)) ([e42dea8](https://github.com/simplyRoba/pixoo-bridge/commit/e42dea875c734688d39f2be01cc7d3b161011f4b))
+* **deps:** bump org.springframework.boot from 4.0.5 to 4.0.6 ([#353](https://github.com/simplyRoba/pixoo-bridge/issues/353)) ([c0abd65](https://github.com/simplyRoba/pixoo-bridge/commit/c0abd65c489d0f148e5be829ea27bb4d33e06df0))
+
 ## [2.2.3](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.2...v2.2.3) (2026-04-17)
 
 
