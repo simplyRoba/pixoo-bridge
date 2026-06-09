@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.5](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.4...v2.2.5) (2026-06-09)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 8.5.1 to 8.6.0 ([#364](https://github.com/simplyRoba/pixoo-bridge/issues/364)) ([b01733d](https://github.com/simplyRoba/pixoo-bridge/commit/b01733d92566db4d44abac3a888db9adf6c31523))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.5.4 to 4.6.2 ([#367](https://github.com/simplyRoba/pixoo-bridge/issues/367)) ([a2ecc11](https://github.com/simplyRoba/pixoo-bridge/commit/a2ecc11dccb4b740cb8d76eb2443c81e8b3c3d34))
+
 ## [2.2.4](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.3...v2.2.4) (2026-05-19)
 
 
