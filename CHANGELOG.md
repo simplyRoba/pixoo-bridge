@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.7](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.6...v2.2.7) (2026-06-25)
+
+
+### Bug Fixes
+
+* **docker:** switch from removed layertools jarmode to tools jarmode ([4847990](https://github.com/simplyRoba/pixoo-bridge/commit/4847990becd5dca2f1951c42506259b6b7a451db))
+
 ## [2.2.6](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.5...v2.2.6) (2026-06-25)
 
 
