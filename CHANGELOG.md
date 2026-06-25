@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.6](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.5...v2.2.6) (2026-06-25)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 8.6.0 to 8.7.0 ([#372](https://github.com/simplyRoba/pixoo-bridge/issues/372)) ([19245b5](https://github.com/simplyRoba/pixoo-bridge/commit/19245b51101031f6faa788b2048ab63d1e98d09d))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.6.2 to 4.6.5 ([#375](https://github.com/simplyRoba/pixoo-bridge/issues/375)) ([ad8108e](https://github.com/simplyRoba/pixoo-bridge/commit/ad8108ea43ff0787a25728e4f2b0ac3b02145c34))
+* **deps:** bump gradle-wrapper from 9.5.1 to 9.6.0 ([#374](https://github.com/simplyRoba/pixoo-bridge/issues/374)) ([ad8ad5f](https://github.com/simplyRoba/pixoo-bridge/commit/ad8ad5f95b0d3ca11e08e4d89557bf9e06d16667))
+* **deps:** bump org.springframework.boot from 4.0.6 to 4.1.0 ([#370](https://github.com/simplyRoba/pixoo-bridge/issues/370)) ([2312dbf](https://github.com/simplyRoba/pixoo-bridge/commit/2312dbfdaa239d81f0e9ae322d2fb9dbf6d32845))
+
 ## [2.2.5](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.4...v2.2.5) (2026-06-09)
 
 
