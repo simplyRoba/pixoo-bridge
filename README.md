@@ -83,3 +83,7 @@ The `Channel control API` of the Pixoo will not be implemented. Use the App for 
 
 ### Pixoo API
 [Official Divoom API documentation](http://doc.divoom-gz.com/web/#/12?page_id=191)
+
+Copyright (C) 2026 simplyRoba.
+
+**This project is developed with AI assistance, reviewed by a critical human.**
