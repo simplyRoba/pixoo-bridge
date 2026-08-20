@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.2.9](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.8...v2.2.9) (2026-08-20)
+
+
+### Bug Fixes
+
+* **deps:** bump com.diffplug.spotless from 8.8.0 to 8.10.0 ([#388](https://github.com/simplyRoba/pixoo-bridge/issues/388)) ([7f0bd6f](https://github.com/simplyRoba/pixoo-bridge/commit/7f0bd6fcb2757708b17b6319be2746860a94461c))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.6.6 to 4.6.7 ([#383](https://github.com/simplyRoba/pixoo-bridge/issues/383)) ([ff63b56](https://github.com/simplyRoba/pixoo-bridge/commit/ff63b5633dbfd701fa59465767f35e8edf888977))
+* **deps:** bump gradle-wrapper from 9.6.1 to 9.7.0 ([#387](https://github.com/simplyRoba/pixoo-bridge/issues/387)) ([8387b7c](https://github.com/simplyRoba/pixoo-bridge/commit/8387b7c4368faf709198cfca34ab82ef1f1f0176))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 3.0.3 to 3.1.0 ([#385](https://github.com/simplyRoba/pixoo-bridge/issues/385)) ([d53fbd4](https://github.com/simplyRoba/pixoo-bridge/commit/d53fbd44662e27fc22ad9d9c5cbf6967b32e20c9))
+
 ## [2.2.8](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.7...v2.2.8) (2026-07-24)
 
 
