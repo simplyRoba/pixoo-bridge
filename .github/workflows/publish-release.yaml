@@ -24,7 +24,6 @@ jobs:
         with:
           distribution: liberica
           java-version: 25
-          cache: 'gradle'
 
       - name: Gradle Wrapper Validation
         uses: gradle/actions/wrapper-validation@v6
