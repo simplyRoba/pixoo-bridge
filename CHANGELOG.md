@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.2.10](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.9...v2.2.10) (2026-09-25)
+
+
+### Bug Fixes
+
+* **ci:** avoid conflicting Gradle caches ([53b7fba](https://github.com/simplyRoba/pixoo-bridge/commit/53b7fba813feed84550225761314e917970f5b12))
+* **deps:** bump com.diffplug.spotless from 8.10.0 to 8.10.2 ([#395](https://github.com/simplyRoba/pixoo-bridge/issues/395)) ([192be3b](https://github.com/simplyRoba/pixoo-bridge/commit/192be3b4199a9871d014ebac9c78a30f36fc78ef))
+* **deps:** bump com.sksamuel.scrimage:scrimage-core from 4.6.7 to 4.6.8 ([#396](https://github.com/simplyRoba/pixoo-bridge/issues/396)) ([52861c2](https://github.com/simplyRoba/pixoo-bridge/commit/52861c265e73c22e6bf018b4b02f49a90f81fa93))
+* **deps:** bump gradle-wrapper from 9.7.0 to 9.7.1 ([#392](https://github.com/simplyRoba/pixoo-bridge/issues/392)) ([23f377e](https://github.com/simplyRoba/pixoo-bridge/commit/23f377efa6bd3db988a7f138e7a1063605ba6805))
+* **deps:** bump org.springdoc:springdoc-openapi-starter-webmvc-ui from 3.1.0 to 3.1.1 ([#394](https://github.com/simplyRoba/pixoo-bridge/issues/394)) ([330e0dd](https://github.com/simplyRoba/pixoo-bridge/commit/330e0ddd7ce4c12031942ea59bc4b0fd74d256e0))
+* **deps:** bump org.springframework.boot from 4.1.0 to 4.1.1 ([#390](https://github.com/simplyRoba/pixoo-bridge/issues/390)) ([4139f7c](https://github.com/simplyRoba/pixoo-bridge/commit/4139f7cbb709d3d6476938a1ae349b7093cdac03))
+* **deps:** bump org.wiremock.integrations:wiremock-spring-boot from 4.2.2 to 4.4.2 ([#398](https://github.com/simplyRoba/pixoo-bridge/issues/398)) ([956ba72](https://github.com/simplyRoba/pixoo-bridge/commit/956ba726026462fd43159d77acf574638202896f))
+
 ## [2.2.9](https://github.com/simplyRoba/pixoo-bridge/compare/v2.2.8...v2.2.9) (2026-08-20)
 
 
